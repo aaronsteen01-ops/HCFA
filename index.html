@@ -246,6 +246,7 @@
       pointer-events: none;
     }
 
+
     .cow-card .accessory-chips {
       display: flex;
       flex-wrap: wrap;
@@ -792,6 +793,7 @@
           <input type="checkbox" id="toggle-audio" />
         </div>
         <div class="toggle">
+
           <label for="range-effects">Effects volume</label>
           <input type="range" id="range-effects" min="0" max="1" step="0.1" />
           <span class="range-value" id="range-effects-value">100%</span>
@@ -802,6 +804,7 @@
           <span class="range-value" id="range-ambience-value">60%</span>
         </div>
         <div class="toggle">
+
           <label for="toggle-contrast">High contrast UI</label>
           <input type="checkbox" id="toggle-contrast" />
         </div>
@@ -844,6 +847,7 @@
           <ul class="achievement-list" id="achievement-list"></ul>
         </article>
       </section>
+
       <div class="button-row">
         <button id="btn-start-day">Start Day Cycle</button>
         <button class="secondary" id="btn-farm-options">Options</button>
@@ -1445,7 +1449,6 @@
       function findCow(id) {
         return data.cows.find(cow => cow.id === id);
       }
-
       function getData() {
         return data;
       }
@@ -2715,6 +2718,7 @@
         applyOutcome
       };
     })();
+
     MiniGames.register('food', (function() {
       let root, board, targetsContainer, tray;
       let state = null;
@@ -2798,6 +2802,7 @@
           Audio.play('lose');
           return;
         }
+
         if (chip.dataset.food === targetState.expected && !targetState.satisfied) {
           targetState.satisfied = true;
           targetEl.classList.add('sated');
@@ -3222,7 +3227,6 @@
           adjustments: {},
           stats: { totalPerfects: 0, totalChonks: 0 }
         };
-        const achievementsUnlocked = [];
         const options = Object.assign({}, save.options);
         UI.showScreen('task');
         for (let i = 0; i < queue.length; i++) {
@@ -3273,6 +3277,7 @@
         if (State.evaluateChonkSentinel()) {
           achievementsUnlocked.push('chonkSentinel');
         }
+
         const summaryData = {
           results: results.miniResults,
           adjustments: results.adjustments,
@@ -3281,6 +3286,7 @@
           stats: results.stats,
           day: save.day,
           achievementsUnlocked
+
         };
         lastResults = summaryData;
         UI.renderSummary(summaryData);
