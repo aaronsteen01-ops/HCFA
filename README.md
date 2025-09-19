@@ -154,4 +154,4 @@ Toggle audio/contrast → settings persist.
 Performance stable over 10 consecutive days.
 
 Licence
-Personal use. (You can choose MIT later if you like.)
+Personal use.
