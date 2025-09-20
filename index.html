@@ -1,0 +1,4583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Highland Cow Farm Adventure</title>
+  <style>
+    :root {
+      --bg: #f7f3f9;
+      --bg-alt: #ffffff;
+      --text: #35264d;
+      --text-muted: #6a5f7c;
+      --accent: #f2a9b7;
+      --accent-strong: #f08093;
+      --accent-contrast: #fff5f7;
+      --outline: rgba(53, 38, 77, 0.1);
+      --success: #8ac6a4;
+      --warning: #f7c36a;
+      --danger: #f4876d;
+      --card-radius: 20px;
+      --transition: 0.2s ease;
+      color-scheme: only light;
+    }
+
+    body.high-contrast {
+      --bg: #ffffff;
+      --bg-alt: #f4f4f4;
+      --text: #111111;
+      --text-muted: #2d2d2d;
+      --accent: #276ef1;
+      --accent-strong: #1747a3;
+      --accent-contrast: #eaf1ff;
+      --outline: rgba(17, 17, 17, 0.3);
+      --success: #14804b;
+      --warning: #af6300;
+      --danger: #c02020;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    main {
+      width: min(960px, 100%);
+      background: var(--bg-alt);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(53, 38, 77, 0.15);
+      padding: clamp(16px, 3vw, 40px);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    p {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0 0 0.75rem;
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--text);
+      border: none;
+      border-radius: 999px;
+      padding: 0.75rem 1.6rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      box-shadow: 0 10px 20px rgba(242, 169, 183, 0.45);
+    }
+
+    button:hover,
+    button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(242, 169, 183, 0.55);
+      outline: none;
+    }
+
+    button.secondary {
+      background: var(--accent-contrast);
+      color: var(--accent-strong);
+      box-shadow: none;
+      border: 2px solid var(--accent);
+    }
+
+    button.ghost {
+      background: transparent;
+      color: var(--text-muted);
+      box-shadow: none;
+      border: 2px dashed var(--outline);
+    }
+
+    button.danger {
+      background: var(--danger);
+      color: #fff;
+      box-shadow: 0 12px 22px rgba(244, 135, 109, 0.45);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .screen {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      animation: fade-in 0.35s ease;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .title-hero {
+      display: grid;
+      gap: 18px;
+    }
+
+    .title-hero svg {
+      width: clamp(160px, 40vw, 280px);
+      align-self: center;
+      filter: drop-shadow(0 12px 22px rgba(53, 38, 77, 0.12));
+    }
+
+    .options-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-radius: 18px;
+      border: 2px solid var(--outline);
+      background: var(--bg);
+    }
+
+    .toggle label {
+      font-weight: 600;
+    }
+
+    .toggle input[type="checkbox"] {
+      width: 46px;
+      height: 26px;
+      border-radius: 999px;
+      border: 2px solid var(--accent);
+      appearance: none;
+      background: var(--accent-contrast);
+      position: relative;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+
+    .toggle input[type="checkbox"]::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      top: 2px;
+      left: 2px;
+      transition: transform var(--transition), background var(--transition);
+    }
+
+    .toggle input[type="range"] {
+      width: 140px;
+      accent-color: var(--accent);
+      margin-left: 12px;
+    }
+
+    .toggle .range-value {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-left: auto;
+      padding-left: 10px;
+    }
+
+    .toggle input[type="checkbox"]:checked {
+      background: var(--accent);
+    }
+
+    .toggle input[type="checkbox"]:checked::after {
+      transform: translateX(20px);
+      background: var(--accent-contrast);
+    }
+
+    .herd-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+    }
+
+    .cow-card {
+      padding: 18px;
+      border-radius: var(--card-radius);
+      background: var(--bg);
+      border: 2px solid var(--outline);
+      display: grid;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cow-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.7), transparent 70%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .cow-card .accessory-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: -6px;
+    }
+
+    .cow-card .accessory-chip {
+      background: rgba(242, 169, 183, 0.18);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(242, 169, 183, 0.45);
+    }
+
+    .cow-card .style-btn {
+      justify-self: start;
+      margin-top: -4px;
+      background: linear-gradient(135deg, rgba(242, 169, 183, 0.85), rgba(138, 198, 164, 0.85));
+      color: #35264d;
+      font-size: 0.85rem;
+      padding: 0.4rem 1rem;
+      box-shadow: none;
+    }
+
+    .cow-card h3 {
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .cow-card .personality {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .farm-meta {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 12px;
+    }
+
+    .farm-panel {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 18px;
+      padding: 14px 16px;
+      border: 2px solid rgba(53, 38, 77, 0.08);
+      display: grid;
+      gap: 10px;
+    }
+
+    .farm-panel h3 {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .helper-text {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: -6px 0 10px;
+    }
+
+    .status-message {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: -4px 0 12px;
+    }
+
+    .status-message.is-warning {
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    .event-list,
+    .achievement-list,
+    .decor-list {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--text-muted);
+    }
+
+    .event-list li + li,
+    .achievement-list li + li {
+      margin-top: 4px;
+    }
+
+    .event-list li strong {
+      color: var(--text);
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .event-list li span {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .achievement-list li.completed::marker {
+      content: "🌟 ";
+    }
+
+    .decor-display {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 20px;
+      border: 2px solid rgba(53, 38, 77, 0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(138, 198, 164, 0.18));
+      position: relative;
+      min-height: 140px;
+    }
+
+    .decor-display::after {
+      content: "";
+      position: absolute;
+      inset: auto 12px 12px 12px;
+      height: 32px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(138, 198, 164, 0.35), rgba(138, 198, 164, 0.05));
+      z-index: 0;
+    }
+
+    .decor-slot {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-height: 96px;
+      border-radius: 16px;
+      border: 2px dashed rgba(53, 38, 77, 0.12);
+      background: rgba(255,255,255,0.7);
+      padding: 12px 10px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: center;
+      transition: border var(--transition), background var(--transition), transform var(--transition);
+    }
+
+    .decor-slot.active {
+      border-style: solid;
+      border-color: rgba(242, 169, 183, 0.6);
+      background: rgba(242, 169, 183, 0.16);
+      transform: translateY(-4px);
+    }
+
+    .decor-slot .decor-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .decor-slot .decor-label {
+      font-size: 0.78rem;
+      margin-top: 6px;
+      color: var(--text-muted);
+    }
+
+    .decor-slot .decor-placeholder {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .pantry-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      min-height: 60px;
+    }
+
+    .pantry-item {
+      min-width: 72px;
+      min-height: 72px;
+      border-radius: 18px;
+      background: rgba(242, 169, 183, 0.16);
+      border: 1px solid rgba(242, 169, 183, 0.38);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--text);
+      padding: 8px;
+      text-align: center;
+      transition: transform var(--transition);
+    }
+
+    .pantry-item span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .pantry-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .cow-art {
+      width: 100%;
+      max-width: 180px;
+      justify-self: center;
+      transition: transform 0.4s ease;
+    }
+
+    .cow-card.is-chonk .cow-art {
+      transform: scale(1.1) translateY(6px);
+    }
+
+    .cow-art-mini {
+      max-width: 120px;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .chonk-hearts {
+      font-size: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .task-panel {
+      display: grid;
+      gap: 16px;
+    }
+
+    .task-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .task-header .badge {
+      background: var(--accent-contrast);
+      color: var(--accent-strong);
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      font-weight: 600;
+    }
+
+    .task-timer {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .mini-instruction {
+      background: rgba(242, 169, 183, 0.15);
+      border-radius: 18px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .minigame-area {
+      min-height: 260px;
+      border-radius: 24px;
+      border: 3px dashed rgba(53, 38, 77, 0.12);
+      background: linear-gradient(160deg, rgba(242, 169, 183, 0.1), rgba(138, 198, 164, 0.15));
+      padding: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .minigame-surface {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+
+    .minigame-surface.active {
+      display: flex;
+    }
+
+    canvas.game-canvas {
+      width: 100%;
+      height: 100%;
+      background: #fef9f4;
+      border-radius: 20px;
+      border: 2px solid rgba(53, 38, 77, 0.1);
+    }
+
+    .food-board {
+      width: 100%;
+      display: grid;
+      gap: 18px;
+    }
+
+    .food-targets {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+    }
+
+    .food-target {
+      background: rgba(255,255,255,0.85);
+      border-radius: 18px;
+      padding: 12px;
+      border: 2px solid rgba(53, 38, 77, 0.12);
+      display: grid;
+      gap: 6px;
+      position: relative;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "art art"
+        "name icon"
+        "label icon"
+        "status status";
+    }
+
+    .food-target.sated {
+      border-color: var(--success);
+      box-shadow: 0 0 0 3px rgba(138, 198, 164, 0.3);
+    }
+
+    .food-target.mistake {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px rgba(244, 135, 109, 0.25);
+    }
+
+    .food-target.overfed {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px rgba(244, 135, 109, 0.35);
+      background: rgba(244, 135, 109, 0.08);
+    }
+
+    .food-icon {
+      font-size: 2rem;
+      grid-area: icon;
+    }
+
+    .food-target .food-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      grid-area: label;
+      justify-self: start;
+    }
+
+    .food-target .food-status {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      grid-area: status;
+      text-align: center;
+    }
+
+    .food-target.sated .food-status {
+      color: var(--success);
+    }
+
+    .food-target.overfed .food-status {
+      color: var(--danger);
+    }
+
+    .food-avatar {
+      grid-area: art;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .food-avatar .cow-art-mini {
+      max-width: 140px;
+    }
+
+    .food-target strong {
+      grid-area: name;
+      justify-self: start;
+    }
+
+    .food-chip-tray {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .food-chip {
+      background: var(--accent-contrast);
+      border: 2px solid var(--accent);
+      border-radius: 14px;
+      padding: 0.4rem 0.9rem;
+      font-size: 1.3rem;
+      cursor: grab;
+      touch-action: none;
+      position: relative;
+    }
+
+    .food-chip.dragging {
+      cursor: grabbing;
+      z-index: 50;
+      position: fixed;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .brush-board {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      min-height: 280px;
+    }
+
+    .brush-cow {
+      position: relative;
+      width: min(420px, 100%);
+      aspect-ratio: 1.2 / 1;
+      border-radius: 24px;
+      background: linear-gradient(180deg, #fef9f4, #f8e7d7);
+      border: 2px solid rgba(53, 38, 77, 0.12);
+      overflow: hidden;
+    }
+
+    .brush-patch {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background: rgba(53, 38, 77, 0.3);
+      border-radius: 50%;
+      transition: opacity 0.2s ease, transform 0.3s ease;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+
+    .brush-patch.clean {
+      opacity: 0;
+      transform: scale(1.4);
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+      animation: sparkle 0.6s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes sparkle {
+      from { opacity: 1; transform: scale(0.6); }
+      to { opacity: 0; transform: scale(1.8); }
+    }
+
+    .style-layout {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      align-items: start;
+    }
+
+    .style-preview {
+      background: linear-gradient(180deg, rgba(242, 169, 183, 0.2), rgba(138, 198, 164, 0.18));
+      border-radius: 24px;
+      border: 2px solid rgba(53, 38, 77, 0.1);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 240px;
+      flex-direction: column;
+    }
+
+    .style-preview-art {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .cow-art-large {
+      max-width: 280px;
+      width: 100%;
+    }
+
+    .style-accessories {
+      display: grid;
+      gap: 12px;
+    }
+
+    .style-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .style-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.8);
+      border-radius: 14px;
+      padding: 8px 12px;
+      border: 1px solid rgba(53, 38, 77, 0.1);
+    }
+
+    .style-item button {
+      padding: 0.35rem 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    .style-item button.active {
+      background: var(--success);
+      color: #fff;
+      box-shadow: none;
+    }
+
+    .style-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .style-actions .ghost {
+      flex: 1 1 160px;
+      text-align: center;
+    }
+
+    .decor-manage-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .decor-manage-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(138, 198, 164, 0.18);
+      border: 1px solid rgba(138, 198, 164, 0.4);
+    }
+
+    .decor-manage-item input {
+      width: 18px;
+      height: 18px;
+    }
+
+    .decor-manage-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      align-items: start;
+    }
+
+    .decor-preview {
+      border-radius: 24px;
+      border: 2px solid rgba(53, 38, 77, 0.08);
+      background: rgba(255,255,255,0.6);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      min-height: 220px;
+    }
+
+    .decor-preview .decor-display {
+      width: 100%;
+      min-height: 0;
+    }
+
+    .decor-slot-control {
+      display: grid;
+      gap: 6px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(138, 198, 164, 0.15);
+      border: 1px solid rgba(138, 198, 164, 0.35);
+    }
+
+    .decor-slot-control select {
+      border-radius: 12px;
+      border: 1px solid rgba(53, 38, 77, 0.2);
+      padding: 8px 10px;
+      background: #fff;
+      font-size: 0.95rem;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-item {
+      padding: 12px 16px;
+      border-radius: 18px;
+      background: rgba(242, 169, 183, 0.12);
+      border: 2px solid rgba(53, 38, 77, 0.08);
+    }
+
+    .summary-cow-deltas {
+      display: grid;
+      gap: 8px;
+    }
+
+    .summary-cow {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.95rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 16px;
+      padding: 10px 14px;
+      border: 1px solid rgba(53, 38, 77, 0.08);
+    }
+
+    .unlock-banner {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(138, 198, 164, 0.2);
+      border: 2px dashed rgba(138, 198, 164, 0.6);
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .unlock-banner .unlock-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .unlock-banner .unlock-reason {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    details.howto summary {
+      cursor: pointer;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    details.howto {
+      background: rgba(138, 198, 164, 0.1);
+      border-radius: 18px;
+      padding: 12px 16px;
+      border: 2px solid rgba(138, 198, 164, 0.3);
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+      }
+      main {
+        padding: 18px;
+      }
+      .task-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="app" aria-live="polite">
+    <section class="screen active" data-screen="title" aria-labelledby="title-heading">
+      <div class="title-hero">
+        <h1 id="title-heading">Highland Cow Farm Adventure</h1>
+        <p>Welcome to your cosy Highland hideaway. Tend to your fluffy herd, keep them happy, and earn charming farm treasures through daily mini-adventures.</p>
+        <svg viewBox="0 0 320 220" role="img" aria-label="Illustration of three highland cows">
+          <rect x="0" y="0" width="320" height="220" rx="36" fill="#fef5f9" />
+          <g transform="translate(60 110)">
+            <ellipse cx="40" cy="60" rx="38" ry="28" fill="#c99364" />
+            <ellipse cx="40" cy="32" rx="28" ry="24" fill="#d8a984" />
+            <path d="M10 14 Q-20 -10 0 -24" stroke="#c99364" stroke-width="10" stroke-linecap="round" fill="none" />
+            <path d="M70 14 Q100 -10 90 -24" stroke="#c99364" stroke-width="10" stroke-linecap="round" fill="none" />
+            <circle cx="28" cy="34" r="4" fill="#412a35" />
+            <circle cx="52" cy="34" r="4" fill="#412a35" />
+            <ellipse cx="40" cy="48" rx="8" ry="10" fill="#412a35" />
+          </g>
+          <g transform="translate(160 120) scale(0.9)">
+            <ellipse cx="40" cy="60" rx="36" ry="26" fill="#f0b8c3" />
+            <ellipse cx="40" cy="32" rx="26" ry="22" fill="#f7cbd3" />
+            <path d="M12 16 Q-12 -6 6 -20" stroke="#f0b8c3" stroke-width="10" stroke-linecap="round" fill="none" />
+            <path d="M68 16 Q96 -6 84 -20" stroke="#f0b8c3" stroke-width="10" stroke-linecap="round" fill="none" />
+            <circle cx="28" cy="34" r="4" fill="#412a35" />
+            <circle cx="52" cy="34" r="4" fill="#412a35" />
+            <ellipse cx="40" cy="48" rx="7" ry="9" fill="#412a35" />
+          </g>
+          <g transform="translate(220 100) scale(0.8)">
+            <ellipse cx="40" cy="60" rx="34" ry="24" fill="#9e6645" />
+            <ellipse cx="40" cy="32" rx="24" ry="20" fill="#ad7652" />
+            <path d="M12 16 Q-12 -6 4 -18" stroke="#9e6645" stroke-width="9" stroke-linecap="round" fill="none" />
+            <path d="M68 16 Q92 -6 82 -18" stroke="#9e6645" stroke-width="9" stroke-linecap="round" fill="none" />
+            <circle cx="28" cy="34" r="4" fill="#412a35" />
+            <circle cx="52" cy="34" r="4" fill="#412a35" />
+            <ellipse cx="40" cy="48" rx="7" ry="9" fill="#412a35" />
+          </g>
+        </svg>
+        <div class="button-row">
+          <button id="btn-start">Start Adventure</button>
+          <button class="secondary" id="btn-options">Options</button>
+          <button class="ghost" id="btn-howto">Quick How-To</button>
+        </div>
+        <details class="howto" id="title-howto">
+          <summary>How to Play</summary>
+          <p>Each day you will complete three brisk mini-games: keep runaway cows safe, match the right feed, and brush away the burrs. Happy cows grant more rewards. Watch the chonk level – a little extra fluff is adorable, but too much means slower cows tomorrow!</p>
+        </details>
+        <button class="danger" id="btn-reset">Reset Save</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="options" aria-labelledby="options-heading">
+      <h2 id="options-heading">Options</h2>
+      <p>Accessibility and comfort settings are saved per device.</p>
+      <div class="options-list">
+        <div class="toggle">
+          <label for="toggle-audio">Farm sounds</label>
+          <input type="checkbox" id="toggle-audio" />
+        </div>
+        <div class="toggle">
+          <label for="range-master">Master volume</label>
+          <input type="range" id="range-master" min="0" max="1" step="0.1" />
+          <span class="range-value" id="range-master-value">100%</span>
+        </div>
+        <div class="toggle">
+          <label for="range-effects">Effects volume</label>
+          <input type="range" id="range-effects" min="0" max="1" step="0.1" />
+          <span class="range-value" id="range-effects-value">100%</span>
+        </div>
+        <div class="toggle">
+          <label for="range-ambience">Ambience volume</label>
+          <input type="range" id="range-ambience" min="0" max="1" step="0.1" />
+          <span class="range-value" id="range-ambience-value">60%</span>
+        </div>
+        <div class="toggle">
+          <label for="toggle-contrast">High contrast UI</label>
+          <input type="checkbox" id="toggle-contrast" />
+        </div>
+        <div class="toggle">
+          <label for="toggle-reduced">Reduce flashing effects</label>
+          <input type="checkbox" id="toggle-reduced" />
+        </div>
+      </div>
+      <div class="button-row">
+        <button class="secondary" id="btn-options-back">Back</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="farm" aria-labelledby="farm-heading">
+      <header>
+        <h2 id="farm-heading">Farm Hub</h2>
+        <p>Welcome back! Check in on your herd, dress up your paddock, and start a new day of country escapades.</p>
+      </header>
+      <details class="howto">
+        <summary>How to Play</summary>
+        <p>Complete the three mini-games in any order given. Keep an eye on the timer and the mood of each cow. Feeding a cow more than once in Food Frenzy makes them extra chonky. Finish all tasks to unlock a surprise for the farm.</p>
+      </details>
+      <section>
+        <h3>Herd</h3>
+        <p class="helper-text">Select a cow card to dress them in unlocked accessories.</p>
+        <div class="herd-grid" id="herd-grid" aria-live="polite"></div>
+      </section>
+      <section class="farm-meta">
+        <article class="farm-panel">
+          <h3>Daily Moodlets</h3>
+          <ul class="event-list" id="farm-events"></ul>
+        </article>
+        <article class="farm-panel">
+          <h3>Pantry</h3>
+          <div class="pantry-list" id="pantry-list" aria-live="polite"></div>
+        </article>
+        <article class="farm-panel">
+          <h3>Paddock Décor</h3>
+          <div class="decor-display" id="decor-display" aria-live="polite"></div>
+          <button class="secondary" id="btn-manage-decor">Decorate Farm</button>
+        </article>
+        <article class="farm-panel">
+          <h3>Achievements</h3>
+          <ul class="achievement-list" id="achievement-list"></ul>
+        </article>
+      </section>
+      <div class="button-row">
+        <button id="btn-start-day">Start Day Cycle</button>
+        <button class="secondary" id="btn-farm-options">Options</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="style" aria-labelledby="style-heading">
+      <h2 id="style-heading">Cow Customiser</h2>
+      <p id="style-subtitle">Mix and match accessories to give your herd a signature look.</p>
+      <div class="style-layout">
+        <div class="style-preview" id="style-preview" aria-live="polite"></div>
+        <div class="style-accessories">
+          <h3 id="style-cow-name">Accessories</h3>
+          <p class="helper-text" id="style-helper">Tap an accessory to toggle it. Up to three can be worn at once.</p>
+          <div class="style-list" id="style-accessory-list"></div>
+          <div class="style-actions">
+            <button class="ghost" id="btn-style-random">Surprise outfit</button>
+            <button class="ghost" id="btn-style-clear">Clear accessories</button>
+          </div>
+        </div>
+      </div>
+      <div class="button-row">
+        <button class="secondary" id="btn-style-back">Back to Farm</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="decor" aria-labelledby="decor-heading">
+      <h2 id="decor-heading">Decorate the Farm</h2>
+      <p>Choose a cosy piece for each paddock slot to set the scene.</p>
+      <p class="helper-text" id="decor-limit-status" role="status" aria-live="polite"></p>
+      <div class="decor-manage-grid">
+        <div class="decor-preview" id="decor-preview" aria-label="Décor preview"></div>
+        <div class="decor-manage-list" id="decor-manage-list"></div>
+      </div>
+      <div class="button-row">
+        <button id="btn-decor-save">Save Décor</button>
+        <button class="secondary" id="btn-decor-back">Cancel</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="task" aria-labelledby="task-heading">
+      <div class="task-panel">
+        <div class="task-header">
+          <div>
+            <h2 id="task-heading">Task Rush</h2>
+            <p class="mini-subtitle" id="mini-subtitle"></p>
+          </div>
+          <div class="badge" id="mini-badge">Mini 1 of 3</div>
+          <div class="task-timer" id="task-timer" aria-live="assertive">00:30</div>
+        </div>
+        <div class="mini-instruction" id="mini-instruction">Stay tuned...</div>
+        <div class="minigame-area" id="minigame-area" role="group" aria-live="polite"></div>
+        <div class="button-row" id="task-controls" hidden>
+          <button id="btn-task-continue">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="summary" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Day Summary</h2>
+      <div class="summary-list" id="summary-results"></div>
+      <div class="summary-cow-deltas" id="summary-cow-deltas"></div>
+      <div class="unlock-banner" id="summary-unlock" hidden></div>
+      <div class="button-row">
+        <button id="btn-summary-continue">Save &amp; Return to Farm</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const Util = (function() {
+      const rngState = { seed: Date.now() % 2147483647 };
+      function seededRandom() {
+        rngState.seed = (rngState.seed * 48271) % 2147483647;
+        return (rngState.seed & 2147483647) / 2147483647;
+      }
+      return {
+        setSeed(seed) {
+          rngState.seed = (seed % 2147483647) || 1;
+        },
+        random() {
+          return seededRandom();
+        },
+        range(min, max) {
+          return min + seededRandom() * (max - min);
+        },
+        pick(array) {
+          if (!array.length) return undefined;
+          return array[Math.floor(seededRandom() * array.length)];
+        },
+        shuffle(array) {
+          const clone = array.slice();
+          for (let i = clone.length - 1; i > 0; i--) {
+            const j = Math.floor(seededRandom() * (i + 1));
+            [clone[i], clone[j]] = [clone[j], clone[i]];
+          }
+          return clone;
+        },
+        sample(array, count) {
+          const pool = array.slice();
+          const result = [];
+          while (pool.length && result.length < count) {
+            const idx = Math.floor(seededRandom() * pool.length);
+            result.push(pool.splice(idx, 1)[0]);
+          }
+          return result;
+        },
+        clamp(value, min, max) {
+          return Math.min(Math.max(value, min), max);
+        },
+        lerp(a, b, t) {
+          return a + (b - a) * t;
+        },
+        formatTime(seconds) {
+          const s = Math.max(0, Math.ceil(seconds));
+          const m = Math.floor(s / 60);
+          const rem = s % 60;
+          return `${String(m).padStart(2, '0')}:${String(rem).padStart(2, '0')}`;
+        },
+        now() {
+          return performance.now() / 1000;
+        }
+      };
+    })();
+
+    const ACCESSORY_LIMIT = 3;
+    const DECOR_LIMIT = 3;
+    const DECOR_SLOTS = ['left', 'centre', 'right'];
+    const DECOR_SLOT_LABELS = { left: 'Left paddock', centre: 'Barn front', right: 'Fence line' };
+
+    const AccessoryLibrary = {
+      'Pastel Bow': {
+        icon: '🎀',
+        description: 'A soft ribbon tied neatly near the fringe.',
+        svg() {
+          return `<g class="acc acc-bow" transform="translate(-20,-18)">
+            <ellipse cx="-6" cy="-2" rx="6" ry="8" fill="#f7c1d8" />
+            <ellipse cx="6" cy="-2" rx="6" ry="8" fill="#f7c1d8" />
+            <circle cx="0" cy="-2" r="3.4" fill="#f38aad" />
+          </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(-20, -18);
+          ctx.fillStyle = '#f7c1d8';
+          ctx.beginPath();
+          ctx.ellipse(-6, -2, 6, 8, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.ellipse(6, -2, 6, 8, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#f38aad';
+          ctx.beginPath();
+          ctx.arc(0, -2, 3.4, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      },
+      'Bell Charm': {
+        icon: '🔔',
+        description: 'A gentle bell that jingles as the cow trots.',
+        svg() {
+          return `<g class="acc acc-bell" transform="translate(0,14)">
+            <path d="M-6 0 Q0 -8 6 0 V4 H-6 Z" fill="#f4d38b" stroke="#d6a442" stroke-width="1" />
+            <circle cx="0" cy="3" r="1.8" fill="#d6a442" />
+          </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, 14);
+          ctx.beginPath();
+          ctx.moveTo(-6, 0);
+          ctx.quadraticCurveTo(0, -8, 6, 0);
+          ctx.lineTo(6, 4);
+          ctx.lineTo(-6, 4);
+          ctx.closePath();
+          ctx.fillStyle = '#f4d38b';
+          ctx.fill();
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = '#d6a442';
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.fillStyle = '#d6a442';
+          ctx.arc(0, 3, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      },
+      'Sun Hat': {
+        icon: '👒',
+        description: 'A straw hat to keep the Highland sun at bay.',
+        svg() {
+          return `<g class="acc acc-hat" transform="translate(0,-34)">
+            <ellipse cx="0" cy="0" rx="28" ry="10" fill="#f3d9a4" stroke="#d6a067" stroke-width="1.4" />
+            <ellipse cx="0" cy="-6" rx="18" ry="10" fill="#f8e7bf" stroke="#d6a067" stroke-width="1.2" />
+            <path d="M-12 -4 Q0 -10 12 -4" stroke="#f2a9b7" stroke-width="3" fill="none" />
+          </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, -34);
+          ctx.fillStyle = '#f3d9a4';
+          ctx.strokeStyle = '#d6a067';
+          ctx.lineWidth = 1.4;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, 28, 10, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          ctx.fillStyle = '#f8e7bf';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.ellipse(0, -6, 18, 10, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.strokeStyle = '#f2a9b7';
+          ctx.lineWidth = 3;
+          ctx.moveTo(-12, -4);
+          ctx.quadraticCurveTo(0, -10, 12, -4);
+          ctx.stroke();
+          ctx.restore();
+        }
+      },
+      'Fern Garland': {
+        icon: '🌿',
+        description: 'Braided fern fronds draped across the horns.',
+        svg() {
+          return `<g class="acc acc-fern" transform="translate(0,-18)">
+            <path d="M-34 -4 Q-12 -12 0 -6 T34 -4" fill="none" stroke="#7fb991" stroke-width="4" stroke-linecap="round" />
+            <path d="M-24 -6 l-3 -6 l5 2 z" fill="#6aa67d" />
+            <path d="M-12 -10 l-3 -6 l5 2 z" fill="#6aa67d" />
+            <path d="M12 -10 l3 -6 l-5 2 z" fill="#6aa67d" />
+            <path d="M24 -6 l3 -6 l-5 2 z" fill="#6aa67d" />
+          </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, -18);
+          ctx.strokeStyle = '#7fb991';
+          ctx.lineWidth = 4;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(-34, -4);
+          ctx.quadraticCurveTo(-12, -12, 0, -6);
+          ctx.quadraticCurveTo(12, -0, 34, -4);
+          ctx.stroke();
+          ctx.fillStyle = '#6aa67d';
+          const leaves = [
+            { x: -24, y: -6 },
+            { x: -12, y: -10 },
+            { x: 12, y: -10 },
+            { x: 24, y: -6 }
+          ];
+          leaves.forEach(({ x, y }) => {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x - 3, y - 6);
+            ctx.lineTo(x + 2, y - 4);
+            ctx.closePath();
+            ctx.fill();
+          });
+          ctx.restore();
+        }
+      },
+      'Starry Bandana': {
+        icon: '🧣',
+        description: 'A midnight blue bandana dotted with stars.',
+        svg() {
+          return `<g class="acc acc-bandana" transform="translate(0,12)">
+            <path d="M-22 -2 L0 10 L22 -2 Z" fill="#3b3b7d" stroke="#272757" stroke-width="1.2" />
+            <circle cx="-10" cy="2" r="1.5" fill="#f7e27d" />
+            <circle cx="0" cy="4" r="1.2" fill="#f7e27d" />
+            <circle cx="10" cy="2" r="1.5" fill="#f7e27d" />
+          </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, 12);
+          ctx.beginPath();
+          ctx.moveTo(-22, -2);
+          ctx.lineTo(0, 10);
+          ctx.lineTo(22, -2);
+          ctx.closePath();
+          ctx.fillStyle = '#3b3b7d';
+          ctx.fill();
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = '#272757';
+          ctx.stroke();
+          ctx.fillStyle = '#f7e27d';
+          [[-10, 2, 1.5], [0, 4, 1.2], [10, 2, 1.5]].forEach(([x, y, r]) => {
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          ctx.restore();
+        }
+      },
+      'Woolly Scarf': {
+        icon: '🧶',
+        description: 'A cosy knitted scarf for brisk mornings.',
+        svg() {
+          return `<g class="acc acc-scarf" transform="translate(0,18)">
+            <path d="M-26 -6 Q0 6 26 -6 L22 6 Q0 16 -22 6 Z" fill="#f2a9b7" stroke="#c97a8a" stroke-width="1.2" />
+            <path d="M-6 -4 V12" stroke="#c97a8a" stroke-width="3" stroke-linecap="round" />
+            <path d="M6 -4 V12" stroke="#c97a8a" stroke-width="3" stroke-linecap="round" />
+          </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, 18);
+          ctx.beginPath();
+          ctx.moveTo(-26, -6);
+          ctx.quadraticCurveTo(0, 6, 26, -6);
+          ctx.lineTo(22, 6);
+          ctx.quadraticCurveTo(0, 16, -22, 6);
+          ctx.closePath();
+          ctx.fillStyle = '#f2a9b7';
+          ctx.fill();
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = '#c97a8a';
+          ctx.stroke();
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(-6, -4);
+          ctx.lineTo(-6, 12);
+          ctx.moveTo(6, -4);
+          ctx.lineTo(6, 12);
+          ctx.stroke();
+          ctx.restore();
+        }
+      },
+      'Thistle Crown': {
+        icon: '🌸',
+        description: 'Highland thistles woven into a proud little crown.',
+        svg() {
+          return `<g class="acc acc-thistle" transform="translate(0,-26)">
+            <path d="M-26 -4 Q0 -10 26 -4" fill="none" stroke="#7fb991" stroke-width="3" stroke-linecap="round" />
+            <circle cx="-16" cy="-8" r="4" fill="#c181d8" />
+            <circle cx="0" cy="-12" r="4.5" fill="#b56ccc" />
+            <circle cx="16" cy="-8" r="4" fill="#c181d8" />
+            <path d="M-16 -8 l-2 -6" stroke="#7fb991" stroke-width="2" />
+            <path d="M0 -12 l-2 -6" stroke="#7fb991" stroke-width="2" />
+            <path d="M16 -8 l2 -6" stroke="#7fb991" stroke-width="2" />
+          </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, -26);
+          ctx.strokeStyle = '#7fb991';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(-26, -4);
+          ctx.quadraticCurveTo(0, -10, 26, -4);
+          ctx.stroke();
+          const blooms = [
+            { x: -16, y: -8, r: 4, colour: '#c181d8' },
+            { x: 0, y: -12, r: 4.5, colour: '#b56ccc' },
+            { x: 16, y: -8, r: 4, colour: '#c181d8' }
+          ];
+          blooms.forEach(({ x, y, r, colour }) => {
+            ctx.beginPath();
+            ctx.fillStyle = colour;
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineWidth = 2;
+            ctx.lineTo(x + (x === 0 ? -2 : Math.sign(x) * -2), y - 6);
+            ctx.stroke();
+          });
+          ctx.restore();
+        }
+      }
+    };
+
+    const FoodLibrary = {
+      'Starter Hay': {
+        icon: '🌾',
+        description: 'Reliable hay baled fresh from the paddock.',
+        hunger: -24,
+        happiness: 6,
+        chonk: 0,
+        overfeedChonk: 6,
+        overfeedMood: 4,
+        maxServings: 1
+      },
+      'Carrot Crunch': {
+        icon: '🥕',
+        description: 'Sweet carrots that brighten every muzzle.',
+        hunger: -20,
+        happiness: 7,
+        chonk: 0,
+        overfeedChonk: 5,
+        overfeedMood: 4,
+        maxServings: 1
+      },
+      'Warm Oat Mash': {
+        icon: '🪣',
+        description: 'Comforting oat mash served warm in a pail.',
+        hunger: -28,
+        happiness: 7,
+        chonk: 2,
+        overfeedChonk: 9,
+        overfeedMood: 5,
+        maxServings: 1
+      },
+      'Sweet Clover Bale': {
+        icon: '☘️',
+        description: 'Fragrant clover tied into a tidy bale.',
+        hunger: -26,
+        happiness: 8,
+        chonk: 1,
+        overfeedChonk: 8,
+        overfeedMood: 5,
+        maxServings: 1
+      },
+      'Heather Honey Jar': {
+        icon: '🍯',
+        description: 'Sticky heather honey drizzled over oats.',
+        hunger: -18,
+        happiness: 10,
+        chonk: 2,
+        overfeedChonk: 10,
+        overfeedMood: 6,
+        maxServings: 1
+      },
+      'Crisp Apple Crate': {
+        icon: '🍎',
+        description: 'A crate of rosy apples from the highland orchard.',
+        hunger: -22,
+        happiness: 8,
+        chonk: 1,
+        overfeedChonk: 7,
+        overfeedMood: 5,
+        maxServings: 1
+      },
+      'Barley Biscuit Stack': {
+        icon: '🍪',
+        description: 'Baked barley biscuits with a hint of molasses.',
+        hunger: -24,
+        happiness: 7,
+        chonk: 3,
+        overfeedChonk: 12,
+        overfeedMood: 6,
+        maxServings: 1
+      }
+    };
+
+    const DEFAULT_FOODS = ['Starter Hay', 'Carrot Crunch', 'Warm Oat Mash'];
+
+    const DecorLibrary = {
+      'Wildflower Patch': {
+        icon: '🌼',
+        description: 'A ring of wildflowers buzzing with bees.'
+      },
+      'Tartan Picnic Rug': {
+        icon: '🧺',
+        description: 'A tartan rug ready for oat biscuits and tea.'
+      },
+      'Fairy Lights Garland': {
+        icon: '✨',
+        description: 'Soft lights twinkling along the fence.'
+      },
+      'Stone Cairn Lantern': {
+        icon: '🪨',
+        description: 'Stacked stones with a lantern glow.'
+      },
+      'Milk Churn Planter': {
+        icon: '🥛',
+        description: 'An old churn overflowing with blooms.'
+      },
+      'Heather Hedge': {
+        icon: '🌸',
+        description: 'Neat hedges of blooming heather create a fragrant border.'
+      },
+      'Pebble Pond': {
+        icon: '💧',
+        description: 'A shallow pond rimmed with river stones for hoof-dipping.'
+      }
+    };
+
+    const CowVisuals = (function() {
+      const colourMap = {
+        brown: '#c99364',
+        cream: '#f7e5c6',
+        rose: '#f5c0c8',
+        chocolate: '#a4744b',
+        white: '#fefefe'
+      };
+
+      function colourHex(colour) {
+        return colourMap[colour] || colourMap.brown;
+      }
+
+      function accessoriesSVG(cow) {
+        return (cow.accessories || [])
+          .map(name => {
+            const entry = AccessoryLibrary[name];
+            return entry && typeof entry.svg === 'function' ? entry.svg(cow) : '';
+          })
+          .join('');
+      }
+
+      function drawAccessories(ctx, cow, meta) {
+        (cow.accessories || []).forEach(name => {
+          const entry = AccessoryLibrary[name];
+          if (entry && typeof entry.draw === 'function') {
+            entry.draw(ctx, meta);
+          } else if (entry && entry.icon) {
+            ctx.save();
+            ctx.translate(0, -26);
+            ctx.font = '18px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(entry.icon, 0, 0);
+            ctx.restore();
+          }
+        });
+      }
+
+      function computeScale(cow, options = {}) {
+        const chonkBoost = Math.max(0, (cow.chonk || 0) - 60);
+        const baseScale = options.scale || 1;
+        const scale = baseScale * (1 + Math.min(0.22, chonkBoost / 160));
+        const bellyOffset = Math.min(10, chonkBoost * 0.2);
+        const bellyStretch = Math.min(9, chonkBoost * 0.18);
+        return { scale, bellyOffset, bellyStretch, chonkBoost };
+      }
+
+      function drawCanvas(ctx, cow, options = {}) {
+        const { scale, bellyOffset, bellyStretch } = computeScale(cow, options);
+        const body = colourHex(cow.colour);
+        const fringeColour = colourHex(cow.colour === 'white' ? 'cream' : cow.colour);
+        const wobble = options.wobble || 0;
+        ctx.save();
+        if (options.x || options.y) {
+          ctx.translate(options.x || 0, options.y || 0);
+        }
+        if (options.rotation) {
+          ctx.rotate(options.rotation);
+        }
+        ctx.scale(scale, scale);
+        ctx.translate(0, options.offsetY || 0);
+        ctx.fillStyle = body;
+        ctx.beginPath();
+        ctx.ellipse(0, 28 + bellyOffset, 40 + bellyStretch, 28 + bellyStretch * 0.9 + wobble * 0.15, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,0.16)';
+        ctx.beginPath();
+        ctx.ellipse(0, 28 + bellyOffset, 24 + bellyStretch * 0.5, 12 + bellyStretch * 0.4, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = body;
+        ctx.lineWidth = 8;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-28, -6);
+        ctx.quadraticCurveTo(-58, -26, -34, -38);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(28, -6);
+        ctx.quadraticCurveTo(58, -26, 34, -38);
+        ctx.stroke();
+        ctx.fillStyle = fringeColour;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 30, 26, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(-20, -10);
+        ctx.quadraticCurveTo(0, -26, 20, -10);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = '#35264d';
+        ctx.beginPath();
+        ctx.arc(-12, -2, 4, 0, Math.PI * 2);
+        ctx.arc(12, -2, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(0, 12, 8, 10, 0, 0, Math.PI * 2);
+        ctx.fill();
+        drawAccessories(ctx, cow, options);
+        ctx.restore();
+      }
+
+      function svg(cow, options = {}) {
+        const { scale, bellyOffset, bellyStretch } = computeScale(cow, options);
+        const viewBox = options.viewBox || '0 0 140 120';
+        const className = options.className ? ` ${options.className}` : '';
+        const offsetY = options.offsetY || 0;
+        const body = colourHex(cow.colour);
+        const fringeColour = colourHex(cow.colour === 'white' ? 'cream' : cow.colour);
+        return `
+          <svg class="cow-art${className}" viewBox="${viewBox}" role="img" aria-label="${cow.name} the cow">
+            <g transform="translate(70 ${60 + offsetY}) scale(${scale.toFixed(3)})">
+              <ellipse cx="0" cy="${28 + bellyOffset}" rx="${40 + bellyStretch}" ry="${28 + bellyStretch * 0.9}" fill="${body}" />
+              <ellipse cx="0" cy="${28 + bellyOffset}" rx="${24 + bellyStretch * 0.5}" ry="${12 + bellyStretch * 0.4}" fill="rgba(255,255,255,0.16)" />
+              <path d="M-28,-6 Q-58,-26 -34,-38" stroke="${body}" stroke-width="8" stroke-linecap="round" fill="none" />
+              <path d="M28,-6 Q58,-26 34,-38" stroke="${body}" stroke-width="8" stroke-linecap="round" fill="none" />
+              <ellipse cx="0" cy="0" rx="30" ry="26" fill="${fringeColour}" />
+              <path d="M-20,-10 Q0,-26 20,-10" fill="${fringeColour}" />
+              <circle cx="-12" cy="-2" r="4" fill="#35264d" />
+              <circle cx="12" cy="-2" r="4" fill="#35264d" />
+              <ellipse cx="0" cy="12" rx="8" ry="10" fill="#35264d" />
+              ${accessoriesSVG(cow)}
+            </g>
+          </svg>`;
+      }
+
+      return { colourHex, drawCanvas, svg };
+    })();
+
+    const ACHIEVEMENTS = {
+      perfectDay: {
+        title: 'Perfect Pastures',
+        description: 'Complete all three mini-games in a single day without a miss.'
+      },
+      fashionista: {
+        title: 'Highland Fashionista',
+        description: 'Equip accessories on at least three different cows.'
+      },
+      cozyDecorator: {
+        title: 'Cozy Decorator',
+        description: 'Display three décor pieces around the paddock at once.'
+      },
+      socialButterfly: {
+        title: 'Social Butterfly',
+        description: 'Win a Social personality event for the herd.'
+      },
+      chonkSentinel: {
+        title: 'Chonk Sentinel',
+        description: 'End a day with every cow below 70 chonk.'
+      }
+    };
+
+    const Audio = (function() {
+      let enabled = true;
+      let ctx = null;
+      let masterGain = null;
+      let sfxGain = null;
+      let ambienceGain = null;
+      let ambienceNodes = null;
+      let ambienceMood = 'farm';
+      const volumes = { effects: 0.9, ambience: 0.5, master: 1 };
+      const AMBIENCE_MOODS = {
+        farm: { base: 196, harmony: 294, noise: 0.05, lfo: 0.08 },
+        task: { base: 220, harmony: 330, noise: 0.07, lfo: 0.14 },
+        summary: { base: 180, harmony: 270, noise: 0.04, lfo: 0.06 }
+      };
+
+      function ensureContext() {
+        if (!ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtx) return null;
+          ctx = new AudioCtx();
+          masterGain = ctx.createGain();
+          sfxGain = ctx.createGain();
+          ambienceGain = ctx.createGain();
+          sfxGain.gain.value = volumes.effects;
+          ambienceGain.gain.value = volumes.ambience * 0.12;
+          masterGain.gain.value = enabled ? volumes.master : 0;
+          sfxGain.connect(masterGain);
+          ambienceGain.connect(masterGain);
+          masterGain.connect(ctx.destination);
+        }
+        return ctx;
+      }
+
+      function createNoiseSource() {
+        if (!ctx) return null;
+        const buffer = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < data.length; i++) {
+          data[i] = (Math.random() * 2 - 1) * 0.32;
+        }
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        return source;
+      }
+
+      function cleanupAmbience() {
+        if (ambienceNodes) {
+          ambienceNodes.oscillators.forEach(osc => {
+            try { osc.stop(); } catch (err) {}
+            try { osc.disconnect(); } catch (err) {}
+          });
+          if (ambienceNodes.noiseSource) {
+            try { ambienceNodes.noiseSource.stop(); } catch (err) {}
+            try { ambienceNodes.noiseSource.disconnect(); } catch (err) {}
+          }
+          if (ambienceNodes.lfo) {
+            try { ambienceNodes.lfo.stop(); } catch (err) {}
+            try { ambienceNodes.lfo.disconnect(); } catch (err) {}
+          }
+          if (ambienceNodes.noiseGain) {
+            try { ambienceNodes.noiseGain.disconnect(); } catch (err) {}
+          }
+          try { ambienceNodes.gain.disconnect(); } catch (err) {}
+          ambienceNodes = null;
+        }
+      }
+
+      function applyAmbienceMood() {
+        if (!ambienceNodes || !ctx) return;
+        const profile = AMBIENCE_MOODS[ambienceMood] || AMBIENCE_MOODS.farm;
+        const now = ctx.currentTime;
+        const [base, harmony] = ambienceNodes.oscillators || [];
+        if (base) {
+          base.frequency.setTargetAtTime(profile.base, now, 0.6);
+        }
+        if (harmony) {
+          harmony.frequency.setTargetAtTime(profile.harmony, now, 0.6);
+        }
+        if (ambienceNodes.noiseGain) {
+          ambienceNodes.noiseGain.gain.setTargetAtTime(profile.noise * volumes.ambience, now, 0.7);
+        }
+        if (ambienceNodes.lfo) {
+          ambienceNodes.lfo.frequency.setTargetAtTime(profile.lfo, now, 0.8);
+        }
+        if (ambienceNodes.gain) {
+          ambienceNodes.gain.gain.setTargetAtTime(volumes.ambience * 0.12, now, 0.4);
+        }
+      }
+
+      function scheduleTone({ freq, duration, type = 'sine', offset = 0, gain = 0.2 }) {
+        if (!ctx || !sfxGain) return;
+        const start = ctx.currentTime + offset;
+        const end = start + duration;
+        const osc = ctx.createOscillator();
+        const toneGain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, start);
+        const peak = Math.max(0.001, gain * volumes.effects);
+        toneGain.gain.setValueAtTime(0.0001, start);
+        toneGain.gain.exponentialRampToValueAtTime(peak, start + 0.03);
+        toneGain.gain.exponentialRampToValueAtTime(0.0001, end);
+        osc.connect(toneGain).connect(sfxGain);
+        osc.start(start);
+        osc.stop(end + 0.05);
+      }
+
+      function ensureAmbienceNodes() {
+        if (!enabled || volumes.ambience <= 0) {
+          cleanupAmbience();
+          return;
+        }
+        if (!ensureContext()) return;
+        if (ambienceNodes) {
+          ambienceNodes.gain.gain.setTargetAtTime(volumes.ambience * 0.12, ctx.currentTime, 0.5);
+          if (ambienceNodes.noiseGain) {
+            const profile = AMBIENCE_MOODS[ambienceMood] || AMBIENCE_MOODS.farm;
+            ambienceNodes.noiseGain.gain.setTargetAtTime(profile.noise * volumes.ambience, ctx.currentTime, 0.6);
+          }
+          return;
+        }
+        const base = ctx.createOscillator();
+        base.type = 'sine';
+        base.frequency.value = 196;
+        const harmony = ctx.createOscillator();
+        harmony.type = 'triangle';
+        harmony.frequency.value = 294;
+        const gain = ctx.createGain();
+        gain.gain.value = volumes.ambience * 0.12;
+        base.connect(gain);
+        harmony.connect(gain);
+        gain.connect(ambienceGain);
+        const noiseSource = createNoiseSource();
+        const noiseGain = ctx.createGain();
+        noiseGain.gain.value = (AMBIENCE_MOODS[ambienceMood]?.noise || 0.05) * volumes.ambience;
+        noiseGain.connect(ambienceGain);
+        if (noiseSource) {
+          noiseSource.connect(noiseGain);
+        }
+        const lfo = ctx.createOscillator();
+        const lfoGain = ctx.createGain();
+        lfoGain.gain.value = 0.02;
+        lfo.frequency.value = (AMBIENCE_MOODS[ambienceMood]?.lfo) || 0.08;
+        lfo.connect(lfoGain);
+        lfoGain.connect(noiseGain.gain);
+        base.start();
+        harmony.start();
+        if (noiseSource) noiseSource.start();
+        lfo.start();
+        ambienceNodes = { oscillators: [base, harmony], gain, noiseSource, noiseGain, lfo };
+        applyAmbienceMood();
+      }
+
+      const toneSequences = {
+        win: [
+          { freq: 660, duration: 0.18, type: 'triangle', gain: 0.24 },
+          { freq: 880, duration: 0.22, type: 'sine', offset: 0.16, gain: 0.18 }
+        ],
+        lose: [
+          { freq: 280, duration: 0.28, type: 'sawtooth', gain: 0.18 },
+          { freq: 180, duration: 0.32, type: 'sine', offset: 0.22, gain: 0.14 }
+        ],
+        tap: [
+          { freq: 520, duration: 0.12, type: 'sine', gain: 0.16 }
+        ],
+        reward: [
+          { freq: 540, duration: 0.16, type: 'sine', gain: 0.2 },
+          { freq: 720, duration: 0.24, type: 'triangle', offset: 0.12, gain: 0.2 },
+          { freq: 960, duration: 0.2, type: 'sine', offset: 0.28, gain: 0.18 }
+        ],
+        equip: [
+          { freq: 680, duration: 0.14, type: 'triangle', gain: 0.2 },
+          { freq: 540, duration: 0.12, type: 'sine', offset: 0.1, gain: 0.16 }
+        ],
+        perfect: [
+          { freq: 660, duration: 0.24, type: 'triangle', gain: 0.24 },
+          { freq: 880, duration: 0.28, type: 'sine', offset: 0.18, gain: 0.22 },
+          { freq: 1180, duration: 0.3, type: 'sine', offset: 0.36, gain: 0.18 }
+        ]
+      };
+
+      return {
+        setEnabled(flag) {
+          enabled = !!flag;
+          const audioCtx = ensureContext();
+          if (!audioCtx) return;
+          if (enabled) {
+            masterGain.gain.setTargetAtTime(volumes.master || 0, audioCtx.currentTime, 0.1);
+            audioCtx.resume?.();
+            ensureAmbienceNodes();
+          } else {
+            masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.1);
+            cleanupAmbience();
+          }
+        },
+        setVolumes(partial) {
+          if (typeof partial.effects === 'number') {
+            volumes.effects = Util.clamp(partial.effects, 0, 1);
+            if (sfxGain) {
+              sfxGain.gain.setTargetAtTime(volumes.effects || 0.0001, (ctx?.currentTime) || 0, 0.05);
+            }
+          }
+          if (typeof partial.ambience === 'number') {
+            volumes.ambience = Util.clamp(partial.ambience, 0, 1);
+            if (ambienceGain) {
+              ambienceGain.gain.setTargetAtTime(volumes.ambience * 0.12, (ctx?.currentTime) || 0, 0.2);
+            }
+            ensureAmbienceNodes();
+            applyAmbienceMood();
+          }
+          if (typeof partial.master === 'number') {
+            volumes.master = Util.clamp(partial.master, 0, 1);
+            if (masterGain) {
+              masterGain.gain.setTargetAtTime(enabled ? volumes.master : 0, (ctx?.currentTime) || 0, 0.1);
+            }
+          }
+        },
+        getVolumes() {
+          return Object.assign({}, volumes);
+        },
+        isEnabled() {
+          return enabled;
+        },
+        play(name) {
+          if (!enabled) return;
+          const audioCtx = ensureContext();
+          if (!audioCtx) return;
+          const sequence = toneSequences[name] || toneSequences.tap;
+          sequence.forEach(config => scheduleTone(config));
+        },
+        setAmbienceMood(mood) {
+          ambienceMood = mood || 'farm';
+          applyAmbienceMood();
+        },
+        ensureAmbience() {
+          ensureAmbienceNodes();
+        },
+        stopAmbience() {
+          cleanupAmbience();
+        }
+      };
+    })();
+
+    const State = (function() {
+      const SAVE_KEY = 'hcfarm_save_v1';
+      const VERSION = 3;
+      const defaultNames = ['Bonnie', 'Fergus', 'Isla', 'Hamish', 'Skye', 'Rory'];
+      const personalities = ['Greedy', 'Vain', 'Sleepy', 'Social'];
+      const coatColours = ['brown', 'cream', 'rose', 'chocolate', 'white'];
+      let data = null;
+
+      function blankAchievements() {
+        const result = {};
+        Object.keys(ACHIEVEMENTS).forEach(key => {
+          result[key] = false;
+        });
+        return result;
+      }
+
+      function sanitizeAccessories(list, source = data) {
+        if (!Array.isArray(list)) return [];
+        const unlocked = new Set(source ? source.unlocks?.accessories || [] : []);
+        const seen = new Set();
+        const result = [];
+        list.forEach(item => {
+          if (!AccessoryLibrary[item]) return;
+          if (!unlocked.has(item)) return;
+          if (seen.has(item)) return;
+          if (result.length >= ACCESSORY_LIMIT) return;
+          seen.add(item);
+          result.push(item);
+        });
+        return result;
+      }
+
+      function sanitizeDecor(list, source = data) {
+        if (!Array.isArray(list)) return [];
+        const unlocked = new Set(source ? source.unlocks?.decor || [] : []);
+        const seen = new Set();
+        const result = [];
+        list.forEach(item => {
+          if (!DecorLibrary[item]) return;
+          if (!unlocked.has(item)) return;
+          if (seen.has(item)) return;
+          if (result.length >= DECOR_LIMIT) return;
+          seen.add(item);
+          result.push(item);
+        });
+        return result;
+      }
+
+      function sanitizeDecorLayout(layout, sourceUnlocks = data) {
+        const unlocked = Array.isArray(sourceUnlocks)
+          ? new Set(sourceUnlocks)
+          : new Set(sourceUnlocks?.unlocks?.decor || []);
+        const sanitized = { left: null, centre: null, right: null };
+        const seen = new Set();
+        DECOR_SLOTS.forEach(slot => {
+          const value = layout && layout[slot];
+          if (value && DecorLibrary[value] && unlocked.has(value)) {
+            if (!seen.has(value)) {
+              sanitized[slot] = value;
+              seen.add(value);
+            }
+          }
+        });
+        return sanitized;
+      }
+
+      function sanitizeUnlockList(list, library) {
+        if (!Array.isArray(list)) return [];
+        const seen = new Set();
+        return list.filter(item => {
+          if (library && !library[item]) return false;
+          if (seen.has(item)) return false;
+          seen.add(item);
+          return true;
+        });
+      }
+
+      function createCow(id, name) {
+        return {
+          id,
+          name,
+          personality: Util.pick(personalities),
+          happiness: 70,
+          chonk: 20,
+          cleanliness: 60,
+          hunger: 40,
+          accessories: [],
+          colour: Util.pick(coatColours)
+        };
+      }
+
+      function ensureCowDefaults(cow, fallbackId, fallbackName) {
+        const base = createCow(fallbackId, fallbackName);
+        return Object.assign(base, cow || {}, {
+          accessories: Array.isArray(cow?.accessories) ? cow.accessories.slice(0, ACCESSORY_LIMIT) : [],
+          colour: cow?.colour || base.colour,
+          personality: cow?.personality || base.personality
+        });
+      }
+
+      function createDefaultSave() {
+        const cows = [];
+        for (let i = 0; i < 4; i++) {
+          const name = defaultNames[i % defaultNames.length];
+          cows.push(createCow(`cow-${i + 1}`, name));
+        }
+        return {
+          version: VERSION,
+          day: 1,
+          cows,
+          unlocks: { foods: DEFAULT_FOODS.slice(), accessories: [], decor: [] },
+          activeDecor: [],
+          decorLayout: { left: null, centre: null, right: null },
+          options: { audioOn: true, effectsVolume: 0.9, ambienceVolume: 0.5, masterVolume: 1, highContrastUI: false, reducedFlash: false },
+          stats: { totalPerfects: 0, totalChonks: 0, perfectDayStreak: 0, bestPerfectDayStreak: 0, lastRewardType: null },
+          achievements: blankAchievements(),
+          lastPlayedISO: new Date().toISOString()
+        };
+      }
+
+      function migrateSave(old) {
+        const migrated = createDefaultSave();
+        if (!old || typeof old !== 'object') {
+          return migrated;
+        }
+        migrated.day = typeof old.day === 'number' ? old.day : migrated.day;
+        const carriedAccessories = new Set();
+        const carriedDecor = new Set();
+        if (Array.isArray(old.cows)) {
+          migrated.cows = old.cows.map((cow, index) => {
+            const fallbackId = cow?.id || `cow-${index + 1}`;
+            const fallbackName = cow?.name || defaultNames[index % defaultNames.length];
+            const merged = ensureCowDefaults(cow, fallbackId, fallbackName);
+            (Array.isArray(cow?.accessories) ? cow.accessories : []).forEach(item => {
+              if (AccessoryLibrary[item]) carriedAccessories.add(item);
+            });
+            return merged;
+          });
+        }
+        if (old.unlocks) {
+          const foodList = sanitizeUnlockList(old.unlocks.foods, FoodLibrary);
+          if (foodList.length) {
+            const combinedFoods = new Set([...migrated.unlocks.foods, ...foodList]);
+            migrated.unlocks.foods = Array.from(combinedFoods);
+          }
+          migrated.unlocks.accessories = sanitizeUnlockList(old.unlocks.accessories, AccessoryLibrary);
+          migrated.unlocks.decor = sanitizeUnlockList(old.unlocks.decor, DecorLibrary);
+        }
+        carriedAccessories.forEach(item => {
+          if (!migrated.unlocks.accessories.includes(item)) {
+            migrated.unlocks.accessories.push(item);
+          }
+        });
+        migrated.unlocks.accessories = sanitizeUnlockList(migrated.unlocks.accessories, AccessoryLibrary);
+        const opts = old.options || {};
+        migrated.options.audioOn = opts.audioOn !== false;
+        migrated.options.highContrastUI = !!opts.highContrastUI;
+        migrated.options.reducedFlash = !!opts.reducedFlash;
+        if (typeof opts.effectsVolume === 'number') {
+          migrated.options.effectsVolume = Util.clamp(opts.effectsVolume, 0, 1);
+        }
+        if (typeof opts.ambienceVolume === 'number') {
+          migrated.options.ambienceVolume = Util.clamp(opts.ambienceVolume, 0, 1);
+        }
+        if (typeof opts.masterVolume === 'number') {
+          migrated.options.masterVolume = Util.clamp(opts.masterVolume, 0, 1);
+        }
+        if (old.stats) {
+          migrated.stats.totalPerfects = Number(old.stats.totalPerfects) || 0;
+          migrated.stats.totalChonks = Number(old.stats.totalChonks) || 0;
+          migrated.stats.perfectDayStreak = Number(old.stats.perfectDayStreak) || 0;
+          migrated.stats.bestPerfectDayStreak = Number(old.stats.bestPerfectDayStreak) || migrated.stats.perfectDayStreak;
+          if (typeof old.stats.lastRewardType === 'string') {
+            migrated.stats.lastRewardType = old.stats.lastRewardType;
+          }
+        }
+        let legacyLayout = null;
+        if (Array.isArray(old.activeDecor)) {
+          migrated.activeDecor = old.activeDecor.slice();
+          old.activeDecor.forEach(item => {
+            if (DecorLibrary[item]) carriedDecor.add(item);
+          });
+          legacyLayout = {};
+          sanitizeDecor(old.activeDecor, migrated).forEach((name, index) => {
+            const slot = DECOR_SLOTS[index];
+            if (slot) legacyLayout[slot] = name;
+          });
+        }
+        if (old.decorLayout && typeof old.decorLayout === 'object') {
+          legacyLayout = old.decorLayout;
+        }
+        carriedDecor.forEach(item => {
+          if (!migrated.unlocks.decor.includes(item)) {
+            migrated.unlocks.decor.push(item);
+          }
+        });
+        migrated.unlocks.decor = sanitizeUnlockList(migrated.unlocks.decor, DecorLibrary);
+        migrated.cows.forEach(cow => {
+          cow.accessories = sanitizeAccessories(cow.accessories, migrated);
+        });
+        migrated.activeDecor = sanitizeDecor(migrated.activeDecor, migrated);
+        if (legacyLayout) {
+          migrated.decorLayout = sanitizeDecorLayout(legacyLayout, migrated);
+        }
+        migrated.activeDecor = sanitizeDecor(Object.values(migrated.decorLayout || {}), migrated);
+        if (old.achievements) {
+          Object.keys(migrated.achievements).forEach(key => {
+            if (key in old.achievements) {
+              migrated.achievements[key] = !!old.achievements[key];
+            }
+          });
+        }
+        return migrated;
+      }
+
+      function load() {
+        const raw = localStorage.getItem(SAVE_KEY);
+        if (!raw) {
+          data = createDefaultSave();
+        } else {
+          try {
+            const parsed = JSON.parse(raw);
+            if (!parsed.version || parsed.version < VERSION) {
+              data = migrateSave(parsed);
+              data.version = VERSION;
+              save();
+            } else {
+              data = parsed;
+            }
+          } catch (err) {
+            console.warn('Failed to parse save, resetting', err);
+            data = createDefaultSave();
+            save();
+          }
+        }
+        if (!Array.isArray(data.activeDecor)) data.activeDecor = [];
+        if (!data.achievements) data.achievements = blankAchievements();
+        data.unlocks = Object.assign({ foods: [], accessories: [], decor: [] }, data.unlocks || {});
+        const ensuredFoods = sanitizeUnlockList([...(data.unlocks.foods || []), ...DEFAULT_FOODS], FoodLibrary);
+        data.unlocks.foods = ensuredFoods.length ? ensuredFoods : DEFAULT_FOODS.slice();
+        data.unlocks.accessories = sanitizeUnlockList(data.unlocks.accessories, AccessoryLibrary);
+        data.unlocks.decor = sanitizeUnlockList(data.unlocks.decor, DecorLibrary);
+        if (!data.decorLayout) {
+          data.decorLayout = sanitizeDecorLayout({}, data);
+        } else {
+          data.decorLayout = sanitizeDecorLayout(data.decorLayout, data);
+        }
+        data.activeDecor = sanitizeDecor(Object.values(data.decorLayout), data);
+        data.cows = Array.isArray(data.cows) ? data.cows.map((cow, index) => ensureCowDefaults(cow, cow.id || `cow-${index + 1}`, cow.name || defaultNames[index % defaultNames.length])) : [];
+        data.cows.forEach(cow => {
+          cow.accessories = sanitizeAccessories(cow.accessories);
+        });
+      }
+
+      function save() {
+        if (!data) return;
+        data.lastPlayedISO = new Date().toISOString();
+        localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+      }
+
+      function findCow(id) {
+        return data.cows.find(cow => cow.id === id);
+      }
+
+      function getData() {
+        return data;
+      }
+
+      function reset() {
+        data = createDefaultSave();
+        save();
+        return data;
+      }
+
+      function applyOptionChange(partial) {
+        if (!partial) return;
+        const options = data.options;
+        if (typeof partial.audioOn === 'boolean') options.audioOn = partial.audioOn;
+        if (typeof partial.highContrastUI === 'boolean') options.highContrastUI = partial.highContrastUI;
+        if (typeof partial.reducedFlash === 'boolean') options.reducedFlash = partial.reducedFlash;
+        if (typeof partial.effectsVolume === 'number') options.effectsVolume = Util.clamp(partial.effectsVolume, 0, 1);
+        if (typeof partial.ambienceVolume === 'number') options.ambienceVolume = Util.clamp(partial.ambienceVolume, 0, 1);
+        if (typeof partial.masterVolume === 'number') options.masterVolume = Util.clamp(partial.masterVolume, 0, 1);
+        save();
+      }
+
+      function applyCowAdjustments(adjustments) {
+        data.cows.forEach(cow => {
+          const diff = adjustments[cow.id];
+          if (!diff) return;
+          if (typeof diff.happiness === 'number') {
+            cow.happiness = Util.clamp(cow.happiness + diff.happiness, 0, 100);
+          }
+          if (typeof diff.chonk === 'number') {
+            cow.chonk = Util.clamp(cow.chonk + diff.chonk, 0, 100);
+          }
+          if (typeof diff.cleanliness === 'number') {
+            cow.cleanliness = Util.clamp(cow.cleanliness + diff.cleanliness, 0, 100);
+          }
+          if (typeof diff.hunger === 'number') {
+            cow.hunger = Util.clamp(cow.hunger + diff.hunger, 0, 100);
+          }
+          if (diff.addAccessory) {
+            const next = cow.accessories.slice();
+            if (!next.includes(diff.addAccessory)) {
+              next.push(diff.addAccessory);
+              cow.accessories = sanitizeAccessories(next);
+            }
+          }
+        });
+      }
+
+      function incrementDay() {
+        data.day += 1;
+      }
+
+      function addUnlock(type, item) {
+        if (!data.unlocks[type]) {
+          data.unlocks[type] = [];
+        }
+        const list = data.unlocks[type];
+        if (list.includes(item)) return false;
+        if (type === 'accessories' && !AccessoryLibrary[item]) return false;
+        if (type === 'foods' && !FoodLibrary[item]) return false;
+        if (type === 'decor' && !DecorLibrary[item]) return false;
+        list.push(item);
+        save();
+        return true;
+      }
+
+      function recordStats(partial) {
+        if (!partial) return;
+        if (partial.totalPerfects) {
+          data.stats.totalPerfects += partial.totalPerfects;
+        }
+        if (partial.totalChonks) {
+          data.stats.totalChonks += partial.totalChonks;
+        }
+      }
+
+      function registerDayOutcome(summary) {
+        if (!summary) {
+          save();
+          return {
+            perfectDayStreak: data.stats.perfectDayStreak || 0,
+            bestPerfectDayStreak: data.stats.bestPerfectDayStreak || 0
+          };
+        }
+        let nextStreak;
+        if (typeof summary.perfectStreak === 'number' && !Number.isNaN(summary.perfectStreak)) {
+          nextStreak = Math.max(0, Math.round(summary.perfectStreak));
+        } else if (summary.perfectDay) {
+          nextStreak = (data.stats.perfectDayStreak || 0) + 1;
+        } else {
+          nextStreak = 0;
+        }
+        data.stats.perfectDayStreak = nextStreak;
+        if ((data.stats.bestPerfectDayStreak || 0) < nextStreak) {
+          data.stats.bestPerfectDayStreak = nextStreak;
+        }
+        if (summary.rewardType) {
+          data.stats.lastRewardType = summary.rewardType;
+        }
+        save();
+        return {
+          perfectDayStreak: data.stats.perfectDayStreak,
+          bestPerfectDayStreak: data.stats.bestPerfectDayStreak
+        };
+      }
+
+      function cowsWithAccessoriesCount() {
+        return data.cows.filter(cow => cow.accessories && cow.accessories.length).length;
+      }
+
+      function checkFashionistaAchievement(options = {}) {
+        if (cowsWithAccessoriesCount() >= 3) {
+          unlockAchievement('fashionista', options);
+        }
+      }
+
+      function checkDecorAchievement(options = {}) {
+        if (getActiveDecor().length >= 3) {
+          unlockAchievement('cozyDecorator', options);
+        }
+      }
+
+      function setCowAccessories(cowId, accessories) {
+        const cow = findCow(cowId);
+        if (!cow) return false;
+        const sanitized = sanitizeAccessories(accessories);
+        const changed = JSON.stringify(cow.accessories) !== JSON.stringify(sanitized);
+        cow.accessories = sanitized;
+        if (changed) {
+          checkFashionistaAchievement();
+          save();
+        }
+        return changed;
+      }
+
+      function toggleCowAccessory(cowId, accessory) {
+        const cow = findCow(cowId);
+        if (!cow) return false;
+        if (!AccessoryLibrary[accessory]) return false;
+        if (!(data.unlocks.accessories || []).includes(accessory)) return false;
+        const current = cow.accessories.slice();
+        if (current.includes(accessory)) {
+          const filtered = current.filter(item => item !== accessory);
+          return setCowAccessories(cowId, filtered);
+        }
+        if (current.length >= ACCESSORY_LIMIT) {
+          current.shift();
+        }
+        current.push(accessory);
+        return setCowAccessories(cowId, current);
+      }
+
+      function randomiseAccessories(cowId) {
+        const cow = findCow(cowId);
+        if (!cow) return null;
+        const unlocked = sanitizeUnlockList(data.unlocks.accessories, AccessoryLibrary);
+        if (!unlocked.length) return cow;
+        const max = Math.min(ACCESSORY_LIMIT, unlocked.length);
+        const count = Math.max(1, Math.floor(Util.range(1, max + 1)));
+        const selection = Util.sample(unlocked, count);
+        setCowAccessories(cowId, selection);
+        return findCow(cowId);
+      }
+
+      function setActiveDecor(list) {
+        const sanitized = sanitizeDecor(list);
+        const layout = {};
+        DECOR_SLOTS.forEach((slot, index) => {
+          layout[slot] = sanitized[index] || null;
+        });
+        return setDecorLayout(layout);
+      }
+
+      function setDecorLayout(layout) {
+        const sanitized = sanitizeDecorLayout(layout, data);
+        data.decorLayout = sanitized;
+        data.activeDecor = sanitizeDecor(Object.values(sanitized), data);
+        checkDecorAchievement();
+        save();
+        return sanitized;
+      }
+
+      function getActiveDecor() {
+        return DECOR_SLOTS.map(slot => (data.decorLayout || {})[slot]).filter(Boolean);
+      }
+
+      function getDecorLayout() {
+        return Object.assign({ left: null, centre: null, right: null }, data.decorLayout || {});
+      }
+
+      function getUnlocks(type) {
+        if (type === 'foods') {
+          const current = Array.isArray(data.unlocks.foods) ? data.unlocks.foods.slice() : [];
+          const combined = [...DEFAULT_FOODS, ...current];
+          return sanitizeUnlockList(combined, FoodLibrary);
+        }
+        if (type === 'accessories') {
+          return sanitizeUnlockList(data.unlocks.accessories, AccessoryLibrary);
+        }
+        if (type === 'decor') {
+          return sanitizeUnlockList(data.unlocks.decor, DecorLibrary);
+        }
+        return (data.unlocks[type] || []).slice();
+      }
+
+      function getCow(cowId) {
+        return findCow(cowId);
+      }
+
+      function unlockAchievement(key, options = {}) {
+        if (!ACHIEVEMENTS[key]) return false;
+        if (!data.achievements.hasOwnProperty(key)) {
+          data.achievements[key] = false;
+        }
+        if (data.achievements[key]) return false;
+        data.achievements[key] = true;
+        if (!options.silent) {
+          save();
+        }
+        return true;
+      }
+
+      function getAchievements() {
+        return data.achievements;
+      }
+
+      function evaluateChonkSentinel() {
+        if (data.cows.every(cow => cow.chonk < 70)) {
+          return unlockAchievement('chonkSentinel');
+        }
+        return false;
+      }
+
+      function refreshAutomaticAchievements() {
+        checkFashionistaAchievement({ silent: true });
+        checkDecorAchievement({ silent: true });
+      }
+
+      load();
+      refreshAutomaticAchievements();
+
+      return {
+        version: VERSION,
+        getData,
+        save,
+        reset,
+        applyOptionChange,
+        applyCowAdjustments,
+        incrementDay,
+        addUnlock,
+        recordStats,
+        registerDayOutcome,
+        createCow,
+        createDefaultSave,
+        setCowAccessories,
+        toggleCowAccessory,
+        randomiseAccessories,
+        getCow,
+        getUnlocks,
+        setActiveDecor,
+        setDecorLayout,
+        getActiveDecor,
+        getDecorLayout,
+        getAchievements,
+        unlockAchievement,
+        evaluateChonkSentinel
+      };
+    })();
+    const UI = (function() {
+      const screenElements = Array.from(document.querySelectorAll('.screen'));
+      const screenMap = {};
+      screenElements.forEach(section => {
+        screenMap[section.dataset.screen] = section;
+      });
+      const elements = {
+        herdGrid: document.getElementById('herd-grid'),
+        timer: document.getElementById('task-timer'),
+        miniSubtitle: document.getElementById('mini-subtitle'),
+        miniInstruction: document.getElementById('mini-instruction'),
+        miniBadge: document.getElementById('mini-badge'),
+        minigameArea: document.getElementById('minigame-area'),
+        summaryResults: document.getElementById('summary-results'),
+        summaryCowDeltas: document.getElementById('summary-cow-deltas'),
+        summaryUnlock: document.getElementById('summary-unlock'),
+        titleHowTo: document.getElementById('title-howto'),
+        rangeEffects: document.getElementById('range-effects'),
+        rangeAmbience: document.getElementById('range-ambience'),
+        rangeMaster: document.getElementById('range-master'),
+        rangeEffectsValue: document.getElementById('range-effects-value'),
+        rangeAmbienceValue: document.getElementById('range-ambience-value'),
+        rangeMasterValue: document.getElementById('range-master-value'),
+        stylePreview: document.getElementById('style-preview'),
+        styleList: document.getElementById('style-accessory-list'),
+        styleCowName: document.getElementById('style-cow-name'),
+        styleSubtitle: document.getElementById('style-subtitle'),
+        styleHelper: document.getElementById('style-helper'),
+        decorDisplay: document.getElementById('decor-display'),
+        pantryList: document.getElementById('pantry-list'),
+        farmEvents: document.getElementById('farm-events'),
+        achievementList: document.getElementById('achievement-list'),
+        decorManageList: document.getElementById('decor-manage-list'),
+        decorStatus: document.getElementById('decor-limit-status'),
+        decorPreview: document.getElementById('decor-preview'),
+      };
+      let currentScreen = 'title';
+      let optionsReturnScreen = 'title';
+      let callbacksRef = {};
+      let currentStyledCowId = null;
+      let decorDraft = { left: null, centre: null, right: null };
+      let decorOptions = [];
+
+      const miniFriendly = {
+        catch: 'Catch the Cow',
+        food: 'Food Frenzy',
+        brush: 'Brush Rush',
+      };
+
+      const miniDescriptions = {
+        catch: 'Tap or click the cows to nudge them back before they reach the fences.',
+        food: 'Drag the matching feed to each cow. One serving each – extra feed means extra chonk!',
+        brush: 'Drag the brush across the messy patches to tidy the coat before time runs out.'
+      };
+
+      function showScreen(name) {
+        currentScreen = name;
+        screenElements.forEach(section => {
+          section.classList.toggle('active', section.dataset.screen === name);
+        });
+        if (typeof Audio?.setAmbienceMood === 'function') {
+          if (name === 'task') {
+            Audio.setAmbienceMood('task');
+          } else if (name === 'summary') {
+            Audio.setAmbienceMood('summary');
+          } else {
+            Audio.setAmbienceMood('farm');
+          }
+        }
+      }
+
+      function setMiniTitle(label, index, total) {
+        elements.miniSubtitle.textContent = label;
+        elements.miniBadge.textContent = `Mini ${index} of ${total}`;
+      }
+
+      function setMiniInstruction(text) {
+        elements.miniInstruction.textContent = text;
+      }
+
+      function updateTimer(seconds) {
+        elements.timer.textContent = Util.formatTime(seconds);
+      }
+
+      function moodIcon(cow) {
+        const happiness = cow.happiness;
+        const hunger = cow.hunger;
+        const cleanliness = cow.cleanliness;
+        if (happiness > 75 && hunger < 50 && cleanliness > 60) return '😊';
+        if (hunger > 70) return '🥕';
+        if (cleanliness < 40) return '🪣';
+        if (happiness < 40) return '😟';
+        return '🙂';
+      }
+
+      function heartsForChonk(chonk) {
+        const filled = Math.min(3, Math.round(chonk / 33));
+        let hearts = '';
+        for (let i = 0; i < 3; i++) {
+          hearts += i < filled ? '❤' : '♡';
+        }
+        return hearts;
+      }
+
+      function renderCowSVG(cow, options = {}) {
+        return CowVisuals.svg(cow, options);
+      }
+
+      function renderAccessoryChips(cow) {
+        if (!cow.accessories || !cow.accessories.length) {
+          return '<span class="accessory-chip">No accessories yet</span>';
+        }
+        return cow.accessories.map(name => {
+          const entry = AccessoryLibrary[name];
+          const icon = entry?.icon || '⭐';
+          return `<span class="accessory-chip" title="${name}">${icon} ${name}</span>`;
+        }).join('');
+      }
+
+      function renderEventsList(events) {
+        elements.farmEvents.innerHTML = '';
+        const fallback = { title: 'No special events', detail: 'A peaceful breeze across the paddock.' };
+        const list = Array.isArray(events) && events.length ? events : [fallback];
+        list.forEach(entry => {
+          const li = document.createElement('li');
+          if (typeof entry === 'string') {
+            li.textContent = entry;
+          } else {
+            const title = entry?.title || '';
+            const detail = entry?.detail || '';
+            if (title) {
+              const strong = document.createElement('strong');
+              strong.textContent = title;
+              li.appendChild(strong);
+            }
+            if (detail) {
+              const span = document.createElement('span');
+              span.textContent = detail;
+              li.appendChild(span);
+            }
+            if (!title && !detail) {
+              li.textContent = fallback.detail;
+            }
+          }
+          elements.farmEvents.appendChild(li);
+        });
+      }
+
+      function slotLabel(slot) {
+        return DECOR_SLOT_LABELS[slot] || slot.charAt(0).toUpperCase() + slot.slice(1);
+      }
+
+      function buildDecorScene(layout) {
+        const scene = document.createElement('div');
+        scene.className = 'decor-display';
+        DECOR_SLOTS.forEach(slot => {
+          const slotEl = document.createElement('div');
+          slotEl.className = `decor-slot decor-slot-${slot}`;
+          const selection = layout && layout[slot];
+          if (selection && DecorLibrary[selection]) {
+            slotEl.classList.add('active');
+            const icon = document.createElement('div');
+            icon.className = 'decor-icon';
+            icon.textContent = DecorLibrary[selection].icon || '✨';
+            const label = document.createElement('span');
+            label.className = 'decor-label';
+            label.textContent = selection;
+            slotEl.appendChild(icon);
+            slotEl.appendChild(label);
+          } else {
+            const placeholder = document.createElement('span');
+            placeholder.className = 'decor-placeholder';
+            placeholder.textContent = slotLabel(slot);
+            slotEl.appendChild(placeholder);
+          }
+          scene.appendChild(slotEl);
+        });
+        return scene;
+      }
+
+      function renderDecorScene(container, layout) {
+        if (!container) return;
+        if (container.classList.contains('decor-display')) {
+          container.innerHTML = '';
+          DECOR_SLOTS.forEach(slot => {
+            const slotEl = document.createElement('div');
+            slotEl.className = `decor-slot decor-slot-${slot}`;
+            const selection = layout && layout[slot];
+            if (selection && DecorLibrary[selection]) {
+              slotEl.classList.add('active');
+              const icon = document.createElement('div');
+              icon.className = 'decor-icon';
+              icon.textContent = DecorLibrary[selection].icon || '✨';
+              const label = document.createElement('span');
+              label.className = 'decor-label';
+              label.textContent = selection;
+              slotEl.appendChild(icon);
+              slotEl.appendChild(label);
+            } else {
+              const placeholder = document.createElement('span');
+              placeholder.className = 'decor-placeholder';
+              placeholder.textContent = slotLabel(slot);
+              slotEl.appendChild(placeholder);
+            }
+            container.appendChild(slotEl);
+          });
+        } else {
+          container.innerHTML = '';
+          container.appendChild(buildDecorScene(layout));
+        }
+      }
+
+      function renderDecorDisplay(layout) {
+        renderDecorScene(elements.decorDisplay, layout || {});
+      }
+
+      function renderPantryList(foods) {
+        if (!elements.pantryList) return;
+        elements.pantryList.innerHTML = '';
+        const items = Array.isArray(foods)
+          ? foods.map(name => ({ name, entry: FoodLibrary[name] })).filter(item => item.entry)
+          : [];
+        if (!items.length) {
+          const message = document.createElement('div');
+          message.className = 'helper-text';
+          message.textContent = 'Unlock new treats in the day summary to expand the pantry.';
+          elements.pantryList.appendChild(message);
+          return;
+        }
+        items.forEach(({ name, entry }) => {
+          const block = document.createElement('div');
+          block.className = 'pantry-item';
+          block.textContent = entry.icon || '🥛';
+          block.setAttribute('aria-label', `${name} treat`);
+          if (entry.description) {
+            block.title = entry.description;
+          }
+          const label = document.createElement('span');
+          label.textContent = name;
+          block.appendChild(label);
+          elements.pantryList.appendChild(block);
+        });
+      }
+
+      function renderAchievementsList(achievements) {
+        elements.achievementList.innerHTML = '';
+        Object.entries(ACHIEVEMENTS).forEach(([key, meta]) => {
+          const li = document.createElement('li');
+          if (achievements && achievements[key]) {
+            li.classList.add('completed');
+            li.textContent = `${meta.title} – complete!`;
+          } else {
+            li.textContent = `${meta.title} – ${meta.description}`;
+          }
+          elements.achievementList.appendChild(li);
+        });
+      }
+
+      let currentStyleUnlocks = [];
+
+      function refreshStylePreview(cow) {
+        if (!cow) return;
+        elements.stylePreview.innerHTML = `
+          <div class="style-preview-art">${renderCowSVG(cow, { className: 'cow-art-large', scale: 1.25, viewBox: '0 0 160 130' })}</div>
+          <div class="accessory-chips">${renderAccessoryChips(cow)}</div>`;
+      }
+
+      function renderStyleList(unlocked, cow) {
+        elements.styleList.innerHTML = '';
+        if (!unlocked.length) {
+          const empty = document.createElement('p');
+          empty.className = 'helper-text';
+          empty.textContent = 'Unlock accessories from day rewards to start styling.';
+          elements.styleList.appendChild(empty);
+          return;
+        }
+        unlocked.forEach(name => {
+          const entry = AccessoryLibrary[name];
+          const row = document.createElement('div');
+          row.className = 'style-item';
+          const label = document.createElement('span');
+          label.textContent = `${entry?.icon || '⭐'} ${name}`;
+          if (entry?.description) {
+            label.title = entry.description;
+          }
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.dataset.accessory = name;
+          const equipped = cow.accessories.includes(name);
+          button.classList.toggle('active', equipped);
+          button.setAttribute('aria-pressed', equipped ? 'true' : 'false');
+          button.textContent = equipped ? 'Equipped' : 'Add';
+          row.appendChild(label);
+          row.appendChild(button);
+          elements.styleList.appendChild(row);
+        });
+      }
+
+      function showStyleScreen(cow, unlocked) {
+        if (!cow) return;
+        currentStyledCowId = cow.id;
+        currentStyleUnlocks = unlocked.slice();
+        elements.styleCowName.textContent = `${cow.name} • ${cow.personality}`;
+        elements.styleSubtitle.textContent = `Dress ${cow.name} with the latest farm finds.`;
+        elements.styleHelper.textContent = `Tap an accessory to toggle it. Up to ${ACCESSORY_LIMIT} can be worn at once.`;
+        renderStyleList(unlocked, cow);
+        refreshStylePreview(cow);
+        showScreen('style');
+      }
+
+      function updateDecorStatus(limitNotice = false) {
+        const statusEl = elements.decorStatus;
+        if (!statusEl) return;
+        if (!decorOptions.length) {
+          statusEl.textContent = 'Unlock décor in the day summary to decorate the paddock.';
+          statusEl.classList.remove('is-warning');
+          return;
+        }
+        const assignedSlots = DECOR_SLOTS.filter(slot => decorDraft[slot]);
+        if (!assignedSlots.length) {
+          statusEl.textContent = 'No décor assigned yet. Choose a cosy piece for each slot.';
+        } else {
+          const pieces = assignedSlots.map(slot => decorDraft[slot]).filter(Boolean);
+          const uniqueCount = new Set(pieces).size;
+          const slotNames = assignedSlots.map(slotLabel).join(', ');
+          statusEl.textContent = `Displaying ${uniqueCount} décor piece${uniqueCount === 1 ? '' : 's'} across ${assignedSlots.length} slot${assignedSlots.length === 1 ? '' : 's'} (${slotNames}).`;
+        }
+        statusEl.classList.toggle('is-warning', !!limitNotice);
+      }
+
+      function showDecorScreen(unlocked, activeLayout) {
+        decorOptions = Array.isArray(unlocked) ? unlocked.slice() : [];
+        decorDraft = Object.assign({ left: null, centre: null, right: null }, activeLayout || {});
+        elements.decorManageList.innerHTML = '';
+        if (!decorOptions.length) {
+          const empty = document.createElement('p');
+          empty.className = 'helper-text';
+          empty.textContent = 'Unlock décor in the day summary to decorate the paddock.';
+          elements.decorManageList.appendChild(empty);
+        } else {
+          DECOR_SLOTS.forEach(slot => {
+            const wrapper = document.createElement('label');
+            wrapper.className = 'decor-slot-control';
+            const title = document.createElement('span');
+            title.textContent = slotLabel(slot);
+            const select = document.createElement('select');
+            select.dataset.slot = slot;
+            const noneOption = document.createElement('option');
+            noneOption.value = '';
+            noneOption.textContent = 'None';
+            select.appendChild(noneOption);
+            decorOptions.forEach(name => {
+              const option = document.createElement('option');
+              option.value = name;
+              option.textContent = `${DecorLibrary[name]?.icon || '✨'} ${name}`;
+              select.appendChild(option);
+            });
+            select.value = decorDraft[slot] || '';
+            wrapper.appendChild(title);
+            wrapper.appendChild(select);
+            elements.decorManageList.appendChild(wrapper);
+          });
+        }
+        renderDecorScene(elements.decorPreview, decorDraft);
+        updateDecorStatus();
+        showScreen('decor');
+      }
+
+      function renderHerd(cows) {
+        const fragment = document.createDocumentFragment();
+        cows.forEach(cow => {
+          const card = document.createElement('article');
+          card.className = 'cow-card';
+          if (cow.chonk >= 65) {
+            card.classList.add('is-chonk');
+          }
+          card.innerHTML = `
+            <h3>${cow.name} <span class="personality">${cow.personality}</span></h3>
+            ${renderCowSVG(cow)}
+            <div class="status-row"><span>Mood ${moodIcon(cow)}</span><span>Chonk <span class="chonk-hearts">${heartsForChonk(cow.chonk)}</span></span></div>
+            <div class="status-row"><span>Happy ${Math.round(cow.happiness)}</span><span>Hunger ${Math.round(cow.hunger)}</span></div>
+            <div class="status-row"><span>Clean ${Math.round(cow.cleanliness)}</span><span>Accessories ${cow.accessories.length}</span></div>
+            <div class="accessory-chips">${renderAccessoryChips(cow)}</div>
+            <button type="button" class="style-btn" data-cow="${cow.id}">Style ${cow.name}</button>
+          `;
+          fragment.appendChild(card);
+        });
+        elements.herdGrid.innerHTML = '';
+        elements.herdGrid.appendChild(fragment);
+      }
+
+      function updateOptionsUI(options) {
+        const audioToggle = document.getElementById('toggle-audio');
+        const contrastToggle = document.getElementById('toggle-contrast');
+        const reducedToggle = document.getElementById('toggle-reduced');
+        const effectsRange = elements.rangeEffects;
+        const ambienceRange = elements.rangeAmbience;
+        const masterRange = elements.rangeMaster;
+        audioToggle.checked = !!options.audioOn;
+        contrastToggle.checked = !!options.highContrastUI;
+        reducedToggle.checked = !!options.reducedFlash;
+        if (masterRange) {
+          const value = typeof options.masterVolume === 'number' ? options.masterVolume : 1;
+          masterRange.value = value;
+          elements.rangeMasterValue.textContent = `${Math.round(value * 100)}%`;
+        }
+        if (effectsRange) {
+          const value = typeof options.effectsVolume === 'number' ? options.effectsVolume : 1;
+          effectsRange.value = value;
+          elements.rangeEffectsValue.textContent = `${Math.round(value * 100)}%`;
+        }
+        if (ambienceRange) {
+          const value = typeof options.ambienceVolume === 'number' ? options.ambienceVolume : 0;
+          ambienceRange.value = value;
+          elements.rangeAmbienceValue.textContent = `${Math.round(value * 100)}%`;
+        }
+        applyOptions(options);
+      }
+
+      function applyOptions(options) {
+        document.body.classList.toggle('high-contrast', !!options.highContrastUI);
+      }
+
+      function renderSummary(data) {
+        const {
+          results = [],
+          adjustments = {},
+          herd = [],
+          reward,
+          stats,
+          day,
+          perfectDay,
+          perfectStreak,
+          previousPerfectStreak
+        } = data || {};
+
+        elements.summaryResults.innerHTML = '';
+        const fragment = document.createDocumentFragment();
+
+        if (typeof perfectDay === 'boolean') {
+          const perfectItem = document.createElement('div');
+          perfectItem.className = 'summary-item';
+          if (perfectDay) {
+            const streakCount = Math.max(0, Number(perfectStreak) || 0);
+            const label = streakCount === 1 ? 'day' : 'days';
+            perfectItem.innerHTML = `<strong>Perfect Pastures!</strong><br>All three mini-games cleared with smiles.<br>Perfect-day streak: ${streakCount} ${label}.`;
+          } else {
+            const streakLost = Math.max(0, Number(previousPerfectStreak) || 0);
+            const label = streakLost === 1 ? 'day' : 'days';
+            const streakMessage = streakLost
+              ? `The streak pauses after ${streakLost} ${label}.`
+              : 'Your next perfect-day streak begins tomorrow.';
+            perfectItem.innerHTML = `<strong>Almost There</strong><br>Not every task was flawless today.<br>${streakMessage}`;
+          }
+          fragment.appendChild(perfectItem);
+        }
+
+        results.forEach(result => {
+          const item = document.createElement('div');
+          item.className = 'summary-item';
+          const statusEmoji = result.success ? '🌟' : '⚠️';
+          item.innerHTML = `<strong>${statusEmoji} ${result.name}</strong><br>${result.summary || (result.success ? 'Great job!' : 'We will get it tomorrow.')}`;
+          fragment.appendChild(item);
+        });
+
+        if (stats && (stats.totalPerfects || stats.totalChonks)) {
+          const statsItem = document.createElement('div');
+          statsItem.className = 'summary-item';
+          statsItem.innerHTML = `<strong>Farm Stats</strong><br>Perfect clears today: ${stats.totalPerfects || 0}<br>Chonky moments: ${stats.totalChonks || 0}`;
+          fragment.appendChild(statsItem);
+        }
+
+        if (data.achievementsUnlocked && data.achievementsUnlocked.length) {
+          const achItem = document.createElement('div');
+          achItem.className = 'summary-item';
+          const names = data.achievementsUnlocked.map(key => ACHIEVEMENTS[key]?.title || key);
+          achItem.innerHTML = `<strong>New Achievements</strong><br>${names.join('<br>')}`;
+          fragment.appendChild(achItem);
+        }
+
+        if (typeof day === 'number') {
+          const dayItem = document.createElement('div');
+          dayItem.className = 'summary-item';
+          dayItem.innerHTML = `<strong>Day ${day - 1} complete!</strong><br>Next up: Day ${day}.`;
+          fragment.appendChild(dayItem);
+        }
+
+        elements.summaryResults.appendChild(fragment);
+
+        elements.summaryCowDeltas.innerHTML = '';
+        herd.forEach(cow => {
+          const delta = adjustments[cow.id];
+          if (!delta) return;
+          const deltaStrings = [];
+          if (delta.happiness) deltaStrings.push(`Happiness ${delta.happiness > 0 ? '+' : ''}${Math.round(delta.happiness)}`);
+          if (delta.hunger) deltaStrings.push(`Hunger ${delta.hunger > 0 ? '+' : ''}${Math.round(delta.hunger)}`);
+          if (delta.cleanliness) deltaStrings.push(`Cleanliness ${delta.cleanliness > 0 ? '+' : ''}${Math.round(delta.cleanliness)}`);
+          if (delta.chonk) deltaStrings.push(`Chonk ${delta.chonk > 0 ? '+' : ''}${Math.round(delta.chonk)}`);
+          const row = document.createElement('div');
+          row.className = 'summary-cow';
+          row.innerHTML = `<span>${cow.name}</span><span>${deltaStrings.join(' • ') || 'No changes'}</span>`;
+          elements.summaryCowDeltas.appendChild(row);
+        });
+
+        if (reward) {
+          elements.summaryUnlock.hidden = false;
+          elements.summaryUnlock.innerHTML = '';
+          const themeText = reward.theme ? ` • ${reward.theme}` : '';
+          let rewardIcon = '';
+          if (reward.type === 'foods') {
+            rewardIcon = FoodLibrary[reward.item]?.icon || '🍀';
+          } else if (reward.type === 'accessories') {
+            rewardIcon = AccessoryLibrary[reward.item]?.icon || '⭐';
+          } else if (reward.type === 'decor') {
+            rewardIcon = DecorLibrary[reward.item]?.icon || '✨';
+          }
+          const iconPrefix = rewardIcon ? `${rewardIcon} ` : '';
+          const title = document.createElement('div');
+          title.className = 'unlock-title';
+          title.textContent = `Unlocked: ${iconPrefix}${reward.item} (${reward.typeLabel})${themeText}!`;
+          elements.summaryUnlock.appendChild(title);
+          if (reward.guaranteedBy) {
+            const reason = document.createElement('div');
+            reason.className = 'unlock-reason';
+            reason.textContent = `Guaranteed by: ${reward.guaranteedBy}.`;
+            elements.summaryUnlock.appendChild(reason);
+          }
+        } else {
+          elements.summaryUnlock.hidden = true;
+          elements.summaryUnlock.innerHTML = '';
+        }
+      }
+
+      function getMiniLabel(key) {
+        return miniFriendly[key] || key;
+      }
+
+      function getMiniDescription(key) {
+        return miniDescriptions[key] || '';
+      }
+
+      function init(callbacks) {
+        callbacksRef = callbacks || {};
+        const startButton = document.getElementById('btn-start');
+        startButton.addEventListener('click', () => {
+          callbacksRef.onStart && callbacksRef.onStart();
+        });
+        document.getElementById('btn-options').addEventListener('click', () => {
+          optionsReturnScreen = currentScreen;
+          callbacksRef.onShowOptions && callbacksRef.onShowOptions();
+          showScreen('options');
+        });
+        document.getElementById('btn-farm-options').addEventListener('click', () => {
+          optionsReturnScreen = 'farm';
+          callbacksRef.onShowOptions && callbacksRef.onShowOptions();
+          showScreen('options');
+        });
+        document.getElementById('btn-options-back').addEventListener('click', () => {
+          callbacksRef.onCloseOptions && callbacksRef.onCloseOptions();
+          showScreen(optionsReturnScreen || 'title');
+        });
+        document.getElementById('btn-reset').addEventListener('click', () => {
+          if (confirm('Reset save data? This cannot be undone.')) {
+            callbacksRef.onReset && callbacksRef.onReset();
+          }
+        });
+        document.getElementById('btn-howto').addEventListener('click', () => {
+          elements.titleHowTo.open = !elements.titleHowTo.open;
+          if (elements.titleHowTo.open) {
+            elements.titleHowTo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+        document.getElementById('btn-start-day').addEventListener('click', () => {
+          callbacksRef.onStartDay && callbacksRef.onStartDay();
+        });
+        document.getElementById('btn-summary-continue').addEventListener('click', () => {
+          callbacksRef.onSummaryContinue && callbacksRef.onSummaryContinue();
+        });
+        const audioToggle = document.getElementById('toggle-audio');
+        const contrastToggle = document.getElementById('toggle-contrast');
+        const reducedToggle = document.getElementById('toggle-reduced');
+        audioToggle.addEventListener('change', () => {
+          callbacksRef.onOptionChange && callbacksRef.onOptionChange({ audioOn: audioToggle.checked });
+        });
+        contrastToggle.addEventListener('change', () => {
+          callbacksRef.onOptionChange && callbacksRef.onOptionChange({ highContrastUI: contrastToggle.checked });
+        });
+        reducedToggle.addEventListener('change', () => {
+          callbacksRef.onOptionChange && callbacksRef.onOptionChange({ reducedFlash: reducedToggle.checked });
+        });
+        if (elements.rangeEffects) {
+          elements.rangeEffects.addEventListener('input', () => {
+            const value = parseFloat(elements.rangeEffects.value);
+            elements.rangeEffectsValue.textContent = `${Math.round(value * 100)}%`;
+            callbacksRef.onOptionChange && callbacksRef.onOptionChange({ effectsVolume: value });
+          });
+        }
+        if (elements.rangeAmbience) {
+          elements.rangeAmbience.addEventListener('input', () => {
+            const value = parseFloat(elements.rangeAmbience.value);
+            elements.rangeAmbienceValue.textContent = `${Math.round(value * 100)}%`;
+            callbacksRef.onOptionChange && callbacksRef.onOptionChange({ ambienceVolume: value });
+          });
+        }
+        if (elements.rangeMaster) {
+          elements.rangeMaster.addEventListener('input', () => {
+            const value = parseFloat(elements.rangeMaster.value);
+            elements.rangeMasterValue.textContent = `${Math.round(value * 100)}%`;
+            callbacksRef.onOptionChange && callbacksRef.onOptionChange({ masterVolume: value });
+          });
+        }
+        elements.herdGrid.addEventListener('click', event => {
+          const button = event.target.closest('.style-btn');
+          if (button) {
+            const cowId = button.dataset.cow;
+            callbacksRef.onEditCow && callbacksRef.onEditCow(cowId);
+          }
+        });
+        const styleBack = document.getElementById('btn-style-back');
+        styleBack.addEventListener('click', () => {
+          showScreen('farm');
+          callbacksRef.onStyleBack && callbacksRef.onStyleBack();
+        });
+        const styleClear = document.getElementById('btn-style-clear');
+        styleClear.addEventListener('click', () => {
+          if (!currentStyledCowId) return;
+          const updated = callbacksRef.onClearAccessories && callbacksRef.onClearAccessories(currentStyledCowId);
+          if (updated) {
+            refreshStylePreview(updated);
+            renderStyleList(currentStyleUnlocks, updated);
+            Audio.play('equip');
+          }
+        });
+        const styleRandom = document.getElementById('btn-style-random');
+        styleRandom.addEventListener('click', () => {
+          if (!currentStyledCowId) return;
+          const updated = callbacksRef.onRandomiseAccessories && callbacksRef.onRandomiseAccessories(currentStyledCowId);
+          if (updated) {
+            refreshStylePreview(updated);
+            renderStyleList(currentStyleUnlocks, updated);
+            Audio.play('equip');
+          }
+        });
+        elements.styleList.addEventListener('click', event => {
+          const button = event.target.closest('button');
+          if (!button || !button.dataset.accessory || !currentStyledCowId) return;
+          const updated = callbacksRef.onToggleAccessory && callbacksRef.onToggleAccessory(currentStyledCowId, button.dataset.accessory);
+          if (updated) {
+            refreshStylePreview(updated);
+            renderStyleList(currentStyleUnlocks, updated);
+            Audio.play('equip');
+          }
+        });
+        document.getElementById('btn-manage-decor').addEventListener('click', () => {
+          callbacksRef.onShowDecor && callbacksRef.onShowDecor();
+        });
+        document.getElementById('btn-decor-back').addEventListener('click', () => {
+          showScreen('farm');
+          callbacksRef.onDecorBack && callbacksRef.onDecorBack();
+        });
+        document.getElementById('btn-decor-save').addEventListener('click', () => {
+          const layout = Object.assign({}, decorDraft);
+          const proceed = callbacksRef.onDecorSave && callbacksRef.onDecorSave(layout);
+          if (proceed !== false) {
+            showScreen('farm');
+          }
+        });
+        elements.decorManageList.addEventListener('change', event => {
+          const select = event.target;
+          if (!(select instanceof HTMLSelectElement)) return;
+          const slot = select.dataset.slot;
+          if (!slot) return;
+          const value = select.value || null;
+          if (value && !decorOptions.includes(value)) {
+            select.value = decorDraft[slot] || '';
+            return;
+          }
+          decorDraft[slot] = value || null;
+          if (value) {
+            DECOR_SLOTS.forEach(other => {
+              if (other !== slot && decorDraft[other] === value) {
+                decorDraft[other] = null;
+                const otherSelect = elements.decorManageList.querySelector(`select[data-slot="${other}"]`);
+                if (otherSelect) {
+                  otherSelect.value = '';
+                }
+              }
+            });
+          }
+          renderDecorScene(elements.decorPreview, decorDraft);
+          updateDecorStatus();
+        });
+      }
+
+      return {
+        init,
+        showScreen,
+        renderHerd,
+        updateOptionsUI,
+        applyOptions,
+        updateTimer,
+        setMiniTitle,
+        setMiniInstruction,
+        getMiniLabel,
+        getMiniDescription,
+        renderSummary,
+        renderEvents: renderEventsList,
+        renderPantry: renderPantryList,
+        renderDecor: renderDecorDisplay,
+        renderAchievements: renderAchievementsList,
+        showStyle: showStyleScreen,
+        refreshStyle: refreshStylePreview,
+        showDecor: showDecorScreen,
+        get miniFriendly() { return miniFriendly; }
+      };
+    })();
+    const MiniGames = (function() {
+      const registry = {};
+      let container = null;
+      let activeGame = null;
+      let loopRunning = false;
+      let lastTime = 0;
+
+      function init(root) {
+        container = root;
+      }
+
+      function register(key, config) {
+        registry[key] = config;
+      }
+
+      function ensureInitialised(game) {
+        if (!game.initialised) {
+          game.root = game.init(container);
+          game.initialised = true;
+        }
+      }
+
+      function startLoop() {
+        if (loopRunning) return;
+        loopRunning = true;
+        lastTime = performance.now();
+        requestAnimationFrame(step);
+      }
+
+      function step(timestamp) {
+        if (!loopRunning) return;
+        const dt = Math.min((timestamp - lastTime) / 1000, 0.1);
+        lastTime = timestamp;
+        if (activeGame && activeGame.update) {
+          activeGame.update(dt);
+          requestAnimationFrame(step);
+        } else {
+          loopRunning = false;
+        }
+      }
+
+      function play(key, context) {
+        return new Promise(resolve => {
+          const game = registry[key];
+          if (!game) {
+            resolve({ success: false, adjustments: {} });
+            return;
+          }
+          ensureInitialised(game);
+          const root = game.root;
+          root.classList.add('active');
+          activeGame = game;
+          let finished = false;
+          const enriched = Object.assign({}, context, {
+            options: context.options || {},
+            end(result) {
+              if (finished) return;
+              finished = true;
+              if (typeof game.stop === 'function') {
+                game.stop();
+              }
+              root.classList.remove('active');
+              activeGame = null;
+              loopRunning = false;
+              resolve(Object.assign({ success: false, adjustments: {} }, result));
+            }
+          });
+          if (typeof context.updateInstruction === 'function' && game.description) {
+            context.updateInstruction(game.description);
+          }
+          game.start(enriched);
+          startLoop();
+        });
+      }
+
+      function getNames() {
+        return Object.keys(registry);
+      }
+
+      function getInfo(key) {
+        return registry[key];
+      }
+
+      return {
+        init,
+        register,
+        play,
+        getNames,
+        getInfo
+      };
+    })();
+
+    MiniGames.init(document.getElementById('minigame-area'));
+    MiniGames.register('catch', (function() {
+      let root, canvas, ctx;
+      let state = null;
+
+      function init(container) {
+        root = document.createElement('div');
+        root.className = 'minigame-surface catch-game';
+        canvas = document.createElement('canvas');
+        canvas.className = 'game-canvas';
+        root.appendChild(canvas);
+        container.appendChild(root);
+        canvas.addEventListener('pointerdown', onPointerDown);
+        window.addEventListener('resize', resizeCanvas);
+        return root;
+      }
+
+      function resizeCanvas() {
+        if (!canvas || !root) return;
+        const rect = root.getBoundingClientRect();
+        const displayWidth = rect.width || 320;
+        const displayHeight = Math.max(260, rect.width * 0.6);
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = displayWidth * dpr;
+        canvas.height = displayHeight * dpr;
+        canvas.style.width = `${displayWidth}px`;
+        canvas.style.height = `${displayHeight}px`;
+        ctx = canvas.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (state) {
+          state.width = displayWidth;
+          state.height = displayHeight;
+        }
+      }
+
+      function spawnCows(count, width, height, baseSpeed, participants) {
+        const cows = [];
+        const pool = (participants && participants.length)
+          ? participants.slice()
+          : [{ id: 'wild', name: 'Runaway', chonk: 40, accessories: [], colour: 'brown' }];
+        for (let i = 0; i < count; i++) {
+          const x = width / 2 + Util.range(-40, 40);
+          const y = height / 2 + Util.range(-40, 40);
+          const radius = 18 + Util.range(-2, 4);
+          const direction = Math.atan2(y - height / 2, x - width / 2);
+          const speed = baseSpeed + Util.range(-20, 20);
+          const profile = pool[i % pool.length];
+          const chonkScale = profile && typeof profile.chonk === 'number' ? Math.max(0, profile.chonk - 60) * 0.06 : 0;
+          cows.push({
+            x,
+            y,
+            radius: radius + chonkScale,
+            vx: Math.cos(direction) * speed,
+            vy: Math.sin(direction) * speed,
+            taggedAt: 0,
+            profile
+          });
+        }
+        return cows;
+      }
+
+      function onPointerDown(event) {
+        if (!state || !state.running) return;
+        const rect = canvas.getBoundingClientRect();
+        const px = event.clientX - rect.left;
+        const py = event.clientY - rect.top;
+        let hit = false;
+        state.cows.forEach(cow => {
+          const distance = Math.hypot(px - cow.x, py - cow.y);
+          if (!hit && distance <= cow.radius + 12) {
+            hit = true;
+            const targetX = state.width / 2;
+            const targetY = state.height / 2;
+            const dx = targetX - cow.x;
+            const dy = targetY - cow.y;
+            const len = Math.hypot(dx, dy) || 1;
+            const speed = state.baseSpeed * 1.3;
+            cow.vx = (dx / len) * speed;
+            cow.vy = (dy / len) * speed;
+            cow.taggedAt = performance.now();
+          }
+        });
+        if (hit) {
+          Audio.play('tap');
+        }
+      }
+
+      function drawBackground(width, height) {
+        ctx.clearRect(0, 0, width, height);
+        const gradient = ctx.createLinearGradient(0, 0, 0, height);
+        gradient.addColorStop(0, '#fef4f2');
+        gradient.addColorStop(1, '#f6e5d0');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+        ctx.strokeStyle = 'rgba(53, 38, 77, 0.2)';
+        ctx.lineWidth = 4;
+        ctx.strokeRect(10, 10, width - 20, height - 20);
+      }
+
+      function drawCows(cows) {
+        const time = performance.now();
+        const fallback = { id: 'wild', name: 'Runaway', colour: 'brown', chonk: 40, accessories: [] };
+        cows.forEach(cow => {
+          const profile = cow.profile || fallback;
+          const wobble = Math.sin(time / 260 + cow.x * 0.02) * 1.2;
+          CowVisuals.drawCanvas(ctx, profile, {
+            x: cow.x,
+            y: cow.y,
+            scale: Math.max(0.55, cow.radius / 28),
+            wobble
+          });
+          if (cow.taggedAt) {
+            const age = time - cow.taggedAt;
+            if (age < 220) {
+              const pulse = 1 - age / 220;
+              ctx.save();
+              ctx.globalAlpha = pulse * 0.4;
+              ctx.strokeStyle = '#f2a9b7';
+              ctx.lineWidth = 6;
+              ctx.beginPath();
+              ctx.arc(cow.x, cow.y + 12, (cow.radius + 12) * (1 + pulse * 0.2), 0, Math.PI * 2);
+              ctx.stroke();
+              ctx.restore();
+            }
+          }
+        });
+      }
+
+      function finish(success, message) {
+        if (!state || state.finished) return;
+        state.finished = true;
+        state.running = false;
+        const adjustments = {};
+        state.participants.forEach(cow => {
+          adjustments[cow.id] = {
+            happiness: success ? 10 : -8,
+            hunger: success ? -4 : 6
+          };
+        });
+        state.context.end({
+          success,
+          adjustments,
+          summary: message,
+          stats: { totalPerfects: success ? 1 : 0 }
+        });
+        Audio.play(success ? 'win' : 'lose');
+      }
+
+      function start(context) {
+        resizeCanvas();
+        const width = state?.width || canvas.clientWidth;
+        const height = state?.height || canvas.clientHeight;
+        const difficulty = context.difficulty || 1;
+        const modifiers = context.modifiers || {};
+        const count = Math.min(8, Math.max(3, Math.round(3 + difficulty * 0.6)));
+        const baseSpeed = (45 + difficulty * 12) * (modifiers.speedScale || 1);
+        state = {
+          context,
+          participants: context.participants || [],
+          width,
+          height,
+          baseSpeed,
+          timeLeft: Math.max(12, Math.max(18, 28 - difficulty * 1.2) + (modifiers.timeModifier || 0)),
+          cows: spawnCows(count, width, height, baseSpeed, context.participants || []),
+          running: true,
+          finished: false,
+          modifiers
+        };
+        context.updateTimer(state.timeLeft);
+        drawBackground(width, height);
+        drawCows(state.cows);
+      }
+
+      function update(dt) {
+        if (!state || !state.running) return;
+        state.timeLeft -= dt;
+        state.context.updateTimer(state.timeLeft);
+        if (state.timeLeft <= 0) {
+          finish(true, 'All cows stayed in the paddock!');
+          return;
+        }
+        let escaped = false;
+        state.cows.forEach(cow => {
+          cow.x += cow.vx * dt;
+          cow.y += cow.vy * dt;
+          if (cow.x - cow.radius <= 12 || cow.x + cow.radius >= state.width - 12 || cow.y - cow.radius <= 12 || cow.y + cow.radius >= state.height - 12) {
+            escaped = true;
+          }
+          const speed = Math.hypot(cow.vx, cow.vy);
+          const maxSpeed = state.baseSpeed * 1.35;
+          if (speed > maxSpeed) {
+            cow.vx = (cow.vx / speed) * maxSpeed;
+            cow.vy = (cow.vy / speed) * maxSpeed;
+          }
+        });
+        drawBackground(state.width, state.height);
+        drawCows(state.cows);
+        if (escaped) {
+          finish(false, 'A cow reached the fence!');
+        }
+      }
+
+      function stop() {
+        if (state) {
+          state.running = false;
+        }
+      }
+
+      return {
+        label: 'Catch the Cow',
+        description: 'Tap or click runaway cows to nudge them back toward the centre paddock.',
+        init,
+        start,
+        update,
+        stop
+      };
+    })());
+    const PersonalityEngine = (function() {
+      function ensureAdjustment(outcome, cowId) {
+        if (!outcome.adjustments[cowId]) {
+          outcome.adjustments[cowId] = {};
+        }
+        return outcome.adjustments[cowId];
+      }
+
+      const configs = {
+        catch: {
+          Sleepy: {
+            personality: 'Sleepy',
+            label: 'Sleepy Shuffle',
+            instruction: 'Sleepy cows drift today – their hooves slow but the timer hurries.',
+            dailyNote: 'Sleepy cows might nod off near the fence. Nudge them gently back to the centre.',
+            modifiers: { timeModifier: -4, speedScale: 0.85 },
+            applyOutcome(outcome, participants) {
+              const sleepy = participants.filter(cow => cow.personality === 'Sleepy');
+              sleepy.forEach(cow => {
+                const adj = ensureAdjustment(outcome, cow.id);
+                if (outcome.success) {
+                  adj.happiness = (adj.happiness || 0) + 3;
+                } else {
+                  adj.happiness = (adj.happiness || 0) - 4;
+                }
+              });
+              if (sleepy.length) {
+                outcome.summary = outcome.success
+                  ? `${outcome.summary} The sleepy herd perked up after a safe stroll.`
+                  : `${outcome.summary} Sleepy hooves will need pep tomorrow.`;
+              }
+            }
+          },
+          Social: {
+            personality: 'Social',
+            label: 'Buddy System',
+            instruction: 'Social butterflies rally the herd. Keep everyone close for a group bonus.',
+            dailyNote: 'Social cows are leading the way – togetherness keeps them calm.',
+            modifiers: { timeModifier: 3, speedScale: 0.95 },
+            achievementOnSuccess: 'socialButterfly',
+            applyOutcome(outcome, participants) {
+              participants.forEach(cow => {
+                const adj = ensureAdjustment(outcome, cow.id);
+                if (outcome.success) {
+                  adj.happiness = (adj.happiness || 0) + 2;
+                } else {
+                  adj.happiness = (adj.happiness || 0) - 2;
+                }
+              });
+              outcome.summary = outcome.success
+                ? `${outcome.summary} The herd moved in perfect harmony.`
+                : `${outcome.summary} The herd scattered without their social lead.`;
+            }
+          }
+        },
+        food: {
+          Greedy: {
+            personality: 'Greedy',
+            label: 'Greedy Graze',
+            instruction: 'Greedy cows eye a second helping. Match perfectly to keep fluff in check.',
+            dailyNote: 'Greedy grazers crave seconds. Keep servings strict to avoid extra chonk.',
+            modifiers: { timeModifier: -2 },
+            applyOutcome(outcome, participants) {
+              const greedy = participants.filter(cow => cow.personality === 'Greedy');
+              if (!greedy.length) return;
+              greedy.forEach(cow => {
+                const adj = ensureAdjustment(outcome, cow.id);
+                if (outcome.success) {
+                  adj.hunger = (adj.hunger || 0) - 6;
+                  adj.happiness = (adj.happiness || 0) + 3;
+                } else if (outcome.stats && outcome.stats.totalChonks) {
+                  adj.chonk = (adj.chonk || 0) + 4;
+                  adj.happiness = (adj.happiness || 0) - 3;
+                }
+              });
+              if (outcome.stats && outcome.stats.totalChonks) {
+                outcome.summary = `${outcome.summary} Greedy bellies grew a little rounder.`;
+              } else if (outcome.success) {
+                outcome.summary = `${outcome.summary} Sensible servings satisfied the greedy grazers.`;
+              }
+            }
+          },
+          Social: {
+            personality: 'Social',
+            label: 'Shared Snacks',
+            instruction: 'Share snacks evenly – a perfect round delights every cow.',
+            dailyNote: 'Social cows want every muzzle to get a taste at once. Even distribution lifts morale.',
+            modifiers: { timeModifier: 2 },
+            applyOutcome(outcome, participants) {
+              if (outcome.success && outcome.stats && outcome.stats.totalChonks === 0) {
+                participants.forEach(cow => {
+                  const adj = ensureAdjustment(outcome, cow.id);
+                  adj.happiness = (adj.happiness || 0) + 3;
+                });
+                outcome.summary = `${outcome.summary} Sharing snacks lifted every mood.`;
+              } else if (!outcome.success) {
+                participants.forEach(cow => {
+                  const adj = ensureAdjustment(outcome, cow.id);
+                  adj.happiness = (adj.happiness || 0) - 2;
+                });
+              }
+            }
+          }
+        },
+        brush: {
+          Vain: {
+            personality: 'Vain',
+            label: 'Fringe Focus',
+            instruction: 'Extra tangles appear as the vain herd demands spotless fringes.',
+            dailyNote: 'Vain cows expect flawless coats. A few extra patches need smoothing.',
+            modifiers: { timeModifier: 1, patchBonus: 2 },
+            applyOutcome(outcome, participants) {
+              const vain = participants.filter(cow => cow.personality === 'Vain');
+              vain.forEach(cow => {
+                const adj = ensureAdjustment(outcome, cow.id);
+                if (outcome.success) {
+                  adj.cleanliness = (adj.cleanliness || 0) + 6;
+                  adj.happiness = (adj.happiness || 0) + 3;
+                } else {
+                  adj.happiness = (adj.happiness || 0) - 5;
+                }
+              });
+              if (vain.length) {
+                outcome.summary = outcome.success
+                  ? `${outcome.summary} Every fringe sparkled to vain approval.`
+                  : `${outcome.summary} Vain cows pouted about stray curls.`;
+              }
+            }
+          },
+          Social: {
+            personality: 'Social',
+            label: 'Salon Day',
+            instruction: 'Friends brush friends – a little extra time keeps the grooming circle happy.',
+            dailyNote: 'Social cows hold a group grooming session. Keep brushes moving to match the chatter.',
+            modifiers: { timeModifier: 2 },
+            applyOutcome(outcome, participants) {
+              participants.forEach(cow => {
+                const adj = ensureAdjustment(outcome, cow.id);
+                if (outcome.success) {
+                  adj.cleanliness = (adj.cleanliness || 0) + 3;
+                  adj.happiness = (adj.happiness || 0) + 2;
+                } else {
+                  adj.happiness = (adj.happiness || 0) - 2;
+                }
+              });
+              outcome.summary = outcome.success
+                ? `${outcome.summary} The grooming circle finished with smiles.`
+                : `${outcome.summary} The grooming circle fizzled out early.`;
+            }
+          }
+        }
+      };
+
+      function cloneEvent(key, config) {
+        return {
+          key,
+          personality: config.personality,
+          label: config.label,
+          instruction: config.instruction,
+          dailyNote: config.dailyNote,
+          modifiers: Object.assign({}, config.modifiers),
+          applyOutcome: config.applyOutcome,
+          achievementOnSuccess: config.achievementOnSuccess || null
+        };
+      }
+
+      function countPersonalities(cows) {
+        const counts = { Greedy: 0, Vain: 0, Sleepy: 0, Social: 0 };
+        cows.forEach(cow => {
+          if (counts.hasOwnProperty(cow.personality)) {
+            counts[cow.personality] += 1;
+          }
+        });
+        return counts;
+      }
+
+      function planDay(cows) {
+        const counts = countPersonalities(cows);
+        const plan = { events: {}, notes: [] };
+        const catchEvent = counts.Sleepy ? configs.catch.Sleepy : (counts.Social ? configs.catch.Social : null);
+        if (catchEvent) {
+          const event = cloneEvent('catch', catchEvent);
+          plan.events.catch = event;
+          plan.notes.push(event.dailyNote);
+        }
+        const foodEvent = counts.Greedy ? configs.food.Greedy : (counts.Social ? configs.food.Social : null);
+        if (foodEvent) {
+          const event = cloneEvent('food', foodEvent);
+          plan.events.food = event;
+          plan.notes.push(event.dailyNote);
+        }
+        const brushEvent = counts.Vain ? configs.brush.Vain : (counts.Social ? configs.brush.Social : null);
+        if (brushEvent) {
+          const event = cloneEvent('brush', brushEvent);
+          plan.events.brush = event;
+          plan.notes.push(event.dailyNote);
+        }
+        return plan;
+      }
+
+      function eventForMini(key, participants, plan) {
+        if (!plan || !plan.events[key]) return null;
+        const base = plan.events[key];
+        if (base.personality && !participants.some(cow => cow.personality === base.personality)) {
+          return null;
+        }
+        return cloneEvent(key, base);
+      }
+
+      function applyOutcome(event, outcome, participants) {
+        if (!event || typeof event.applyOutcome !== 'function') return;
+        event.applyOutcome(outcome, participants || []);
+      }
+
+      return {
+        planDay,
+        eventForMini,
+        applyOutcome
+      };
+    })();
+    MiniGames.register('food', (function() {
+      let root, board, targetsContainer, tray;
+      let state = null;
+
+      function resolveFood(name) {
+        const entry = FoodLibrary[name];
+        if (!entry) return null;
+        return Object.assign({ name }, entry);
+      }
+
+      function buildFoodPool(names) {
+        const seen = new Set();
+        const pool = [];
+        const source = Array.isArray(names) ? names : [];
+        [...source, ...DEFAULT_FOODS].forEach(name => {
+          const resolved = resolveFood(name);
+          if (resolved && !seen.has(resolved.name)) {
+            seen.add(resolved.name);
+            pool.push(resolved);
+          }
+        });
+        if (pool.length) return pool;
+        const fallback = DEFAULT_FOODS.map(resolveFood).filter(Boolean);
+        if (fallback.length) return fallback;
+        return [{ name: 'Starter Hay', icon: '🌾', hunger: -24, happiness: 6, chonk: 0, overfeedChonk: 6, overfeedMood: 4, maxServings: 1 }];
+      }
+
+      function init(container) {
+        root = document.createElement('div');
+        root.className = 'minigame-surface food-game';
+        board = document.createElement('div');
+        board.className = 'food-board';
+        targetsContainer = document.createElement('div');
+        targetsContainer.className = 'food-targets';
+        tray = document.createElement('div');
+        tray.className = 'food-chip-tray';
+        board.appendChild(targetsContainer);
+        board.appendChild(tray);
+        root.appendChild(board);
+        container.appendChild(root);
+        return root;
+      }
+
+      function createTarget(cow, food) {
+        const target = document.createElement('div');
+        target.className = 'food-target';
+        target.dataset.food = food.name;
+        target.setAttribute('role', 'group');
+        target.setAttribute('aria-label', `${cow.name} snack target`);
+        if (food.description) {
+          target.title = food.description;
+        }
+        const cowArt = CowVisuals.svg(cow, { className: 'cow-art-mini', scale: 0.85, offsetY: -6 });
+        target.innerHTML = `
+          <div class="food-avatar" aria-hidden="true">${cowArt}</div>
+          <strong>${cow.name}</strong>
+          <span class="food-label">${food.name}</span>
+          <div class="food-icon" aria-hidden="true">${food.icon || '🌾'}</div>
+          <span class="food-status">Needs snack</span>`;
+        return target;
+      }
+
+      function createChip(food) {
+        const chip = document.createElement('div');
+        chip.className = 'food-chip';
+        chip.textContent = food.icon || '🌾';
+        chip.dataset.food = food.name;
+        chip.setAttribute('role', 'button');
+        chip.setAttribute('aria-label', `${food.name} chip`);
+        if (food.description) {
+          chip.title = food.description;
+        }
+        chip.addEventListener('pointerdown', handlePointerDown);
+        return chip;
+      }
+
+      function handlePointerDown(event) {
+        if (!state || !state.running) return;
+        const chip = event.currentTarget;
+        event.preventDefault();
+        chip.setPointerCapture(event.pointerId);
+        chip.classList.add('dragging');
+        const rect = chip.getBoundingClientRect();
+        const offsetX = event.clientX - rect.left;
+        const offsetY = event.clientY - rect.top;
+        const move = ev => {
+          chip.style.left = `${ev.clientX - offsetX}px`;
+          chip.style.top = `${ev.clientY - offsetY}px`;
+        };
+        const end = ev => {
+          chip.classList.remove('dragging');
+          chip.style.left = '';
+          chip.style.top = '';
+          chip.releasePointerCapture(ev.pointerId);
+          chip.removeEventListener('pointermove', move);
+          chip.removeEventListener('pointerup', end);
+          chip.removeEventListener('pointercancel', end);
+          const drop = document.elementFromPoint(ev.clientX, ev.clientY);
+          const targetEl = drop ? drop.closest('.food-target') : null;
+          if (targetEl) {
+            processDrop(chip, targetEl);
+          }
+        };
+        chip.addEventListener('pointermove', move);
+        chip.addEventListener('pointerup', end);
+        chip.addEventListener('pointercancel', end);
+      }
+
+      function processDrop(chip, targetEl) {
+        const targetState = state.targets.find(t => t.el === targetEl);
+        if (!targetState) return;
+        targetState.feeds += 1;
+        const limit = targetState.limit || 1;
+        const statusEl = targetEl.querySelector('.food-status');
+        if (!statusEl) return;
+        if (targetState.satisfied && targetState.feeds > limit) {
+          targetState.overfed = true;
+          targetEl.classList.remove('sated');
+          targetEl.classList.add('overfed');
+          statusEl.textContent = 'Too full!';
+          state.overfed.add(targetState.cow.id);
+          Audio.play('lose');
+          return;
+        }
+        if (chip.dataset.food === targetState.expected && !targetState.satisfied) {
+          targetState.satisfied = true;
+          targetEl.classList.add('sated');
+          targetEl.classList.remove('mistake', 'overfed');
+          statusEl.textContent = 'Yum!';
+          chip.remove();
+          Audio.play('tap');
+          if (state.targets.every(t => t.satisfied)) {
+            finish(true, 'Every cow is well fed!');
+          }
+        } else {
+          targetEl.classList.add('mistake');
+          statusEl.textContent = 'Wrong snack!';
+          setTimeout(() => {
+            targetEl.classList.remove('mistake');
+            if (!targetState.satisfied && !targetState.overfed) {
+              statusEl.textContent = 'Needs snack';
+            }
+          }, 400);
+          state.mistakes += 1;
+        }
+      }
+
+      function finish(success, message) {
+        if (!state || state.finished) return;
+        state.finished = true;
+        state.running = false;
+        const adjustments = {};
+        state.targets.forEach(target => {
+          if (!adjustments[target.cow.id]) adjustments[target.cow.id] = {};
+          const adj = adjustments[target.cow.id];
+          const foodMeta = target.food || {};
+          if (success && target.satisfied) {
+            const hungerChange = typeof foodMeta.hunger === 'number' ? foodMeta.hunger : -24;
+            const happinessChange = typeof foodMeta.happiness === 'number' ? foodMeta.happiness : 6;
+            const chonkChange = typeof foodMeta.chonk === 'number' ? foodMeta.chonk : 0;
+            adj.hunger = (adj.hunger || 0) + hungerChange;
+            adj.happiness = (adj.happiness || 0) + happinessChange;
+            if (chonkChange) {
+              adj.chonk = (adj.chonk || 0) + chonkChange;
+            }
+          } else if (!success) {
+            adj.hunger = (adj.hunger || 0) + 12;
+            adj.happiness = (adj.happiness || 0) - 6;
+          }
+          if (target.overfed) {
+            const overfeedChonk = typeof foodMeta.overfeedChonk === 'number' ? foodMeta.overfeedChonk : 12;
+            const overfeedMood = typeof foodMeta.overfeedMood === 'number' ? foodMeta.overfeedMood : 4;
+            adj.chonk = (adj.chonk || 0) + overfeedChonk;
+            adj.happiness = (adj.happiness || 0) - overfeedMood;
+          }
+        });
+        const treatNames = Array.from(new Set(state.targets.filter(t => t.satisfied && t.food).map(t => t.food.name)));
+        let summary = message || '';
+        if (success && treatNames.length) {
+          summary += ` Treats served: ${treatNames.join(', ')}.`;
+        }
+        if (state.overfed.size) {
+          const label = state.overfed.size === 1 ? 'One cow' : `${state.overfed.size} cows`;
+          summary += ` ${label} snuck extra serves.`;
+        }
+        const stats = { totalPerfects: success && state.mistakes === 0 && state.overfed.size === 0 ? 1 : 0, totalChonks: state.overfed.size };
+        state.context.end({ success, adjustments, summary: summary.trim(), stats });
+        Audio.play(success ? 'win' : 'lose');
+      }
+
+      function start(context) {
+        const modifiers = context.modifiers || {};
+        const pool = buildFoodPool(context.foods);
+        state = {
+          context,
+          participants: context.participants || [],
+          targets: [],
+          overfed: new Set(),
+          mistakes: 0,
+          timeLeft: Math.max(15, Math.max(20, 40 - (context.difficulty || 1) * 1.4) + (modifiers.timeModifier || 0)),
+          running: true,
+          finished: false,
+          modifiers,
+          pool
+        };
+        context.updateTimer(state.timeLeft);
+        targetsContainer.innerHTML = '';
+        tray.innerHTML = '';
+        const chipFoods = [];
+        state.participants.forEach(cow => {
+          const expected = Util.pick(pool) || resolveFood(DEFAULT_FOODS[0]);
+          const targetEl = createTarget(cow, expected);
+          targetsContainer.appendChild(targetEl);
+          const limit = Math.max(1, (expected?.maxServings || 1) + (modifiers.overfeedGrace || 0));
+          state.targets.push({ cow, expected: expected.name, food: expected, el: targetEl, satisfied: false, feeds: 0, overfed: false, limit });
+          chipFoods.push(expected);
+        });
+        while (chipFoods.length < state.targets.length + 2) {
+          chipFoods.push(Util.pick(pool) || resolveFood(DEFAULT_FOODS[0]));
+        }
+        Util.shuffle(chipFoods).forEach(food => {
+          tray.appendChild(createChip(food));
+        });
+      }
+
+      function update(dt) {
+        if (!state || !state.running) return;
+        state.timeLeft -= dt;
+        state.context.updateTimer(state.timeLeft);
+        if (state.timeLeft <= 0) {
+          finish(false, 'The cows wandered off hungry...');
+        }
+      }
+
+      function stop() {
+        if (state) {
+          state.running = false;
+        }
+      }
+
+      return {
+        label: 'Food Frenzy',
+        description: 'Drag the matching feed to each cow. One serving each keeps them spry!',
+        init,
+        start,
+        update,
+        stop
+      };
+    })());
+    MiniGames.register('brush', (function() {
+      let root, board, cowSurface, artWrapper;
+      let state = null;
+
+      function init(container) {
+        root = document.createElement('div');
+        root.className = 'minigame-surface brush-game';
+        board = document.createElement('div');
+        board.className = 'brush-board';
+        cowSurface = document.createElement('div');
+        cowSurface.className = 'brush-cow';
+        artWrapper = document.createElement('div');
+        artWrapper.className = 'brush-art';
+        cowSurface.appendChild(artWrapper);
+        board.appendChild(cowSurface);
+        root.appendChild(board);
+        container.appendChild(root);
+        cowSurface.addEventListener('pointerdown', handlePointerDown);
+        cowSurface.addEventListener('pointermove', handlePointerMove);
+        cowSurface.addEventListener('pointerup', handlePointerUp);
+        cowSurface.addEventListener('pointercancel', handlePointerUp);
+        cowSurface.addEventListener('pointerleave', handlePointerUp);
+        return root;
+      }
+
+      function patchColour(alpha = 0.28) {
+        const base = CowVisuals.colourHex(state?.focusCow?.colour || 'brown').replace('#', '');
+        if (base.length !== 6) {
+          return `rgba(53, 38, 77, ${alpha})`;
+        }
+        const value = parseInt(base, 16);
+        const r = (value >> 16) & 255;
+        const g = (value >> 8) & 255;
+        const b = value & 255;
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      }
+
+      function spawnPatches(count) {
+        cowSurface.querySelectorAll('.brush-patch').forEach(el => el.remove());
+        const rect = cowSurface.getBoundingClientRect();
+        const patches = [];
+        for (let i = 0; i < count; i++) {
+          const radius = Util.range(20, 28);
+          const x = Util.range(radius + 10, rect.width - radius - 10);
+          const y = Util.range(radius + 20, rect.height - radius - 20);
+          const patchEl = document.createElement('div');
+          patchEl.className = 'brush-patch';
+          patchEl.style.width = `${radius * 2}px`;
+          patchEl.style.height = `${radius * 2}px`;
+          patchEl.style.left = `${x - radius}px`;
+          patchEl.style.top = `${y - radius}px`;
+          patchEl.style.background = patchColour(0.26);
+          cowSurface.appendChild(patchEl);
+          patches.push({ x, y, radius, el: patchEl, clean: false });
+        }
+        return patches;
+      }
+
+      function handlePointerDown(event) {
+        if (!state || !state.running) return;
+        state.brushing = true;
+        cowSurface.setPointerCapture(event.pointerId);
+        brushAt(event);
+      }
+
+      function handlePointerMove(event) {
+        if (!state || !state.running || !state.brushing) return;
+        brushAt(event);
+      }
+
+      function handlePointerUp(event) {
+        if (!state) return;
+        state.brushing = false;
+        if (event.pointerId) {
+          try { cowSurface.releasePointerCapture(event.pointerId); } catch (err) {}
+        }
+      }
+
+      function brushAt(event) {
+        const rect = cowSurface.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        state.patches.forEach(patch => {
+          if (!patch.clean) {
+            const distance = Math.hypot(x - patch.x, y - patch.y);
+            if (distance <= patch.radius) {
+              patch.clean = true;
+              patch.el.classList.add('clean');
+              if (!state.context.options.reducedFlash) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = `${patch.x - 7}px`;
+                sparkle.style.top = `${patch.y - 7}px`;
+                board.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 600);
+              }
+            }
+          }
+        });
+        if (state.patches.every(p => p.clean)) {
+          finish(true, 'Spotless coats! Smooth brushing.');
+        }
+      }
+
+      function finish(success, message) {
+        if (!state || state.finished) return;
+        state.finished = true;
+        state.running = false;
+        const adjustments = {};
+        state.participants.forEach(cow => {
+          adjustments[cow.id] = {
+            cleanliness: success ? 30 : -12,
+            happiness: success ? 6 : -4
+          };
+        });
+        state.context.end({
+          success,
+          adjustments,
+          summary: message,
+          stats: { totalPerfects: success && state.timeLeft > 5 ? 1 : 0 }
+        });
+        Audio.play(success ? 'win' : 'lose');
+      }
+
+      function start(context) {
+        const modifiers = context.modifiers || {};
+        const participants = context.participants || [];
+        const focusCow = participants[0] || { id: 'brush-guest', name: 'Guest Cow', colour: 'cream', chonk: 42, accessories: [] };
+        state = {
+          context,
+          participants,
+          focusCow,
+          timeLeft: Math.max(12, Math.max(18, 32 - (context.difficulty || 1)) + (modifiers.timeModifier || 0)),
+          patches: [],
+          running: true,
+          finished: false,
+          brushing: false,
+          modifiers
+        };
+        context.updateTimer(state.timeLeft);
+        if (artWrapper) {
+          artWrapper.innerHTML = CowVisuals.svg(focusCow, { className: 'cow-art-large', viewBox: '0 0 160 130', scale: 1.3 });
+        }
+        const basePatches = Math.min(8, Math.max(4, Math.round(4 + (context.difficulty || 1) * 0.5)));
+        const chonkBonus = focusCow.chonk > 70 ? 1 : 0;
+        const patchCount = Math.min(12, basePatches + (modifiers.patchBonus || 0) + chonkBonus);
+        state.patches = spawnPatches(patchCount);
+      }
+
+      function update(dt) {
+        if (!state || !state.running) return;
+        state.timeLeft -= dt;
+        state.context.updateTimer(state.timeLeft);
+        if (state.timeLeft <= 0) {
+          finish(false, "Time's up – a few tangles remain.");
+        }
+      }
+
+      function stop() {
+        if (state) {
+          state.running = false;
+        }
+      }
+
+      return {
+        label: 'Brush Rush',
+        description: 'Brush the messy patches away by dragging across them quickly.',
+        init,
+        start,
+        update,
+        stop
+      };
+    })());
+    const GameFlow = (function() {
+      let running = false;
+      let lastResults = null;
+      let preparedPlan = null;
+      const rewardThemes = [
+        {
+          name: 'Highland Picnic',
+          items: [
+            { type: 'accessories', item: 'Pastel Bow' },
+            { type: 'decor', item: 'Tartan Picnic Rug' },
+            { type: 'foods', item: 'Sweet Clover Bale' }
+          ]
+        },
+        {
+          name: 'Forest Trimmings',
+          items: [
+            { type: 'accessories', item: 'Fern Garland' },
+            { type: 'decor', item: 'Wildflower Patch' },
+            { type: 'foods', item: 'Heather Honey Jar' }
+          ]
+        },
+        {
+          name: 'Sunlit Outing',
+          items: [
+            { type: 'accessories', item: 'Sun Hat' },
+            { type: 'accessories', item: 'Starry Bandana' },
+            { type: 'foods', item: 'Crisp Apple Crate' }
+          ]
+        },
+        {
+          name: 'Cozy Evenings',
+          items: [
+            { type: 'accessories', item: 'Woolly Scarf' },
+            { type: 'decor', item: 'Fairy Lights Garland' },
+            { type: 'decor', item: 'Stone Cairn Lantern' }
+          ]
+        },
+        {
+          name: 'Barnyard Keepsakes',
+          items: [
+            { type: 'accessories', item: 'Bell Charm' },
+            { type: 'decor', item: 'Milk Churn Planter' },
+            { type: 'foods', item: 'Barley Biscuit Stack' }
+          ]
+        }
+      ];
+
+      function planSignature(save) {
+        const herdSignature = (save.cows || [])
+          .map(cow => `${cow.id}:${cow.personality}`)
+          .sort()
+          .join('|');
+        return `${save.day}|${herdSignature}`;
+      }
+
+      function buildPreviewNotes(queue, eventPlan) {
+        return queue.map((key, index) => {
+          const info = MiniGames.getInfo(key) || {};
+          const label = info.label || UI.getMiniLabel(key);
+          const event = eventPlan.events?.[key];
+          if (event) {
+            const detail = event.dailyNote || event.instruction || 'Special modifiers are active.';
+            return {
+              key,
+              title: `${index + 1}. ${label}`,
+              detail: `${event.label}: ${detail}`
+            };
+          }
+          return {
+            key,
+            title: `${index + 1}. ${label}`,
+            detail: 'Standard conditions today.'
+          };
+        });
+      }
+
+      function buildPlan(save) {
+        const queue = Util.shuffle(MiniGames.getNames());
+        const eventPlan = PersonalityEngine.planDay(save.cows);
+        return {
+          queue,
+          eventPlan,
+          previewNotes: buildPreviewNotes(queue, eventPlan),
+          signature: planSignature(save)
+        };
+      }
+
+      function ensurePlan(save) {
+        const signature = planSignature(save);
+        if (!preparedPlan || preparedPlan.signature !== signature) {
+          preparedPlan = buildPlan(save);
+        }
+        return preparedPlan;
+      }
+
+      function pickParticipants(cows, count, plannedEvent) {
+        if (!Array.isArray(cows) || !cows.length) return [];
+        const desired = Math.min(count, cows.length);
+        const selection = [];
+        if (plannedEvent?.personality) {
+          const matches = cows.filter(cow => cow.personality === plannedEvent.personality);
+          if (matches.length) {
+            const chosen = Util.pick(matches);
+            if (chosen) {
+              selection.push(chosen);
+            }
+          }
+        }
+        const remainingPool = cows.filter(cow => !selection.includes(cow));
+        const extras = Util.sample(remainingPool, Math.max(0, desired - selection.length));
+        return selection.concat(extras);
+      }
+
+      function mergeAdjustments(target, addition) {
+        if (!addition) return;
+        Object.keys(addition).forEach(id => {
+          const source = addition[id];
+          if (!target[id]) target[id] = {};
+          const dest = target[id];
+          ['happiness', 'hunger', 'cleanliness', 'chonk'].forEach(key => {
+            if (typeof source[key] === 'number') {
+              dest[key] = (dest[key] || 0) + source[key];
+            }
+          });
+        });
+      }
+
+      function chooseReward(save, context = {}) {
+        const unlocks = save.unlocks || {};
+        const themed = rewardThemes
+          .map(theme => {
+            const missing = theme.items
+              .filter(entry => {
+                const list = unlocks[entry.type] || [];
+                return !list.includes(entry.item);
+              })
+              .map(entry => ({
+                type: entry.type,
+                item: entry.item,
+                typeLabel: entry.type.charAt(0).toUpperCase() + entry.type.slice(1),
+                theme: theme.name
+              }));
+            return { theme: theme.name, missing };
+          })
+          .filter(entry => entry.missing.length);
+        if (!themed.length) return null;
+
+        const byType = { foods: [], accessories: [], decor: [] };
+        themed.forEach(entry => {
+          entry.missing.forEach(item => {
+            byType[item.type].push(Object.assign({ themeMissing: entry.missing.length }, item));
+          });
+        });
+
+        function pickFromType(type) {
+          const pool = byType[type] || [];
+          if (!pool.length) return null;
+          const maxMissing = Math.max(...pool.map(item => item.themeMissing || 1));
+          const candidates = pool.filter(item => item.themeMissing === maxMissing);
+          return Util.pick(candidates);
+        }
+
+        const perfectDay = !!context.perfectDay;
+        const stats = save.stats || {};
+        const baseStreak = typeof context.streakBefore === 'number'
+          ? context.streakBefore
+          : (stats.perfectDayStreak || 0);
+        const nextStreak = typeof context.nextPerfectStreak === 'number'
+          ? context.nextPerfectStreak
+          : (perfectDay ? baseStreak + 1 : 0);
+        const lastRewardType = context.lastRewardType || stats.lastRewardType || null;
+
+        let guaranteedBy = null;
+        let reward = null;
+
+        if (!reward && nextStreak && nextStreak % 3 === 0) {
+          const candidate = pickFromType('decor');
+          if (candidate) {
+            reward = candidate;
+            const suffix = nextStreak === 1 ? 'day' : 'days';
+            guaranteedBy = `Perfect-day streak (${nextStreak} ${suffix})`;
+          }
+        }
+
+        if (!reward && perfectDay) {
+          const candidate = pickFromType('accessories');
+          if (candidate) {
+            reward = candidate;
+            guaranteedBy = 'Perfect day bonus';
+          }
+        }
+
+        if (!reward) {
+          const typePreference = ['accessories', 'decor', 'foods'];
+          if (lastRewardType) {
+            const index = typePreference.indexOf(lastRewardType);
+            if (index >= 0) {
+              typePreference.splice(index, 1);
+              typePreference.push(lastRewardType);
+            }
+          }
+          for (let i = 0; i < typePreference.length && !reward; i++) {
+            reward = pickFromType(typePreference[i]);
+          }
+        }
+
+        if (!reward) return null;
+
+        return Object.assign({ guaranteedBy }, reward);
+      }
+
+      async function startDay() {
+        if (running) return;
+        running = true;
+        const save = State.getData();
+        const plan = ensurePlan(save);
+        const queue = plan ? plan.queue.slice() : Util.shuffle(MiniGames.getNames());
+        const eventPlan = plan ? plan.eventPlan : PersonalityEngine.planDay(save.cows);
+        const results = {
+          miniResults: [],
+          adjustments: {},
+          stats: { totalPerfects: 0, totalChonks: 0 }
+        };
+        const achievementsUnlocked = [];
+        const options = Object.assign({}, save.options);
+        const availableFoods = State.getUnlocks('foods');
+        UI.showScreen('task');
+        for (let i = 0; i < queue.length; i++) {
+          const key = queue[i];
+          const info = MiniGames.getInfo(key) || {};
+          const plannedEvent = eventPlan.events?.[key];
+          const participants = pickParticipants(save.cows, Math.min(3, save.cows.length), plannedEvent);
+          const event = PersonalityEngine.eventForMini(key, participants, eventPlan);
+          const instructionParts = [info.description || UI.getMiniDescription(key)];
+          if (event) {
+            instructionParts.push(`${event.label}: ${event.instruction}`);
+          }
+          UI.setMiniTitle(info.label || UI.getMiniLabel(key), i + 1, queue.length);
+          UI.setMiniInstruction(instructionParts.join(' '));
+          const outcome = await MiniGames.play(key, {
+            participants,
+            difficulty: Math.min(10, save.day + i),
+            updateTimer: UI.updateTimer,
+            updateInstruction: UI.setMiniInstruction,
+            options,
+            modifiers: event ? event.modifiers : null,
+            foods: availableFoods
+          });
+          PersonalityEngine.applyOutcome(event, outcome, participants);
+          results.miniResults.push({
+            name: info.label || UI.getMiniLabel(key),
+            success: !!outcome.success,
+            summary: outcome.summary || (outcome.success ? 'Great job!' : 'We will get it tomorrow.')
+          });
+          mergeAdjustments(results.adjustments, outcome.adjustments);
+          if (outcome.stats) {
+            results.stats.totalPerfects += outcome.stats.totalPerfects || 0;
+            results.stats.totalChonks += outcome.stats.totalChonks || 0;
+          }
+          if (event && event.achievementOnSuccess && outcome.success) {
+            if (State.unlockAchievement(event.achievementOnSuccess)) {
+              achievementsUnlocked.push(event.achievementOnSuccess);
+            }
+          }
+        }
+        State.applyCowAdjustments(results.adjustments);
+        const perfectDay = results.miniResults.length > 0 && results.miniResults.every(entry => entry.success);
+        if (perfectDay) {
+          Audio.play('perfect');
+          if (State.unlockAchievement('perfectDay')) {
+            achievementsUnlocked.push('perfectDay');
+          }
+        }
+        const previousStreak = save.stats?.perfectDayStreak || 0;
+        const nextStreak = perfectDay ? previousStreak + 1 : 0;
+        let reward = chooseReward(save, {
+          perfectDay,
+          streakBefore: previousStreak,
+          nextPerfectStreak: nextStreak,
+          lastRewardType: save.stats?.lastRewardType
+        });
+        if (reward) {
+          const added = State.addUnlock(reward.type, reward.item);
+          if (added) {
+            Audio.play('reward');
+          } else {
+            reward = null;
+          }
+        }
+        State.recordStats(results.stats);
+        const dayOutcomeStats = State.registerDayOutcome({
+          perfectDay,
+          rewardType: reward ? reward.type : null,
+          perfectStreak: nextStreak
+        });
+        const appliedStreak = dayOutcomeStats?.perfectDayStreak ?? nextStreak;
+        State.incrementDay();
+        if (State.evaluateChonkSentinel()) {
+          achievementsUnlocked.push('chonkSentinel');
+        }
+        const summaryData = {
+          results: results.miniResults,
+          adjustments: results.adjustments,
+          herd: save.cows,
+          reward,
+          stats: results.stats,
+          day: save.day,
+          achievementsUnlocked,
+          perfectDay,
+          perfectStreak: appliedStreak,
+          previousPerfectStreak: previousStreak,
+          bestPerfectStreak: dayOutcomeStats?.bestPerfectDayStreak ?? save.stats?.bestPerfectDayStreak
+        };
+        lastResults = summaryData;
+        UI.renderSummary(summaryData);
+        UI.showScreen('summary');
+        State.save();
+        preparedPlan = null;
+        running = false;
+      }
+
+      function getLastResults() {
+        return lastResults;
+      }
+
+      return {
+        startDay,
+        getLastResults,
+        getPreviewPlan(save) {
+          return ensurePlan(save || State.getData());
+        }
+      };
+    })();
+    (function bootstrap() {
+      const save = State.getData();
+      Audio.setEnabled(save.options.audioOn);
+      Audio.setVolumes({ effects: save.options.effectsVolume, ambience: save.options.ambienceVolume, master: save.options.masterVolume });
+      UI.applyOptions(save.options);
+      UI.updateOptionsUI(save.options);
+
+      function refreshFarm() {
+        const data = State.getData();
+        UI.renderHerd(data.cows);
+        UI.renderPantry(State.getUnlocks('foods'));
+        UI.renderDecor(State.getDecorLayout());
+        UI.renderAchievements(State.getAchievements());
+        const preview = GameFlow.getPreviewPlan(data);
+        UI.renderEvents(preview?.previewNotes);
+        if (data.options.audioOn) {
+          Audio.ensureAmbience();
+        } else {
+          Audio.stopAmbience();
+        }
+      }
+
+      refreshFarm();
+
+      UI.init({
+        onStart() {
+          refreshFarm();
+          UI.showScreen('farm');
+        },
+        onShowOptions() {
+          UI.updateOptionsUI(State.getData().options);
+        },
+        onCloseOptions() {
+          // No-op placeholder for future animations.
+        },
+        onOptionChange(partial) {
+          State.applyOptionChange(partial);
+          const opts = State.getData().options;
+          UI.applyOptions(opts);
+          if (typeof partial.audioOn === 'boolean') {
+            Audio.setEnabled(partial.audioOn);
+            if (partial.audioOn) {
+              Audio.ensureAmbience();
+            } else {
+              Audio.stopAmbience();
+            }
+          }
+          if (typeof partial.effectsVolume === 'number' || typeof partial.ambienceVolume === 'number' || typeof partial.masterVolume === 'number') {
+            Audio.setVolumes({ effects: opts.effectsVolume, ambience: opts.ambienceVolume, master: opts.masterVolume });
+            if (opts.audioOn) {
+              Audio.ensureAmbience();
+            }
+          }
+        },
+        onReset() {
+          const data = State.reset();
+          Audio.setEnabled(data.options.audioOn);
+          Audio.setVolumes({ effects: data.options.effectsVolume, ambience: data.options.ambienceVolume, master: data.options.masterVolume });
+          UI.updateOptionsUI(data.options);
+          refreshFarm();
+          UI.showScreen('title');
+        },
+        onStartDay() {
+          GameFlow.startDay();
+        },
+        onSummaryContinue() {
+          UI.showScreen('farm');
+          refreshFarm();
+          State.save();
+        },
+        onEditCow(cowId) {
+          const cow = State.getCow(cowId);
+          if (!cow) return;
+          UI.showStyle(cow, State.getUnlocks('accessories'));
+        },
+        onStyleBack() {
+          refreshFarm();
+        },
+        onClearAccessories(cowId) {
+          State.setCowAccessories(cowId, []);
+          State.save();
+          const cow = State.getCow(cowId);
+          refreshFarm();
+          return cow;
+        },
+        onRandomiseAccessories(cowId) {
+          const cow = State.randomiseAccessories(cowId);
+          refreshFarm();
+          return cow;
+        },
+        onToggleAccessory(cowId, accessory) {
+          State.toggleCowAccessory(cowId, accessory);
+          State.save();
+          const cow = State.getCow(cowId);
+          refreshFarm();
+          return cow;
+        },
+        onShowDecor() {
+          const data = State.getData();
+          UI.showDecor(State.getUnlocks('decor'), State.getDecorLayout());
+        },
+        onDecorSave(layout) {
+          State.setDecorLayout(layout);
+          State.save();
+          refreshFarm();
+        },
+        onDecorBack() {
+          refreshFarm();
+        }
+      });
+
+      window.__DEV__ = {
+        addCow(name = `New Calf ${Math.floor(Math.random() * 100)}`) {
+          const data = State.getData();
+          const cow = State.createCow(`cow-${Date.now()}`, name);
+          data.cows.push(cow);
+          State.save();
+          refreshFarm();
+          return cow;
+        },
+        giveUnlock(item, type = 'accessories') {
+          State.addUnlock(type, item);
+          State.save();
+          refreshFarm();
+          return item;
+        },
+        fastForwardDay() {
+          State.incrementDay();
+          State.save();
+          refreshFarm();
+          return State.getData().day;
+        }
+      };
+    })();
+
+    // TODO: Hook up celebratory animations for future seasonal events.
+  </script>
+</body>
+</html>
