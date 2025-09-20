@@ -26,15 +26,34 @@ export function configureFarmHandlers(partial: FarmHandlers): void {
   handlers = Object.assign({}, handlers, partial);
 }
 
-function moodIcon(cow: Cow): string {
+type CowMoodState = 'thriving' | 'content' | 'hungry' | 'muddy' | 'unhappy';
+
+interface CowMoodDetails {
+  icon: string;
+  state: CowMoodState;
+}
+
+function moodDetails(cow: Cow): CowMoodDetails {
   const happiness = cow.happiness;
   const hunger = cow.hunger;
   const cleanliness = cow.cleanliness;
-  if (happiness > 75 && hunger < 50 && cleanliness > 60) return '😊';
-  if (hunger > 70) return '🥕';
-  if (cleanliness < 40) return '🪣';
-  if (happiness < 40) return '😟';
-  return '🙂';
+  if (happiness > 75 && hunger < 50 && cleanliness > 60) {
+    return { icon: '😊', state: 'thriving' };
+  }
+  if (hunger > 70) {
+    return { icon: '🥕', state: 'hungry' };
+  }
+  if (cleanliness < 40) {
+    return { icon: '🪣', state: 'muddy' };
+  }
+  if (happiness < 40) {
+    return { icon: '😟', state: 'unhappy' };
+  }
+  return { icon: '🙂', state: 'content' };
+}
+
+function moodIcon(cow: Cow): string {
+  return moodDetails(cow).icon;
 }
 
 function heartsForChonk(chonk: number): string {
@@ -131,13 +150,16 @@ export function renderHerd(cows: Cow[]): void {
   cows.forEach(cow => {
     const card = document.createElement('article');
     card.className = 'cow-card';
+    const { icon: moodEmoji, state: moodState } = moodDetails(cow);
+    card.dataset.colour = cow.colour;
+    card.dataset.mood = moodState;
     if (cow.chonk >= 65) {
       card.classList.add('is-chonk');
     }
     card.innerHTML = `
       <h3>${cow.name} <span class="personality">${cow.personality}</span></h3>
       ${svg(cow)}
-      <div class="status-row"><span>Mood ${moodIcon(cow)}</span><span>Chonk <span class="chonk-hearts">${heartsForChonk(cow.chonk)}</span></span></div>
+      <div class="status-row"><span>Mood ${moodEmoji}</span><span>Chonk <span class="chonk-hearts">${heartsForChonk(cow.chonk)}</span></span></div>
       <div class="status-row"><span>Happy ${Math.round(cow.happiness)}</span><span>Hunger ${Math.round(cow.hunger)}</span></div>
       <div class="status-row"><span>Clean ${Math.round(cow.cleanliness)}</span><span>Accessories ${cow.accessories.length}</span></div>
       <div class="accessory-chips">${renderAccessoryChips(cow)}</div>
