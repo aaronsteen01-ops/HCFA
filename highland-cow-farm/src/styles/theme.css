@@ -1,24 +1,26 @@
 :root {
-      --bg: #f7f3f9;
-      --bg-alt: #ffffff;
-      --text: #35264d;
-      --text-muted: #6a5f7c;
-      --accent: #f2a9b7;
-      --accent-strong: #f08093;
-      --accent-contrast: #fff5f7;
-      --outline: rgba(53, 38, 77, 0.1);
-      --success: #8ac6a4;
-      --warning: #f7c36a;
-      --danger: #f4876d;
-      --card-radius: 20px;
-      --transition: 0.2s ease;
-      --sky-top: #fdf6ff;
-      --sky-bottom: #dcefff;
-      --sky-glow: rgba(255, 220, 235, 0.65);
-      --field-main: #cde9bd;
-      --field-highlight: #b9ddb1;
-      --hill-shadow: #a3d3a0;
-      --cloud-color: rgba(255, 255, 255, 0.9);
+      --bg: #fef8ff;
+      --bg-alt: rgba(255, 255, 255, 0.94);
+      --text: #3d2b4f;
+      --text-muted: #77688d;
+      --accent: #f5a6c8;
+      --accent-strong: #f07fb0;
+      --accent-contrast: #fff2f8;
+      --outline: rgba(61, 43, 79, 0.14);
+      --success: #8ed1b0;
+      --warning: #fcd68a;
+      --danger: #f78c82;
+      --card-radius: 26px;
+      --card-shadow: 0 24px 48px rgba(97, 73, 116, 0.16);
+      --card-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+      --transition: 0.25s ease;
+      --sky-top: #fff2fa;
+      --sky-bottom: #d6efff;
+      --sky-glow: rgba(254, 214, 241, 0.72);
+      --field-main: #d8f5e0;
+      --field-highlight: #c9efd6;
+      --hill-shadow: #b4e4cc;
+      --cloud-color: rgba(255, 255, 255, 0.92);
       --cow-colour-rose-bg: linear-gradient(140deg, rgba(255, 236, 246, 0.95) 0%, rgba(244, 188, 213, 0.75) 100%);
       --cow-colour-rose-border: rgba(239, 153, 197, 0.6);
       --cow-colour-rose-glow: rgba(239, 153, 197, 0.4);
@@ -37,7 +39,8 @@
       color-scheme: only light;
     }
 
-    body.high-contrast {
+    body.high-contrast,
+    body.hc-high-contrast {
       --bg: #ffffff;
       --bg-alt: #f4f4f4;
       --text: #111111;
@@ -82,14 +85,15 @@
       font-family: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
       background-color: var(--bg);
       background-image:
-        radial-gradient(circle at 20% -10%, var(--sky-glow), transparent 60%),
+        radial-gradient(160% 140% at 50% 0%, rgba(255, 218, 242, 0.42) 0%, transparent 68%),
+        radial-gradient(120% 150% at 50% 65%, rgba(204, 232, 255, 0.22) 0%, transparent 82%),
         linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 55%, var(--field-highlight) 72%, var(--field-main) 100%);
       background-repeat: no-repeat;
       color: var(--text);
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      padding: 20px;
+      padding: 24px;
       transition: background-color var(--transition), color var(--transition);
       position: relative;
       overflow-x: hidden;
@@ -278,6 +282,29 @@
       gap: 24px;
       position: relative;
       z-index: 1;
+      overflow: hidden;
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(120% 120% at 50% 0%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 65%),
+        radial-gradient(150% 120% at 50% 100%, rgba(242, 169, 183, 0.22) 0%, rgba(255, 255, 255, 0) 75%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body.high-contrast main::before,
+    body.hc-high-contrast main::before {
+      background: none;
+    }
+
+    main > * {
+      position: relative;
+      z-index: 1;
     }
 
     h1, h2, h3, h4 {
@@ -299,17 +326,29 @@
       border-radius: 999px;
       padding: 0.75rem 1.6rem;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-      box-shadow: 0 10px 20px rgba(242, 169, 183, 0.45);
+      box-shadow: 0 12px 24px rgba(242, 169, 183, 0.35);
+      position: relative;
     }
 
-    button:hover,
-    button:focus-visible {
+    button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(242, 169, 183, 0.55);
-      outline: none;
+      box-shadow: 0 16px 32px rgba(242, 169, 183, 0.45);
+    }
+
+    button:focus-visible {
+      transform: translateY(-1px);
+      outline: 2px solid var(--accent-strong);
+      outline-offset: 2px;
+      box-shadow: 0 18px 36px rgba(242, 169, 183, 0.5);
+    }
+
+    body.high-contrast button:focus-visible,
+    body.hc-high-contrast button:focus-visible {
+      outline-color: var(--text);
+      box-shadow: 0 0 0 2px var(--accent-contrast);
     }
 
     button.secondary {
@@ -458,8 +497,34 @@
       gap: 12px;
       position: relative;
       overflow: hidden;
-      box-shadow: var(--cow-card-shadow-base), var(--cow-card-shadow-outline), var(--cow-card-shadow-glow);
+      box-shadow: var(--cow-card-shadow-base), var(--cow-card-shadow-outline), var(--cow-card-shadow-glow), var(--card-highlight);
       transition: box-shadow 0.45s ease, border-color var(--transition), transform var(--transition);
+      transform: translateY(0);
+      isolation: isolate;
+    }
+
+    .cow-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0));
+      opacity: 0.65;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      transition: opacity var(--transition);
+      z-index: 0;
+    }
+
+    .cow-card:hover,
+    .cow-card:focus-within {
+      transform: translateY(-6px);
+      box-shadow: var(--cow-card-shadow-base), 0 12px 32px rgba(97, 73, 116, 0.18), var(--cow-card-shadow-outline), var(--cow-card-shadow-glow), var(--card-highlight);
+    }
+
+    .cow-card:hover::before,
+    .cow-card:focus-within::before {
+      opacity: 0.8;
     }
 
     .cow-card[data-colour="rose"] {
@@ -523,6 +588,11 @@
       --cow-card-shadow-base: 0 0 0 2px var(--outline);
       --cow-card-shadow-outline: 0 0 0 0 transparent;
       --cow-card-shadow-glow: 0 0 0 0 transparent;
+    }
+
+    body.high-contrast .cow-card::before,
+    body.hc-high-contrast .cow-card::before {
+      opacity: 0;
     }
 
     body.high-contrast .cow-card[data-mood="content"] {
@@ -856,6 +926,20 @@
       gap: 12px;
       justify-content: space-between;
       align-items: center;
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 20px;
+      padding: 12px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 16px 32px rgba(53, 38, 77, 0.12);
+    }
+
+    body.high-contrast .task-header,
+    body.hc-high-contrast .task-header {
+      background: var(--bg);
+      border: 2px solid var(--outline);
+      backdrop-filter: none;
+      box-shadow: none;
     }
 
     .task-header .badge {
@@ -872,11 +956,22 @@
     }
 
     .mini-instruction {
-      background: rgba(242, 169, 183, 0.15);
-      border-radius: 18px;
-      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 20px;
+      padding: 14px 18px;
       font-size: 0.95rem;
       color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 12px 26px rgba(53, 38, 77, 0.12);
+    }
+
+    body.high-contrast .mini-instruction,
+    body.hc-high-contrast .mini-instruction {
+      background: var(--bg);
+      border: 2px solid var(--outline);
+      backdrop-filter: none;
+      box-shadow: none;
     }
 
     .minigame-area {
@@ -1254,15 +1349,26 @@
     }
     details.howto summary {
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 8px;
+      color: var(--text);
     }
 
     details.howto {
-      background: rgba(138, 198, 164, 0.1);
-      border-radius: 18px;
-      padding: 12px 16px;
-      border: 2px solid rgba(138, 198, 164, 0.3);
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 20px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 18px 36px rgba(53, 38, 77, 0.12);
+    }
+
+    body.high-contrast details.howto,
+    body.hc-high-contrast details.howto {
+      background: var(--bg);
+      border: 2px solid var(--outline);
+      backdrop-filter: none;
+      box-shadow: none;
     }
 
     @media (max-width: 640px) {
