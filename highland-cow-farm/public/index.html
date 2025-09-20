@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Highland Cow Farm Adventure</title>
+  <link rel="stylesheet" href="/src/styles/theme.css" />
+  </head>
+<body>
+  <main id="app" aria-live="polite">
+    <section class="screen active" data-screen="title" aria-labelledby="title-heading">
+      <div class="title-hero">
+        <h1 id="title-heading">Highland Cow Farm Adventure</h1>
+        <p>Welcome to your cosy Highland hideaway. Tend to your fluffy herd, keep them happy, and earn charming farm treasures through daily mini-adventures.</p>
+        <svg viewBox="0 0 320 220" role="img" aria-label="Illustration of three highland cows">
+          <rect x="0" y="0" width="320" height="220" rx="36" fill="#fef5f9" />
+          <g transform="translate(60 110)">
+            <ellipse cx="40" cy="60" rx="38" ry="28" fill="#c99364" />
+            <ellipse cx="40" cy="32" rx="28" ry="24" fill="#d8a984" />
+            <path d="M10 14 Q-20 -10 0 -24" stroke="#c99364" stroke-width="10" stroke-linecap="round" fill="none" />
+            <path d="M70 14 Q100 -10 90 -24" stroke="#c99364" stroke-width="10" stroke-linecap="round" fill="none" />
+            <circle cx="28" cy="34" r="4" fill="#412a35" />
+            <circle cx="52" cy="34" r="4" fill="#412a35" />
+            <ellipse cx="40" cy="48" rx="8" ry="10" fill="#412a35" />
+          </g>
+          <g transform="translate(160 120) scale(0.9)">
+            <ellipse cx="40" cy="60" rx="36" ry="26" fill="#f0b8c3" />
+            <ellipse cx="40" cy="32" rx="26" ry="22" fill="#f7cbd3" />
+            <path d="M12 16 Q-12 -6 6 -20" stroke="#f0b8c3" stroke-width="10" stroke-linecap="round" fill="none" />
+            <path d="M68 16 Q96 -6 84 -20" stroke="#f0b8c3" stroke-width="10" stroke-linecap="round" fill="none" />
+            <circle cx="28" cy="34" r="4" fill="#412a35" />
+            <circle cx="52" cy="34" r="4" fill="#412a35" />
+            <ellipse cx="40" cy="48" rx="7" ry="9" fill="#412a35" />
+          </g>
+          <g transform="translate(220 100) scale(0.8)">
+            <ellipse cx="40" cy="60" rx="34" ry="24" fill="#9e6645" />
+            <ellipse cx="40" cy="32" rx="24" ry="20" fill="#ad7652" />
+            <path d="M12 16 Q-12 -6 4 -18" stroke="#9e6645" stroke-width="9" stroke-linecap="round" fill="none" />
+            <path d="M68 16 Q92 -6 82 -18" stroke="#9e6645" stroke-width="9" stroke-linecap="round" fill="none" />
+            <circle cx="28" cy="34" r="4" fill="#412a35" />
+            <circle cx="52" cy="34" r="4" fill="#412a35" />
+            <ellipse cx="40" cy="48" rx="7" ry="9" fill="#412a35" />
+          </g>
+        </svg>
+        <div class="button-row">
+          <button id="btn-start">Start Adventure</button>
+          <button class="secondary" id="btn-options">Options</button>
+          <button class="ghost" id="btn-howto">Quick How-To</button>
+        </div>
+        <details class="howto" id="title-howto">
+          <summary>How to Play</summary>
+          <p>Each day you will complete three brisk mini-games: keep runaway cows safe, match the right feed, and brush away the burrs. Happy cows grant more rewards. Watch the chonk level – a little extra fluff is adorable, but too much means slower cows tomorrow!</p>
+        </details>
+        <button class="danger" id="btn-reset">Reset Save</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="options" aria-labelledby="options-heading">
+      <h2 id="options-heading">Options</h2>
+      <p>Accessibility and comfort settings are saved per device.</p>
+      <div class="options-list">
+        <div class="toggle">
+          <label for="toggle-audio">Farm sounds</label>
+          <input type="checkbox" id="toggle-audio" />
+        </div>
+        <div class="toggle">
+          <label for="range-master">Master volume</label>
+          <input type="range" id="range-master" min="0" max="1" step="0.1" />
+          <span class="range-value" id="range-master-value">100%</span>
+        </div>
+        <div class="toggle">
+          <label for="range-effects">Effects volume</label>
+          <input type="range" id="range-effects" min="0" max="1" step="0.1" />
+          <span class="range-value" id="range-effects-value">100%</span>
+        </div>
+        <div class="toggle">
+          <label for="range-ambience">Ambience volume</label>
+          <input type="range" id="range-ambience" min="0" max="1" step="0.1" />
+          <span class="range-value" id="range-ambience-value">60%</span>
+        </div>
+        <div class="toggle">
+          <label for="toggle-contrast">High contrast UI</label>
+          <input type="checkbox" id="toggle-contrast" />
+        </div>
+        <div class="toggle">
+          <label for="toggle-reduced">Reduce flashing effects</label>
+          <input type="checkbox" id="toggle-reduced" />
+        </div>
+      </div>
+      <div class="button-row">
+        <button class="secondary" id="btn-options-back">Back</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="farm" aria-labelledby="farm-heading">
+      <header>
+        <h2 id="farm-heading">Farm Hub</h2>
+        <p>Welcome back! Check in on your herd, dress up your paddock, and start a new day of country escapades.</p>
+      </header>
+      <details class="howto">
+        <summary>How to Play</summary>
+        <p>Complete the three mini-games in any order given. Keep an eye on the timer and the mood of each cow. Feeding a cow more than once in Food Frenzy makes them extra chonky. Finish all tasks to unlock a surprise for the farm.</p>
+      </details>
+      <section>
+        <h3>Herd</h3>
+        <p class="helper-text">Select a cow card to dress them in unlocked accessories.</p>
+        <div class="herd-grid" id="herd-grid" aria-live="polite"></div>
+      </section>
+      <section class="farm-meta">
+        <article class="farm-panel">
+          <h3>Daily Moodlets</h3>
+          <ul class="event-list" id="farm-events"></ul>
+        </article>
+        <article class="farm-panel">
+          <h3>Pantry</h3>
+          <div class="pantry-list" id="pantry-list" aria-live="polite"></div>
+        </article>
+        <article class="farm-panel">
+          <h3>Paddock Décor</h3>
+          <div class="decor-display" id="decor-display" aria-live="polite"></div>
+          <button class="secondary" id="btn-manage-decor">Decorate Farm</button>
+        </article>
+        <article class="farm-panel">
+          <h3>Achievements</h3>
+          <ul class="achievement-list" id="achievement-list"></ul>
+        </article>
+      </section>
+      <div class="button-row">
+        <button id="btn-start-day">Start Day Cycle</button>
+        <button class="secondary" id="btn-farm-options">Options</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="style" aria-labelledby="style-heading">
+      <h2 id="style-heading">Cow Customiser</h2>
+      <p id="style-subtitle">Mix and match accessories to give your herd a signature look.</p>
+      <div class="style-layout">
+        <div class="style-preview" id="style-preview" aria-live="polite"></div>
+        <div class="style-accessories">
+          <h3 id="style-cow-name">Accessories</h3>
+          <p class="helper-text" id="style-helper">Tap an accessory to toggle it. Up to three can be worn at once.</p>
+          <div class="style-list" id="style-accessory-list"></div>
+          <div class="style-actions">
+            <button class="ghost" id="btn-style-random">Surprise outfit</button>
+            <button class="ghost" id="btn-style-clear">Clear accessories</button>
+          </div>
+        </div>
+      </div>
+      <div class="button-row">
+        <button class="secondary" id="btn-style-back">Back to Farm</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="decor" aria-labelledby="decor-heading">
+      <h2 id="decor-heading">Decorate the Farm</h2>
+      <p>Choose a cosy piece for each paddock slot to set the scene.</p>
+      <p class="helper-text" id="decor-limit-status" role="status" aria-live="polite"></p>
+      <div class="decor-manage-grid">
+        <div class="decor-preview" id="decor-preview" aria-label="Décor preview"></div>
+        <div class="decor-manage-list" id="decor-manage-list"></div>
+      </div>
+      <div class="button-row">
+        <button id="btn-decor-save">Save Décor</button>
+        <button class="secondary" id="btn-decor-back">Cancel</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="task" aria-labelledby="task-heading">
+      <div class="task-panel">
+        <div class="task-header">
+          <div>
+            <h2 id="task-heading">Task Rush</h2>
+            <p class="mini-subtitle" id="mini-subtitle"></p>
+          </div>
+          <div class="badge" id="mini-badge">Mini 1 of 3</div>
+          <div class="task-timer" id="task-timer" aria-live="assertive">00:30</div>
+        </div>
+        <div class="mini-instruction" id="mini-instruction">Stay tuned...</div>
+        <div class="minigame-area" id="minigame-area" role="group" aria-live="polite"></div>
+        <div class="button-row" id="task-controls" hidden>
+          <button id="btn-task-continue">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="summary" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Day Summary</h2>
+      <div class="summary-list" id="summary-results"></div>
+      <div class="summary-cow-deltas" id="summary-cow-deltas"></div>
+      <div class="unlock-banner" id="summary-unlock" hidden></div>
+      <div class="button-row">
+        <button id="btn-summary-continue">Save &amp; Return to Farm</button>
+      </div>
+    </section>
+  </main>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
