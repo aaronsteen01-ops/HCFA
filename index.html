@@ -1099,7 +1099,6 @@
         }
       }
     };
-
     const FoodLibrary = {
       'Starter Hay': {
         icon: '🌾',
@@ -1174,7 +1173,6 @@
     };
 
     const DEFAULT_FOODS = ['Starter Hay', 'Carrot Crunch', 'Warm Oat Mash'];
-
     const DecorLibrary = {
       'Wildflower Patch': {
         icon: '🌼',
@@ -1589,7 +1587,6 @@
       function findCow(id) {
         return data.cows.find(cow => cow.id === id);
       }
-
       function getData() {
         return data;
       }
@@ -1992,7 +1989,6 @@
           elements.decorDisplay.appendChild(el);
         });
       }
-
       function renderPantryList(foods) {
         if (!elements.pantryList) return;
         elements.pantryList.innerHTML = '';
@@ -2020,7 +2016,7 @@
           elements.pantryList.appendChild(block);
         });
       }
-
+     
       function renderAchievementsList(achievements) {
         elements.achievementList.innerHTML = '';
         Object.entries(ACHIEVEMENTS).forEach(([key, meta]) => {
@@ -3481,6 +3477,7 @@
         const achievementsUnlocked = [];
         const options = Object.assign({}, save.options);
         const availableFoods = State.getUnlocks('foods');
+
         UI.showScreen('task');
         for (let i = 0; i < queue.length; i++) {
           const key = queue[i];
