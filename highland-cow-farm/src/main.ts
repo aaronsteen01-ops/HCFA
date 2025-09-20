@@ -1,3 +1,5 @@
+import './styles/theme.css';
+
 import { registerScreen, showScreen } from './core/screens';
 import { initAudio, setEnabled, setVolumes, ensureAmbience, stopAmbience } from './core/audio';
 import * as State from './core/state';
