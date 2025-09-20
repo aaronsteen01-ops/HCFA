@@ -12,6 +12,13 @@
       --danger: #f4876d;
       --card-radius: 20px;
       --transition: 0.2s ease;
+      --sky-top: #fdf6ff;
+      --sky-bottom: #dcefff;
+      --sky-glow: rgba(255, 220, 235, 0.65);
+      --field-main: #cde9bd;
+      --field-highlight: #b9ddb1;
+      --hill-shadow: #a3d3a0;
+      --cloud-color: rgba(255, 255, 255, 0.9);
       color-scheme: only light;
     }
 
@@ -27,6 +34,13 @@
       --success: #14804b;
       --warning: #af6300;
       --danger: #c02020;
+      --sky-top: #f7f8fb;
+      --sky-bottom: #d7e2fb;
+      --sky-glow: rgba(223, 237, 255, 0.8);
+      --field-main: #d2e4cc;
+      --field-highlight: #bed6bc;
+      --hill-shadow: #97c29b;
+      --cloud-color: #ffffff;
     }
 
     * {
@@ -36,13 +50,191 @@
     body {
       margin: 0;
       font-family: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
-      background: var(--bg);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 20% -10%, var(--sky-glow), transparent 60%),
+        linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 55%, var(--field-highlight) 72%, var(--field-main) 100%);
+      background-repeat: no-repeat;
       color: var(--text);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       padding: 20px;
-      transition: background var(--transition), color var(--transition);
+      transition: background-color var(--transition), color var(--transition);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: absolute;
+      left: -20vw;
+      right: -20vw;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      bottom: -8vh;
+      height: clamp(260px, 42vh, 420px);
+      background:
+        radial-gradient(60% 80% at 20% 100%, var(--field-highlight) 0%, transparent 70%),
+        radial-gradient(70% 90% at 80% 100%, var(--hill-shadow) 0%, transparent 75%);
+      opacity: 0.85;
+    }
+
+    body::after {
+      bottom: -16vh;
+      height: clamp(320px, 56vh, 520px);
+      background: radial-gradient(80% 100% at 50% 100%, var(--field-main) 0%, transparent 75%);
+      opacity: 0.7;
+    }
+
+    .scene-frame {
+      position: relative;
+      z-index: 1;
+      width: min(960px, 100%);
+    }
+
+    .scene-decoration {
+      position: absolute;
+      top: -180px;
+      left: -240px;
+      width: calc(100% + 480px);
+      height: 260px;
+      pointer-events: none;
+      z-index: 0;
+      overflow: visible;
+    }
+
+    .scene-decoration .cloud {
+      --cloud-scale: 1;
+      --cloud-duration: 70s;
+      position: absolute;
+      top: 0;
+      left: -35%;
+      width: 180px;
+      height: 70px;
+      background: var(--cloud-color);
+      border-radius: 999px;
+      opacity: 0.85;
+      filter: drop-shadow(0 16px 32px rgba(53, 38, 77, 0.15));
+      transform: scale(var(--cloud-scale));
+      animation: cloud-drift var(--cloud-duration) linear infinite;
+    }
+
+    .scene-decoration .cloud::before,
+    .scene-decoration .cloud::after {
+      content: "";
+      position: absolute;
+      background: var(--cloud-color);
+      border-radius: 50%;
+    }
+
+    .scene-decoration .cloud::before {
+      width: 90px;
+      height: 60px;
+      left: -28px;
+      top: 10px;
+    }
+
+    .scene-decoration .cloud::after {
+      width: 80px;
+      height: 55px;
+      right: -25px;
+      top: 16px;
+    }
+
+    .scene-decoration .cloud--one {
+      top: 20px;
+      --cloud-duration: 68s;
+      --cloud-scale: 1.05;
+    }
+
+    .scene-decoration .cloud--two {
+      top: 60px;
+      --cloud-duration: 74s;
+      --cloud-scale: 0.85;
+      opacity: 0.8;
+      animation-delay: -24s;
+    }
+
+    .scene-decoration .cloud--three {
+      top: 100px;
+      --cloud-duration: 80s;
+      --cloud-scale: 1.2;
+      opacity: 0.75;
+      animation-delay: -48s;
+    }
+
+    .scene-decoration .bird {
+      --bird-duration: 36s;
+      position: absolute;
+      top: 140px;
+      left: -12%;
+      width: 36px;
+      height: 18px;
+      color: var(--text-muted);
+      opacity: 0.6;
+      animation: bird-glide var(--bird-duration) linear infinite;
+    }
+
+    .scene-decoration .bird::before,
+    .scene-decoration .bird::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 12px;
+      border-top: 2px solid currentColor;
+      border-radius: 50% 50% 0 0;
+      top: 0;
+    }
+
+    .scene-decoration .bird::before {
+      left: 0;
+      transform: rotate(-18deg);
+    }
+
+    .scene-decoration .bird::after {
+      right: 0;
+      transform: rotate(18deg);
+    }
+
+    .scene-decoration .bird--one {
+      top: 80px;
+      --bird-duration: 34s;
+      animation-delay: -8s;
+    }
+
+    .scene-decoration .bird--two {
+      top: 130px;
+      --bird-duration: 42s;
+      animation-delay: -18s;
+    }
+
+    @keyframes cloud-drift {
+      from {
+        left: -35%;
+      }
+      to {
+        left: 110%;
+      }
+    }
+
+    @keyframes bird-glide {
+      from {
+        left: -12%;
+        transform: translateY(0);
+      }
+      50% {
+        left: 55%;
+        transform: translateY(-6px);
+      }
+      to {
+        left: 112%;
+        transform: translateY(0);
+      }
     }
 
     main {
@@ -54,6 +246,8 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
+      position: relative;
+      z-index: 1;
     }
 
     h1, h2, h3, h4 {
@@ -891,6 +1085,12 @@
     @media (max-width: 640px) {
       body {
         padding: 12px;
+      }
+      .scene-decoration {
+        top: -140px;
+        left: -160px;
+        width: calc(100% + 320px);
+        height: 220px;
       }
       main {
         padding: 18px;
