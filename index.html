@@ -463,7 +463,6 @@
     .cow-art-mini {
       max-width: 120px;
     }
-
     .status-row {
       display: flex;
       justify-content: space-between;
@@ -627,7 +626,6 @@
       grid-area: name;
       justify-self: start;
     }
-
     .food-chip-tray {
       display: flex;
       flex-wrap: wrap;
@@ -776,7 +774,6 @@
       flex: 1 1 160px;
       text-align: center;
     }
-
     .decor-manage-list {
       display: grid;
       gap: 10px;
@@ -885,7 +882,6 @@
       font-weight: 500;
       color: var(--text);
     }
-
     details.howto summary {
       cursor: pointer;
       font-weight: 600;
@@ -1483,7 +1479,6 @@
     };
 
     const DEFAULT_FOODS = ['Starter Hay', 'Carrot Crunch', 'Warm Oat Mash'];
-
     const DecorLibrary = {
       'Wildflower Patch': {
         icon: '🌼',
@@ -1786,6 +1781,7 @@
             const profile = AMBIENCE_MOODS[ambienceMood] || AMBIENCE_MOODS.farm;
             ambienceNodes.noiseGain.gain.setTargetAtTime(profile.noise * volumes.ambience, ctx.currentTime, 0.6);
           }
+
           return;
         }
         const base = ctx.createOscillator();
@@ -1975,7 +1971,6 @@
         });
         return sanitized;
       }
-
       function sanitizeUnlockList(list, library) {
         if (!Array.isArray(list)) return [];
         const seen = new Set();
@@ -2173,7 +2168,6 @@
       function findCow(id) {
         return data.cows.find(cow => cow.id === id);
       }
-
       function getData() {
         return data;
       }
@@ -2756,6 +2750,7 @@
         const statusEl = elements.decorStatus;
         if (!statusEl) return;
         if (!decorOptions.length) {
+
           statusEl.textContent = 'Unlock décor in the day summary to decorate the paddock.';
           statusEl.classList.remove('is-warning');
           return;
