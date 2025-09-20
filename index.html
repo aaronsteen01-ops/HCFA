@@ -246,7 +246,6 @@
       pointer-events: none;
     }
 
-
     .cow-card .accessory-chips {
       display: flex;
       flex-wrap: wrap;
@@ -389,6 +388,40 @@
       font-size: 0.75rem;
     }
 
+    .pantry-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      min-height: 60px;
+    }
+
+    .pantry-item {
+      min-width: 72px;
+      min-height: 72px;
+      border-radius: 18px;
+      background: rgba(242, 169, 183, 0.16);
+      border: 1px solid rgba(242, 169, 183, 0.38);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--text);
+      padding: 8px;
+      text-align: center;
+      transition: transform var(--transition);
+    }
+
+    .pantry-item span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .pantry-item:hover {
+      transform: translateY(-2px);
+    }
+
     .cow-art {
       width: 100%;
       max-width: 180px;
@@ -509,8 +542,33 @@
       box-shadow: 0 0 0 3px rgba(244, 135, 109, 0.25);
     }
 
+    .food-target.overfed {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px rgba(244, 135, 109, 0.35);
+      background: rgba(244, 135, 109, 0.08);
+    }
+
     .food-icon {
       font-size: 2rem;
+    }
+
+    .food-target .food-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .food-target .food-status {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .food-target.sated .food-status {
+      color: var(--success);
+    }
+
+    .food-target.overfed .food-status {
+      color: var(--danger);
     }
 
     .food-chip-tray {
@@ -793,7 +851,6 @@
           <input type="checkbox" id="toggle-audio" />
         </div>
         <div class="toggle">
-
           <label for="range-effects">Effects volume</label>
           <input type="range" id="range-effects" min="0" max="1" step="0.1" />
           <span class="range-value" id="range-effects-value">100%</span>
@@ -804,7 +861,6 @@
           <span class="range-value" id="range-ambience-value">60%</span>
         </div>
         <div class="toggle">
-
           <label for="toggle-contrast">High contrast UI</label>
           <input type="checkbox" id="toggle-contrast" />
         </div>
@@ -838,6 +894,10 @@
           <ul class="event-list" id="farm-events"></ul>
         </article>
         <article class="farm-panel">
+          <h3>Pantry</h3>
+          <div class="pantry-list" id="pantry-list" aria-live="polite"></div>
+        </article>
+        <article class="farm-panel">
           <h3>Paddock Décor</h3>
           <div class="decor-display" id="decor-display" aria-live="polite"></div>
           <button class="secondary" id="btn-manage-decor">Decorate Farm</button>
@@ -847,7 +907,6 @@
           <ul class="achievement-list" id="achievement-list"></ul>
         </article>
       </section>
-
       <div class="button-row">
         <button id="btn-start-day">Start Day Cycle</button>
         <button class="secondary" id="btn-farm-options">Options</button>
@@ -1040,7 +1099,80 @@
         }
       }
     };
+    const FoodLibrary = {
+      'Starter Hay': {
+        icon: '🌾',
+        description: 'Reliable hay baled fresh from the paddock.',
+        hunger: -24,
+        happiness: 6,
+        chonk: 0,
+        overfeedChonk: 6,
+        overfeedMood: 4,
+        maxServings: 1
+      },
+      'Carrot Crunch': {
+        icon: '🥕',
+        description: 'Sweet carrots that brighten every muzzle.',
+        hunger: -20,
+        happiness: 7,
+        chonk: 0,
+        overfeedChonk: 5,
+        overfeedMood: 4,
+        maxServings: 1
+      },
+      'Warm Oat Mash': {
+        icon: '🪣',
+        description: 'Comforting oat mash served warm in a pail.',
+        hunger: -28,
+        happiness: 7,
+        chonk: 2,
+        overfeedChonk: 9,
+        overfeedMood: 5,
+        maxServings: 1
+      },
+      'Sweet Clover Bale': {
+        icon: '☘️',
+        description: 'Fragrant clover tied into a tidy bale.',
+        hunger: -26,
+        happiness: 8,
+        chonk: 1,
+        overfeedChonk: 8,
+        overfeedMood: 5,
+        maxServings: 1
+      },
+      'Heather Honey Jar': {
+        icon: '🍯',
+        description: 'Sticky heather honey drizzled over oats.',
+        hunger: -18,
+        happiness: 10,
+        chonk: 2,
+        overfeedChonk: 10,
+        overfeedMood: 6,
+        maxServings: 1
+      },
+      'Crisp Apple Crate': {
+        icon: '🍎',
+        description: 'A crate of rosy apples from the highland orchard.',
+        hunger: -22,
+        happiness: 8,
+        chonk: 1,
+        overfeedChonk: 7,
+        overfeedMood: 5,
+        maxServings: 1
+      },
+      'Barley Biscuit Stack': {
+        icon: '🍪',
+        description: 'Baked barley biscuits with a hint of molasses.',
+        hunger: -24,
+        happiness: 7,
+        chonk: 3,
+        overfeedChonk: 12,
+        overfeedMood: 6,
+        maxServings: 1
+      }
+    };
 
+    const DEFAULT_FOODS = ['Starter Hay', 'Carrot Crunch', 'Warm Oat Mash'];
     const DecorLibrary = {
       'Wildflower Patch': {
         icon: '🌼',
@@ -1330,7 +1462,7 @@
           version: VERSION,
           day: 1,
           cows,
-          unlocks: { foods: ['Starter Hay'], accessories: [], decor: [] },
+          unlocks: { foods: DEFAULT_FOODS.slice(), accessories: [], decor: [] },
           activeDecor: [],
           options: { audioOn: true, effectsVolume: 0.9, ambienceVolume: 0.5, highContrastUI: false, reducedFlash: false },
           stats: { totalPerfects: 0, totalChonks: 0 },
@@ -1359,7 +1491,11 @@
           });
         }
         if (old.unlocks) {
-          migrated.unlocks.foods = Array.isArray(old.unlocks.foods) ? Array.from(new Set(old.unlocks.foods)) : migrated.unlocks.foods;
+          const foodList = sanitizeUnlockList(old.unlocks.foods, FoodLibrary);
+          if (foodList.length) {
+            const combinedFoods = new Set([...migrated.unlocks.foods, ...foodList]);
+            migrated.unlocks.foods = Array.from(combinedFoods);
+          }
           migrated.unlocks.accessories = sanitizeUnlockList(old.unlocks.accessories, AccessoryLibrary);
           migrated.unlocks.decor = sanitizeUnlockList(old.unlocks.decor, DecorLibrary);
         }
@@ -1432,8 +1568,10 @@
         if (!Array.isArray(data.activeDecor)) data.activeDecor = [];
         if (!data.achievements) data.achievements = blankAchievements();
         data.unlocks = Object.assign({ foods: [], accessories: [], decor: [] }, data.unlocks || {});
-        data.unlocks.accessories = Array.from(new Set(data.unlocks.accessories || []));
-        data.unlocks.decor = Array.from(new Set(data.unlocks.decor || []));
+        const ensuredFoods = sanitizeUnlockList([...(data.unlocks.foods || []), ...DEFAULT_FOODS], FoodLibrary);
+        data.unlocks.foods = ensuredFoods.length ? ensuredFoods : DEFAULT_FOODS.slice();
+        data.unlocks.accessories = sanitizeUnlockList(data.unlocks.accessories, AccessoryLibrary);
+        data.unlocks.decor = sanitizeUnlockList(data.unlocks.decor, DecorLibrary);
         data.cows = Array.isArray(data.cows) ? data.cows.map((cow, index) => ensureCowDefaults(cow, cow.id || `cow-${index + 1}`, cow.name || defaultNames[index % defaultNames.length])) : [];
         data.cows.forEach(cow => {
           cow.accessories = sanitizeAccessories(cow.accessories);
@@ -1507,6 +1645,7 @@
         const list = data.unlocks[type];
         if (list.includes(item)) return false;
         if (type === 'accessories' && !AccessoryLibrary[item]) return false;
+        if (type === 'foods' && !FoodLibrary[item]) return false;
         if (type === 'decor' && !DecorLibrary[item]) return false;
         list.push(item);
         save();
@@ -1582,6 +1721,17 @@
       }
 
       function getUnlocks(type) {
+        if (type === 'foods') {
+          const current = Array.isArray(data.unlocks.foods) ? data.unlocks.foods.slice() : [];
+          const combined = [...DEFAULT_FOODS, ...current];
+          return sanitizeUnlockList(combined, FoodLibrary);
+        }
+        if (type === 'accessories') {
+          return sanitizeUnlockList(data.unlocks.accessories, AccessoryLibrary);
+        }
+        if (type === 'decor') {
+          return sanitizeUnlockList(data.unlocks.decor, DecorLibrary);
+        }
         return (data.unlocks[type] || []).slice();
       }
 
@@ -1671,6 +1821,7 @@
         styleSubtitle: document.getElementById('style-subtitle'),
         styleHelper: document.getElementById('style-helper'),
         decorDisplay: document.getElementById('decor-display'),
+        pantryList: document.getElementById('pantry-list'),
         farmEvents: document.getElementById('farm-events'),
         achievementList: document.getElementById('achievement-list'),
         decorManageList: document.getElementById('decor-manage-list'),
@@ -1838,7 +1989,34 @@
           elements.decorDisplay.appendChild(el);
         });
       }
-
+      function renderPantryList(foods) {
+        if (!elements.pantryList) return;
+        elements.pantryList.innerHTML = '';
+        const items = Array.isArray(foods)
+          ? foods.map(name => ({ name, entry: FoodLibrary[name] })).filter(item => item.entry)
+          : [];
+        if (!items.length) {
+          const message = document.createElement('div');
+          message.className = 'helper-text';
+          message.textContent = 'Unlock new treats in the day summary to expand the pantry.';
+          elements.pantryList.appendChild(message);
+          return;
+        }
+        items.forEach(({ name, entry }) => {
+          const block = document.createElement('div');
+          block.className = 'pantry-item';
+          block.textContent = entry.icon || '🥛';
+          block.setAttribute('aria-label', `${name} treat`);
+          if (entry.description) {
+            block.title = entry.description;
+          }
+          const label = document.createElement('span');
+          label.textContent = name;
+          block.appendChild(label);
+          elements.pantryList.appendChild(block);
+        });
+      }
+     
       function renderAchievementsList(achievements) {
         elements.achievementList.innerHTML = '';
         Object.entries(ACHIEVEMENTS).forEach(([key, meta]) => {
@@ -2033,7 +2211,16 @@
         if (reward) {
           elements.summaryUnlock.hidden = false;
           const themeText = reward.theme ? ` • ${reward.theme}` : '';
-          elements.summaryUnlock.textContent = `Unlocked: ${reward.item} (${reward.typeLabel})${themeText}!`;
+          let rewardIcon = '';
+          if (reward.type === 'foods') {
+            rewardIcon = FoodLibrary[reward.item]?.icon || '🍀';
+          } else if (reward.type === 'accessories') {
+            rewardIcon = AccessoryLibrary[reward.item]?.icon || '⭐';
+          } else if (reward.type === 'decor') {
+            rewardIcon = DecorLibrary[reward.item]?.icon || '✨';
+          }
+          const iconPrefix = rewardIcon ? `${rewardIcon} ` : '';
+          elements.summaryUnlock.textContent = `Unlocked: ${iconPrefix}${reward.item} (${reward.typeLabel})${themeText}!`;
         } else {
           elements.summaryUnlock.hidden = true;
         }
@@ -2201,6 +2388,7 @@
         getMiniDescription,
         renderSummary,
         renderEvents: renderEventsList,
+        renderPantry: renderPantryList,
         renderDecor: renderDecorDisplay,
         renderAchievements: renderAchievementsList,
         showStyle: showStyleScreen,
@@ -2718,11 +2906,32 @@
         applyOutcome
       };
     })();
-
     MiniGames.register('food', (function() {
       let root, board, targetsContainer, tray;
       let state = null;
-      const foods = ['🥕', '🍎', '🌾', '🪣'];
+
+      function resolveFood(name) {
+        const entry = FoodLibrary[name];
+        if (!entry) return null;
+        return Object.assign({ name }, entry);
+      }
+
+      function buildFoodPool(names) {
+        const seen = new Set();
+        const pool = [];
+        const source = Array.isArray(names) ? names : [];
+        [...source, ...DEFAULT_FOODS].forEach(name => {
+          const resolved = resolveFood(name);
+          if (resolved && !seen.has(resolved.name)) {
+            seen.add(resolved.name);
+            pool.push(resolved);
+          }
+        });
+        if (pool.length) return pool;
+        const fallback = DEFAULT_FOODS.map(resolveFood).filter(Boolean);
+        if (fallback.length) return fallback;
+        return [{ name: 'Starter Hay', icon: '🌾', hunger: -24, happiness: 6, chonk: 0, overfeedChonk: 6, overfeedMood: 4, maxServings: 1 }];
+      }
 
       function init(container) {
         root = document.createElement('div');
@@ -2740,19 +2949,27 @@
         return root;
       }
 
-      function createTarget(cow, expected) {
+      function createTarget(cow, food) {
         const target = document.createElement('div');
         target.className = 'food-target';
-        target.dataset.food = expected;
-        target.innerHTML = `<strong>${cow.name}</strong><div class="food-icon">${expected}</div><span>Needs snack</span>`;
+        target.dataset.food = food.name;
+        if (food.description) {
+          target.title = food.description;
+        }
+        target.innerHTML = `<strong>${cow.name}</strong><div class="food-icon" aria-hidden="true">${food.icon || '🌾'}</div><span class="food-label">${food.name}</span><span class="food-status">Needs snack</span>`;
         return target;
       }
 
       function createChip(food) {
         const chip = document.createElement('div');
         chip.className = 'food-chip';
-        chip.textContent = food;
-        chip.dataset.food = food;
+        chip.textContent = food.icon || '🌾';
+        chip.dataset.food = food.name;
+        chip.setAttribute('role', 'button');
+        chip.setAttribute('aria-label', `${food.name} chip`);
+        if (food.description) {
+          chip.title = food.description;
+        }
         chip.addEventListener('pointerdown', handlePointerDown);
         return chip;
       }
@@ -2794,19 +3011,22 @@
         if (!targetState) return;
         targetState.feeds += 1;
         const limit = targetState.limit || 1;
+        const statusEl = targetEl.querySelector('.food-status');
+        if (!statusEl) return;
         if (targetState.satisfied && targetState.feeds > limit) {
           targetState.overfed = true;
-          targetEl.classList.add('sated');
-          targetEl.querySelector('span').textContent = 'Too full!';
+          targetEl.classList.remove('sated');
+          targetEl.classList.add('overfed');
+          statusEl.textContent = 'Too full!';
           state.overfed.add(targetState.cow.id);
           Audio.play('lose');
           return;
         }
-
         if (chip.dataset.food === targetState.expected && !targetState.satisfied) {
           targetState.satisfied = true;
           targetEl.classList.add('sated');
-          targetEl.querySelector('span').textContent = 'Yum!';
+          targetEl.classList.remove('mistake', 'overfed');
+          statusEl.textContent = 'Yum!';
           chip.remove();
           Audio.play('tap');
           if (state.targets.every(t => t.satisfied)) {
@@ -2814,7 +3034,13 @@
           }
         } else {
           targetEl.classList.add('mistake');
-          setTimeout(() => targetEl.classList.remove('mistake'), 400);
+          statusEl.textContent = 'Wrong snack!';
+          setTimeout(() => {
+            targetEl.classList.remove('mistake');
+            if (!targetState.satisfied && !targetState.overfed) {
+              statusEl.textContent = 'Needs snack';
+            }
+          }, 400);
           state.mistakes += 1;
         }
       }
@@ -2826,25 +3052,45 @@
         const adjustments = {};
         state.targets.forEach(target => {
           if (!adjustments[target.cow.id]) adjustments[target.cow.id] = {};
+          const adj = adjustments[target.cow.id];
+          const foodMeta = target.food || {};
           if (success && target.satisfied) {
-            adjustments[target.cow.id].hunger = (adjustments[target.cow.id].hunger || 0) - 28;
-            adjustments[target.cow.id].happiness = (adjustments[target.cow.id].happiness || 0) + 8;
+            const hungerChange = typeof foodMeta.hunger === 'number' ? foodMeta.hunger : -24;
+            const happinessChange = typeof foodMeta.happiness === 'number' ? foodMeta.happiness : 6;
+            const chonkChange = typeof foodMeta.chonk === 'number' ? foodMeta.chonk : 0;
+            adj.hunger = (adj.hunger || 0) + hungerChange;
+            adj.happiness = (adj.happiness || 0) + happinessChange;
+            if (chonkChange) {
+              adj.chonk = (adj.chonk || 0) + chonkChange;
+            }
           } else if (!success) {
-            adjustments[target.cow.id].hunger = (adjustments[target.cow.id].hunger || 0) + 12;
-            adjustments[target.cow.id].happiness = (adjustments[target.cow.id].happiness || 0) - 6;
+            adj.hunger = (adj.hunger || 0) + 12;
+            adj.happiness = (adj.happiness || 0) - 6;
           }
           if (target.overfed) {
-            adjustments[target.cow.id].chonk = (adjustments[target.cow.id].chonk || 0) + 12;
-            adjustments[target.cow.id].happiness = (adjustments[target.cow.id].happiness || 0) - 4;
+            const overfeedChonk = typeof foodMeta.overfeedChonk === 'number' ? foodMeta.overfeedChonk : 12;
+            const overfeedMood = typeof foodMeta.overfeedMood === 'number' ? foodMeta.overfeedMood : 4;
+            adj.chonk = (adj.chonk || 0) + overfeedChonk;
+            adj.happiness = (adj.happiness || 0) - overfeedMood;
           }
         });
-        const stats = { totalPerfects: success && state.mistakes === 0 ? 1 : 0, totalChonks: state.overfed.size };
-        state.context.end({ success, adjustments, summary: message, stats });
+        const treatNames = Array.from(new Set(state.targets.filter(t => t.satisfied && t.food).map(t => t.food.name)));
+        let summary = message || '';
+        if (success && treatNames.length) {
+          summary += ` Treats served: ${treatNames.join(', ')}.`;
+        }
+        if (state.overfed.size) {
+          const label = state.overfed.size === 1 ? 'One cow' : `${state.overfed.size} cows`;
+          summary += ` ${label} snuck extra serves.`;
+        }
+        const stats = { totalPerfects: success && state.mistakes === 0 && state.overfed.size === 0 ? 1 : 0, totalChonks: state.overfed.size };
+        state.context.end({ success, adjustments, summary: summary.trim(), stats });
         Audio.play(success ? 'win' : 'lose');
       }
 
       function start(context) {
         const modifiers = context.modifiers || {};
+        const pool = buildFoodPool(context.foods);
         state = {
           context,
           participants: context.participants || [],
@@ -2854,22 +3100,23 @@
           timeLeft: Math.max(15, Math.max(20, 40 - (context.difficulty || 1) * 1.4) + (modifiers.timeModifier || 0)),
           running: true,
           finished: false,
-          modifiers
+          modifiers,
+          pool
         };
         context.updateTimer(state.timeLeft);
         targetsContainer.innerHTML = '';
         tray.innerHTML = '';
         const chipFoods = [];
         state.participants.forEach(cow => {
-          const expected = Util.pick(foods);
+          const expected = Util.pick(pool) || resolveFood(DEFAULT_FOODS[0]);
           const targetEl = createTarget(cow, expected);
           targetsContainer.appendChild(targetEl);
-          const limit = 1 + (modifiers.overfeedGrace || 0);
-          state.targets.push({ cow, expected, el: targetEl, satisfied: false, feeds: 0, overfed: false, limit });
+          const limit = Math.max(1, (expected?.maxServings || 1) + (modifiers.overfeedGrace || 0));
+          state.targets.push({ cow, expected: expected.name, food: expected, el: targetEl, satisfied: false, feeds: 0, overfed: false, limit });
           chipFoods.push(expected);
         });
         while (chipFoods.length < state.targets.length + 2) {
-          chipFoods.push(Util.pick(foods));
+          chipFoods.push(Util.pick(pool) || resolveFood(DEFAULT_FOODS[0]));
         }
         Util.shuffle(chipFoods).forEach(food => {
           tray.appendChild(createChip(food));
@@ -3227,7 +3474,10 @@
           adjustments: {},
           stats: { totalPerfects: 0, totalChonks: 0 }
         };
+        const achievementsUnlocked = [];
         const options = Object.assign({}, save.options);
+        const availableFoods = State.getUnlocks('foods');
+
         UI.showScreen('task');
         for (let i = 0; i < queue.length; i++) {
           const key = queue[i];
@@ -3247,7 +3497,8 @@
             updateTimer: UI.updateTimer,
             updateInstruction: UI.setMiniInstruction,
             options,
-            modifiers: event ? event.modifiers : null
+            modifiers: event ? event.modifiers : null,
+            foods: availableFoods
           });
           PersonalityEngine.applyOutcome(event, outcome, participants);
           results.miniResults.push({
@@ -3277,7 +3528,6 @@
         if (State.evaluateChonkSentinel()) {
           achievementsUnlocked.push('chonkSentinel');
         }
-
         const summaryData = {
           results: results.miniResults,
           adjustments: results.adjustments,
@@ -3286,7 +3536,6 @@
           stats: results.stats,
           day: save.day,
           achievementsUnlocked
-
         };
         lastResults = summaryData;
         UI.renderSummary(summaryData);
@@ -3318,6 +3567,7 @@
       function refreshFarm() {
         const data = State.getData();
         UI.renderHerd(data.cows);
+        UI.renderPantry(State.getUnlocks('foods'));
         UI.renderDecor(State.getActiveDecor());
         UI.renderAchievements(State.getAchievements());
         const preview = GameFlow.getPreviewPlan(data);
