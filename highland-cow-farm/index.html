@@ -6,7 +6,15 @@
   <title>Highland Cow Farm Adventure</title>
 </head>
 <body>
-  <main id="app" aria-live="polite">
+  <div class="scene-frame">
+    <div class="scene-decoration" aria-hidden="true">
+      <div class="cloud cloud--one"></div>
+      <div class="cloud cloud--two"></div>
+      <div class="cloud cloud--three"></div>
+      <div class="bird bird--one"></div>
+      <div class="bird bird--two"></div>
+    </div>
+    <main id="app" aria-live="polite">
     <section class="screen active" data-screen="title" aria-labelledby="title-heading">
       <div class="title-hero">
         <h1 id="title-heading">Highland Cow Farm Adventure</h1>
@@ -192,6 +200,7 @@
       </div>
     </section>
   </main>
+  </div>
 
   <script type="module" src="/src/main.ts"></script>
 </body>
