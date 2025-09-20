@@ -643,6 +643,26 @@
       transition: transform 0.4s ease;
     }
 
+    .cow-art .cow-root-group {
+      transform-box: fill-box;
+      transform-origin: 50% 72%;
+    }
+
+    .cow-art--idle-wobble .cow-root-group,
+    .cow-art .cow-root-group.is-idle-wobble {
+      animation: cowIdleWobble 4.2s ease-in-out infinite;
+    }
+
+    @keyframes cowIdleWobble {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(2.2px);
+      }
+    }
+
     .cow-card.is-chonk .cow-art {
       transform: scale(1.1) translateY(6px);
     }
