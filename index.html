@@ -354,38 +354,65 @@
 
     .decor-display {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      min-height: 36px;
-    }
-
-    .decor-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      border: 2px dashed rgba(138, 198, 164, 0.5);
-      background: rgba(138, 198, 164, 0.18);
-      font-size: 1.4rem;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 20px;
+      border: 2px solid rgba(53, 38, 77, 0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(138, 198, 164, 0.18));
       position: relative;
+      min-height: 140px;
     }
 
-    .decor-item span {
-      font-size: 0.75rem;
-      color: var(--text-muted);
+    .decor-display::after {
+      content: "";
       position: absolute;
-      bottom: 4px;
-      width: 100%;
-      text-align: center;
+      inset: auto 12px 12px 12px;
+      height: 32px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(138, 198, 164, 0.35), rgba(138, 198, 164, 0.05));
+      z-index: 0;
     }
 
-    .decor-item.empty {
-      border-style: dotted;
-      background: transparent;
+    .decor-slot {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-height: 96px;
+      border-radius: 16px;
+      border: 2px dashed rgba(53, 38, 77, 0.12);
+      background: rgba(255,255,255,0.7);
+      padding: 12px 10px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: center;
+      transition: border var(--transition), background var(--transition), transform var(--transition);
+    }
+
+    .decor-slot.active {
+      border-style: solid;
+      border-color: rgba(242, 169, 183, 0.6);
+      background: rgba(242, 169, 183, 0.16);
+      transform: translateY(-4px);
+    }
+
+    .decor-slot .decor-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .decor-slot .decor-label {
+      font-size: 0.78rem;
+      margin-top: 6px;
       color: var(--text-muted);
+    }
+
+    .decor-slot .decor-placeholder {
       font-size: 0.75rem;
+      color: var(--text-muted);
     }
 
     .pantry-list {
@@ -433,6 +460,9 @@
       transform: scale(1.1) translateY(6px);
     }
 
+    .cow-art-mini {
+      max-width: 120px;
+    }
     .status-row {
       display: flex;
       justify-content: space-between;
@@ -527,9 +557,14 @@
       padding: 12px;
       border: 2px solid rgba(53, 38, 77, 0.12);
       display: grid;
-      gap: 8px;
-      place-items: center;
+      gap: 6px;
       position: relative;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "art art"
+        "name icon"
+        "label icon"
+        "status status";
     }
 
     .food-target.sated {
@@ -550,17 +585,22 @@
 
     .food-icon {
       font-size: 2rem;
+      grid-area: icon;
     }
 
     .food-target .food-label {
       font-size: 0.85rem;
       color: var(--text-muted);
+      grid-area: label;
+      justify-self: start;
     }
 
     .food-target .food-status {
       font-size: 0.8rem;
       font-weight: 600;
       color: var(--text);
+      grid-area: status;
+      text-align: center;
     }
 
     .food-target.sated .food-status {
@@ -571,6 +611,21 @@
       color: var(--danger);
     }
 
+    .food-avatar {
+      grid-area: art;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .food-avatar .cow-art-mini {
+      max-width: 140px;
+    }
+
+    .food-target strong {
+      grid-area: name;
+      justify-self: start;
+    }
     .food-chip-tray {
       display: flex;
       flex-wrap: wrap;
@@ -709,6 +764,16 @@
       box-shadow: none;
     }
 
+    .style-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .style-actions .ghost {
+      flex: 1 1 160px;
+      text-align: center;
+    }
     .decor-manage-list {
       display: grid;
       gap: 10px;
@@ -727,6 +792,46 @@
     .decor-manage-item input {
       width: 18px;
       height: 18px;
+    }
+
+    .decor-manage-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      align-items: start;
+    }
+
+    .decor-preview {
+      border-radius: 24px;
+      border: 2px solid rgba(53, 38, 77, 0.08);
+      background: rgba(255,255,255,0.6);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      min-height: 220px;
+    }
+
+    .decor-preview .decor-display {
+      width: 100%;
+      min-height: 0;
+    }
+
+    .decor-slot-control {
+      display: grid;
+      gap: 6px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(138, 198, 164, 0.15);
+      border: 1px solid rgba(138, 198, 164, 0.35);
+    }
+
+    .decor-slot-control select {
+      border-radius: 12px;
+      border: 1px solid rgba(53, 38, 77, 0.2);
+      padding: 8px 10px;
+      background: #fff;
+      font-size: 0.95rem;
     }
 
     .summary-list {
@@ -766,6 +871,17 @@
       color: var(--text);
     }
 
+    .unlock-banner .unlock-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .unlock-banner .unlock-reason {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+    }
     details.howto summary {
       cursor: pointer;
       font-weight: 600;
@@ -851,6 +967,11 @@
           <input type="checkbox" id="toggle-audio" />
         </div>
         <div class="toggle">
+          <label for="range-master">Master volume</label>
+          <input type="range" id="range-master" min="0" max="1" step="0.1" />
+          <span class="range-value" id="range-master-value">100%</span>
+        </div>
+        <div class="toggle">
           <label for="range-effects">Effects volume</label>
           <input type="range" id="range-effects" min="0" max="1" step="0.1" />
           <span class="range-value" id="range-effects-value">100%</span>
@@ -922,7 +1043,10 @@
           <h3 id="style-cow-name">Accessories</h3>
           <p class="helper-text" id="style-helper">Tap an accessory to toggle it. Up to three can be worn at once.</p>
           <div class="style-list" id="style-accessory-list"></div>
-          <button class="ghost" id="btn-style-clear">Clear accessories</button>
+          <div class="style-actions">
+            <button class="ghost" id="btn-style-random">Surprise outfit</button>
+            <button class="ghost" id="btn-style-clear">Clear accessories</button>
+          </div>
         </div>
       </div>
       <div class="button-row">
@@ -932,9 +1056,12 @@
 
     <section class="screen" data-screen="decor" aria-labelledby="decor-heading">
       <h2 id="decor-heading">Decorate the Farm</h2>
-      <p>Select up to three décor pieces to display around the paddock.</p>
-      <p class="helper-text status-message" id="decor-limit-status" role="status" aria-live="polite"></p>
-      <div class="decor-manage-list" id="decor-manage-list"></div>
+      <p>Choose a cosy piece for each paddock slot to set the scene.</p>
+      <p class="helper-text" id="decor-limit-status" role="status" aria-live="polite"></p>
+      <div class="decor-manage-grid">
+        <div class="decor-preview" id="decor-preview" aria-label="Décor preview"></div>
+        <div class="decor-manage-list" id="decor-manage-list"></div>
+      </div>
       <div class="button-row">
         <button id="btn-decor-save">Save Décor</button>
         <button class="secondary" id="btn-decor-back">Cancel</button>
@@ -1028,6 +1155,8 @@
 
     const ACCESSORY_LIMIT = 3;
     const DECOR_LIMIT = 3;
+    const DECOR_SLOTS = ['left', 'centre', 'right'];
+    const DECOR_SLOT_LABELS = { left: 'Left paddock', centre: 'Barn front', right: 'Fence line' };
 
     const AccessoryLibrary = {
       'Pastel Bow': {
@@ -1039,6 +1168,22 @@
             <ellipse cx="6" cy="-2" rx="6" ry="8" fill="#f7c1d8" />
             <circle cx="0" cy="-2" r="3.4" fill="#f38aad" />
           </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(-20, -18);
+          ctx.fillStyle = '#f7c1d8';
+          ctx.beginPath();
+          ctx.ellipse(-6, -2, 6, 8, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.ellipse(6, -2, 6, 8, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#f38aad';
+          ctx.beginPath();
+          ctx.arc(0, -2, 3.4, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
         }
       },
       'Bell Charm': {
@@ -1049,6 +1194,26 @@
             <path d="M-6 0 Q0 -8 6 0 V4 H-6 Z" fill="#f4d38b" stroke="#d6a442" stroke-width="1" />
             <circle cx="0" cy="3" r="1.8" fill="#d6a442" />
           </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, 14);
+          ctx.beginPath();
+          ctx.moveTo(-6, 0);
+          ctx.quadraticCurveTo(0, -8, 6, 0);
+          ctx.lineTo(6, 4);
+          ctx.lineTo(-6, 4);
+          ctx.closePath();
+          ctx.fillStyle = '#f4d38b';
+          ctx.fill();
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = '#d6a442';
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.fillStyle = '#d6a442';
+          ctx.arc(0, 3, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
         }
       },
       'Sun Hat': {
@@ -1060,6 +1225,30 @@
             <ellipse cx="0" cy="-6" rx="18" ry="10" fill="#f8e7bf" stroke="#d6a067" stroke-width="1.2" />
             <path d="M-12 -4 Q0 -10 12 -4" stroke="#f2a9b7" stroke-width="3" fill="none" />
           </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, -34);
+          ctx.fillStyle = '#f3d9a4';
+          ctx.strokeStyle = '#d6a067';
+          ctx.lineWidth = 1.4;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, 28, 10, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          ctx.fillStyle = '#f8e7bf';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.ellipse(0, -6, 18, 10, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.strokeStyle = '#f2a9b7';
+          ctx.lineWidth = 3;
+          ctx.moveTo(-12, -4);
+          ctx.quadraticCurveTo(0, -10, 12, -4);
+          ctx.stroke();
+          ctx.restore();
         }
       },
       'Fern Garland': {
@@ -1073,6 +1262,34 @@
             <path d="M12 -10 l3 -6 l-5 2 z" fill="#6aa67d" />
             <path d="M24 -6 l3 -6 l-5 2 z" fill="#6aa67d" />
           </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, -18);
+          ctx.strokeStyle = '#7fb991';
+          ctx.lineWidth = 4;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(-34, -4);
+          ctx.quadraticCurveTo(-12, -12, 0, -6);
+          ctx.quadraticCurveTo(12, -0, 34, -4);
+          ctx.stroke();
+          ctx.fillStyle = '#6aa67d';
+          const leaves = [
+            { x: -24, y: -6 },
+            { x: -12, y: -10 },
+            { x: 12, y: -10 },
+            { x: 24, y: -6 }
+          ];
+          leaves.forEach(({ x, y }) => {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x - 3, y - 6);
+            ctx.lineTo(x + 2, y - 4);
+            ctx.closePath();
+            ctx.fill();
+          });
+          ctx.restore();
         }
       },
       'Starry Bandana': {
@@ -1085,6 +1302,27 @@
             <circle cx="0" cy="4" r="1.2" fill="#f7e27d" />
             <circle cx="10" cy="2" r="1.5" fill="#f7e27d" />
           </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, 12);
+          ctx.beginPath();
+          ctx.moveTo(-22, -2);
+          ctx.lineTo(0, 10);
+          ctx.lineTo(22, -2);
+          ctx.closePath();
+          ctx.fillStyle = '#3b3b7d';
+          ctx.fill();
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = '#272757';
+          ctx.stroke();
+          ctx.fillStyle = '#f7e27d';
+          [[-10, 2, 1.5], [0, 4, 1.2], [10, 2, 1.5]].forEach(([x, y, r]) => {
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          ctx.restore();
         }
       },
       'Woolly Scarf': {
@@ -1096,9 +1334,77 @@
             <path d="M-6 -4 V12" stroke="#c97a8a" stroke-width="3" stroke-linecap="round" />
             <path d="M6 -4 V12" stroke="#c97a8a" stroke-width="3" stroke-linecap="round" />
           </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, 18);
+          ctx.beginPath();
+          ctx.moveTo(-26, -6);
+          ctx.quadraticCurveTo(0, 6, 26, -6);
+          ctx.lineTo(22, 6);
+          ctx.quadraticCurveTo(0, 16, -22, 6);
+          ctx.closePath();
+          ctx.fillStyle = '#f2a9b7';
+          ctx.fill();
+          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = '#c97a8a';
+          ctx.stroke();
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(-6, -4);
+          ctx.lineTo(-6, 12);
+          ctx.moveTo(6, -4);
+          ctx.lineTo(6, 12);
+          ctx.stroke();
+          ctx.restore();
+        }
+      },
+      'Thistle Crown': {
+        icon: '🌸',
+        description: 'Highland thistles woven into a proud little crown.',
+        svg() {
+          return `<g class="acc acc-thistle" transform="translate(0,-26)">
+            <path d="M-26 -4 Q0 -10 26 -4" fill="none" stroke="#7fb991" stroke-width="3" stroke-linecap="round" />
+            <circle cx="-16" cy="-8" r="4" fill="#c181d8" />
+            <circle cx="0" cy="-12" r="4.5" fill="#b56ccc" />
+            <circle cx="16" cy="-8" r="4" fill="#c181d8" />
+            <path d="M-16 -8 l-2 -6" stroke="#7fb991" stroke-width="2" />
+            <path d="M0 -12 l-2 -6" stroke="#7fb991" stroke-width="2" />
+            <path d="M16 -8 l2 -6" stroke="#7fb991" stroke-width="2" />
+          </g>`;
+        },
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(0, -26);
+          ctx.strokeStyle = '#7fb991';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(-26, -4);
+          ctx.quadraticCurveTo(0, -10, 26, -4);
+          ctx.stroke();
+          const blooms = [
+            { x: -16, y: -8, r: 4, colour: '#c181d8' },
+            { x: 0, y: -12, r: 4.5, colour: '#b56ccc' },
+            { x: 16, y: -8, r: 4, colour: '#c181d8' }
+          ];
+          blooms.forEach(({ x, y, r, colour }) => {
+            ctx.beginPath();
+            ctx.fillStyle = colour;
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineWidth = 2;
+            ctx.lineTo(x + (x === 0 ? -2 : Math.sign(x) * -2), y - 6);
+            ctx.stroke();
+          });
+          ctx.restore();
         }
       }
     };
+
     const FoodLibrary = {
       'Starter Hay': {
         icon: '🌾',
@@ -1193,8 +1499,145 @@
       'Milk Churn Planter': {
         icon: '🥛',
         description: 'An old churn overflowing with blooms.'
+      },
+      'Heather Hedge': {
+        icon: '🌸',
+        description: 'Neat hedges of blooming heather create a fragrant border.'
+      },
+      'Pebble Pond': {
+        icon: '💧',
+        description: 'A shallow pond rimmed with river stones for hoof-dipping.'
       }
     };
+
+    const CowVisuals = (function() {
+      const colourMap = {
+        brown: '#c99364',
+        cream: '#f7e5c6',
+        rose: '#f5c0c8',
+        chocolate: '#a4744b',
+        white: '#fefefe'
+      };
+
+      function colourHex(colour) {
+        return colourMap[colour] || colourMap.brown;
+      }
+
+      function accessoriesSVG(cow) {
+        return (cow.accessories || [])
+          .map(name => {
+            const entry = AccessoryLibrary[name];
+            return entry && typeof entry.svg === 'function' ? entry.svg(cow) : '';
+          })
+          .join('');
+      }
+
+      function drawAccessories(ctx, cow, meta) {
+        (cow.accessories || []).forEach(name => {
+          const entry = AccessoryLibrary[name];
+          if (entry && typeof entry.draw === 'function') {
+            entry.draw(ctx, meta);
+          } else if (entry && entry.icon) {
+            ctx.save();
+            ctx.translate(0, -26);
+            ctx.font = '18px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(entry.icon, 0, 0);
+            ctx.restore();
+          }
+        });
+      }
+
+      function computeScale(cow, options = {}) {
+        const chonkBoost = Math.max(0, (cow.chonk || 0) - 60);
+        const baseScale = options.scale || 1;
+        const scale = baseScale * (1 + Math.min(0.22, chonkBoost / 160));
+        const bellyOffset = Math.min(10, chonkBoost * 0.2);
+        const bellyStretch = Math.min(9, chonkBoost * 0.18);
+        return { scale, bellyOffset, bellyStretch, chonkBoost };
+      }
+
+      function drawCanvas(ctx, cow, options = {}) {
+        const { scale, bellyOffset, bellyStretch } = computeScale(cow, options);
+        const body = colourHex(cow.colour);
+        const fringeColour = colourHex(cow.colour === 'white' ? 'cream' : cow.colour);
+        const wobble = options.wobble || 0;
+        ctx.save();
+        if (options.x || options.y) {
+          ctx.translate(options.x || 0, options.y || 0);
+        }
+        if (options.rotation) {
+          ctx.rotate(options.rotation);
+        }
+        ctx.scale(scale, scale);
+        ctx.translate(0, options.offsetY || 0);
+        ctx.fillStyle = body;
+        ctx.beginPath();
+        ctx.ellipse(0, 28 + bellyOffset, 40 + bellyStretch, 28 + bellyStretch * 0.9 + wobble * 0.15, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,0.16)';
+        ctx.beginPath();
+        ctx.ellipse(0, 28 + bellyOffset, 24 + bellyStretch * 0.5, 12 + bellyStretch * 0.4, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = body;
+        ctx.lineWidth = 8;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-28, -6);
+        ctx.quadraticCurveTo(-58, -26, -34, -38);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(28, -6);
+        ctx.quadraticCurveTo(58, -26, 34, -38);
+        ctx.stroke();
+        ctx.fillStyle = fringeColour;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 30, 26, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(-20, -10);
+        ctx.quadraticCurveTo(0, -26, 20, -10);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = '#35264d';
+        ctx.beginPath();
+        ctx.arc(-12, -2, 4, 0, Math.PI * 2);
+        ctx.arc(12, -2, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(0, 12, 8, 10, 0, 0, Math.PI * 2);
+        ctx.fill();
+        drawAccessories(ctx, cow, options);
+        ctx.restore();
+      }
+
+      function svg(cow, options = {}) {
+        const { scale, bellyOffset, bellyStretch } = computeScale(cow, options);
+        const viewBox = options.viewBox || '0 0 140 120';
+        const className = options.className ? ` ${options.className}` : '';
+        const offsetY = options.offsetY || 0;
+        const body = colourHex(cow.colour);
+        const fringeColour = colourHex(cow.colour === 'white' ? 'cream' : cow.colour);
+        return `
+          <svg class="cow-art${className}" viewBox="${viewBox}" role="img" aria-label="${cow.name} the cow">
+            <g transform="translate(70 ${60 + offsetY}) scale(${scale.toFixed(3)})">
+              <ellipse cx="0" cy="${28 + bellyOffset}" rx="${40 + bellyStretch}" ry="${28 + bellyStretch * 0.9}" fill="${body}" />
+              <ellipse cx="0" cy="${28 + bellyOffset}" rx="${24 + bellyStretch * 0.5}" ry="${12 + bellyStretch * 0.4}" fill="rgba(255,255,255,0.16)" />
+              <path d="M-28,-6 Q-58,-26 -34,-38" stroke="${body}" stroke-width="8" stroke-linecap="round" fill="none" />
+              <path d="M28,-6 Q58,-26 34,-38" stroke="${body}" stroke-width="8" stroke-linecap="round" fill="none" />
+              <ellipse cx="0" cy="0" rx="30" ry="26" fill="${fringeColour}" />
+              <path d="M-20,-10 Q0,-26 20,-10" fill="${fringeColour}" />
+              <circle cx="-12" cy="-2" r="4" fill="#35264d" />
+              <circle cx="12" cy="-2" r="4" fill="#35264d" />
+              <ellipse cx="0" cy="12" rx="8" ry="10" fill="#35264d" />
+              ${accessoriesSVG(cow)}
+            </g>
+          </svg>`;
+      }
+
+      return { colourHex, drawCanvas, svg };
+    })();
 
     const ACHIEVEMENTS = {
       perfectDay: {
@@ -1226,7 +1669,13 @@
       let sfxGain = null;
       let ambienceGain = null;
       let ambienceNodes = null;
-      const volumes = { effects: 0.9, ambience: 0.5 };
+      let ambienceMood = 'farm';
+      const volumes = { effects: 0.9, ambience: 0.5, master: 1 };
+      const AMBIENCE_MOODS = {
+        farm: { base: 196, harmony: 294, noise: 0.05, lfo: 0.08 },
+        task: { base: 220, harmony: 330, noise: 0.07, lfo: 0.14 },
+        summary: { base: 180, harmony: 270, noise: 0.04, lfo: 0.06 }
+      };
 
       function ensureContext() {
         if (!ctx) {
@@ -1238,12 +1687,25 @@
           ambienceGain = ctx.createGain();
           sfxGain.gain.value = volumes.effects;
           ambienceGain.gain.value = volumes.ambience * 0.12;
-          masterGain.gain.value = enabled ? 1 : 0;
+          masterGain.gain.value = enabled ? volumes.master : 0;
           sfxGain.connect(masterGain);
           ambienceGain.connect(masterGain);
           masterGain.connect(ctx.destination);
         }
         return ctx;
+      }
+
+      function createNoiseSource() {
+        if (!ctx) return null;
+        const buffer = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < data.length; i++) {
+          data[i] = (Math.random() * 2 - 1) * 0.32;
+        }
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        return source;
       }
 
       function cleanupAmbience() {
@@ -1252,8 +1714,41 @@
             try { osc.stop(); } catch (err) {}
             try { osc.disconnect(); } catch (err) {}
           });
+          if (ambienceNodes.noiseSource) {
+            try { ambienceNodes.noiseSource.stop(); } catch (err) {}
+            try { ambienceNodes.noiseSource.disconnect(); } catch (err) {}
+          }
+          if (ambienceNodes.lfo) {
+            try { ambienceNodes.lfo.stop(); } catch (err) {}
+            try { ambienceNodes.lfo.disconnect(); } catch (err) {}
+          }
+          if (ambienceNodes.noiseGain) {
+            try { ambienceNodes.noiseGain.disconnect(); } catch (err) {}
+          }
           try { ambienceNodes.gain.disconnect(); } catch (err) {}
           ambienceNodes = null;
+        }
+      }
+
+      function applyAmbienceMood() {
+        if (!ambienceNodes || !ctx) return;
+        const profile = AMBIENCE_MOODS[ambienceMood] || AMBIENCE_MOODS.farm;
+        const now = ctx.currentTime;
+        const [base, harmony] = ambienceNodes.oscillators || [];
+        if (base) {
+          base.frequency.setTargetAtTime(profile.base, now, 0.6);
+        }
+        if (harmony) {
+          harmony.frequency.setTargetAtTime(profile.harmony, now, 0.6);
+        }
+        if (ambienceNodes.noiseGain) {
+          ambienceNodes.noiseGain.gain.setTargetAtTime(profile.noise * volumes.ambience, now, 0.7);
+        }
+        if (ambienceNodes.lfo) {
+          ambienceNodes.lfo.frequency.setTargetAtTime(profile.lfo, now, 0.8);
+        }
+        if (ambienceNodes.gain) {
+          ambienceNodes.gain.gain.setTargetAtTime(volumes.ambience * 0.12, now, 0.4);
         }
       }
 
@@ -1282,6 +1777,11 @@
         if (!ensureContext()) return;
         if (ambienceNodes) {
           ambienceNodes.gain.gain.setTargetAtTime(volumes.ambience * 0.12, ctx.currentTime, 0.5);
+          if (ambienceNodes.noiseGain) {
+            const profile = AMBIENCE_MOODS[ambienceMood] || AMBIENCE_MOODS.farm;
+            ambienceNodes.noiseGain.gain.setTargetAtTime(profile.noise * volumes.ambience, ctx.currentTime, 0.6);
+          }
+
           return;
         }
         const base = ctx.createOscillator();
@@ -1295,9 +1795,25 @@
         base.connect(gain);
         harmony.connect(gain);
         gain.connect(ambienceGain);
+        const noiseSource = createNoiseSource();
+        const noiseGain = ctx.createGain();
+        noiseGain.gain.value = (AMBIENCE_MOODS[ambienceMood]?.noise || 0.05) * volumes.ambience;
+        noiseGain.connect(ambienceGain);
+        if (noiseSource) {
+          noiseSource.connect(noiseGain);
+        }
+        const lfo = ctx.createOscillator();
+        const lfoGain = ctx.createGain();
+        lfoGain.gain.value = 0.02;
+        lfo.frequency.value = (AMBIENCE_MOODS[ambienceMood]?.lfo) || 0.08;
+        lfo.connect(lfoGain);
+        lfoGain.connect(noiseGain.gain);
         base.start();
         harmony.start();
-        ambienceNodes = { oscillators: [base, harmony], gain };
+        if (noiseSource) noiseSource.start();
+        lfo.start();
+        ambienceNodes = { oscillators: [base, harmony], gain, noiseSource, noiseGain, lfo };
+        applyAmbienceMood();
       }
 
       const toneSequences = {
@@ -1316,6 +1832,15 @@
           { freq: 540, duration: 0.16, type: 'sine', gain: 0.2 },
           { freq: 720, duration: 0.24, type: 'triangle', offset: 0.12, gain: 0.2 },
           { freq: 960, duration: 0.2, type: 'sine', offset: 0.28, gain: 0.18 }
+        ],
+        equip: [
+          { freq: 680, duration: 0.14, type: 'triangle', gain: 0.2 },
+          { freq: 540, duration: 0.12, type: 'sine', offset: 0.1, gain: 0.16 }
+        ],
+        perfect: [
+          { freq: 660, duration: 0.24, type: 'triangle', gain: 0.24 },
+          { freq: 880, duration: 0.28, type: 'sine', offset: 0.18, gain: 0.22 },
+          { freq: 1180, duration: 0.3, type: 'sine', offset: 0.36, gain: 0.18 }
         ]
       };
 
@@ -1325,7 +1850,7 @@
           const audioCtx = ensureContext();
           if (!audioCtx) return;
           if (enabled) {
-            masterGain.gain.setTargetAtTime(1, audioCtx.currentTime, 0.1);
+            masterGain.gain.setTargetAtTime(volumes.master || 0, audioCtx.currentTime, 0.1);
             audioCtx.resume?.();
             ensureAmbienceNodes();
           } else {
@@ -1346,6 +1871,13 @@
               ambienceGain.gain.setTargetAtTime(volumes.ambience * 0.12, (ctx?.currentTime) || 0, 0.2);
             }
             ensureAmbienceNodes();
+            applyAmbienceMood();
+          }
+          if (typeof partial.master === 'number') {
+            volumes.master = Util.clamp(partial.master, 0, 1);
+            if (masterGain) {
+              masterGain.gain.setTargetAtTime(enabled ? volumes.master : 0, (ctx?.currentTime) || 0, 0.1);
+            }
           }
         },
         getVolumes() {
@@ -1361,6 +1893,10 @@
           const sequence = toneSequences[name] || toneSequences.tap;
           sequence.forEach(config => scheduleTone(config));
         },
+        setAmbienceMood(mood) {
+          ambienceMood = mood || 'farm';
+          applyAmbienceMood();
+        },
         ensureAmbience() {
           ensureAmbienceNodes();
         },
@@ -1372,7 +1908,7 @@
 
     const State = (function() {
       const SAVE_KEY = 'hcfarm_save_v1';
-      const VERSION = 2;
+      const VERSION = 3;
       const defaultNames = ['Bonnie', 'Fergus', 'Isla', 'Hamish', 'Skye', 'Rory'];
       const personalities = ['Greedy', 'Vain', 'Sleepy', 'Social'];
       const coatColours = ['brown', 'cream', 'rose', 'chocolate', 'white'];
@@ -1418,6 +1954,23 @@
         return result;
       }
 
+      function sanitizeDecorLayout(layout, sourceUnlocks = data) {
+        const unlocked = Array.isArray(sourceUnlocks)
+          ? new Set(sourceUnlocks)
+          : new Set(sourceUnlocks?.unlocks?.decor || []);
+        const sanitized = { left: null, centre: null, right: null };
+        const seen = new Set();
+        DECOR_SLOTS.forEach(slot => {
+          const value = layout && layout[slot];
+          if (value && DecorLibrary[value] && unlocked.has(value)) {
+            if (!seen.has(value)) {
+              sanitized[slot] = value;
+              seen.add(value);
+            }
+          }
+        });
+        return sanitized;
+      }
       function sanitizeUnlockList(list, library) {
         if (!Array.isArray(list)) return [];
         const seen = new Set();
@@ -1464,8 +2017,9 @@
           cows,
           unlocks: { foods: DEFAULT_FOODS.slice(), accessories: [], decor: [] },
           activeDecor: [],
-          options: { audioOn: true, effectsVolume: 0.9, ambienceVolume: 0.5, highContrastUI: false, reducedFlash: false },
-          stats: { totalPerfects: 0, totalChonks: 0 },
+          decorLayout: { left: null, centre: null, right: null },
+          options: { audioOn: true, effectsVolume: 0.9, ambienceVolume: 0.5, masterVolume: 1, highContrastUI: false, reducedFlash: false },
+          stats: { totalPerfects: 0, totalChonks: 0, perfectDayStreak: 0, bestPerfectDayStreak: 0, lastRewardType: null },
           achievements: blankAchievements(),
           lastPlayedISO: new Date().toISOString()
         };
@@ -1515,15 +2069,32 @@
         if (typeof opts.ambienceVolume === 'number') {
           migrated.options.ambienceVolume = Util.clamp(opts.ambienceVolume, 0, 1);
         }
+        if (typeof opts.masterVolume === 'number') {
+          migrated.options.masterVolume = Util.clamp(opts.masterVolume, 0, 1);
+        }
         if (old.stats) {
           migrated.stats.totalPerfects = Number(old.stats.totalPerfects) || 0;
           migrated.stats.totalChonks = Number(old.stats.totalChonks) || 0;
+          migrated.stats.perfectDayStreak = Number(old.stats.perfectDayStreak) || 0;
+          migrated.stats.bestPerfectDayStreak = Number(old.stats.bestPerfectDayStreak) || migrated.stats.perfectDayStreak;
+          if (typeof old.stats.lastRewardType === 'string') {
+            migrated.stats.lastRewardType = old.stats.lastRewardType;
+          }
         }
+        let legacyLayout = null;
         if (Array.isArray(old.activeDecor)) {
           migrated.activeDecor = old.activeDecor.slice();
           old.activeDecor.forEach(item => {
             if (DecorLibrary[item]) carriedDecor.add(item);
           });
+          legacyLayout = {};
+          sanitizeDecor(old.activeDecor, migrated).forEach((name, index) => {
+            const slot = DECOR_SLOTS[index];
+            if (slot) legacyLayout[slot] = name;
+          });
+        }
+        if (old.decorLayout && typeof old.decorLayout === 'object') {
+          legacyLayout = old.decorLayout;
         }
         carriedDecor.forEach(item => {
           if (!migrated.unlocks.decor.includes(item)) {
@@ -1535,6 +2106,10 @@
           cow.accessories = sanitizeAccessories(cow.accessories, migrated);
         });
         migrated.activeDecor = sanitizeDecor(migrated.activeDecor, migrated);
+        if (legacyLayout) {
+          migrated.decorLayout = sanitizeDecorLayout(legacyLayout, migrated);
+        }
+        migrated.activeDecor = sanitizeDecor(Object.values(migrated.decorLayout || {}), migrated);
         if (old.achievements) {
           Object.keys(migrated.achievements).forEach(key => {
             if (key in old.achievements) {
@@ -1572,6 +2147,12 @@
         data.unlocks.foods = ensuredFoods.length ? ensuredFoods : DEFAULT_FOODS.slice();
         data.unlocks.accessories = sanitizeUnlockList(data.unlocks.accessories, AccessoryLibrary);
         data.unlocks.decor = sanitizeUnlockList(data.unlocks.decor, DecorLibrary);
+        if (!data.decorLayout) {
+          data.decorLayout = sanitizeDecorLayout({}, data);
+        } else {
+          data.decorLayout = sanitizeDecorLayout(data.decorLayout, data);
+        }
+        data.activeDecor = sanitizeDecor(Object.values(data.decorLayout), data);
         data.cows = Array.isArray(data.cows) ? data.cows.map((cow, index) => ensureCowDefaults(cow, cow.id || `cow-${index + 1}`, cow.name || defaultNames[index % defaultNames.length])) : [];
         data.cows.forEach(cow => {
           cow.accessories = sanitizeAccessories(cow.accessories);
@@ -1605,6 +2186,7 @@
         if (typeof partial.reducedFlash === 'boolean') options.reducedFlash = partial.reducedFlash;
         if (typeof partial.effectsVolume === 'number') options.effectsVolume = Util.clamp(partial.effectsVolume, 0, 1);
         if (typeof partial.ambienceVolume === 'number') options.ambienceVolume = Util.clamp(partial.ambienceVolume, 0, 1);
+        if (typeof partial.masterVolume === 'number') options.masterVolume = Util.clamp(partial.masterVolume, 0, 1);
         save();
       }
 
@@ -1662,6 +2244,36 @@
         }
       }
 
+      function registerDayOutcome(summary) {
+        if (!summary) {
+          save();
+          return {
+            perfectDayStreak: data.stats.perfectDayStreak || 0,
+            bestPerfectDayStreak: data.stats.bestPerfectDayStreak || 0
+          };
+        }
+        let nextStreak;
+        if (typeof summary.perfectStreak === 'number' && !Number.isNaN(summary.perfectStreak)) {
+          nextStreak = Math.max(0, Math.round(summary.perfectStreak));
+        } else if (summary.perfectDay) {
+          nextStreak = (data.stats.perfectDayStreak || 0) + 1;
+        } else {
+          nextStreak = 0;
+        }
+        data.stats.perfectDayStreak = nextStreak;
+        if ((data.stats.bestPerfectDayStreak || 0) < nextStreak) {
+          data.stats.bestPerfectDayStreak = nextStreak;
+        }
+        if (summary.rewardType) {
+          data.stats.lastRewardType = summary.rewardType;
+        }
+        save();
+        return {
+          perfectDayStreak: data.stats.perfectDayStreak,
+          bestPerfectDayStreak: data.stats.bestPerfectDayStreak
+        };
+      }
+
       function cowsWithAccessoriesCount() {
         return data.cows.filter(cow => cow.accessories && cow.accessories.length).length;
       }
@@ -1673,7 +2285,7 @@
       }
 
       function checkDecorAchievement(options = {}) {
-        if ((data.activeDecor || []).length >= 3) {
+        if (getActiveDecor().length >= 3) {
           unlockAchievement('cozyDecorator', options);
         }
       }
@@ -1708,16 +2320,42 @@
         return setCowAccessories(cowId, current);
       }
 
+      function randomiseAccessories(cowId) {
+        const cow = findCow(cowId);
+        if (!cow) return null;
+        const unlocked = sanitizeUnlockList(data.unlocks.accessories, AccessoryLibrary);
+        if (!unlocked.length) return cow;
+        const max = Math.min(ACCESSORY_LIMIT, unlocked.length);
+        const count = Math.max(1, Math.floor(Util.range(1, max + 1)));
+        const selection = Util.sample(unlocked, count);
+        setCowAccessories(cowId, selection);
+        return findCow(cowId);
+      }
+
       function setActiveDecor(list) {
         const sanitized = sanitizeDecor(list);
-        data.activeDecor = sanitized;
+        const layout = {};
+        DECOR_SLOTS.forEach((slot, index) => {
+          layout[slot] = sanitized[index] || null;
+        });
+        return setDecorLayout(layout);
+      }
+
+      function setDecorLayout(layout) {
+        const sanitized = sanitizeDecorLayout(layout, data);
+        data.decorLayout = sanitized;
+        data.activeDecor = sanitizeDecor(Object.values(sanitized), data);
         checkDecorAchievement();
         save();
         return sanitized;
       }
 
       function getActiveDecor() {
-        return data.activeDecor;
+        return DECOR_SLOTS.map(slot => (data.decorLayout || {})[slot]).filter(Boolean);
+      }
+
+      function getDecorLayout() {
+        return Object.assign({ left: null, centre: null, right: null }, data.decorLayout || {});
       }
 
       function getUnlocks(type) {
@@ -1781,14 +2419,18 @@
         incrementDay,
         addUnlock,
         recordStats,
+        registerDayOutcome,
         createCow,
         createDefaultSave,
         setCowAccessories,
         toggleCowAccessory,
+        randomiseAccessories,
         getCow,
         getUnlocks,
         setActiveDecor,
+        setDecorLayout,
         getActiveDecor,
+        getDecorLayout,
         getAchievements,
         unlockAchievement,
         evaluateChonkSentinel
@@ -1813,8 +2455,10 @@
         titleHowTo: document.getElementById('title-howto'),
         rangeEffects: document.getElementById('range-effects'),
         rangeAmbience: document.getElementById('range-ambience'),
+        rangeMaster: document.getElementById('range-master'),
         rangeEffectsValue: document.getElementById('range-effects-value'),
         rangeAmbienceValue: document.getElementById('range-ambience-value'),
+        rangeMasterValue: document.getElementById('range-master-value'),
         stylePreview: document.getElementById('style-preview'),
         styleList: document.getElementById('style-accessory-list'),
         styleCowName: document.getElementById('style-cow-name'),
@@ -1826,13 +2470,14 @@
         achievementList: document.getElementById('achievement-list'),
         decorManageList: document.getElementById('decor-manage-list'),
         decorStatus: document.getElementById('decor-limit-status'),
+        decorPreview: document.getElementById('decor-preview'),
       };
       let currentScreen = 'title';
       let optionsReturnScreen = 'title';
       let callbacksRef = {};
       let currentStyledCowId = null;
-      let decorSelection = new Set();
-      let currentDecorOptions = [];
+      let decorDraft = { left: null, centre: null, right: null };
+      let decorOptions = [];
 
       const miniFriendly = {
         catch: 'Catch the Cow',
@@ -1851,6 +2496,15 @@
         screenElements.forEach(section => {
           section.classList.toggle('active', section.dataset.screen === name);
         });
+        if (typeof Audio?.setAmbienceMood === 'function') {
+          if (name === 'task') {
+            Audio.setAmbienceMood('task');
+          } else if (name === 'summary') {
+            Audio.setAmbienceMood('summary');
+          } else {
+            Audio.setAmbienceMood('farm');
+          }
+        }
       }
 
       function setMiniTitle(label, index, total) {
@@ -1886,46 +2540,8 @@
         return hearts;
       }
 
-      function colourHex(colour) {
-        switch (colour) {
-          case 'cream': return '#f7e5c6';
-          case 'rose': return '#f5c0c8';
-          case 'chocolate': return '#a4744b';
-          case 'white': return '#fefefe';
-          default: return '#c99364';
-        }
-      }
-
       function renderCowSVG(cow, options = {}) {
-        const body = colourHex(cow.colour);
-        const fringe = colourHex(cow.colour === 'white' ? 'cream' : cow.colour);
-        const chonkBoost = Math.max(0, cow.chonk - 60);
-        const bellyOffset = Math.min(10, chonkBoost * 0.2);
-        const bellyStretch = Math.min(9, chonkBoost * 0.18);
-        const baseScale = options.scale || 1;
-        const scale = baseScale * (1 + Math.min(0.22, chonkBoost / 160));
-        const viewBox = options.viewBox || '0 0 140 120';
-        const className = options.className ? ` ${options.className}` : '';
-        const accessories = (cow.accessories || []).map(name => {
-          const entry = AccessoryLibrary[name];
-          return entry ? entry.svg(cow) : '';
-        }).join('');
-        const offsetY = options.offsetY || 0;
-        return `
-          <svg class="cow-art${className}" viewBox="${viewBox}" role="img" aria-label="${cow.name} the cow">
-            <g transform="translate(70 ${60 + offsetY}) scale(${scale.toFixed(3)})">
-              <ellipse cx="0" cy="${28 + bellyOffset}" rx="${40 + bellyStretch}" ry="${28 + bellyStretch * 0.9}" fill="${body}" />
-              <ellipse cx="0" cy="0" rx="30" ry="26" fill="${fringe}" />
-              <ellipse cx="0" cy="${28 + bellyOffset}" rx="${24 + bellyStretch * 0.5}" ry="${12 + bellyStretch * 0.4}" fill="rgba(255,255,255,0.16)" />
-              <path d="M-28,-6 Q-58,-26 -34,-38" stroke="${body}" stroke-width="8" stroke-linecap="round" fill="none" />
-              <path d="M28,-6 Q58,-26 34,-38" stroke="${body}" stroke-width="8" stroke-linecap="round" fill="none" />
-              <path d="M-20,-10 Q0,-26 20,-10" fill="${fringe}" />
-              <circle cx="-12" cy="-2" r="4" fill="#35264d" />
-              <circle cx="12" cy="-2" r="4" fill="#35264d" />
-              <ellipse cx="0" cy="12" rx="8" ry="10" fill="#35264d" />
-              ${accessories}
-            </g>
-          </svg>`;
+        return CowVisuals.svg(cow, options);
       }
 
       function renderAccessoryChips(cow) {
@@ -1968,27 +2584,74 @@
         });
       }
 
-      function renderDecorDisplay(activeDecor) {
-        elements.decorDisplay.innerHTML = '';
-        const items = Array.isArray(activeDecor) && activeDecor.length ? activeDecor : [];
-        if (!items.length) {
-          const placeholder = document.createElement('div');
-          placeholder.className = 'decor-item empty';
-          placeholder.textContent = 'No décor placed';
-          elements.decorDisplay.appendChild(placeholder);
-          return;
-        }
-        items.forEach(name => {
-          const entry = DecorLibrary[name];
-          const el = document.createElement('div');
-          el.className = 'decor-item';
-          el.textContent = entry?.icon || '🌟';
-          const label = document.createElement('span');
-          label.textContent = name;
-          el.appendChild(label);
-          elements.decorDisplay.appendChild(el);
-        });
+      function slotLabel(slot) {
+        return DECOR_SLOT_LABELS[slot] || slot.charAt(0).toUpperCase() + slot.slice(1);
       }
+
+      function buildDecorScene(layout) {
+        const scene = document.createElement('div');
+        scene.className = 'decor-display';
+        DECOR_SLOTS.forEach(slot => {
+          const slotEl = document.createElement('div');
+          slotEl.className = `decor-slot decor-slot-${slot}`;
+          const selection = layout && layout[slot];
+          if (selection && DecorLibrary[selection]) {
+            slotEl.classList.add('active');
+            const icon = document.createElement('div');
+            icon.className = 'decor-icon';
+            icon.textContent = DecorLibrary[selection].icon || '✨';
+            const label = document.createElement('span');
+            label.className = 'decor-label';
+            label.textContent = selection;
+            slotEl.appendChild(icon);
+            slotEl.appendChild(label);
+          } else {
+            const placeholder = document.createElement('span');
+            placeholder.className = 'decor-placeholder';
+            placeholder.textContent = slotLabel(slot);
+            slotEl.appendChild(placeholder);
+          }
+          scene.appendChild(slotEl);
+        });
+        return scene;
+      }
+
+      function renderDecorScene(container, layout) {
+        if (!container) return;
+        if (container.classList.contains('decor-display')) {
+          container.innerHTML = '';
+          DECOR_SLOTS.forEach(slot => {
+            const slotEl = document.createElement('div');
+            slotEl.className = `decor-slot decor-slot-${slot}`;
+            const selection = layout && layout[slot];
+            if (selection && DecorLibrary[selection]) {
+              slotEl.classList.add('active');
+              const icon = document.createElement('div');
+              icon.className = 'decor-icon';
+              icon.textContent = DecorLibrary[selection].icon || '✨';
+              const label = document.createElement('span');
+              label.className = 'decor-label';
+              label.textContent = selection;
+              slotEl.appendChild(icon);
+              slotEl.appendChild(label);
+            } else {
+              const placeholder = document.createElement('span');
+              placeholder.className = 'decor-placeholder';
+              placeholder.textContent = slotLabel(slot);
+              slotEl.appendChild(placeholder);
+            }
+            container.appendChild(slotEl);
+          });
+        } else {
+          container.innerHTML = '';
+          container.appendChild(buildDecorScene(layout));
+        }
+      }
+
+      function renderDecorDisplay(layout) {
+        renderDecorScene(elements.decorDisplay, layout || {});
+      }
+
       function renderPantryList(foods) {
         if (!elements.pantryList) return;
         elements.pantryList.innerHTML = '';
@@ -2016,7 +2679,7 @@
           elements.pantryList.appendChild(block);
         });
       }
-     
+
       function renderAchievementsList(achievements) {
         elements.achievementList.innerHTML = '';
         Object.entries(ACHIEVEMENTS).forEach(([key, meta]) => {
@@ -2086,51 +2749,58 @@
       function updateDecorStatus(limitNotice = false) {
         const statusEl = elements.decorStatus;
         if (!statusEl) return;
-        if (!currentDecorOptions.length) {
+        if (!decorOptions.length) {
+
           statusEl.textContent = 'Unlock décor in the day summary to decorate the paddock.';
           statusEl.classList.remove('is-warning');
           return;
         }
-        const count = decorSelection.size;
-        let message = count
-          ? `Selected ${count} of ${DECOR_LIMIT} décor pieces.`
-          : `No décor selected yet. Choose up to ${DECOR_LIMIT} pieces.`;
-        if (limitNotice || count >= DECOR_LIMIT) {
-          message += ' Décor limit reached – deselect one to add another.';
-          statusEl.classList.add('is-warning');
+        const assignedSlots = DECOR_SLOTS.filter(slot => decorDraft[slot]);
+        if (!assignedSlots.length) {
+          statusEl.textContent = 'No décor assigned yet. Choose a cosy piece for each slot.';
         } else {
-          statusEl.classList.remove('is-warning');
+          const pieces = assignedSlots.map(slot => decorDraft[slot]).filter(Boolean);
+          const uniqueCount = new Set(pieces).size;
+          const slotNames = assignedSlots.map(slotLabel).join(', ');
+          statusEl.textContent = `Displaying ${uniqueCount} décor piece${uniqueCount === 1 ? '' : 's'} across ${assignedSlots.length} slot${assignedSlots.length === 1 ? '' : 's'} (${slotNames}).`;
         }
-        statusEl.textContent = message;
+        statusEl.classList.toggle('is-warning', !!limitNotice);
       }
 
-      function showDecorScreen(unlocked, active) {
-        decorSelection = new Set(active || []);
-        currentDecorOptions = unlocked.slice();
+      function showDecorScreen(unlocked, activeLayout) {
+        decorOptions = Array.isArray(unlocked) ? unlocked.slice() : [];
+        decorDraft = Object.assign({ left: null, centre: null, right: null }, activeLayout || {});
         elements.decorManageList.innerHTML = '';
-        updateDecorStatus();
-        if (!unlocked.length) {
+        if (!decorOptions.length) {
           const empty = document.createElement('p');
           empty.className = 'helper-text';
           empty.textContent = 'Unlock décor in the day summary to decorate the paddock.';
           elements.decorManageList.appendChild(empty);
-          return showScreen('decor');
         } else {
-          unlocked.forEach(name => {
-            const entry = DecorLibrary[name];
-            const label = document.createElement('label');
-            label.className = 'decor-manage-item';
+          DECOR_SLOTS.forEach(slot => {
+            const wrapper = document.createElement('label');
+            wrapper.className = 'decor-slot-control';
             const title = document.createElement('span');
-            title.textContent = `${entry?.icon || '🌟'} ${name}`;
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.value = name;
-            checkbox.checked = decorSelection.has(name);
-            label.appendChild(title);
-            label.appendChild(checkbox);
-            elements.decorManageList.appendChild(label);
+            title.textContent = slotLabel(slot);
+            const select = document.createElement('select');
+            select.dataset.slot = slot;
+            const noneOption = document.createElement('option');
+            noneOption.value = '';
+            noneOption.textContent = 'None';
+            select.appendChild(noneOption);
+            decorOptions.forEach(name => {
+              const option = document.createElement('option');
+              option.value = name;
+              option.textContent = `${DecorLibrary[name]?.icon || '✨'} ${name}`;
+              select.appendChild(option);
+            });
+            select.value = decorDraft[slot] || '';
+            wrapper.appendChild(title);
+            wrapper.appendChild(select);
+            elements.decorManageList.appendChild(wrapper);
           });
         }
+        renderDecorScene(elements.decorPreview, decorDraft);
         updateDecorStatus();
         showScreen('decor');
       }
@@ -2164,9 +2834,15 @@
         const reducedToggle = document.getElementById('toggle-reduced');
         const effectsRange = elements.rangeEffects;
         const ambienceRange = elements.rangeAmbience;
+        const masterRange = elements.rangeMaster;
         audioToggle.checked = !!options.audioOn;
         contrastToggle.checked = !!options.highContrastUI;
         reducedToggle.checked = !!options.reducedFlash;
+        if (masterRange) {
+          const value = typeof options.masterVolume === 'number' ? options.masterVolume : 1;
+          masterRange.value = value;
+          elements.rangeMasterValue.textContent = `${Math.round(value * 100)}%`;
+        }
         if (effectsRange) {
           const value = typeof options.effectsVolume === 'number' ? options.effectsVolume : 1;
           effectsRange.value = value;
@@ -2185,15 +2861,71 @@
       }
 
       function renderSummary(data) {
-        const { results, adjustments, herd, reward, stats, day } = data;
+        const {
+          results = [],
+          adjustments = {},
+          herd = [],
+          reward,
+          stats,
+          day,
+          perfectDay,
+          perfectStreak,
+          previousPerfectStreak
+        } = data || {};
+
         elements.summaryResults.innerHTML = '';
-        results.forEach((result, idx) => {
+        const fragment = document.createDocumentFragment();
+
+        if (typeof perfectDay === 'boolean') {
+          const perfectItem = document.createElement('div');
+          perfectItem.className = 'summary-item';
+          if (perfectDay) {
+            const streakCount = Math.max(0, Number(perfectStreak) || 0);
+            const label = streakCount === 1 ? 'day' : 'days';
+            perfectItem.innerHTML = `<strong>Perfect Pastures!</strong><br>All three mini-games cleared with smiles.<br>Perfect-day streak: ${streakCount} ${label}.`;
+          } else {
+            const streakLost = Math.max(0, Number(previousPerfectStreak) || 0);
+            const label = streakLost === 1 ? 'day' : 'days';
+            const streakMessage = streakLost
+              ? `The streak pauses after ${streakLost} ${label}.`
+              : 'Your next perfect-day streak begins tomorrow.';
+            perfectItem.innerHTML = `<strong>Almost There</strong><br>Not every task was flawless today.<br>${streakMessage}`;
+          }
+          fragment.appendChild(perfectItem);
+        }
+
+        results.forEach(result => {
           const item = document.createElement('div');
           item.className = 'summary-item';
           const statusEmoji = result.success ? '🌟' : '⚠️';
-          item.innerHTML = `<strong>${statusEmoji} ${result.name}</strong><br>${result.summary || (result.success ? 'Success!' : 'Needs work next time.')}`;
-          elements.summaryResults.appendChild(item);
+          item.innerHTML = `<strong>${statusEmoji} ${result.name}</strong><br>${result.summary || (result.success ? 'Great job!' : 'We will get it tomorrow.')}`;
+          fragment.appendChild(item);
         });
+
+        if (stats && (stats.totalPerfects || stats.totalChonks)) {
+          const statsItem = document.createElement('div');
+          statsItem.className = 'summary-item';
+          statsItem.innerHTML = `<strong>Farm Stats</strong><br>Perfect clears today: ${stats.totalPerfects || 0}<br>Chonky moments: ${stats.totalChonks || 0}`;
+          fragment.appendChild(statsItem);
+        }
+
+        if (data.achievementsUnlocked && data.achievementsUnlocked.length) {
+          const achItem = document.createElement('div');
+          achItem.className = 'summary-item';
+          const names = data.achievementsUnlocked.map(key => ACHIEVEMENTS[key]?.title || key);
+          achItem.innerHTML = `<strong>New Achievements</strong><br>${names.join('<br>')}`;
+          fragment.appendChild(achItem);
+        }
+
+        if (typeof day === 'number') {
+          const dayItem = document.createElement('div');
+          dayItem.className = 'summary-item';
+          dayItem.innerHTML = `<strong>Day ${day - 1} complete!</strong><br>Next up: Day ${day}.`;
+          fragment.appendChild(dayItem);
+        }
+
+        elements.summaryResults.appendChild(fragment);
+
         elements.summaryCowDeltas.innerHTML = '';
         herd.forEach(cow => {
           const delta = adjustments[cow.id];
@@ -2208,8 +2940,10 @@
           row.innerHTML = `<span>${cow.name}</span><span>${deltaStrings.join(' • ') || 'No changes'}</span>`;
           elements.summaryCowDeltas.appendChild(row);
         });
+
         if (reward) {
           elements.summaryUnlock.hidden = false;
+          elements.summaryUnlock.innerHTML = '';
           const themeText = reward.theme ? ` • ${reward.theme}` : '';
           let rewardIcon = '';
           if (reward.type === 'foods') {
@@ -2220,27 +2954,20 @@
             rewardIcon = DecorLibrary[reward.item]?.icon || '✨';
           }
           const iconPrefix = rewardIcon ? `${rewardIcon} ` : '';
-          elements.summaryUnlock.textContent = `Unlocked: ${iconPrefix}${reward.item} (${reward.typeLabel})${themeText}!`;
+          const title = document.createElement('div');
+          title.className = 'unlock-title';
+          title.textContent = `Unlocked: ${iconPrefix}${reward.item} (${reward.typeLabel})${themeText}!`;
+          elements.summaryUnlock.appendChild(title);
+          if (reward.guaranteedBy) {
+            const reason = document.createElement('div');
+            reason.className = 'unlock-reason';
+            reason.textContent = `Guaranteed by: ${reward.guaranteedBy}.`;
+            elements.summaryUnlock.appendChild(reason);
+          }
         } else {
           elements.summaryUnlock.hidden = true;
+          elements.summaryUnlock.innerHTML = '';
         }
-        if (stats && (stats.totalPerfects || stats.totalChonks)) {
-          const statsItem = document.createElement('div');
-          statsItem.className = 'summary-item';
-          statsItem.innerHTML = `<strong>Farm Stats</strong><br>Perfect clears today: ${stats.totalPerfects || 0}<br>Chonky moments: ${stats.totalChonks || 0}`;
-          elements.summaryResults.appendChild(statsItem);
-        }
-        if (data.achievementsUnlocked && data.achievementsUnlocked.length) {
-          const achItem = document.createElement('div');
-          achItem.className = 'summary-item';
-          const names = data.achievementsUnlocked.map(key => ACHIEVEMENTS[key]?.title || key);
-          achItem.innerHTML = `<strong>New Achievements</strong><br>${names.join('<br>')}`;
-          elements.summaryResults.appendChild(achItem);
-        }
-        const dayItem = document.createElement('div');
-        dayItem.className = 'summary-item';
-        dayItem.innerHTML = `<strong>Day ${day - 1} complete!</strong><br>Next up: Day ${day}.`;
-        elements.summaryResults.appendChild(dayItem);
       }
 
       function getMiniLabel(key) {
@@ -2314,6 +3041,13 @@
             callbacksRef.onOptionChange && callbacksRef.onOptionChange({ ambienceVolume: value });
           });
         }
+        if (elements.rangeMaster) {
+          elements.rangeMaster.addEventListener('input', () => {
+            const value = parseFloat(elements.rangeMaster.value);
+            elements.rangeMasterValue.textContent = `${Math.round(value * 100)}%`;
+            callbacksRef.onOptionChange && callbacksRef.onOptionChange({ masterVolume: value });
+          });
+        }
         elements.herdGrid.addEventListener('click', event => {
           const button = event.target.closest('.style-btn');
           if (button) {
@@ -2333,6 +3067,17 @@
           if (updated) {
             refreshStylePreview(updated);
             renderStyleList(currentStyleUnlocks, updated);
+            Audio.play('equip');
+          }
+        });
+        const styleRandom = document.getElementById('btn-style-random');
+        styleRandom.addEventListener('click', () => {
+          if (!currentStyledCowId) return;
+          const updated = callbacksRef.onRandomiseAccessories && callbacksRef.onRandomiseAccessories(currentStyledCowId);
+          if (updated) {
+            refreshStylePreview(updated);
+            renderStyleList(currentStyleUnlocks, updated);
+            Audio.play('equip');
           }
         });
         elements.styleList.addEventListener('click', event => {
@@ -2342,6 +3087,7 @@
           if (updated) {
             refreshStylePreview(updated);
             renderStyleList(currentStyleUnlocks, updated);
+            Audio.play('equip');
           }
         });
         document.getElementById('btn-manage-decor').addEventListener('click', () => {
@@ -2352,25 +3098,35 @@
           callbacksRef.onDecorBack && callbacksRef.onDecorBack();
         });
         document.getElementById('btn-decor-save').addEventListener('click', () => {
-          const selection = Array.from(decorSelection);
-          const proceed = callbacksRef.onDecorSave && callbacksRef.onDecorSave(selection);
+          const layout = Object.assign({}, decorDraft);
+          const proceed = callbacksRef.onDecorSave && callbacksRef.onDecorSave(layout);
           if (proceed !== false) {
             showScreen('farm');
           }
         });
         elements.decorManageList.addEventListener('change', event => {
-          const input = event.target;
-          if (!(input instanceof HTMLInputElement) || input.type !== 'checkbox') return;
-          if (input.checked) {
-            if (decorSelection.size >= DECOR_LIMIT) {
-              input.checked = false;
-              updateDecorStatus(true);
-              return;
-            }
-            decorSelection.add(input.value);
-          } else {
-            decorSelection.delete(input.value);
+          const select = event.target;
+          if (!(select instanceof HTMLSelectElement)) return;
+          const slot = select.dataset.slot;
+          if (!slot) return;
+          const value = select.value || null;
+          if (value && !decorOptions.includes(value)) {
+            select.value = decorDraft[slot] || '';
+            return;
           }
+          decorDraft[slot] = value || null;
+          if (value) {
+            DECOR_SLOTS.forEach(other => {
+              if (other !== slot && decorDraft[other] === value) {
+                decorDraft[other] = null;
+                const otherSelect = elements.decorManageList.querySelector(`select[data-slot="${other}"]`);
+                if (otherSelect) {
+                  otherSelect.value = '';
+                }
+              }
+            });
+          }
+          renderDecorScene(elements.decorPreview, decorDraft);
           updateDecorStatus();
         });
       }
@@ -2524,15 +3280,28 @@
         }
       }
 
-      function spawnCows(count, width, height, baseSpeed) {
+      function spawnCows(count, width, height, baseSpeed, participants) {
         const cows = [];
+        const pool = (participants && participants.length)
+          ? participants.slice()
+          : [{ id: 'wild', name: 'Runaway', chonk: 40, accessories: [], colour: 'brown' }];
         for (let i = 0; i < count; i++) {
           const x = width / 2 + Util.range(-40, 40);
           const y = height / 2 + Util.range(-40, 40);
           const radius = 18 + Util.range(-2, 4);
           const direction = Math.atan2(y - height / 2, x - width / 2);
           const speed = baseSpeed + Util.range(-20, 20);
-          cows.push({ x, y, radius, vx: Math.cos(direction) * speed, vy: Math.sin(direction) * speed, taggedAt: 0 });
+          const profile = pool[i % pool.length];
+          const chonkScale = profile && typeof profile.chonk === 'number' ? Math.max(0, profile.chonk - 60) * 0.06 : 0;
+          cows.push({
+            x,
+            y,
+            radius: radius + chonkScale,
+            vx: Math.cos(direction) * speed,
+            vy: Math.sin(direction) * speed,
+            taggedAt: 0,
+            profile
+          });
         }
         return cows;
       }
@@ -2576,24 +3345,31 @@
       }
 
       function drawCows(cows) {
+        const time = performance.now();
+        const fallback = { id: 'wild', name: 'Runaway', colour: 'brown', chonk: 40, accessories: [] };
         cows.forEach(cow => {
-          ctx.save();
-          ctx.translate(cow.x, cow.y);
-          const wobble = Math.sin(performance.now() / 200 + cow.x) * (state.participants.some(p => p.chonk > 65) ? 1.6 : 0.9);
-          ctx.beginPath();
-          ctx.fillStyle = '#c99364';
-          ctx.ellipse(0, 0, cow.radius + wobble, cow.radius, 0, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.fillStyle = '#825c3a';
-          ctx.beginPath();
-          ctx.arc(-6, -4, 3, 0, Math.PI * 2);
-          ctx.arc(6, -4, 3, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.fillStyle = '#825c3a';
-          ctx.beginPath();
-          ctx.arc(0, 4, 5, 0, Math.PI);
-          ctx.fill();
-          ctx.restore();
+          const profile = cow.profile || fallback;
+          const wobble = Math.sin(time / 260 + cow.x * 0.02) * 1.2;
+          CowVisuals.drawCanvas(ctx, profile, {
+            x: cow.x,
+            y: cow.y,
+            scale: Math.max(0.55, cow.radius / 28),
+            wobble
+          });
+          if (cow.taggedAt) {
+            const age = time - cow.taggedAt;
+            if (age < 220) {
+              const pulse = 1 - age / 220;
+              ctx.save();
+              ctx.globalAlpha = pulse * 0.4;
+              ctx.strokeStyle = '#f2a9b7';
+              ctx.lineWidth = 6;
+              ctx.beginPath();
+              ctx.arc(cow.x, cow.y + 12, (cow.radius + 12) * (1 + pulse * 0.2), 0, Math.PI * 2);
+              ctx.stroke();
+              ctx.restore();
+            }
+          }
         });
       }
 
@@ -2632,7 +3408,7 @@
           height,
           baseSpeed,
           timeLeft: Math.max(12, Math.max(18, 28 - difficulty * 1.2) + (modifiers.timeModifier || 0)),
-          cows: spawnCows(count, width, height, baseSpeed),
+          cows: spawnCows(count, width, height, baseSpeed, context.participants || []),
           running: true,
           finished: false,
           modifiers
@@ -2953,10 +3729,18 @@
         const target = document.createElement('div');
         target.className = 'food-target';
         target.dataset.food = food.name;
+        target.setAttribute('role', 'group');
+        target.setAttribute('aria-label', `${cow.name} snack target`);
         if (food.description) {
           target.title = food.description;
         }
-        target.innerHTML = `<strong>${cow.name}</strong><div class="food-icon" aria-hidden="true">${food.icon || '🌾'}</div><span class="food-label">${food.name}</span><span class="food-status">Needs snack</span>`;
+        const cowArt = CowVisuals.svg(cow, { className: 'cow-art-mini', scale: 0.85, offsetY: -6 });
+        target.innerHTML = `
+          <div class="food-avatar" aria-hidden="true">${cowArt}</div>
+          <strong>${cow.name}</strong>
+          <span class="food-label">${food.name}</span>
+          <div class="food-icon" aria-hidden="true">${food.icon || '🌾'}</div>
+          <span class="food-status">Needs snack</span>`;
         return target;
       }
 
@@ -3148,7 +3932,7 @@
       };
     })());
     MiniGames.register('brush', (function() {
-      let root, board, cowSurface;
+      let root, board, cowSurface, artWrapper;
       let state = null;
 
       function init(container) {
@@ -3158,22 +3942,9 @@
         board.className = 'brush-board';
         cowSurface = document.createElement('div');
         cowSurface.className = 'brush-cow';
-        cowSurface.innerHTML = `
-          <svg viewBox="0 0 220 180" width="100%" height="100%" aria-hidden="true">
-            <defs>
-              <radialGradient id="coatGradient" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stop-color="#f7d9c7" />
-                <stop offset="100%" stop-color="#d7a883" />
-              </radialGradient>
-            </defs>
-            <ellipse cx="110" cy="100" rx="90" ry="60" fill="url(#coatGradient)" />
-            <ellipse cx="110" cy="58" rx="70" ry="48" fill="#eac8a4" />
-            <path d="M60 50 Q20 10 50 4" stroke="#d7a883" stroke-width="14" stroke-linecap="round" fill="none" />
-            <path d="M160 50 Q200 10 170 4" stroke="#d7a883" stroke-width="14" stroke-linecap="round" fill="none" />
-            <circle cx="92" cy="62" r="6" fill="#35264d" />
-            <circle cx="128" cy="62" r="6" fill="#35264d" />
-            <ellipse cx="110" cy="82" rx="10" ry="12" fill="#35264d" />
-          </svg>`;
+        artWrapper = document.createElement('div');
+        artWrapper.className = 'brush-art';
+        cowSurface.appendChild(artWrapper);
         board.appendChild(cowSurface);
         root.appendChild(board);
         container.appendChild(root);
@@ -3183,6 +3954,18 @@
         cowSurface.addEventListener('pointercancel', handlePointerUp);
         cowSurface.addEventListener('pointerleave', handlePointerUp);
         return root;
+      }
+
+      function patchColour(alpha = 0.28) {
+        const base = CowVisuals.colourHex(state?.focusCow?.colour || 'brown').replace('#', '');
+        if (base.length !== 6) {
+          return `rgba(53, 38, 77, ${alpha})`;
+        }
+        const value = parseInt(base, 16);
+        const r = (value >> 16) & 255;
+        const g = (value >> 8) & 255;
+        const b = value & 255;
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
       }
 
       function spawnPatches(count) {
@@ -3199,6 +3982,7 @@
           patchEl.style.height = `${radius * 2}px`;
           patchEl.style.left = `${x - radius}px`;
           patchEl.style.top = `${y - radius}px`;
+          patchEl.style.background = patchColour(0.26);
           cowSurface.appendChild(patchEl);
           patches.push({ x, y, radius, el: patchEl, clean: false });
         }
@@ -3273,9 +4057,12 @@
 
       function start(context) {
         const modifiers = context.modifiers || {};
+        const participants = context.participants || [];
+        const focusCow = participants[0] || { id: 'brush-guest', name: 'Guest Cow', colour: 'cream', chonk: 42, accessories: [] };
         state = {
           context,
-          participants: context.participants || [],
+          participants,
+          focusCow,
           timeLeft: Math.max(12, Math.max(18, 32 - (context.difficulty || 1)) + (modifiers.timeModifier || 0)),
           patches: [],
           running: true,
@@ -3284,8 +4071,12 @@
           modifiers
         };
         context.updateTimer(state.timeLeft);
+        if (artWrapper) {
+          artWrapper.innerHTML = CowVisuals.svg(focusCow, { className: 'cow-art-large', viewBox: '0 0 160 130', scale: 1.3 });
+        }
         const basePatches = Math.min(8, Math.max(4, Math.round(4 + (context.difficulty || 1) * 0.5)));
-        const patchCount = Math.min(12, basePatches + (modifiers.patchBonus || 0));
+        const chonkBonus = focusCow.chonk > 70 ? 1 : 0;
+        const patchCount = Math.min(12, basePatches + (modifiers.patchBonus || 0) + chonkBonus);
         state.patches = spawnPatches(patchCount);
       }
 
@@ -3440,26 +4231,88 @@
         });
       }
 
-      function chooseReward(save) {
+      function chooseReward(save, context = {}) {
+        const unlocks = save.unlocks || {};
         const themed = rewardThemes
           .map(theme => {
-            const missing = theme.items.filter(entry => {
-              const list = save.unlocks[entry.type] || [];
-              return !list.includes(entry.item);
-            });
-            return { theme, missing };
+            const missing = theme.items
+              .filter(entry => {
+                const list = unlocks[entry.type] || [];
+                return !list.includes(entry.item);
+              })
+              .map(entry => ({
+                type: entry.type,
+                item: entry.item,
+                typeLabel: entry.type.charAt(0).toUpperCase() + entry.type.slice(1),
+                theme: theme.name
+              }));
+            return { theme: theme.name, missing };
           })
           .filter(entry => entry.missing.length);
         if (!themed.length) return null;
-        themed.sort((a, b) => b.missing.length - a.missing.length);
-        const topMissing = themed[0].missing.length;
-        const candidates = themed.filter(entry => entry.missing.length === topMissing);
-        const chosenTheme = Util.pick(candidates);
-        const rewardEntry = Util.pick(chosenTheme.missing);
-        return Object.assign({
-          typeLabel: rewardEntry.type.charAt(0).toUpperCase() + rewardEntry.type.slice(1),
-          theme: chosenTheme.theme.name
-        }, rewardEntry);
+
+        const byType = { foods: [], accessories: [], decor: [] };
+        themed.forEach(entry => {
+          entry.missing.forEach(item => {
+            byType[item.type].push(Object.assign({ themeMissing: entry.missing.length }, item));
+          });
+        });
+
+        function pickFromType(type) {
+          const pool = byType[type] || [];
+          if (!pool.length) return null;
+          const maxMissing = Math.max(...pool.map(item => item.themeMissing || 1));
+          const candidates = pool.filter(item => item.themeMissing === maxMissing);
+          return Util.pick(candidates);
+        }
+
+        const perfectDay = !!context.perfectDay;
+        const stats = save.stats || {};
+        const baseStreak = typeof context.streakBefore === 'number'
+          ? context.streakBefore
+          : (stats.perfectDayStreak || 0);
+        const nextStreak = typeof context.nextPerfectStreak === 'number'
+          ? context.nextPerfectStreak
+          : (perfectDay ? baseStreak + 1 : 0);
+        const lastRewardType = context.lastRewardType || stats.lastRewardType || null;
+
+        let guaranteedBy = null;
+        let reward = null;
+
+        if (!reward && nextStreak && nextStreak % 3 === 0) {
+          const candidate = pickFromType('decor');
+          if (candidate) {
+            reward = candidate;
+            const suffix = nextStreak === 1 ? 'day' : 'days';
+            guaranteedBy = `Perfect-day streak (${nextStreak} ${suffix})`;
+          }
+        }
+
+        if (!reward && perfectDay) {
+          const candidate = pickFromType('accessories');
+          if (candidate) {
+            reward = candidate;
+            guaranteedBy = 'Perfect day bonus';
+          }
+        }
+
+        if (!reward) {
+          const typePreference = ['accessories', 'decor', 'foods'];
+          if (lastRewardType) {
+            const index = typePreference.indexOf(lastRewardType);
+            if (index >= 0) {
+              typePreference.splice(index, 1);
+              typePreference.push(lastRewardType);
+            }
+          }
+          for (let i = 0; i < typePreference.length && !reward; i++) {
+            reward = pickFromType(typePreference[i]);
+          }
+        }
+
+        if (!reward) return null;
+
+        return Object.assign({ guaranteedBy }, reward);
       }
 
       async function startDay() {
@@ -3477,7 +4330,6 @@
         const achievementsUnlocked = [];
         const options = Object.assign({}, save.options);
         const availableFoods = State.getUnlocks('foods');
-
         UI.showScreen('task');
         for (let i = 0; i < queue.length; i++) {
           const key = queue[i];
@@ -3518,12 +4370,36 @@
           }
         }
         State.applyCowAdjustments(results.adjustments);
-        const reward = chooseReward(save);
+        const perfectDay = results.miniResults.length > 0 && results.miniResults.every(entry => entry.success);
+        if (perfectDay) {
+          Audio.play('perfect');
+          if (State.unlockAchievement('perfectDay')) {
+            achievementsUnlocked.push('perfectDay');
+          }
+        }
+        const previousStreak = save.stats?.perfectDayStreak || 0;
+        const nextStreak = perfectDay ? previousStreak + 1 : 0;
+        let reward = chooseReward(save, {
+          perfectDay,
+          streakBefore: previousStreak,
+          nextPerfectStreak: nextStreak,
+          lastRewardType: save.stats?.lastRewardType
+        });
         if (reward) {
-          State.addUnlock(reward.type, reward.item);
-          Audio.play('reward');
+          const added = State.addUnlock(reward.type, reward.item);
+          if (added) {
+            Audio.play('reward');
+          } else {
+            reward = null;
+          }
         }
         State.recordStats(results.stats);
+        const dayOutcomeStats = State.registerDayOutcome({
+          perfectDay,
+          rewardType: reward ? reward.type : null,
+          perfectStreak: nextStreak
+        });
+        const appliedStreak = dayOutcomeStats?.perfectDayStreak ?? nextStreak;
         State.incrementDay();
         if (State.evaluateChonkSentinel()) {
           achievementsUnlocked.push('chonkSentinel');
@@ -3535,7 +4411,11 @@
           reward,
           stats: results.stats,
           day: save.day,
-          achievementsUnlocked
+          achievementsUnlocked,
+          perfectDay,
+          perfectStreak: appliedStreak,
+          previousPerfectStreak: previousStreak,
+          bestPerfectStreak: dayOutcomeStats?.bestPerfectDayStreak ?? save.stats?.bestPerfectDayStreak
         };
         lastResults = summaryData;
         UI.renderSummary(summaryData);
@@ -3560,7 +4440,7 @@
     (function bootstrap() {
       const save = State.getData();
       Audio.setEnabled(save.options.audioOn);
-      Audio.setVolumes({ effects: save.options.effectsVolume, ambience: save.options.ambienceVolume });
+      Audio.setVolumes({ effects: save.options.effectsVolume, ambience: save.options.ambienceVolume, master: save.options.masterVolume });
       UI.applyOptions(save.options);
       UI.updateOptionsUI(save.options);
 
@@ -3568,7 +4448,7 @@
         const data = State.getData();
         UI.renderHerd(data.cows);
         UI.renderPantry(State.getUnlocks('foods'));
-        UI.renderDecor(State.getActiveDecor());
+        UI.renderDecor(State.getDecorLayout());
         UI.renderAchievements(State.getAchievements());
         const preview = GameFlow.getPreviewPlan(data);
         UI.renderEvents(preview?.previewNotes);
@@ -3604,8 +4484,8 @@
               Audio.stopAmbience();
             }
           }
-          if (typeof partial.effectsVolume === 'number' || typeof partial.ambienceVolume === 'number') {
-            Audio.setVolumes({ effects: opts.effectsVolume, ambience: opts.ambienceVolume });
+          if (typeof partial.effectsVolume === 'number' || typeof partial.ambienceVolume === 'number' || typeof partial.masterVolume === 'number') {
+            Audio.setVolumes({ effects: opts.effectsVolume, ambience: opts.ambienceVolume, master: opts.masterVolume });
             if (opts.audioOn) {
               Audio.ensureAmbience();
             }
@@ -3614,7 +4494,7 @@
         onReset() {
           const data = State.reset();
           Audio.setEnabled(data.options.audioOn);
-          Audio.setVolumes({ effects: data.options.effectsVolume, ambience: data.options.ambienceVolume });
+          Audio.setVolumes({ effects: data.options.effectsVolume, ambience: data.options.ambienceVolume, master: data.options.masterVolume });
           UI.updateOptionsUI(data.options);
           refreshFarm();
           UI.showScreen('title');
@@ -3642,6 +4522,11 @@
           refreshFarm();
           return cow;
         },
+        onRandomiseAccessories(cowId) {
+          const cow = State.randomiseAccessories(cowId);
+          refreshFarm();
+          return cow;
+        },
         onToggleAccessory(cowId, accessory) {
           State.toggleCowAccessory(cowId, accessory);
           State.save();
@@ -3651,10 +4536,10 @@
         },
         onShowDecor() {
           const data = State.getData();
-          UI.showDecor(State.getUnlocks('decor'), data.activeDecor || []);
+          UI.showDecor(State.getUnlocks('decor'), State.getDecorLayout());
         },
-        onDecorSave(selection) {
-          State.setActiveDecor(selection);
+        onDecorSave(layout) {
+          State.setDecorLayout(layout);
           State.save();
           refreshFarm();
         },
