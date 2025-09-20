@@ -1,1 +1,4 @@
 /highland-cow-farm/node_modules
+/highland-cow-farm/_chatgpt_bundle
+highland-cow-farm/make_chatgpt_package_txt.bat
+highland-cow-farm/_chatgpt_bundle_txt.zip
