@@ -1,0 +1,2908 @@
+diff --git a/highland-cow-farm/src/assets/accessories/bell_charm.png b/highland-cow-farm/src/assets/accessories/bell_charm.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..193c0c2de8b64bfd1491865981229fc08d83b335
+GIT binary patch
+literal 914
+zcmeAS@N?(olHy`uVBq!ia0y~yU<5K5893O0R7}x|GzJFdNKY5XkcwMxuLSZk7;qd3
+zDDitU<w0v_#3A-QYNif5+<+=+3Th^OpQ6p+eC*EBY-a8@J)VYx+)N1{niwSZN-((T
+zvo$>AW=!~!#2~RxfT2yF#h`|Zk!QXW!{Oxu2YzTW!MKl?bHKPg^OYDt+z*;826bHw
+zFfK?j2DjnkWTk{ZOE@I#HJOh2cQr6fV8X`@U`Y5Q!pOnE%5cnIu;F7civoiPgM_^+
+z1Cs+I4({XcE+UMK3akzc9*hQcK`bl{A`Fk!T|ry{h9IEpFl5mbW9NeOq8SC^LKQ<~
+znG_i2H3Eqx3>*xaKqqp+yw|~y`3K5Hlf}VRa*)~&3>tJ<rX?S_5hg33b4}_%Aq5H=
+zjtf5&fguIrDmgqBXXtlk6kxpcgB9vx77w6U5Q9sDNgc=oxVeG~z44%cgX#rwL5jg#
+zCI-O;ADvk;{s=Hi*|RjDa9tXX@gvFN;BsXA0O<wEDlT{kG3qgU%YhG!iUu_fEIsl9
+zOo!oI4jwS~$blDNS)Lv_0p`W*EC(MjIvP|Y<VwU;v+=LqX{=DD=XRI@2s~Z=T-G@y
+GGywqLvfBv&
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/accessories/bow_pink.png b/highland-cow-farm/src/assets/accessories/bow_pink.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..e8a442bb535c41dc91f35dd8aa31f98a0e71a39b
+GIT binary patch
+literal 912
+zcmeAS@N?(olHy`uVBq!ia0y~yU<5K5893O0R7}x|GzJFda8DP<kcwMxuQ>8DIB*<s
+zNLl>Sr-@@y^#PNWjEBsafC^~|5<H%2hcis;`8j<ZuZ+Yl0|qvIj)sHWObK6-7$o*e
+zFtq8jG+gXvO!(o%AhA#2zz0nhgBmVIp7~A;kC$`6xIOcg;M}?{1`zk~a)ARsG?@&b
+zT##Z+?lJ$ahL4k#68<dVkg(TeVshZZ%Vli%7|f!;Ai^MF@5*q@U$B88fFa?J2qOmr
+zD-LeYec?bBmIe_9Mg`UbKRg8m7=nPV6JZ2$9T+?q4eEl>WziI4=YsU283p1(6+>jX
+z8W<|rfW!nQ1%@RI91NNaQ12-)E&0d|<)X=A=XNk;{sHMlljWFjOdrW)bnb;8iolQp
+z1&xx!<91+3DFC@0488FTHhioOEFO==p)M9w0Ez+q!+7ZjD=?&Rb6p!u>OcVp)$0P}
+zf)s<fTnsJ^$M^*od~{~X_#?o8%4L+YN0!CTRb228tQRQT($EGmsz+Xc=`efCfe(y=
+z26YY`JaDd}K@FJ8ycjHNXi(+A(<3Lq(#+0s@Im9|#Dcf7CU4pJ4Ln4I=7VyNr>mdK
+II;Vst0Lq=+R{#J2
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/accessories/fern_garland.png b/highland-cow-farm/src/assets/accessories/fern_garland.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..ca5568da544f579e6f56bc917dd69f4215fc88df
+GIT binary patch
+literal 914
+zcmeAS@N?(olHy`uVBq!ia0y~yU<5K5893O0R7}x|GzJFdNKY5XkcwMxuLSZk7;qd3
+zNbx^nlGxiBafp47nyJGMH=s(If|{aF)3h0!kKI|C&CK1V$J20-n<?Q#6NAKF2?jTP
+zwuXn?j0s<o7$o)yFtq8j7}Rhv^2~Q)IJ{iozz<C(829mV4j8v*z7hk7`$3b%pstGn
+z#sw+H;5K}mtd#I)35SHeCetzht_Fq)O!&9~3<-Zk7&#bN8IJi2Hhc_bQD6{Zkg#`U
+zU~*u@!F~MQMTC)2fz^S*gVCTah=rv=gyFHeD~Kz=5Cn7`hAf(5>|BsuG^0RVsA7mL
+zlLEuMMj)|-frCL4=tM4<_c|Cd|3JBDvN*U(4pRGpL4z*KwB#c<!ej+>u1Oszq(DK#
+zap8v|Fr+|SC5Ol24E@fG0*se_utHtT;sF#3VsL3NsRMZcH&;-hHy#vlP`w~7NHLhp
+z#2~ofqccm!9|1-wdzJ<iu1mu)ek55OT#k$%AiW@2#RU%`Mm=V4Iq-o|(V)hGrAJ<X
+z=`ftj!2{+VIq(83%hMw#z`U59<=_KGM}vxlT#1-!HvWmqN_y|SUfMGNfv2mV%Q~lo
+FCIIal+1LO8
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/accessories/flower_crown.png b/highland-cow-farm/src/assets/accessories/flower_crown.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..c498c46088ec444b89183b9da37ddcd56cdf9b0a
+GIT binary patch
+literal 914
+zcmeAS@N?(olHy`uVBq!ia0y~yU<5K5893O0R7}x|GzJFdNKY5XkcwMxuLSZk7;qd3
+zNb!F(C84=9;t=~DHB*NjZa|eZ1vN#Vr)V=cAG@<Oo0+>!kEh`vH&eogCI*SU5)5wo
+zYz+^&856!FF-YtaU})24F{t5U<eBfpaCo`EfghSoFz(~!958Ord?f}D_k$*jL0uOE
+zj0;kX!EN|BSt;Sq5)KJ_O{Qc1T@4HqnDB7}7!v-7Fmf=kG92?4Z1@<=qQD@+AYt#y
+zz~sP)gZucqiwGm50;>aq2ctn<5DQC#2*YD_R}fc#AqeO?3|TbA*tsCRXhwm!P{j~g
+zCIyChjX+`v0|$d9(1~0y?{zR_{(*AQWN~nn9HjOGg9creX~{=!gvko%T$4IbNP&We
+z<H8R`U`T<uN)C_38Ty?W1sE^=V1>Gv#RDi7#Ng6kQU~$?Zmyt0Z#*dApn5@EkYX^G
+zi9v9|M`xCdKLU(W_ACu3T$hGp{7AAmxEvWjKzc#4iVGe>jC#!8a^M4_qCt%VOOLz&
+z(_uK5g9pq#a^MA6mZwKffO#=H%fSbXjs_J8xe_teZ2V2_E<#e94q7q*fv2mV%Q~lo
+FCID%L+6w>x
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/accessories/starry_bandana.png b/highland-cow-farm/src/assets/accessories/starry_bandana.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..77f9e41fcb055b2cf8ed5d53b132ae0bbda82a66
+GIT binary patch
+literal 914
+zcmeAS@N?(olHy`uVBq!ia0y~yU<5K5893O0R7}x|GzJFdNKY5XkcwMxuLSZk7;qd3
+zDDgXT<zatk#3A-QYNif5+<+=+3Tle-rfD-cAG@<Oo0+>!kEh`vH&eogCI*SU5)5wo
+zYz+^&856!FF-YtaU})24F{t5U<eBfpaCo`EfghSoFz(~!958Ord?f}D_k$*jL0uOE
+zj0;kX!EN|BSt;Sq5)KJ_O{Qc1T@4HqnDB7}7!v-7Fmf=kG92?4Z1@<=qQD@+AYt#y
+zz~sP)gZucqiwGm50;>aq2ctn<5DQC#2*YD_R}fc#AqeO?3|TbA*tsCRXhwm!P{j~g
+zCIyChjX+`v0|$d9(1~0y?{zR_{(*AQWN~nn9HjOGg9creX~{=!gvko%T$4IbNP&We
+z<H8R`U`T<uN)C_38Ty?W1sE^=V1>Gv#RDi7#Ng6kQU~$?Zmyt0Z#*dApn5@EkYX^G
+zi9v9|M`xCdKLU(W_ACu3T$hGp{7AAmxEvWjKzc#4iVGe>jC#!8a^M4_qCt%VOOLz&
+z(_uK5g9pq#a^MA6mZwKffO#=H%fSbXjs_J8xe_teZ2YrhZI||~wgcxNPgg&ebxsLQ
+E0B}IsxBvhE
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/accessories/sun_hat.png b/highland-cow-farm/src/assets/accessories/sun_hat.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..4cc44938a73ec3f90855fbd6f2c9907a21a66178
+GIT binary patch
+literal 914
+zcmeAS@N?(olHy`uVBq!ia0y~yU<5K5893O0R7}x|GzJFdNKY5XkcwMxuLSZk7;qd3
+zNb$d6lGxlCafp47nyJGMH=s(If|^O+r)V=cAG@<Oo0+>!kEh`vH&eogCI*SU5)5wo
+zYz+^&856!FF-YtaU})24F{t5U<eBfpaCo`EfghSoFz(~!958Ord?f}D_k$*jL0uOE
+zj0;kX!EN|BSt;Sq5)KJ_O{Qc1T@4HqnDB7}7!v-7Fmf=kG92?4Z1@<=qQD@+AYt#y
+zz~sP)gZucqiwGm50;>aq2ctn<5DQC#2*YD_R}fc#AqeO?3|TbA*tsCRXhwm!P{j~g
+zCIyChjX+`v0|$d9(1~0y?{zR_{(*AQWN~nn9HjOGg9creX~{=!gvko%T$4IbNP&We
+z<H8R`U`T<uN)C_38Ty?W1sE^=V1>Gv#RDi7#Ng6kQU~$?Zmyt0Z#*dApn5@EkYX^G
+zi9v9|M`xCdKLU(W_ACu3T$hGp{7AAmxEvWjKzc#4iVGe>jC#!8a^M4_qCt%VOOLz&
+z(_uK5g9pq#a^MA6mZwKffO#=H%fSbXjs_J8xe_teZ2Z$w3#xDU?oD9;0#8>zmvv4F
+FO#p*$+RXp}
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/accessories/woolly_scarf.png b/highland-cow-farm/src/assets/accessories/woolly_scarf.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..e1e186d110dda95cc135ba7909dc3d41310a81df
+GIT binary patch
+literal 914
+zcmeAS@N?(olHy`uVBq!ia0y~yU<5K5893O0R7}x|GzJFdNKY5XkcwMxuLSZk7;qd3
+zNbx_ZlGNN8afp47nyJGMH=s(If|^Osr)e`dAG@<Oo0+>!kEh`vH&eogCI*SU5)5wo
+zYz+^&856!FF-YtaU})24F{t5U<eBfpaCo`EfghSoFz(~!958Ord?f}D_k$*jL0uOE
+zj0;kX!EN|BSt;Sq5)KJ_O{Qc1T@4HqnDB7}7!v-7Fmf=kG92?4Z1@<=qQD@+AYt#y
+zz~sP)gZucqiwGm50;>aq2ctn<5DQC#2*YD_R}fc#AqeO?3|TbA*tsCRXhwm!P{j~g
+zCIyChjX+`v0|$d9(1~0y?{zR_{(*AQWN~nn9HjOGg9creX~{=!gvko%T$4IbNP&We
+z<H8R`U`T<uN)C_38Ty?W1sE^=V1>Gv#RDi7#Ng6kQU~$?Zmyt0Z#*dApn5@EkYX^G
+zi9v9|M`xCdKLU(W_ACu3T$hGp{7AAmxEvWjKzc#4iVGe>jC#!8a^M4_qCt%VOOLz&
+z(_uK5g9pq#a^MA6mZwKffO#=H%fSbXjs_J8xe_teZ2Ys18!J3|KS6~72s~Z=T-G@y
+GGywqjW!kO)
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/brown_eyes_closed.png b/highland-cow-farm/src/assets/cows/brown_eyes_closed.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..8d59026c455332fdf9de9ce710eb5c1095384a59
+GIT binary patch
+literal 2406
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZI(T~8OskcwMxuNm?(IB>8y
+zwgf6a`un@WBw*r%nNMVL3I%~mN5N<ajE2By2#kgRt`I1=b^4dt>^L8Nh6d;77hWFy
+z!o*-v!Z$Y#NI$q>SyFY88zSMVkIRHn@zD?%4S~TO0y<eXoKu<3efLQLxzp3t&t;uc
+GLK6TjQY|L{
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/brown_eyes_half.png b/highland-cow-farm/src/assets/cows/brown_eyes_half.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..6878cd7422e4da48ef2864f9f52f161a8f504452
+GIT binary patch
+literal 2587
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZKPN1iT@Ar-gYUf(FnARyr4
+z*xD(&@V}kM7KI(RXMQ(1z<*5wsCE>LhQMeDjE2C73jx-*JNu#?^cfgh*>AmnJnicu
+zafXIvkI$aC+#Scjz+=JeuV2N;VDN;;dhZKX28FyMlI2wwxfvWjOfY`)1*G<XV)~7j
+zu0Z_@lh3UHYXZ{FAWb}$hxuxOnhc)xSb;PjSYZ4Dq=f;du*Y(-AK3I4Jg5qq&n*C(
+z1XEDMB$EtQ$zydKA_G>jSR7*JBakJpdMv?~tT28Cwghg56-2AS8y-{zi_gt~_|e)K
+zY<7oaSzIW{IT?2E_RNd>!o(n8@Mh065aU9{gGyeI=?h+-C_WAL|3k(XVi&kaTxuEh
+g@Ms7Ox)Asf6a7Z=#IyNJE`glp>FVdQ&MBb@0K9OYSpWb4
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/brown_eyes_open.png b/highland-cow-farm/src/assets/cows/brown_eyes_open.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4d792dd3b0ce9f86bd1ae3480bcea71730ebaa1
+GIT binary patch
+literal 2830
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZJ^tDY{7Ar-gY-aW{B$U%U`
+zk^OMD#EJM6RyC#x7SXR~YMtb~^DX&EdoD=lC>RZa(GVC7fuR)w4W}#aywhLb5XZpK
+z#CCiC{O~K?K;|L$Ifcu`_cAbu@LL}C)30J=(2y=XHaG4I6GMRAvmUFxFIX8CWSo#J
+ztGdX|;P7&W@vAS3#2Fek8Kz%(>8j7b;OcyC!)1^`UdQJIf(@F|Yq=O~kim-!Ac-KD
+zgpAFzGJl8^hivhD#_w;ThIRArif_BKCGq(wkR=B^lh3UH8+qy&)JTaEHn58f3NNgc
+zC>C~`yZSZI?gqnflNS&d8oc1K0=etJ3~$*IH?UfX67^oo{jXku9C?_1ZhXmCkh>Qd
+zPPahUv%vTTP%khDQk(Uj&X45<`x$QHf@s@UYQ2`tU@!6PVs^i~#W4K>$nOn~<p(y*
+zws^t=(eO-+ch5;?sM8m(`w`p>3PhmOWkJ45xFA^qq8l6`ni<&UI)Z}><~IxlZgUN>
+zDscF@qPP|mEpR8UFn)Fco5`ie=75}#a7D5h#cH_87z)}!>L*ydiU|a#1j*8MkhH;L
+zef<(RlHKNNgQHz_@wrlPLTE~SE(J2&;pB>9R*<U{YVK6#f>TYxjmlV<h%1<p@u89x
+lXu&8L4S~@Rpm_*{R5DMW!y0v?VviZfE>BlKmvv4FO#m`5AkF{)
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/brown_idle_base.png b/highland-cow-farm/src/assets/cows/brown_idle_base.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..32bb1e5c15beddb1031f4f9cbecc757d3334db83
+GIT binary patch
+literal 6735
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/brown_shadow.png b/highland-cow-farm/src/assets/cows/brown_shadow.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..2e62ce2118340b7b00abc6dd42de1a46ceda5f56
+GIT binary patch
+literal 2778
+zcmeHJ&ui0Q7=H4DF4lH#;9-^GHu@F3t;=Z>VQ$v0pMfEw2QO`5_2!`nf)liv;$&EA
+z`2>qc*<J9U$F5LliGnaZ2)kJ54jv{{5b2?IzDW~xqJMyp9Fn~6^W%N<Ku9((t}KUx
+zCxQUNJe|A*D0Hhp3()1sI?6!sIZrNLzP0=L!^<#cHFfbqA${byvGZ;-9bHT91~N0x
+z9ue6;`~>_2`~>_2`~>_2{)YrM-n_5Lz?svpU%mY(!;EE`^zkp>jvNK%_OG3yb2qL?
+zsISjNG+^|Ol>iERMpJ^hn$_u_;bDz6sI_m{MXScPsOTCxk$*4hJ2SjVX1%yI1&nO7
+zh>G^7Dq97j-$gzI^L|!@WE8#{Vix9BR+J<ZdWM*$ZSHbC0MDTxx5j{Fa!}CjR@pgn
+z7>K;)6cHJ7{W#yCO^ckgW+VGgs6&wI&~+8j1HmGary4@-Ue)fohGjAwhj|Dp7av!c
+zrJ>L_9Iru~>$2x%3rdv2HsdKr$6~0X!Xgv{5mWSFj%5yMkstO*90C`ipDJmJ3kiQ^
+zC}#yzJi`fig+=iXx0#Rxn;%H7;V(Kd5@1}1H!DU?tp$^2QO||~K+0s+mt*eW!%i-J
+zoL1{h+7DzK%8cLWD>kvU;EGLRP%o#ZMf3nJbaL8JX`~{1g7$hNo>&%a?TS>Q06LSP
+wDFoHWDr~+l*^F`#A&HB|pODJ<XmM~;`u1Qcb2V}Osr}aR^DD_0OSyYL0IN6hA^-pY
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/chocolate_eyes_closed.png b/highland-cow-farm/src/assets/cows/chocolate_eyes_closed.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..8d59026c455332fdf9de9ce710eb5c1095384a59
+GIT binary patch
+literal 2406
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZI(T~8OskcwMxuNm?(IB>8y
+zwgf6a`un@WBw*r%nNMVL3I%~mN5N<ajE2By2#kgRt`I1=b^4dt>^L8Nh6d;77hWFy
+z!o*-v!Z$Y#NI$q>SyFY88zSMVkIRHn@zD?%4S~TO0y<eXoKu<3efLQLxzp3t&t;uc
+GLK6TjQY|L{
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/chocolate_eyes_half.png b/highland-cow-farm/src/assets/cows/chocolate_eyes_half.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..6878cd7422e4da48ef2864f9f52f161a8f504452
+GIT binary patch
+literal 2587
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZKPN1iT@Ar-gYUf(FnARyr4
+z*xD(&@V}kM7KI(RXMQ(1z<*5wsCE>LhQMeDjE2C73jx-*JNu#?^cfgh*>AmnJnicu
+zafXIvkI$aC+#Scjz+=JeuV2N;VDN;;dhZKX28FyMlI2wwxfvWjOfY`)1*G<XV)~7j
+zu0Z_@lh3UHYXZ{FAWb}$hxuxOnhc)xSb;PjSYZ4Dq=f;du*Y(-AK3I4Jg5qq&n*C(
+z1XEDMB$EtQ$zydKA_G>jSR7*JBakJpdMv?~tT28Cwghg56-2AS8y-{zi_gt~_|e)K
+zY<7oaSzIW{IT?2E_RNd>!o(n8@Mh065aU9{gGyeI=?h+-C_WAL|3k(XVi&kaTxuEh
+g@Ms7Ox)Asf6a7Z=#IyNJE`glp>FVdQ&MBb@0K9OYSpWb4
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/chocolate_eyes_open.png b/highland-cow-farm/src/assets/cows/chocolate_eyes_open.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4d792dd3b0ce9f86bd1ae3480bcea71730ebaa1
+GIT binary patch
+literal 2830
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZJ^tDY{7Ar-gY-aW{B$U%U`
+zk^OMD#EJM6RyC#x7SXR~YMtb~^DX&EdoD=lC>RZa(GVC7fuR)w4W}#aywhLb5XZpK
+z#CCiC{O~K?K;|L$Ifcu`_cAbu@LL}C)30J=(2y=XHaG4I6GMRAvmUFxFIX8CWSo#J
+ztGdX|;P7&W@vAS3#2Fek8Kz%(>8j7b;OcyC!)1^`UdQJIf(@F|Yq=O~kim-!Ac-KD
+zgpAFzGJl8^hivhD#_w;ThIRArif_BKCGq(wkR=B^lh3UH8+qy&)JTaEHn58f3NNgc
+zC>C~`yZSZI?gqnflNS&d8oc1K0=etJ3~$*IH?UfX67^oo{jXku9C?_1ZhXmCkh>Qd
+zPPahUv%vTTP%khDQk(Uj&X45<`x$QHf@s@UYQ2`tU@!6PVs^i~#W4K>$nOn~<p(y*
+zws^t=(eO-+ch5;?sM8m(`w`p>3PhmOWkJ45xFA^qq8l6`ni<&UI)Z}><~IxlZgUN>
+zDscF@qPP|mEpR8UFn)Fco5`ie=75}#a7D5h#cH_87z)}!>L*ydiU|a#1j*8MkhH;L
+zef<(RlHKNNgQHz_@wrlPLTE~SE(J2&;pB>9R*<U{YVK6#f>TYxjmlV<h%1<p@u89x
+lXu&8L4S~@Rpm_*{R5DMW!y0v?VviZfE>BlKmvv4FO#m`5AkF{)
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/chocolate_idle_base.png b/highland-cow-farm/src/assets/cows/chocolate_idle_base.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..00d7eb72213b44c0d330f41a9cf94f912c8d2896
+GIT binary patch
+literal 6736
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/chocolate_shadow.png b/highland-cow-farm/src/assets/cows/chocolate_shadow.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..2e62ce2118340b7b00abc6dd42de1a46ceda5f56
+GIT binary patch
+literal 2778
+zcmeHJ&ui0Q7=H4DF4lH#;9-^GHu@F3t;=Z>VQ$v0pMfEw2QO`5_2!`nf)liv;$&EA
+z`2>qc*<J9U$F5LliGnaZ2)kJ54jv{{5b2?IzDW~xqJMyp9Fn~6^W%N<Ku9((t}KUx
+zCxQUNJe|A*D0Hhp3()1sI?6!sIZrNLzP0=L!^<#cHFfbqA${byvGZ;-9bHT91~N0x
+z9ue6;`~>_2`~>_2`~>_2{)YrM-n_5Lz?svpU%mY(!;EE`^zkp>jvNK%_OG3yb2qL?
+zsISjNG+^|Ol>iERMpJ^hn$_u_;bDz6sI_m{MXScPsOTCxk$*4hJ2SjVX1%yI1&nO7
+zh>G^7Dq97j-$gzI^L|!@WE8#{Vix9BR+J<ZdWM*$ZSHbC0MDTxx5j{Fa!}CjR@pgn
+z7>K;)6cHJ7{W#yCO^ckgW+VGgs6&wI&~+8j1HmGary4@-Ue)fohGjAwhj|Dp7av!c
+zrJ>L_9Iru~>$2x%3rdv2HsdKr$6~0X!Xgv{5mWSFj%5yMkstO*90C`ipDJmJ3kiQ^
+zC}#yzJi`fig+=iXx0#Rxn;%H7;V(Kd5@1}1H!DU?tp$^2QO||~K+0s+mt*eW!%i-J
+zoL1{h+7DzK%8cLWD>kvU;EGLRP%o#ZMf3nJbaL8JX`~{1g7$hNo>&%a?TS>Q06LSP
+wDFoHWDr~+l*^F`#A&HB|pODJ<XmM~;`u1Qcb2V}Osr}aR^DD_0OSyYL0IN6hA^-pY
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/cream_eyes_closed.png b/highland-cow-farm/src/assets/cows/cream_eyes_closed.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..8d59026c455332fdf9de9ce710eb5c1095384a59
+GIT binary patch
+literal 2406
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZI(T~8OskcwMxuNm?(IB>8y
+zwgf6a`un@WBw*r%nNMVL3I%~mN5N<ajE2By2#kgRt`I1=b^4dt>^L8Nh6d;77hWFy
+z!o*-v!Z$Y#NI$q>SyFY88zSMVkIRHn@zD?%4S~TO0y<eXoKu<3efLQLxzp3t&t;uc
+GLK6TjQY|L{
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/cream_eyes_half.png b/highland-cow-farm/src/assets/cows/cream_eyes_half.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..6878cd7422e4da48ef2864f9f52f161a8f504452
+GIT binary patch
+literal 2587
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZKPN1iT@Ar-gYUf(FnARyr4
+z*xD(&@V}kM7KI(RXMQ(1z<*5wsCE>LhQMeDjE2C73jx-*JNu#?^cfgh*>AmnJnicu
+zafXIvkI$aC+#Scjz+=JeuV2N;VDN;;dhZKX28FyMlI2wwxfvWjOfY`)1*G<XV)~7j
+zu0Z_@lh3UHYXZ{FAWb}$hxuxOnhc)xSb;PjSYZ4Dq=f;du*Y(-AK3I4Jg5qq&n*C(
+z1XEDMB$EtQ$zydKA_G>jSR7*JBakJpdMv?~tT28Cwghg56-2AS8y-{zi_gt~_|e)K
+zY<7oaSzIW{IT?2E_RNd>!o(n8@Mh065aU9{gGyeI=?h+-C_WAL|3k(XVi&kaTxuEh
+g@Ms7Ox)Asf6a7Z=#IyNJE`glp>FVdQ&MBb@0K9OYSpWb4
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/cream_eyes_open.png b/highland-cow-farm/src/assets/cows/cream_eyes_open.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4d792dd3b0ce9f86bd1ae3480bcea71730ebaa1
+GIT binary patch
+literal 2830
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZJ^tDY{7Ar-gY-aW{B$U%U`
+zk^OMD#EJM6RyC#x7SXR~YMtb~^DX&EdoD=lC>RZa(GVC7fuR)w4W}#aywhLb5XZpK
+z#CCiC{O~K?K;|L$Ifcu`_cAbu@LL}C)30J=(2y=XHaG4I6GMRAvmUFxFIX8CWSo#J
+ztGdX|;P7&W@vAS3#2Fek8Kz%(>8j7b;OcyC!)1^`UdQJIf(@F|Yq=O~kim-!Ac-KD
+zgpAFzGJl8^hivhD#_w;ThIRArif_BKCGq(wkR=B^lh3UH8+qy&)JTaEHn58f3NNgc
+zC>C~`yZSZI?gqnflNS&d8oc1K0=etJ3~$*IH?UfX67^oo{jXku9C?_1ZhXmCkh>Qd
+zPPahUv%vTTP%khDQk(Uj&X45<`x$QHf@s@UYQ2`tU@!6PVs^i~#W4K>$nOn~<p(y*
+zws^t=(eO-+ch5;?sM8m(`w`p>3PhmOWkJ45xFA^qq8l6`ni<&UI)Z}><~IxlZgUN>
+zDscF@qPP|mEpR8UFn)Fco5`ie=75}#a7D5h#cH_87z)}!>L*ydiU|a#1j*8MkhH;L
+zef<(RlHKNNgQHz_@wrlPLTE~SE(J2&;pB>9R*<U{YVK6#f>TYxjmlV<h%1<p@u89x
+lXu&8L4S~@Rpm_*{R5DMW!y0v?VviZfE>BlKmvv4FO#m`5AkF{)
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/cream_idle_base.png b/highland-cow-farm/src/assets/cows/cream_idle_base.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..15b59ef2a94ffb6b94cf2219aeec9c7b8a8ba053
+GIT binary patch
+literal 6731
+zcmeHLYgAKby8d<&LxvMV@G=dMaGAtWt1T&N2^S?)1u|A;+D@Hybbt{&wRIeWRY5=!
+z)J3LCh)k@tjt8M?tJP&`XF5~cS`(!;Qmo*m#j#bw#oJI#B2c1)<UHTr36-&(H9yaf
+zVXZ9o{=WC}ywCex-gm!}voI?xG%A!35~j<Z`wSs`Jo1T1h=1EFiJ6e7vAVe#&y`%h
+zeI<2`ynXDvUz!*Gt!iIJ+iQ>QesbF7#CfLawIK^C7f#Pt^Ok9!G90?|#hJf6|LJ!f
+zy}w_7Ey8op#lX^k{{F+j|04$SKe%DF=04MRr?v0K1?SF-$A*ZpyF;Y+Mq{xGjZ8j~
+z5kmiQ516vKR}0uFI!cJypd@x{1c988Dm?I@@zoHyKa;S!becFkNj$kfk%xU{BWhAe
+zO*?E!L`?UZ-rK_Y{a5bb;m7=rawjy3386m3B$E2w89{#(H+<QEo5C0kjz&0wk|p4W
+zf#j3Z&}YrmB3!c}lA%9Dc{&hNcV4CuKT1U+6(sEVzhj$=jpdy>0l)_hJsgP^q;gJ1
+z=8`D8TGqsmq{+y{v2;fVackZQqbh`Ge9Hy&hqT0jB^n+}*pJMa4S$Vd46`;)b6cAt
+zR?$_V{f3kzpL&)?4fbV=&u19cOMVA$a{ro3Ejel)Mr)OMrz%<ElJ72;%P4W0{)tUC
+z#LKt6kq{|lfhdM7zs#pV9G7-h^H>X#iYXhUp09)uJCQIZjMs6Qs(RjR$Z#x)CY!by
+zOm(j&i^|LR+S5dTR41fPnzkA2y9&kdqAn+zld1x^F?RB8?@f&4!;g5jPw|{31CF#d
+zqSxrE=mLgLmSsezYDDLp^2Gs}>xhIzn++l6{dIF}AEc6LQA84@n^0w3T}(7?Pw}zr
+zLmFXu3m_txpS^uo>Uu1kgoF{(EBhr-NF!+_-qg9Ob<w=zw;9JN#&NUu;s&wjZz0C1
+z+YBL9`=>x?Hdt@Ud!|k5IuZ^7JUhqF;Fb6C9iC#({7@(kGioCDSvJ9`f$T-xmHR)9
+zcT6E#xyiV{Cv6P2(tHaRyTqVN6cC#`L6?c#dM7qZ3HGWAYt`Y}shUHxVkrd2-FcR3
+z>_5+ZOFa96F*v1i8s9{!3qzx)l>e;DI;4gk(iIw2%~%WofqhSb!4>?fU;<d0MFcBC
+zh1CmJ^o5gC6O~R#_m&QEU@__v>G{Cwiiys`1YzcrYzvlJz#d;~!I45S!xfdo6gL(K
+zM@B3vesJuEbOU3Y5BdUoR0;S3ag2bayksIaH&Vpn3t%24$2p`Cf&(gmII01xJ2n7p
+zltW`goNkSm|1ZWk-Jm_5N@q5(fr5}xx}$vvvMq8ykuesPJv|tQs8*HiW7Iqv0F8rt
+zdDz}4-9WqnS0htBo)DtcQXl!EY)ext4H0orNWfQ3!k5$6+H3WV^=S<gZ*9pvo;Pbb
+znVd}JQhc5yLME5t!m+IN(z_+6g2;H5wcm8ECZz3uDD1Uo+<|AFrT-E;zJ?w5v*UP%
+z{17`1T?Rnvk@-Ihjq!2KbX2M#Vn!!1@QKmJ0OA@?G$8^BnWMEdbr2G#=ajJEGVE4X
+zM?j=$yyLSBMfur}{=H>zJI$A43*$=3GVQ;T<?n@gv2l9{9K3y!ddMf!Vn~&7f1SyS
+zR50%r2>|K&Sl?kYoZ`Ha)xPh(i8$3Hl)62?i<8SKp>pQg-o-I~co*6>Czq<S{1I4g
+zGE$Rid?GIS{>O4|N|$U=Wx+c6OlbSN(k88y`@UqYr;pLx>-@bmTT<a4h$Sa0Li5Gh
+zX7*W33bdhV_rt)injEUe+n)^m&NLqe#KygRTU_mRg%^HhjIeV2T34!%X>gF6Gk9X&
+zt%8=k##C!Z+HU~4N=!CuB^9_3h)pDlg|OUfHqfP{b&1rWJ(pT%u_lSqHo3MS{U%MQ
+z8o6!KN`@P{L9k7v=85^q{R%7)II}B~%v~Gq4V>#^C3)4x+xD7*k8b?Y*=_>ST|%Ss
+zh1*5lag9Znh6c_Ja^~d8-R9lx&a5uyhl9OMjp3kGY5U{24PK{rbKBKNth2HDq-tW3
+zC>pJU_Mr=X1B3l=tnbl0{>h@NlYmx6Bz3u_8pbhvw-ou8F_OB5rc-X`Cw)<f94Bf@
+zJe{4@e>v)b+2Q`ulm})v4y3TN=DON_(B1gmN9@LV{KA?u8s8`Wij5i{6SsmaEfY-i
+z8y4TG>}@w8W$!6*t|_(bW=O{UD)7xc@hm-ugvMnd+OD#$DRlpaTsispqI$oYR~}>b
+z9)lsk_a>yAdHw}Ke@w;Um+6jjcvi1D`m0Exd3aa-BOPA$^8b@Ue^^*qklx+brGuS@
+zgWZOcO!4(Nz3axt+_VWq&6{z@vq;lrmh*2JvXh4Ux_-hy>@~aLZbb2?GJSuG3{2(R
+z>+U$W{@an)=I)Nl^;e~@dx~9U9kKpnC2L5&U`31D8MkD*;4N>{lB+jfo}I8K4(IK<
+z`)(&$k}gQ`ul)FG`?~r^7LCXKl+y1h)_>t${0D`vik`{}za)8%tuwu+uj>^)?l)A9
+zHg~LNgImA@J0@$q!<B^Fs?+HyK7*3Vzom8SfpNG3?AAGFrFu^^54YA}-Y~6D#=-GY
+z)?}cF(|Cuk_<j+?<T|Tcw@!*;wW>+|P8)1Q6Nx|GWGy%gHe2Wo6T8NfdR@NGIneh)
+zbMHU;mWgoNtuFPX`V{Nh>B_EuL`jIrZ*1ytI}esQFBN--j>&j%7a|`v`@h|H=W6R~
+z?X6hTxOXIX-ZELc(^Ku%v%cx7J+<&WLE{NS(fQx^Os8i}VdTC?_5G>7b*&;-DegDD
+z_wc#*oSt^2($<SB(B^JTmGn;!FQrT2kiTr~p1rW(-*MI5D1?L(5}gTjPE4rqYQ#Qs
+zm7wG|xMelIFUtj*rG@0+Nn{vMQ1Zp`wZG-ts25t>O^9N0!*Pk54KrgI$xkE6Aq{pV
+zZe0}ar%BHC)~ykUeDS#m$FI*lmQ~lD@qsy$g|tkG(uJ>m!G94&C=j=a^aoFqwnNrg
+zpL4b;o-w|u=Q9aN!d@>VlUHCv!IKhq6Vvc6<2pT9f8a^lO3>MZous5Ewe3PQ7sA9b
+zHDr+<$09iFnM7VHrQJqQ*T(33iyI~-kLcbbM+eH<#wn;St#xPQlchtmZoVy{-2^S~
+zqY}BWBG|Alk)zik9y207f=twQs^Dzz8()F|#Lel3Mib}8kkT$b?H(x6RbiBAFj`Gk
+zrCdMu_~jz6bx?7$Ih@wTtb0B2wih=XNJmW(&w6a5{M)V7xC1A}yqp_*JH<CVo~Cwl
+zrjeg1G^T_ZKR7<Llut`}?7MN>k{h?Lrw2YR`VcW=s;=n&y3xAy>gOcqO~%z%yk{#&
+zZvi)J9d7?uGFR!_=LhQ!(=jQ=&b$37jk~+8pBLA)U~GP|nc&!>K#+*>PYUEoU{b4~
+zR|94<jX#a0O+*Jx+{!ko{#zR8uhM;n^2QIx0`*#q^|NEMafl;(G;WC4{b!ek0&z--
+zNVAFULvWDmy;FZD(o}J;qJY17>_)~VsPRpJ`z*76W!XLXhG7L-KN#SjGAf(hhT9<N
+z{>I#o40#{^3`8di<i6dwKihiymQl?&{R*CW5*kUhvu_z)+;0}!jdMQlG_*wA8a_0%
+zVb|R&J%>>0yqIBr)b4-Gw14o(^&6kDMPZe($^R<j=zFHGFY(sLr`Itky5iM$8ejTf
+zH7U=1DQq4exk!lQedafR_Y=Fdb$(5~bb;4bv>Z#WSt=XcHhn=fnVm3HvGUSIXH2^g
+zS*fxeHSAb-+3oE6v#)i_)4sDstEjL{R@8q$jALb{L0W#lxaKe)C0#+o@VUGqf#+Di
+z_v`wx$Mcpd5Okt2Q$D;S)7Uz{)p~d4t+LMsD5{J$pQAC6SDstyiw=LWL-|fP1tw5R
+zd{>mV8`qAuZXNtWM2p!ddFhV4@Q}h*ZbVFU|0Oxm?DxxSXQd}xO`@4yxuRo_)jPHE
+zl|zahxk=955m-$(ZJYf^jxD@glwYbiwpvKp-zup<Wmb*E=3F|l8WkI@=_jmrMe}H-
+zE;RDO>AaZEJI<{}^~TPZ^rISM=TDj|P$gmB-Dum_fud1Kv%bEc>eKpsOw2Hf!bmjb
+z4YsBZX)VfYy*Ks#wZFunKF%ka`!#I2j=R^u+QEur#poW>2dsFy*5Y*M>?M1{7+Ssa
+zwE+d2+v(c*M8KMNIg5~5i{x_(CM!xissJhrxJdM#7Fhs@ceyy5?FAslLq~ya;!fD?
+zcr`CIcN{8mF)>-IH`($Mj^}Z}z01c7d{OR=N*WP1c#-t}$`gaz5Gw7+KI*G|aua$1
+zY$xQ6&(f+d)SWU0<}FXeVUp?<O0%gm^jr|5lq&odF%Rdz7zC*HY0(Doak4kZ)l%xQ
+zPZPx)0N=#O5VSlpP^-(_1iQ)TB;%+2_Bok~)uFu{4&S%}Qqq8S4UN1glEic&S=j$<
+z8>G!7>K94L3Uq*h*{`_Sr-Vk+`$$zHG1fAU&S{*XLQ*pMd(l&zsJ9)B7Zax>t~@^)
+zKsao;MqI8PDy3FPq=_VLEqXP49oQl!;Y+|iaK`g(bDjqykp$hhOV5dNolGRLz0Ww_
+zcyz?!>%SPmwwH5=6%K!V^7@k`E$w^T3pm?C+CswJ)6pd6wb2Tojyh$uEfJ2+$?zce
+z;~GSp1xObV@Lo1xEGMiMF!WX!37_+@(M_X`QWReFRx9~f>}W(0fBt3SYTFKD?5T|n
+zK@%PDvns@BszWEMMp6TQg7K_KC22h>z+#A?hJ<SnrNa|KXXRfDiFy?&IjRGG&JX=+
+zLR-5?Tyi6p{t-^XXQB(vM{}aI@fRQtREF@QqV;&tPY`B<kGRy|!z{!?vV9ui$oM%J
+z;h3@Ds=#8VQ8Ac>8KktWKu}Uk+huz?O&L|A(FJ8$@`JKDD+DEfprGyP((j%n;ZLBO
+z#nnKO&`({iuVFjrj7>u@dqD&5uKaOlN3x6|yO3<XmmkFFS%p~b*3I7#;vLV@>kbc^
+z%Fzo-8vY4)hfsxXv*ib*gR7Bim0JdQtQoMVsSuRdI5Um|pu}!PA{H@}qX(8#CT;c;
+zIEKE@KRQ9B*3#oC_VR<~&{U)EwWm`G*_`4k=SI-|5N;t>gRX9r!1;GXF72yGg4w`&
+z#Fs>3tmo0M8fYxi$Ivc)dEi5X(-Xqw8K2D9-rH<2Uc;Jr_TLm90s34d*YU$}MJUCH
+z-ieJ49$ZT*DOTK>>=y#GY{8j>Gf-xMTJ%oAAy!yu?2a7~u9%8X9keS)8{XsD$<5fU
+zoP%WFHBZQ|r$1ySNRRDc1p5J@!yO(BkYdKSLodHNfEm4Oa46^^|Ds4OP$hd|9G2J|
+zai1Q*U}g>5<%8)FwWnj5Dx=EuAg0&TC??81siduSkLy9?7qZw72}nKu<1>OOoug0T
+b*T3VOc`*4K8M$(v;7>Pi;oNtg%HQ;V883ND
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/cream_shadow.png b/highland-cow-farm/src/assets/cows/cream_shadow.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..2e62ce2118340b7b00abc6dd42de1a46ceda5f56
+GIT binary patch
+literal 2778
+zcmeHJ&ui0Q7=H4DF4lH#;9-^GHu@F3t;=Z>VQ$v0pMfEw2QO`5_2!`nf)liv;$&EA
+z`2>qc*<J9U$F5LliGnaZ2)kJ54jv{{5b2?IzDW~xqJMyp9Fn~6^W%N<Ku9((t}KUx
+zCxQUNJe|A*D0Hhp3()1sI?6!sIZrNLzP0=L!^<#cHFfbqA${byvGZ;-9bHT91~N0x
+z9ue6;`~>_2`~>_2`~>_2{)YrM-n_5Lz?svpU%mY(!;EE`^zkp>jvNK%_OG3yb2qL?
+zsISjNG+^|Ol>iERMpJ^hn$_u_;bDz6sI_m{MXScPsOTCxk$*4hJ2SjVX1%yI1&nO7
+zh>G^7Dq97j-$gzI^L|!@WE8#{Vix9BR+J<ZdWM*$ZSHbC0MDTxx5j{Fa!}CjR@pgn
+z7>K;)6cHJ7{W#yCO^ckgW+VGgs6&wI&~+8j1HmGary4@-Ue)fohGjAwhj|Dp7av!c
+zrJ>L_9Iru~>$2x%3rdv2HsdKr$6~0X!Xgv{5mWSFj%5yMkstO*90C`ipDJmJ3kiQ^
+zC}#yzJi`fig+=iXx0#Rxn;%H7;V(Kd5@1}1H!DU?tp$^2QO||~K+0s+mt*eW!%i-J
+zoL1{h+7DzK%8cLWD>kvU;EGLRP%o#ZMf3nJbaL8JX`~{1g7$hNo>&%a?TS>Q06LSP
+wDFoHWDr~+l*^F`#A&HB|pODJ<XmM~;`u1Qcb2V}Osr}aR^DD_0OSyYL0IN6hA^-pY
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/rose_eyes_closed.png b/highland-cow-farm/src/assets/cows/rose_eyes_closed.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..8d59026c455332fdf9de9ce710eb5c1095384a59
+GIT binary patch
+literal 2406
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZI(T~8OskcwMxuNm?(IB>8y
+zwgf6a`un@WBw*r%nNMVL3I%~mN5N<ajE2By2#kgRt`I1=b^4dt>^L8Nh6d;77hWFy
+z!o*-v!Z$Y#NI$q>SyFY88zSMVkIRHn@zD?%4S~TO0y<eXoKu<3efLQLxzp3t&t;uc
+GLK6TjQY|L{
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/rose_eyes_half.png b/highland-cow-farm/src/assets/cows/rose_eyes_half.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..6878cd7422e4da48ef2864f9f52f161a8f504452
+GIT binary patch
+literal 2587
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZKPN1iT@Ar-gYUf(FnARyr4
+z*xD(&@V}kM7KI(RXMQ(1z<*5wsCE>LhQMeDjE2C73jx-*JNu#?^cfgh*>AmnJnicu
+zafXIvkI$aC+#Scjz+=JeuV2N;VDN;;dhZKX28FyMlI2wwxfvWjOfY`)1*G<XV)~7j
+zu0Z_@lh3UHYXZ{FAWb}$hxuxOnhc)xSb;PjSYZ4Dq=f;du*Y(-AK3I4Jg5qq&n*C(
+z1XEDMB$EtQ$zydKA_G>jSR7*JBakJpdMv?~tT28Cwghg56-2AS8y-{zi_gt~_|e)K
+zY<7oaSzIW{IT?2E_RNd>!o(n8@Mh065aU9{gGyeI=?h+-C_WAL|3k(XVi&kaTxuEh
+g@Ms7Ox)Asf6a7Z=#IyNJE`glp>FVdQ&MBb@0K9OYSpWb4
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/rose_eyes_open.png b/highland-cow-farm/src/assets/cows/rose_eyes_open.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4d792dd3b0ce9f86bd1ae3480bcea71730ebaa1
+GIT binary patch
+literal 2830
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZJ^tDY{7Ar-gY-aW{B$U%U`
+zk^OMD#EJM6RyC#x7SXR~YMtb~^DX&EdoD=lC>RZa(GVC7fuR)w4W}#aywhLb5XZpK
+z#CCiC{O~K?K;|L$Ifcu`_cAbu@LL}C)30J=(2y=XHaG4I6GMRAvmUFxFIX8CWSo#J
+ztGdX|;P7&W@vAS3#2Fek8Kz%(>8j7b;OcyC!)1^`UdQJIf(@F|Yq=O~kim-!Ac-KD
+zgpAFzGJl8^hivhD#_w;ThIRArif_BKCGq(wkR=B^lh3UH8+qy&)JTaEHn58f3NNgc
+zC>C~`yZSZI?gqnflNS&d8oc1K0=etJ3~$*IH?UfX67^oo{jXku9C?_1ZhXmCkh>Qd
+zPPahUv%vTTP%khDQk(Uj&X45<`x$QHf@s@UYQ2`tU@!6PVs^i~#W4K>$nOn~<p(y*
+zws^t=(eO-+ch5;?sM8m(`w`p>3PhmOWkJ45xFA^qq8l6`ni<&UI)Z}><~IxlZgUN>
+zDscF@qPP|mEpR8UFn)Fco5`ie=75}#a7D5h#cH_87z)}!>L*ydiU|a#1j*8MkhH;L
+zef<(RlHKNNgQHz_@wrlPLTE~SE(J2&;pB>9R*<U{YVK6#f>TYxjmlV<h%1<p@u89x
+lXu&8L4S~@Rpm_*{R5DMW!y0v?VviZfE>BlKmvv4FO#m`5AkF{)
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/rose_idle_base.png b/highland-cow-farm/src/assets/cows/rose_idle_base.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..304c7b12dfb02d5162dfc23456708851daf588fb
+GIT binary patch
+literal 6729
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/rose_shadow.png b/highland-cow-farm/src/assets/cows/rose_shadow.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..2e62ce2118340b7b00abc6dd42de1a46ceda5f56
+GIT binary patch
+literal 2778
+zcmeHJ&ui0Q7=H4DF4lH#;9-^GHu@F3t;=Z>VQ$v0pMfEw2QO`5_2!`nf)liv;$&EA
+z`2>qc*<J9U$F5LliGnaZ2)kJ54jv{{5b2?IzDW~xqJMyp9Fn~6^W%N<Ku9((t}KUx
+zCxQUNJe|A*D0Hhp3()1sI?6!sIZrNLzP0=L!^<#cHFfbqA${byvGZ;-9bHT91~N0x
+z9ue6;`~>_2`~>_2`~>_2{)YrM-n_5Lz?svpU%mY(!;EE`^zkp>jvNK%_OG3yb2qL?
+zsISjNG+^|Ol>iERMpJ^hn$_u_;bDz6sI_m{MXScPsOTCxk$*4hJ2SjVX1%yI1&nO7
+zh>G^7Dq97j-$gzI^L|!@WE8#{Vix9BR+J<ZdWM*$ZSHbC0MDTxx5j{Fa!}CjR@pgn
+z7>K;)6cHJ7{W#yCO^ckgW+VGgs6&wI&~+8j1HmGary4@-Ue)fohGjAwhj|Dp7av!c
+zrJ>L_9Iru~>$2x%3rdv2HsdKr$6~0X!Xgv{5mWSFj%5yMkstO*90C`ipDJmJ3kiQ^
+zC}#yzJi`fig+=iXx0#Rxn;%H7;V(Kd5@1}1H!DU?tp$^2QO||~K+0s+mt*eW!%i-J
+zoL1{h+7DzK%8cLWD>kvU;EGLRP%o#ZMf3nJbaL8JX`~{1g7$hNo>&%a?TS>Q06LSP
+wDFoHWDr~+l*^F`#A&HB|pODJ<XmM~;`u1Qcb2V}Osr}aR^DD_0OSyYL0IN6hA^-pY
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/white_eyes_closed.png b/highland-cow-farm/src/assets/cows/white_eyes_closed.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..8d59026c455332fdf9de9ce710eb5c1095384a59
+GIT binary patch
+literal 2406
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZI(T~8OskcwMxuNm?(IB>8y
+zwgf6a`un@WBw*r%nNMVL3I%~mN5N<ajE2By2#kgRt`I1=b^4dt>^L8Nh6d;77hWFy
+z!o*-v!Z$Y#NI$q>SyFY88zSMVkIRHn@zD?%4S~TO0y<eXoKu<3efLQLxzp3t&t;uc
+GLK6TjQY|L{
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/white_eyes_half.png b/highland-cow-farm/src/assets/cows/white_eyes_half.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..6878cd7422e4da48ef2864f9f52f161a8f504452
+GIT binary patch
+literal 2587
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZKPN1iT@Ar-gYUf(FnARyr4
+z*xD(&@V}kM7KI(RXMQ(1z<*5wsCE>LhQMeDjE2C73jx-*JNu#?^cfgh*>AmnJnicu
+zafXIvkI$aC+#Scjz+=JeuV2N;VDN;;dhZKX28FyMlI2wwxfvWjOfY`)1*G<XV)~7j
+zu0Z_@lh3UHYXZ{FAWb}$hxuxOnhc)xSb;PjSYZ4Dq=f;du*Y(-AK3I4Jg5qq&n*C(
+z1XEDMB$EtQ$zydKA_G>jSR7*JBakJpdMv?~tT28Cwghg56-2AS8y-{zi_gt~_|e)K
+zY<7oaSzIW{IT?2E_RNd>!o(n8@Mh065aU9{gGyeI=?h+-C_WAL|3k(XVi&kaTxuEh
+g@Ms7Ox)Asf6a7Z=#IyNJE`glp>FVdQ&MBb@0K9OYSpWb4
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/white_eyes_open.png b/highland-cow-farm/src/assets/cows/white_eyes_open.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4d792dd3b0ce9f86bd1ae3480bcea71730ebaa1
+GIT binary patch
+literal 2830
+zcmeAS@N?(olHy`uVBq!ia0y~yU<NXo893O0)Z|8nJ_ZJ^tDY{7Ar-gY-aW{B$U%U`
+zk^OMD#EJM6RyC#x7SXR~YMtb~^DX&EdoD=lC>RZa(GVC7fuR)w4W}#aywhLb5XZpK
+z#CCiC{O~K?K;|L$Ifcu`_cAbu@LL}C)30J=(2y=XHaG4I6GMRAvmUFxFIX8CWSo#J
+ztGdX|;P7&W@vAS3#2Fek8Kz%(>8j7b;OcyC!)1^`UdQJIf(@F|Yq=O~kim-!Ac-KD
+zgpAFzGJl8^hivhD#_w;ThIRArif_BKCGq(wkR=B^lh3UH8+qy&)JTaEHn58f3NNgc
+zC>C~`yZSZI?gqnflNS&d8oc1K0=etJ3~$*IH?UfX67^oo{jXku9C?_1ZhXmCkh>Qd
+zPPahUv%vTTP%khDQk(Uj&X45<`x$QHf@s@UYQ2`tU@!6PVs^i~#W4K>$nOn~<p(y*
+zws^t=(eO-+ch5;?sM8m(`w`p>3PhmOWkJ45xFA^qq8l6`ni<&UI)Z}><~IxlZgUN>
+zDscF@qPP|mEpR8UFn)Fco5`ie=75}#a7D5h#cH_87z)}!>L*ydiU|a#1j*8MkhH;L
+zef<(RlHKNNgQHz_@wrlPLTE~SE(J2&;pB>9R*<U{YVK6#f>TYxjmlV<h%1<p@u89x
+lXu&8L4S~@Rpm_*{R5DMW!y0v?VviZfE>BlKmvv4FO#m`5AkF{)
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/white_idle_base.png b/highland-cow-farm/src/assets/cows/white_idle_base.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..0d1c0c60d32320439bab1fa56dc4c38d0b52479f
+GIT binary patch
+literal 6731
+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
+aljqD#8TZksx<rCc{<N7>|MrA&?f(O%jboDl
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/assets/cows/white_shadow.png b/highland-cow-farm/src/assets/cows/white_shadow.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..2e62ce2118340b7b00abc6dd42de1a46ceda5f56
+GIT binary patch
+literal 2778
+zcmeHJ&ui0Q7=H4DF4lH#;9-^GHu@F3t;=Z>VQ$v0pMfEw2QO`5_2!`nf)liv;$&EA
+z`2>qc*<J9U$F5LliGnaZ2)kJ54jv{{5b2?IzDW~xqJMyp9Fn~6^W%N<Ku9((t}KUx
+zCxQUNJe|A*D0Hhp3()1sI?6!sIZrNLzP0=L!^<#cHFfbqA${byvGZ;-9bHT91~N0x
+z9ue6;`~>_2`~>_2`~>_2{)YrM-n_5Lz?svpU%mY(!;EE`^zkp>jvNK%_OG3yb2qL?
+zsISjNG+^|Ol>iERMpJ^hn$_u_;bDz6sI_m{MXScPsOTCxk$*4hJ2SjVX1%yI1&nO7
+zh>G^7Dq97j-$gzI^L|!@WE8#{Vix9BR+J<ZdWM*$ZSHbC0MDTxx5j{Fa!}CjR@pgn
+z7>K;)6cHJ7{W#yCO^ckgW+VGgs6&wI&~+8j1HmGary4@-Ue)fohGjAwhj|Dp7av!c
+zrJ>L_9Iru~>$2x%3rdv2HsdKr$6~0X!Xgv{5mWSFj%5yMkstO*90C`ipDJmJ3kiQ^
+zC}#yzJi`fig+=iXx0#Rxn;%H7;V(Kd5@1}1H!DU?tp$^2QO||~K+0s+mt*eW!%i-J
+zoL1{h+7DzK%8cLWD>kvU;EGLRP%o#ZMf3nJbaL8JX`~{1g7$hNo>&%a?TS>Q06LSP
+wDFoHWDr~+l*^F`#A&HB|pODJ<XmM~;`u1Qcb2V}Osr}aR^DD_0OSyYL0IN6hA^-pY
+
+literal 0
+HcmV?d00001
+
+diff --git a/highland-cow-farm/src/game/cowSprites.ts b/highland-cow-farm/src/game/cowSprites.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..cc300db084cb935c1bc766868d9a30334d2c49b1
+--- /dev/null
++++ b/highland-cow-farm/src/game/cowSprites.ts
+@@ -0,0 +1,312 @@
++import type { CowColour } from '../types';
++
++export interface Point {
++  x: number;
++  y: number;
++}
++
++export interface SpriteLayer {
++  id: string;
++  src: string;
++  width: number;
++  height: number;
++  anchor?: Point;
++  offset?: Point;
++  opacity?: number;
++  scale?: number;
++  zIndex?: number;
++  className?: string;
++}
++
++export interface EyeLayers {
++  open: SpriteLayer;
++  half?: SpriteLayer;
++  closed: SpriteLayer;
++}
++
++export interface CowPoseAssets {
++  layers: SpriteLayer[];
++  eyes: EyeLayers;
++}
++
++export interface CowSpriteDefinition {
++  colour: CowColour;
++  size: { width: number; height: number };
++  anchor: Point;
++  poses: Record<'idle' | 'walk', CowPoseAssets>;
++}
++
++export interface AccessorySpriteDefinition {
++  name: string;
++  src: string;
++  width: number;
++  height: number;
++  anchor: Point;
++  placement: keyof typeof ACCESSORY_ANCHORS;
++  offset?: Point;
++  scale?: number;
++  zIndex?: number;
++  className?: string;
++}
++
++export const COW_TEXTURE_SIZE = 768;
++export const COW_ANCHOR: Point = { x: 512, y: 512 };
++
++export const ACCESSORY_ANCHORS = {
++  head: { x: 384, y: 285 },
++  neck: { x: 384, y: 495 },
++  back: { x: 384, y: 450 },
++  leftEar: { x: 255, y: 330 },
++  rightEar: { x: 510, y: 330 }
++} as const;
++
++type CowAssetSet = {
++  base: string;
++  shadow: string;
++  eyesOpen: string;
++  eyesHalf: string;
++  eyesClosed: string;
++};
++
++function createCowDefinition(colour: CowColour, assets: CowAssetSet): CowSpriteDefinition {
++  const anchor = COW_ANCHOR;
++  const size = { width: COW_TEXTURE_SIZE, height: COW_TEXTURE_SIZE };
++  const baseLayers: SpriteLayer[] = [
++    {
++      id: `${colour}-shadow`,
++      src: assets.shadow,
++      width: size.width,
++      height: size.height,
++      anchor,
++      className: 'cow-shadow',
++      zIndex: -20,
++      opacity: 0.85
++    },
++    {
++      id: `${colour}-base`,
++      src: assets.base,
++      width: size.width,
++      height: size.height,
++      anchor,
++      className: 'cow-base',
++      zIndex: 0
++    }
++  ];
++  const eyes: EyeLayers = {
++    open: {
++      id: `${colour}-eyes-open`,
++      src: assets.eyesOpen,
++      width: size.width,
++      height: size.height,
++      anchor,
++      className: 'eyes-open',
++      zIndex: 10
++    },
++    half: {
++      id: `${colour}-eyes-half`,
++      src: assets.eyesHalf,
++      width: size.width,
++      height: size.height,
++      anchor,
++      className: 'eyes-half',
++      zIndex: 10
++    },
++    closed: {
++      id: `${colour}-eyes-closed`,
++      src: assets.eyesClosed,
++      width: size.width,
++      height: size.height,
++      anchor,
++      className: 'eyes-closed',
++      zIndex: 10
++    }
++  };
++
++  const pose: CowPoseAssets = {
++    layers: baseLayers,
++    eyes
++  };
++
++  return {
++    colour,
++    size,
++    anchor,
++    poses: {
++      idle: pose,
++      walk: pose
++    }
++  };
++}
++
++import brownBase from '../assets/cows/brown_idle_base.png';
++import brownShadow from '../assets/cows/brown_shadow.png';
++import brownEyesOpen from '../assets/cows/brown_eyes_open.png';
++import brownEyesHalf from '../assets/cows/brown_eyes_half.png';
++import brownEyesClosed from '../assets/cows/brown_eyes_closed.png';
++
++import creamBase from '../assets/cows/cream_idle_base.png';
++import creamShadow from '../assets/cows/cream_shadow.png';
++import creamEyesOpen from '../assets/cows/cream_eyes_open.png';
++import creamEyesHalf from '../assets/cows/cream_eyes_half.png';
++import creamEyesClosed from '../assets/cows/cream_eyes_closed.png';
++
++import roseBase from '../assets/cows/rose_idle_base.png';
++import roseShadow from '../assets/cows/rose_shadow.png';
++import roseEyesOpen from '../assets/cows/rose_eyes_open.png';
++import roseEyesHalf from '../assets/cows/rose_eyes_half.png';
++import roseEyesClosed from '../assets/cows/rose_eyes_closed.png';
++
++import chocolateBase from '../assets/cows/chocolate_idle_base.png';
++import chocolateShadow from '../assets/cows/chocolate_shadow.png';
++import chocolateEyesOpen from '../assets/cows/chocolate_eyes_open.png';
++import chocolateEyesHalf from '../assets/cows/chocolate_eyes_half.png';
++import chocolateEyesClosed from '../assets/cows/chocolate_eyes_closed.png';
++
++import whiteBase from '../assets/cows/white_idle_base.png';
++import whiteShadow from '../assets/cows/white_shadow.png';
++import whiteEyesOpen from '../assets/cows/white_eyes_open.png';
++import whiteEyesHalf from '../assets/cows/white_eyes_half.png';
++import whiteEyesClosed from '../assets/cows/white_eyes_closed.png';
++
++const cowAssets: Record<CowColour, CowAssetSet> = {
++  brown: {
++    base: brownBase,
++    shadow: brownShadow,
++    eyesOpen: brownEyesOpen,
++    eyesHalf: brownEyesHalf,
++    eyesClosed: brownEyesClosed
++  },
++  cream: {
++    base: creamBase,
++    shadow: creamShadow,
++    eyesOpen: creamEyesOpen,
++    eyesHalf: creamEyesHalf,
++    eyesClosed: creamEyesClosed
++  },
++  rose: {
++    base: roseBase,
++    shadow: roseShadow,
++    eyesOpen: roseEyesOpen,
++    eyesHalf: roseEyesHalf,
++    eyesClosed: roseEyesClosed
++  },
++  chocolate: {
++    base: chocolateBase,
++    shadow: chocolateShadow,
++    eyesOpen: chocolateEyesOpen,
++    eyesHalf: chocolateEyesHalf,
++    eyesClosed: chocolateEyesClosed
++  },
++  white: {
++    base: whiteBase,
++    shadow: whiteShadow,
++    eyesOpen: whiteEyesOpen,
++    eyesHalf: whiteEyesHalf,
++    eyesClosed: whiteEyesClosed
++  }
++};
++
++export const COW_SPRITES: Record<CowColour, CowSpriteDefinition> = {
++  brown: createCowDefinition('brown', cowAssets.brown),
++  cream: createCowDefinition('cream', cowAssets.cream),
++  rose: createCowDefinition('rose', cowAssets.rose),
++  chocolate: createCowDefinition('chocolate', cowAssets.chocolate),
++  white: createCowDefinition('white', cowAssets.white)
++};
++
++import bowPink from '../assets/accessories/bow_pink.png';
++import sunHat from '../assets/accessories/sun_hat.png';
++import flowerCrown from '../assets/accessories/flower_crown.png';
++import bellCharm from '../assets/accessories/bell_charm.png';
++import fernGarland from '../assets/accessories/fern_garland.png';
++import starryBandana from '../assets/accessories/starry_bandana.png';
++import woollyScarf from '../assets/accessories/woolly_scarf.png';
++
++const DEFAULT_ACCESSORY_ANCHOR: Point = { x: 128, y: 256 };
++
++export const ACCESSORY_SPRITES: Record<string, AccessorySpriteDefinition> = {
++  bow_pink: {
++    name: 'bow_pink',
++    src: bowPink,
++    width: 256,
++    height: 256,
++    anchor: DEFAULT_ACCESSORY_ANCHOR,
++    placement: 'leftEar',
++    offset: { x: -48, y: -110 },
++    scale: 0.72,
++    zIndex: 30,
++    className: 'bow'
++  },
++  sun_hat: {
++    name: 'sun_hat',
++    src: sunHat,
++    width: 256,
++    height: 256,
++    anchor: DEFAULT_ACCESSORY_ANCHOR,
++    placement: 'head',
++    offset: { x: 0, y: -140 },
++    scale: 1.22,
++    zIndex: 28,
++    className: 'sun-hat'
++  },
++  flower_crown: {
++    name: 'flower_crown',
++    src: flowerCrown,
++    width: 256,
++    height: 256,
++    anchor: DEFAULT_ACCESSORY_ANCHOR,
++    placement: 'head',
++    offset: { x: 0, y: -160 },
++    scale: 1.08,
++    zIndex: 26,
++    className: 'flower-crown'
++  },
++  bell_charm: {
++    name: 'bell_charm',
++    src: bellCharm,
++    width: 256,
++    height: 256,
++    anchor: DEFAULT_ACCESSORY_ANCHOR,
++    placement: 'neck',
++    offset: { x: 0, y: -20 },
++    scale: 0.62,
++    zIndex: 24,
++    className: 'bell'
++  },
++  fern_garland: {
++    name: 'fern_garland',
++    src: fernGarland,
++    width: 256,
++    height: 256,
++    anchor: DEFAULT_ACCESSORY_ANCHOR,
++    placement: 'head',
++    offset: { x: 0, y: -130 },
++    scale: 1.05,
++    zIndex: 25,
++    className: 'fern-garland'
++  },
++  starry_bandana: {
++    name: 'starry_bandana',
++    src: starryBandana,
++    width: 256,
++    height: 256,
++    anchor: DEFAULT_ACCESSORY_ANCHOR,
++    placement: 'neck',
++    offset: { x: 0, y: -12 },
++    scale: 0.92,
++    zIndex: 23,
++    className: 'bandana'
++  },
++  woolly_scarf: {
++    name: 'woolly_scarf',
++    src: woollyScarf,
++    width: 256,
++    height: 256,
++    anchor: DEFAULT_ACCESSORY_ANCHOR,
++    placement: 'neck',
++    offset: { x: 0, y: -8 },
++    scale: 1.02,
++    zIndex: 23,
++    className: 'scarf'
++  }
++};
+diff --git a/highland-cow-farm/src/game/cowVisuals.ts b/highland-cow-farm/src/game/cowVisuals.ts
+index 33dbd2ed830604dae7d34e38c09d9bc2c44c416c..f751cf68499bda55f67f16811f43a785d1cb7d20 100644
+--- a/highland-cow-farm/src/game/cowVisuals.ts
++++ b/highland-cow-farm/src/game/cowVisuals.ts
+@@ -1,1283 +1,329 @@
+ import type { Cow } from '../types';
++import { resolvedAccessoryKey } from '../data/accessories';
++import {
++  ACCESSORY_ANCHORS,
++  ACCESSORY_SPRITES,
++  COW_ANCHOR,
++  COW_SPRITES,
++  COW_TEXTURE_SIZE,
++  type AccessorySpriteDefinition,
++  type CowPoseAssets,
++  type CowSpriteDefinition,
++  type SpriteLayer
++} from './cowSprites';
+ 
+ export const COAT_COLOURS: Record<Cow['colour'], { base: string; shade: string; light: string }> = {
+   brown: { base: '#C98655', shade: '#B37447', light: '#E2AA7C' },
+   cream: { base: '#E9D6B8', shade: '#D2BE9F', light: '#F5E8D3' },
+   rose: { base: '#F2B7C6', shade: '#DD9DAF', light: '#FFD7E3' },
+   chocolate: { base: '#8A5A3B', shade: '#72482F', light: '#A87553' },
+   white: { base: '#F3F1EA', shade: '#D4D1C7', light: '#FFFFFF' }
+ };
+ 
+-const EYE_COLOUR = '#4A2C3A';
+-const BLUSH_COLOUR = '#F3B1B4';
+-const HORN_BASE = '#D7CFC4';
+-
+ export type CowPose = 'idle' | 'walk' | 'blink';
+ 
+ export interface CowSvgOptions {
+   size?: number;
+   pose?: CowPose;
+   highContrast?: boolean;
+   className?: string;
+   scale?: number;
+   viewBox?: string;
+   offsetX?: number;
+   offsetY?: number;
+ }
+ 
+ export interface CowCanvasOptions {
+   w?: number;
+   h?: number;
+   pose?: CowPose;
++  x?: number;
++  y?: number;
++  scale?: number;
++  wobble?: number;
++  clear?: boolean;
+ }
+ 
+-interface LegGeometry {
+-  side: 'left' | 'right';
+-  position: 'front' | 'back';
+-  x: number;
+-  top: number;
+-  bottom: number;
+-  width: number;
+-  hoofWidth: number;
+-  hoofHeight: number;
+-  lift: number;
+-}
+-
+-interface CowGeometry {
+-  pose: CowPose;
+-  chonk: number;
+-  bobStrength: number;
+-  body: {
+-    cx: number;
+-    cy: number;
+-    rx: number;
+-    ry: number;
+-    bellyRx: number;
+-    bellyRy: number;
+-    bellyCy: number;
+-  };
+-  head: {
+-    cx: number;
+-    cy: number;
+-    rx: number;
+-    ry: number;
+-    top: number;
+-    bottom: number;
+-  };
+-  snout: {
+-    cx: number;
+-    cy: number;
+-    width: number;
+-    height: number;
+-    nostrilGap: number;
+-    nostrilRadius: number;
+-  };
+-  horns: {
+-    baseLeft: { x: number; y: number };
+-    baseRight: { x: number; y: number };
+-    tipLeft: { x: number; y: number };
+-    tipRight: { x: number; y: number };
+-    innerLeft: { x: number; y: number };
+-    innerRight: { x: number; y: number };
+-  };
+-  ears: {
+-    left: { x: number; y: number; width: number; height: number; tilt: number };
+-    right: { x: number; y: number; width: number; height: number; tilt: number };
+-  };
+-  eyes: {
+-    left: { cx: number; cy: number; rx: number; ry: number };
+-    right: { cx: number; cy: number; rx: number; ry: number };
+-  };
+-  blush: {
+-    left: { cx: number; cy: number; rx: number; ry: number };
+-    right: { cx: number; cy: number; rx: number; ry: number };
+-  };
+-  fringe: {
+-    top: number;
+-    bottom: number;
+-    width: number;
+-  };
+-  legs: LegGeometry[];
+-  crown: {
+-    y: number;
+-    radius: number;
+-  };
+-}
+-
+-interface AccessoryGeometry {
+-  cow: Cow;
+-  geo: CowGeometry;
+-  scale: number;
+-}
+-
+-type AccessoryRenderer = {
+-  svg: (input: AccessoryGeometry) => string;
+-  canvas?: (ctx: CanvasRenderingContext2D, input: AccessoryGeometry) => void;
+-};
+-
+ const DEFAULT_SIZE = 240;
+-const DEFAULT_VIEWBOX = { x: -120, y: -120, width: 240, height: 240 } as const;
+-
+-interface ViewBoxDefinition {
+-  x: number;
+-  y: number;
+-  width: number;
+-  height: number;
+-}
+-
+-const BLUSH_MIN_OPACITY = 0.35;
+-const BLUSH_MAX_OPACITY = 0.5;
+-
+ const BLINK_DURATION = 180;
+ const BLINK_GAP_MIN = 2800;
+ const BLINK_GAP_MAX = 6200;
+ 
+ const blinkControllers = new WeakMap<HTMLElement, { open?: number; close?: number }>();
+ 
+-const clamp = (value: number, min: number, max: number): number => Math.min(max, Math.max(min, value));
+-const lerp = (a: number, b: number, t: number): number => a + (b - a) * t;
+ const fmt = (value: number): string => Number.isFinite(value) ? Number(value.toFixed(2)).toString() : '0';
+-const now = (): number => (typeof performance !== 'undefined' ? performance.now() : Date.now());
+-
+-let gradientCounter = 0;
+-const uid = (prefix: string): string => `${prefix}-${(++gradientCounter).toString(36)}`;
+-
+-function parseViewBox(value?: string): ViewBoxDefinition | null {
+-  if (!value) return null;
+-  const parts = value.trim().split(/[\s,]+/).map(part => Number(part));
+-  if (parts.length !== 4 || parts.some(part => Number.isNaN(part))) {
+-    return null;
+-  }
+-  const [x, y, width, height] = parts;
+-  return { x, y, width, height };
+-}
++const clamp = (value: number, min: number, max: number): number => Math.min(max, Math.max(min, value));
+ 
+ export function colourHex(colour: Cow['colour']): string {
+   return (COAT_COLOURS[colour] || COAT_COLOURS.brown).base;
+ }
+ 
+-const normaliseAccessoryName = (name: string): string => name.trim().toLowerCase().replace(/\s+/g, '_');
+-
+ function chonkBucket(chonk: number): number {
+-  const normalised = clamp(chonk, 0, 100);
++  const normalised = clamp(chonk ?? 0, 0, 100);
+   return Math.min(4, Math.floor(normalised / 25));
+ }
+ 
+-function computeGeometry(cow: Cow, pose: CowPose, timestamp: number = now()): CowGeometry {
+-  const chonk = clamp(cow.chonk ?? 0, 0, 100) / 100;
+-  const effectivePose = pose === 'blink' ? 'idle' : pose;
+-  const bobStrength = 1 - chonk * 0.45;
+-  const baseBob = effectivePose === 'walk' ? 4.2 : 1.6;
+-  const bob = Math.sin(timestamp / (effectivePose === 'walk' ? 380 : 920)) * baseBob * bobStrength;
+-  const sway = Math.cos(timestamp / 1450) * 1.1;
+-
+-  const baseBodyCy = 44;
+-  const baseBodyRx = 80;
+-  const baseBodyRy = 54;
+-  const bodyRx = baseBodyRx * (1 + 0.15 * chonk);
+-  const bodyRy = baseBodyRy * (1 + 0.12 * chonk);
+-  const bodyCy = baseBodyCy + bob * 0.6;
++type EyeState = 'open' | 'half' | 'closed';
+ 
+-  const bellyRx = 50 + 22 * chonk;
+-  const bellyRy = 32 + 16 * chonk;
+-  const bellyCy = bodyCy + bodyRy * 0.2;
+-
+-  const baseHeadCy = -32;
+-  const headRx = 58;
+-  const headRy = 52;
+-  const headCy = baseHeadCy + bob;
+-  const headTop = headCy - headRy;
+-  const headBottom = headCy + headRy;
+-
+-  const snoutCy = headCy + headRy * 0.26;
+-  const snoutWidth = 62;
+-  const snoutHeight = 42;
+-
+-  const hornsBaseY = headTop + 18;
+-  const hornOffsetX = headRx * 0.64;
+-  const hornTipOffsetX = hornOffsetX + 46;
+-  const hornTipOffsetY = 36;
+-
+-  const eyesSpacing = 42;
+-  const eyeRx = 12.5;
+-  const eyeRy = 14;
+-  const eyeCy = headCy - headRy * 0.18;
+-
+-  const blushCy = snoutCy + 12;
+-  const blushRx = 20;
+-  const blushRy = 13;
+-
+-  const legBaseY = bodyCy + bodyRy - 6;
+-  const legHeight = 46 + chonk * 8;
+-  const legWidth = 24 + chonk * 5;
+-  const hoofHeight = 12 + chonk * 4;
+-  const hoofWidth = legWidth * 0.78;
+-
+-  const stepPhase = Math.sin(timestamp / 420);
+-  const stepAmplitude = 6.2 * bobStrength;
+-  const frontLift = effectivePose === 'walk' ? stepPhase * stepAmplitude : 0;
+-  const backLift = effectivePose === 'walk' ? -stepPhase * stepAmplitude : 0;
+-  const frontSpacing = bodyRx * 0.5 + 6;
+-  const backSpacing = bodyRx * 0.26 + 4;
+-
+-  const legs: LegGeometry[] = [
+-    {
+-      side: 'left',
+-      position: 'front',
+-      x: -frontSpacing,
+-      top: legBaseY - legHeight - Math.max(0, frontLift),
+-      bottom: legBaseY + Math.max(0, -frontLift * 0.4),
+-      width: legWidth,
+-      hoofHeight,
+-      hoofWidth,
+-      lift: Math.max(0, frontLift)
+-    },
+-    {
+-      side: 'right',
+-      position: 'front',
+-      x: frontSpacing,
+-      top: legBaseY - legHeight - Math.max(0, -frontLift),
+-      bottom: legBaseY + Math.max(0, frontLift * 0.4),
+-      width: legWidth,
+-      hoofHeight,
+-      hoofWidth,
+-      lift: Math.max(0, -frontLift)
+-    },
+-    {
+-      side: 'left',
+-      position: 'back',
+-      x: -backSpacing,
+-      top: legBaseY - legHeight - Math.max(0, backLift),
+-      bottom: legBaseY + Math.max(0, -backLift * 0.4),
+-      width: legWidth * 0.92,
+-      hoofHeight,
+-      hoofWidth: hoofWidth * 0.92,
+-      lift: Math.max(0, backLift)
+-    },
+-    {
+-      side: 'right',
+-      position: 'back',
+-      x: backSpacing,
+-      top: legBaseY - legHeight - Math.max(0, -backLift),
+-      bottom: legBaseY + Math.max(0, backLift * 0.4),
+-      width: legWidth * 0.92,
+-      hoofHeight,
+-      hoofWidth: hoofWidth * 0.92,
+-      lift: Math.max(0, -backLift)
+-    }
+-  ];
+-
+-  return {
+-    pose,
+-    chonk,
+-    bobStrength,
+-    body: {
+-      cx: 0,
+-      cy: bodyCy,
+-      rx: bodyRx,
+-      ry: bodyRy,
+-      bellyRx,
+-      bellyRy,
+-      bellyCy
+-    },
+-    head: {
+-      cx: 0,
+-      cy: headCy,
+-      rx: headRx,
+-      ry: headRy,
+-      top: headTop,
+-      bottom: headBottom
+-    },
+-    snout: {
+-      cx: 0,
+-      cy: snoutCy,
+-      width: snoutWidth,
+-      height: snoutHeight,
+-      nostrilGap: 18,
+-      nostrilRadius: 6
+-    },
+-    horns: {
+-      baseLeft: { x: -hornOffsetX, y: hornsBaseY },
+-      baseRight: { x: hornOffsetX, y: hornsBaseY },
+-      tipLeft: { x: -hornTipOffsetX, y: hornsBaseY - hornTipOffsetY },
+-      tipRight: { x: hornTipOffsetX, y: hornsBaseY - hornTipOffsetY },
+-      innerLeft: { x: -hornOffsetX + 6, y: hornsBaseY - 18 },
+-      innerRight: { x: hornOffsetX - 6, y: hornsBaseY - 18 }
+-    },
+-    ears: {
+-      left: { x: -headRx * 0.78, y: headCy - headRy * 0.32, width: 34, height: 38, tilt: -12 + sway },
+-      right: { x: headRx * 0.78, y: headCy - headRy * 0.32, width: 34, height: 38, tilt: 12 + sway }
+-    },
+-    eyes: {
+-      left: { cx: -eyesSpacing / 2, cy: eyeCy, rx: eyeRx, ry: eyeRy },
+-      right: { cx: eyesSpacing / 2, cy: eyeCy, rx: eyeRx, ry: eyeRy }
+-    },
+-    blush: {
+-      left: { cx: -snoutWidth * 0.38, cy: blushCy, rx: blushRx, ry: blushRy },
+-      right: { cx: snoutWidth * 0.38, cy: blushCy, rx: blushRx, ry: blushRy }
+-    },
+-    fringe: {
+-      top: headTop + 6,
+-      bottom: eyeCy + 16,
+-      width: headRx * 1.46
+-    },
+-    legs,
+-    crown: {
+-      y: headTop + 14,
+-      radius: headRx * 0.98
+-    }
+-  };
+-}
+-
+-function buildLegPath(leg: LegGeometry): string {
+-  const half = leg.width / 2;
+-  const top = leg.top;
+-  const knee = lerp(leg.top, leg.bottom - leg.hoofHeight, 0.55);
+-  const bottom = leg.bottom;
+-  const inset = leg.side === 'left' ? -2.2 : 2.2;
+-  return `M ${fmt(leg.x - half)} ${fmt(top)} C ${fmt(leg.x - half - 6)} ${fmt(top + 14)}, ${fmt(leg.x - half + inset)} ${fmt(knee - 6)}, ${fmt(leg.x - half + 3)} ${fmt(knee)} ` +
+-    `L ${fmt(leg.x - half + 4)} ${fmt(bottom - leg.hoofHeight)} C ${fmt(leg.x - half + 6)} ${fmt(bottom - 2)}, ${fmt(leg.x - half + 10)} ${fmt(bottom)}, ${fmt(leg.x - half + 16)} ${fmt(bottom)} ` +
+-    `L ${fmt(leg.x + half - 16)} ${fmt(bottom)} C ${fmt(leg.x + half - 10)} ${fmt(bottom)}, ${fmt(leg.x + half - 6)} ${fmt(bottom - 2)}, ${fmt(leg.x + half - 4)} ${fmt(bottom - leg.hoofHeight)} ` +
+-    `L ${fmt(leg.x + half - 3)} ${fmt(knee)} C ${fmt(leg.x + half - inset)} ${fmt(knee - 6)}, ${fmt(leg.x + half + 6)} ${fmt(top + 14)}, ${fmt(leg.x + half)} ${fmt(top)} Z`;
+-}
+-
+-function buildHoofPath(leg: LegGeometry): string {
+-  const half = leg.hoofWidth / 2;
+-  const bottom = leg.bottom;
+-  return `M ${fmt(leg.x - half)} ${fmt(bottom - leg.hoofHeight + 2)} Q ${fmt(leg.x)} ${fmt(bottom + 4)}, ${fmt(leg.x + half)} ${fmt(bottom - leg.hoofHeight + 2)} ` +
+-    `Q ${fmt(leg.x)} ${fmt(bottom - leg.hoofHeight - 2)}, ${fmt(leg.x - half)} ${fmt(bottom - leg.hoofHeight + 2)} Z`;
+-}
+-
+-function buildHornPath(geo: CowGeometry, side: 'left' | 'right'): string {
+-  const start = side === 'left' ? geo.horns.baseLeft : geo.horns.baseRight;
+-  const tip = side === 'left' ? geo.horns.tipLeft : geo.horns.tipRight;
+-  const inner = side === 'left' ? geo.horns.innerLeft : geo.horns.innerRight;
+-  const sweep = side === 'left' ? -1 : 1;
+-  const curveOutX = start.x + sweep * 18;
+-  const curveOutY = start.y - 18;
+-  const midX = tip.x + sweep * 8;
+-  const midY = tip.y + 8;
+-  const returnX = start.x + sweep * 10;
+-  const returnY = start.y + 14;
+-  return `M ${fmt(start.x)} ${fmt(start.y)} C ${fmt(curveOutX)} ${fmt(curveOutY)}, ${fmt(midX)} ${fmt(midY)}, ${fmt(tip.x)} ${fmt(tip.y)} ` +
+-    `Q ${fmt(tip.x + sweep * 14)} ${fmt(tip.y + 18)}, ${fmt(tip.x + sweep * 18)} ${fmt(tip.y + 32)} ` +
+-    `C ${fmt(tip.x + sweep * 20)} ${fmt(tip.y + 44)}, ${fmt(returnX)} ${fmt(returnY)}, ${fmt(inner.x)} ${fmt(inner.y)} ` +
+-    `Q ${fmt(start.x + sweep * 2)} ${fmt(start.y - 6)}, ${fmt(start.x)} ${fmt(start.y)} Z`;
+-}
+-
+-function buildEarPath(ear: CowGeometry['ears']['left'], side: 'left' | 'right'): string {
+-  const sweep = side === 'left' ? -1 : 1;
+-  const tipX = ear.x + sweep * ear.width * 0.6;
+-  const tipY = ear.y + ear.height * 0.1;
+-  const bottomX = ear.x + sweep * ear.width * 0.2;
+-  const bottomY = ear.y + ear.height;
+-  return `M ${fmt(ear.x)} ${fmt(ear.y)} Q ${fmt(ear.x + sweep * ear.width * 0.4)} ${fmt(ear.y - ear.height * 0.2)}, ${fmt(tipX)} ${fmt(tipY)} ` +
+-    `Q ${fmt(ear.x + sweep * ear.width * 0.9)} ${fmt(bottomY - ear.height * 0.15)}, ${fmt(bottomX)} ${fmt(bottomY)} ` +
+-    `Q ${fmt(ear.x - sweep * ear.width * 0.2)} ${fmt(bottomY - ear.height * 0.1)}, ${fmt(ear.x)} ${fmt(ear.y)} Z`;
+-}
+-
+-function buildEarInnerPath(ear: CowGeometry['ears']['left'], side: 'left' | 'right'): string {
+-  const sweep = side === 'left' ? -1 : 1;
+-  const tipX = ear.x + sweep * ear.width * 0.4;
+-  const tipY = ear.y + ear.height * 0.12;
+-  const bottomX = ear.x + sweep * ear.width * 0.12;
+-  const bottomY = ear.y + ear.height * 0.76;
+-  return `M ${fmt(ear.x + sweep * ear.width * 0.12)} ${fmt(ear.y + ear.height * 0.12)} Q ${fmt(ear.x + sweep * ear.width * 0.24)} ${fmt(ear.y - ear.height * 0.08)}, ${fmt(tipX)} ${fmt(tipY)} ` +
+-    `Q ${fmt(ear.x + sweep * ear.width * 0.6)} ${fmt(bottomY - ear.height * 0.12)}, ${fmt(bottomX)} ${fmt(bottomY)} ` +
+-    `Q ${fmt(ear.x)} ${fmt(bottomY - ear.height * 0.18)}, ${fmt(ear.x + sweep * ear.width * 0.12)} ${fmt(ear.y + ear.height * 0.12)} Z`;
+-}
+-
+-function buildSnoutPath(geo: CowGeometry): string {
+-  const left = geo.snout.cx - geo.snout.width / 2;
+-  const right = geo.snout.cx + geo.snout.width / 2;
+-  const top = geo.snout.cy - geo.snout.height * 0.52;
+-  const bottom = geo.snout.cy + geo.snout.height * 0.68;
+-  return `M ${fmt(left)} ${fmt(geo.snout.cy)} Q ${fmt(geo.snout.cx)} ${fmt(top)}, ${fmt(right)} ${fmt(geo.snout.cy)} ` +
+-    `Q ${fmt(geo.snout.cx)} ${fmt(bottom)}, ${fmt(left)} ${fmt(geo.snout.cy)} Z`;
+-}
+-
+-function buildSnoutHighlightPath(geo: CowGeometry): string {
+-  const left = geo.snout.cx - geo.snout.width * 0.24;
+-  const right = geo.snout.cx + geo.snout.width * 0.18;
+-  const top = geo.snout.cy - geo.snout.height * 0.25;
+-  const bottom = geo.snout.cy + geo.snout.height * 0.12;
+-  return `M ${fmt(left)} ${fmt(geo.snout.cy)} Q ${fmt(geo.snout.cx - 4)} ${fmt(top)}, ${fmt(right)} ${fmt(geo.snout.cy - 4)} ` +
+-    `Q ${fmt(geo.snout.cx - 2)} ${fmt(bottom)}, ${fmt(left)} ${fmt(geo.snout.cy)} Z`;
+-}
+-
+-interface FringePaths {
+-  back: string;
+-  front: string;
+-}
+-
+-function buildFringePaths(geo: CowGeometry): FringePaths {
+-  const width = geo.fringe.width;
+-  const left = -width / 2;
+-  const top = geo.fringe.top;
+-  const bottom = geo.fringe.bottom;
+-  const tuftDepths = [0, 12, 5, 14, 6, 13, 4, 10];
+-  const step = width / (tuftDepths.length - 1);
+-  const right = left + width;
+-
+-  let back = `M ${fmt(left)} ${fmt(top)}`;
+-  for (let i = 0; i < tuftDepths.length - 1; i++) {
+-    const start = left + step * i;
+-    const end = left + step * (i + 1);
+-    const ctrlX = start + step / 2;
+-    const ctrlY = top - (i % 2 === 0 ? 10 : 7);
+-    back += ` Q ${fmt(ctrlX)} ${fmt(ctrlY)}, ${fmt(end)} ${fmt(top)}`;
+-  }
+-  back += ` L ${fmt(right)} ${fmt(bottom + tuftDepths[tuftDepths.length - 1])}`;
+-  for (let i = tuftDepths.length - 2; i >= 0; i--) {
+-    const drop = bottom + tuftDepths[i];
+-    const endX = left + step * i;
+-    const ctrlX = endX + step / 2;
+-    const ctrlY = drop + (i % 2 === 0 ? 12 : 8);
+-    back += ` Q ${fmt(ctrlX)} ${fmt(ctrlY)}, ${fmt(endX)} ${fmt(drop)}`;
+-  }
+-  back += ' Z';
+-
+-  const overlayWidth = width * 0.92;
+-  const overlayLeft = -overlayWidth / 2;
+-  const overlayTop = top + 3;
+-  const overlayBottom = geo.eyes.left.cy - geo.eyes.left.ry * 0.25;
+-  const overlayDepths = [0, 6, 2, 8, 3, 7, 1, 5];
+-  const overlayStep = overlayWidth / (overlayDepths.length - 1);
+-  const overlayRight = overlayLeft + overlayWidth;
+-  let front = `M ${fmt(overlayLeft)} ${fmt(overlayTop)}`;
+-  for (let i = 0; i < overlayDepths.length - 1; i++) {
+-    const start = overlayLeft + overlayStep * i;
+-    const end = overlayLeft + overlayStep * (i + 1);
+-    const ctrlX = start + overlayStep / 2;
+-    const ctrlY = overlayTop - (i % 2 === 0 ? 8 : 5);
+-    front += ` Q ${fmt(ctrlX)} ${fmt(ctrlY)}, ${fmt(end)} ${fmt(overlayTop)}`;
+-  }
+-  front += ` L ${fmt(overlayRight)} ${fmt(overlayBottom + overlayDepths[overlayDepths.length - 1])}`;
+-  for (let i = overlayDepths.length - 2; i >= 0; i--) {
+-    const drop = overlayBottom + overlayDepths[i];
+-    const endX = overlayLeft + overlayStep * i;
+-    const ctrlX = endX + overlayStep / 2;
+-    const ctrlY = drop + (i % 2 === 0 ? 7 : 9);
+-    front += ` Q ${fmt(ctrlX)} ${fmt(ctrlY)}, ${fmt(endX)} ${fmt(drop)}`;
+-  }
+-  front += ' Z';
+-
+-  return { back, front };
+-}
+-
+-function buildEyeHighlight(cx: number, cy: number): string {
+-  return `M ${fmt(cx - 3)} ${fmt(cy - 4)} a 4 4 0 0 1 4 4  a 4 4 0 0 1 -4 -4`;
+-}
+-
+-function buildEyeHalfPath(cx: number, cy: number, rx: number, ry: number): string {
+-  return `M ${fmt(cx - rx)} ${fmt(cy)} Q ${fmt(cx)} ${fmt(cy - ry * 0.9)}, ${fmt(cx + rx)} ${fmt(cy)} L ${fmt(cx + rx)} ${fmt(cy + ry * 0.3)} ` +
+-    `Q ${fmt(cx)} ${fmt(cy + ry * 0.1)}, ${fmt(cx - rx)} ${fmt(cy + ry * 0.3)} Z`;
+-}
+-
+-function buildEyeClosedPath(cx: number, cy: number, rx: number): string {
+-  return `M ${fmt(cx - rx)} ${fmt(cy)} Q ${fmt(cx)} ${fmt(cy + 1)}, ${fmt(cx + rx)} ${fmt(cy)}`;
+-}
++type MoodState = 'happy' | 'calm' | 'sleepy' | 'worried';
+ 
+-function buildBrowPath(cx: number, cy: number, rx: number, tilt: number): string {
+-  const leftX = cx - rx;
+-  const rightX = cx + rx;
+-  const arcY = cy - tilt;
+-  return `M ${fmt(leftX)} ${fmt(cy)} Q ${fmt(cx)} ${fmt(arcY)}, ${fmt(rightX)} ${fmt(cy)}`;
++export function moodFromStats(happiness: number, hunger: number, cleanliness: number): MoodState {
++  if (happiness >= 72 && hunger <= 45 && cleanliness >= 60) return 'happy';
++  if (hunger >= 75 || cleanliness <= 34) return 'worried';
++  if (happiness <= 45 || hunger >= 60) return 'sleepy';
++  return 'calm';
+ }
+ 
+-function buildPastureGlow(geo: CowGeometry, gradientId: string): string {
+-  const width = geo.body.rx * 1.6;
+-  const height = geo.body.ry * 1.15;
+-  return `<ellipse class='cow-backdrop' cx='0' cy='${fmt(geo.body.cy + geo.body.ry * 0.55)}' rx='${fmt(width)}' ry='${fmt(height)}' fill='url(#${gradientId})' />`;
++function buildEyeState(pose: CowPose, mood: MoodState): EyeState {
++  if (pose === 'blink') return 'closed';
++  if (mood === 'sleepy') return 'half';
++  return 'open';
+ }
+ 
+-function createDefs(geo: CowGeometry, coat: { base: string; shade: string; light: string }, highContrast: boolean) {
+-  const bodyGradient = uid('coat');
+-  const headGradient = uid('head');
+-  const hornGradient = uid('horn');
+-  const snoutGradient = uid('snout');
+-  const glowGradient = uid('glow');
+-  const defs = `<linearGradient id='${bodyGradient}' x1='0' y1='0' x2='0' y2='1'>
+-      <stop offset='0%' stop-color='${coat.light}' />
+-      <stop offset='65%' stop-color='${coat.base}' />
+-      <stop offset='100%' stop-color='${coat.shade}' />
+-    </linearGradient>
+-    <linearGradient id='${headGradient}' x1='0' y1='0' x2='0' y2='1'>
+-      <stop offset='0%' stop-color='${coat.light}' />
+-      <stop offset='80%' stop-color='${coat.base}' />
+-    </linearGradient>
+-    <linearGradient id='${hornGradient}' x1='0' y1='0' x2='1' y2='1'>
+-      <stop offset='0%' stop-color='#F1EBE3' />
+-      <stop offset='55%' stop-color='${HORN_BASE}' />
+-      <stop offset='100%' stop-color='#BDAF9D' />
+-    </linearGradient>
+-    <linearGradient id='${snoutGradient}' x1='0' y1='0' x2='0' y2='1'>
+-      <stop offset='0%' stop-color='${coat.light}' />
+-      <stop offset='100%' stop-color='${coat.base}' />
+-    </linearGradient>
+-    <radialGradient id='${glowGradient}' cx='50%' cy='60%' r='62%'>
+-      <stop offset='0%' stop-color='rgba(255, 246, 252, ${highContrast ? 0.9 : 0.75})' />
+-      <stop offset='100%' stop-color='rgba(255, 246, 252, 0)' />
+-    </radialGradient>`;
+-  return { defs, bodyGradient, headGradient, hornGradient, snoutGradient, glowGradient };
++function spriteForCow(cow: Cow): CowSpriteDefinition {
++  return COW_SPRITES[cow.colour] || COW_SPRITES.brown;
+ }
+ 
+-const ACCESSORY_RENDERERS: Record<string, AccessoryRenderer> = {};
+-
+-function registerAccessories() {
+-  if (Object.keys(ACCESSORY_RENDERERS).length) return;
+-  ACCESSORY_RENDERERS.bow_pink = {
+-    svg: ({ geo, scale }) => {
+-      const x = geo.head.cx - geo.head.rx * 0.62;
+-      const y = geo.head.cy - geo.head.ry * 0.08;
+-      return `<g class="acc acc-bow" transform="translate(${fmt(x)} ${fmt(y)}) scale(${fmt(scale)})">
+-          <ellipse cx="-10" cy="0" rx="10" ry="14" fill="#FBD5EA" />
+-          <ellipse cx="10" cy="0" rx="10" ry="14" fill="#FBD5EA" />
+-          <ellipse cx="0" cy="2" rx="6" ry="8" fill="#F49BC4" />
+-          <path d="M-6 -12 Q0 -8 6 -12" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" />
+-        </g>`;
+-    },
+-    canvas: (ctx, { geo, scale }) => {
+-      const x = geo.head.cx - geo.head.rx * 0.62;
+-      const y = geo.head.cy - geo.head.ry * 0.08;
+-      ctx.save();
+-      ctx.translate(x, y);
+-      ctx.scale(scale, scale);
+-      ctx.fillStyle = '#FBD5EA';
+-      ctx.beginPath();
+-      ctx.ellipse(-10, 0, 10, 14, 0, 0, Math.PI * 2);
+-      ctx.ellipse(10, 0, 10, 14, 0, 0, Math.PI * 2);
+-      ctx.fill();
+-      ctx.fillStyle = '#F49BC4';
+-      ctx.beginPath();
+-      ctx.ellipse(0, 2, 6, 8, 0, 0, Math.PI * 2);
+-      ctx.fill();
+-      ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+-      ctx.lineWidth = 2;
+-      ctx.beginPath();
+-      ctx.moveTo(-6, -12);
+-      ctx.quadraticCurveTo(0, -8, 6, -12);
+-      ctx.stroke();
+-      ctx.restore();
+-    }
+-  };
+-
+-  ACCESSORY_RENDERERS.sun_hat = {
+-    svg: ({ geo, scale }) => {
+-      const y = geo.head.top - 4;
+-      const brim = geo.head.rx * 1.25;
+-      const crown = geo.head.rx * 0.76;
+-      return `<g class="acc acc-sun-hat" transform="translate(0 ${fmt(y)}) scale(${fmt(scale)})">
+-          <ellipse cx="0" cy="0" rx="${fmt(brim)}" ry="18" fill="#FBEAC3" stroke="#E6C592" stroke-width="3" />
+-          <ellipse cx="0" cy="-10" rx="${fmt(crown)}" ry="22" fill="#FFF4D7" stroke="#E6C592" stroke-width="2.4" />
+-          <path d="M-${fmt(crown * 0.7)} -6 Q0 -16 ${fmt(crown * 0.7)} -6" fill="none" stroke="#F7AEC7" stroke-width="5" stroke-linecap="round" />
+-        </g>`;
+-    },
+-    canvas: (ctx, { geo, scale }) => {
+-      const y = geo.head.top - 4;
+-      const brim = geo.head.rx * 1.25;
+-      const crown = geo.head.rx * 0.76;
+-      ctx.save();
+-      ctx.translate(0, y);
+-      ctx.scale(scale, scale);
+-      ctx.fillStyle = '#FBEAC3';
+-      ctx.strokeStyle = '#E6C592';
+-      ctx.lineWidth = 3;
+-      ctx.beginPath();
+-      ctx.ellipse(0, 0, brim, 18, 0, 0, Math.PI * 2);
+-      ctx.fill();
+-      ctx.stroke();
+-      ctx.fillStyle = '#FFF4D7';
+-      ctx.lineWidth = 2.4;
+-      ctx.beginPath();
+-      ctx.ellipse(0, -10, crown, 22, 0, 0, Math.PI * 2);
+-      ctx.fill();
+-      ctx.stroke();
+-      ctx.strokeStyle = '#F7AEC7';
+-      ctx.lineWidth = 5;
+-      ctx.lineCap = 'round';
+-      ctx.beginPath();
+-      ctx.moveTo(-crown * 0.7, -6);
+-      ctx.quadraticCurveTo(0, -16, crown * 0.7, -6);
+-      ctx.stroke();
+-      ctx.restore();
+-    }
+-  };
+-
+-  ACCESSORY_RENDERERS.flower_crown = {
+-    svg: ({ geo, scale }) => {
+-      const y = geo.crown.y;
+-      const floralScale = geo.head.rx / 60;
+-      return `<g class="acc acc-flower-crown" transform="translate(0 ${fmt(y)}) scale(${fmt(scale)})">${flowerCrownSVG(floralScale, 0)}</g>`;
+-    },
+-    canvas: (ctx, { geo, scale }) => {
+-      const y = geo.crown.y;
+-      const floralScale = geo.head.rx / 60;
+-      const petals = [
+-        { x: -52, y: -6, r: 12, colour: '#FCDDEB', centre: '#F4A7C4' },
+-        { x: -32, y: -12, r: 8, colour: '#CBE7FF', centre: '#7AB2E3' },
+-        { x: -8, y: -4, r: 14, colour: '#FFE8D6', centre: '#F4B876' },
+-        { x: 14, y: -10, r: 12, colour: '#FFD6E5', centre: '#F58FB8' },
+-        { x: 36, y: -8, r: 9, colour: '#C7ECD3', centre: '#76B88B' },
+-        { x: 52, y: -6, r: 11, colour: '#F7C6DD', centre: '#E08CB9' }
+-      ];
+-      const leaves = [
+-        { x: -42, y: 2, w: 20, h: 8, colour: '#9FD4A8', rotate: -16 },
+-        { x: -4, y: 6, w: 26, h: 9, colour: '#B5E0B7', rotate: 12 },
+-        { x: 30, y: 4, w: 22, h: 8, colour: '#8BC598', rotate: 18 }
+-      ];
+-      ctx.save();
+-      ctx.translate(0, y);
+-      ctx.scale(scale * floralScale, scale * floralScale);
+-      leaves.forEach(leaf => {
+-        ctx.save();
+-        ctx.translate(leaf.x, leaf.y);
+-        ctx.rotate((leaf.rotate * Math.PI) / 180);
+-        ctx.fillStyle = leaf.colour;
+-        ctx.beginPath();
+-        ctx.moveTo(-leaf.w / 2, 0);
+-        ctx.quadraticCurveTo(0, -leaf.h, leaf.w / 2, 0);
+-        ctx.quadraticCurveTo(0, leaf.h, -leaf.w / 2, 0);
+-        ctx.fill();
+-        ctx.restore();
+-      });
+-      petals.forEach(flower => {
+-        ctx.save();
+-        ctx.translate(flower.x, flower.y);
+-        ctx.fillStyle = flower.colour;
+-        for (let i = 0; i < 6; i++) {
+-          ctx.rotate((Math.PI * 2) / 6);
+-          ctx.beginPath();
+-          ctx.ellipse(0, flower.r, flower.r * 0.45, flower.r, 0, 0, Math.PI * 2);
+-          ctx.fill();
+-        }
+-        ctx.fillStyle = flower.centre;
+-        ctx.beginPath();
+-        ctx.arc(0, 0, flower.r * 0.42, 0, Math.PI * 2);
+-        ctx.fill();
+-        ctx.restore();
+-      });
+-      ctx.restore();
+-    }
+-  };
+-
+-  ACCESSORY_RENDERERS.bell_charm = {
+-    svg: ({ geo, scale }) => {
+-      const y = geo.snout.cy + geo.snout.height * 0.92;
+-      return `<g class="acc acc-bell" transform="translate(0 ${fmt(y)}) scale(${fmt(scale)})">
+-          <path d="M-10 0 Q0 -16 10 0 V8 H-10 Z" fill="#F7E3B2" stroke="#C69C4F" stroke-width="2" />
+-          <circle cx="0" cy="5" r="3.6" fill="#C69C4F" />
+-          <path d="M-8 -2 Q0 -10 8 -2" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" />
+-        </g>`;
+-    },
+-    canvas: (ctx, { geo, scale }) => {
+-      const y = geo.snout.cy + geo.snout.height * 0.92;
+-      ctx.save();
+-      ctx.translate(0, y);
+-      ctx.scale(scale, scale);
+-      ctx.beginPath();
+-      ctx.moveTo(-10, 0);
+-      ctx.quadraticCurveTo(0, -16, 10, 0);
+-      ctx.lineTo(10, 8);
+-      ctx.lineTo(-10, 8);
+-      ctx.closePath();
+-      ctx.fillStyle = '#F7E3B2';
+-      ctx.strokeStyle = '#C69C4F';
+-      ctx.lineWidth = 2;
+-      ctx.fill();
+-      ctx.stroke();
+-      ctx.fillStyle = '#C69C4F';
+-      ctx.beginPath();
+-      ctx.arc(0, 5, 3.6, 0, Math.PI * 2);
+-      ctx.fill();
+-      ctx.strokeStyle = '#FFFFFF';
+-      ctx.lineWidth = 1.6;
+-      ctx.lineCap = 'round';
+-      ctx.beginPath();
+-      ctx.moveTo(-8, -2);
+-      ctx.quadraticCurveTo(0, -10, 8, -2);
+-      ctx.stroke();
+-      ctx.restore();
+-    }
+-  };
+-
+-  ACCESSORY_RENDERERS.fern_garland = {
+-    svg: ({ geo, scale }) => {
+-      const y = geo.horns.baseLeft.y - 8;
+-      const spread = geo.head.rx * 1.3;
+-      const leaves = [-spread * 0.6, -spread * 0.2, spread * 0.2, spread * 0.6]
+-        .map((x, index) => `<path d="M${fmt(x)} ${fmt(y)} q${fmt(index % 2 === 0 ? -8 : 8)} -6 ${fmt(index % 2 === 0 ? -2 : 2)} -16" stroke="#7DBA8E" stroke-width="3" stroke-linecap="round" />`)
+-        .join('');
+-      return `<g class="acc acc-fern" transform="scale(${fmt(scale)})">
+-          <path d="M-${fmt(spread)} ${fmt(y)} Q0 ${fmt(y - 14)} ${fmt(spread)} ${fmt(y)}" fill="none" stroke="#7DBA8E" stroke-width="5" stroke-linecap="round" />
+-          ${leaves}
+-        </g>`;
+-    },
+-    canvas: (ctx, { geo, scale }) => {
+-      const y = geo.horns.baseLeft.y - 8;
+-      const spread = geo.head.rx * 1.3;
+-      ctx.save();
+-      ctx.scale(scale, scale);
+-      ctx.strokeStyle = '#7DBA8E';
+-      ctx.lineWidth = 5;
+-      ctx.lineCap = 'round';
+-      ctx.beginPath();
+-      ctx.moveTo(-spread, y);
+-      ctx.quadraticCurveTo(0, y - 14, spread, y);
+-      ctx.stroke();
+-      ctx.lineWidth = 3;
+-      const offsets = [-spread * 0.6, -spread * 0.2, spread * 0.2, spread * 0.6];
+-      offsets.forEach((x, index) => {
+-        ctx.beginPath();
+-        ctx.moveTo(x, y);
+-        const ctrl = index % 2 === 0 ? x - 8 : x + 8;
+-        ctx.quadraticCurveTo(ctrl, y - 6, x + (index % 2 === 0 ? -2 : 2), y - 16);
+-        ctx.stroke();
+-      });
+-      ctx.restore();
+-    }
+-  };
+-
+-  ACCESSORY_RENDERERS.starry_bandana = {
+-    svg: ({ geo, scale }) => {
+-      const y = geo.snout.cy + geo.snout.height * 0.4;
+-      const width = geo.head.rx * 1.2;
+-      return `<g class="acc acc-bandana" transform="translate(0 ${fmt(y)}) scale(${fmt(scale)})">
+-          <path d="M-${fmt(width)} -6 L0 18 L${fmt(width)} -6 Z" fill="#364C85" stroke="#223463" stroke-width="3" stroke-linejoin="round" />
+-          <circle cx="-${fmt(width * 0.46)}" cy="4" r="3" fill="#F9F1FF" opacity="0.85" />
+-          <circle cx="0" cy="10" r="3.8" fill="#F9F1FF" opacity="0.85" />
+-          <circle cx="${fmt(width * 0.46)}" cy="4" r="3" fill="#F9F1FF" opacity="0.85" />
+-        </g>`;
+-    },
+-    canvas: (ctx, { geo, scale }) => {
+-      const y = geo.snout.cy + geo.snout.height * 0.4;
+-      const width = geo.head.rx * 1.2;
+-      ctx.save();
+-      ctx.translate(0, y);
+-      ctx.scale(scale, scale);
+-      ctx.beginPath();
+-      ctx.moveTo(-width, -6);
+-      ctx.lineTo(0, 18);
+-      ctx.lineTo(width, -6);
+-      ctx.closePath();
+-      ctx.fillStyle = '#364C85';
+-      ctx.strokeStyle = '#223463';
+-      ctx.lineWidth = 3;
+-      ctx.fill();
+-      ctx.stroke();
+-      ctx.fillStyle = 'rgba(249,241,255,0.85)';
+-      ctx.beginPath();
+-      ctx.arc(-width * 0.46, 4, 3, 0, Math.PI * 2);
+-      ctx.arc(0, 10, 3.8, 0, Math.PI * 2);
+-      ctx.arc(width * 0.46, 4, 3, 0, Math.PI * 2);
+-      ctx.fill();
+-      ctx.restore();
+-    }
+-  };
+-
+-  ACCESSORY_RENDERERS.woolly_scarf = {
+-    svg: ({ geo, scale }) => {
+-      const y = geo.snout.cy + geo.snout.height * 0.58;
+-      const width = geo.head.rx * 1.18;
+-      return `<g class="acc acc-scarf" transform="translate(0 ${fmt(y)}) scale(${fmt(scale)})">
+-          <path d="M-${fmt(width)} -10 Q0 12 ${fmt(width)} -10 L${fmt(width * 0.74)} 12 Q0 26 -${fmt(width * 0.74)} 12 Z" fill="#F2A9B7" stroke="#C97A8A" stroke-width="3" stroke-linejoin="round" />
+-          <path d="M-${fmt(width * 0.24)} -4 V18" stroke="#C97A8A" stroke-width="5" stroke-linecap="round" />
+-          <path d="M${fmt(width * 0.24)} -4 V18" stroke="#C97A8A" stroke-width="5" stroke-linecap="round" />
+-        </g>`;
+-    },
+-    canvas: (ctx, { geo, scale }) => {
+-      const y = geo.snout.cy + geo.snout.height * 0.58;
+-      const width = geo.head.rx * 1.18;
+-      ctx.save();
+-      ctx.translate(0, y);
+-      ctx.scale(scale, scale);
+-      ctx.beginPath();
+-      ctx.moveTo(-width, -10);
+-      ctx.quadraticCurveTo(0, 12, width, -10);
+-      ctx.lineTo(width * 0.74, 12);
+-      ctx.quadraticCurveTo(0, 26, -width * 0.74, 12);
+-      ctx.closePath();
+-      ctx.fillStyle = '#F2A9B7';
+-      ctx.strokeStyle = '#C97A8A';
+-      ctx.lineWidth = 3;
+-      ctx.fill();
+-      ctx.stroke();
+-      ctx.lineWidth = 5;
+-      ctx.lineCap = 'round';
+-      ctx.beginPath();
+-      ctx.moveTo(-width * 0.24, -4);
+-      ctx.lineTo(-width * 0.24, 18);
+-      ctx.moveTo(width * 0.24, -4);
+-      ctx.lineTo(width * 0.24, 18);
+-      ctx.stroke();
+-      ctx.restore();
+-    }
+-  };
++function poseAssets(sprite: CowSpriteDefinition, pose: CowPose): CowPoseAssets {
++  if (pose === 'walk') return sprite.poses.walk;
++  return sprite.poses.idle;
+ }
+ 
+-registerAccessories();
+-
+-const ACCESSORY_ALIASES: Record<string, string> = {
+-  'pastel bow': 'bow_pink',
+-  'bow_pink': 'bow_pink',
+-  'sun hat': 'sun_hat',
+-  'sun_hat': 'sun_hat',
+-  'flower crown': 'flower_crown',
+-  'thistle crown': 'flower_crown',
+-  'bell charm': 'bell_charm',
+-  'fern garland': 'fern_garland',
+-  'starry bandana': 'starry_bandana',
+-  'woolly scarf': 'woolly_scarf'
+-};
+-
+-function resolveAccessoryKey(name: string): string | undefined {
+-  return ACCESSORY_ALIASES[normaliseAccessoryName(name)];
++function defaultViewBox(sprite: CowSpriteDefinition): string {
++  return `${fmt(-sprite.anchor.x)} ${fmt(-sprite.anchor.y)} ${fmt(sprite.size.width)} ${fmt(sprite.size.height)}`;
+ }
+ 
+-function renderAccessorySvg(name: string, cow: Cow, geo: CowGeometry, scale = 1): string {
+-  const key = resolveAccessoryKey(name);
+-  if (!key) return '';
+-  const renderer = ACCESSORY_RENDERERS[key];
+-  if (!renderer) return '';
+-  return renderer.svg({ cow, geo, scale });
++function sortLayers<T extends { zIndex?: number }>(layers: T[]): T[] {
++  return [...layers].sort((a, b) => (a.zIndex ?? 0) - (b.zIndex ?? 0));
+ }
+ 
+-function drawAccessoryCanvas(ctx: CanvasRenderingContext2D, name: string, cow: Cow, geo: CowGeometry, scale = 1): void {
+-  const key = resolveAccessoryKey(name);
+-  if (!key) return;
+-  const renderer = ACCESSORY_RENDERERS[key];
+-  renderer?.canvas?.(ctx, { cow, geo, scale });
++function layerToSvg(layer: SpriteLayer): string {
++  const width = fmt(layer.width * (layer.scale ?? 1));
++  const height = fmt(layer.height * (layer.scale ?? 1));
++  const anchor = layer.anchor ?? COW_ANCHOR;
++  const offset = layer.offset ?? { x: 0, y: 0 };
++  const x = fmt(-anchor.x * (layer.scale ?? 1) + offset.x);
++  const y = fmt(-anchor.y * (layer.scale ?? 1) + offset.y);
++  const opacityAttr = typeof layer.opacity === 'number' ? ` opacity="${fmt(layer.opacity)}"` : '';
++  const classes = ['cow-layer'];
++  if (layer.className) classes.push(layer.className);
++  return `<image class="${classes.join(' ')}" href="${layer.src}" x="${x}" y="${y}" width="${width}" height="${height}"${opacityAttr} />`;
+ }
+ 
+-export function flowerCrownSVG(scale = 1, hueShift = 0): string {
+-  const flowers: Array<{ type: 'cosmos' | 'forget' | 'daisy'; x: number; y: number; scale: number; petal: string; centre: string }> = [
+-    { type: 'cosmos', x: -52, y: -6, scale: 0.92, petal: '#FCDDEB', centre: '#F4A7C4' },
+-    { type: 'forget', x: -30, y: -12, scale: 0.68, petal: '#CBE7FF', centre: '#7AB2E3' },
+-    { type: 'daisy', x: -6, y: -4, scale: 1.08, petal: '#FFF4D6', centre: '#F2B976' },
+-    { type: 'cosmos', x: 18, y: -10, scale: 0.96, petal: '#FFD6E5', centre: '#F58FB8' },
+-    { type: 'forget', x: 38, y: -8, scale: 0.64, petal: '#C6E7F8', centre: '#73B7D9' },
+-    { type: 'daisy', x: 56, y: -4, scale: 0.9, petal: '#FFF6E6', centre: '#F3C27D' }
+-  ];
+-  const leaves: Array<{ x: number; y: number; rotate: number; width: number; height: number; colour: string }> = [
+-    { x: -40, y: 4, rotate: -20, width: 22, height: 8, colour: '#9FD4A8' },
+-    { x: -8, y: 8, rotate: 12, width: 26, height: 9, colour: '#B5E0B7' },
+-    { x: 24, y: 6, rotate: 18, width: 24, height: 8, colour: '#8BC598' },
+-    { x: 48, y: 4, rotate: 26, width: 20, height: 7, colour: '#A3D6AF' }
+-  ];
+-
+-  const petals = flowers
+-    .map(({ type, x, y, scale: flowerScale, petal, centre }) => {
+-      const petalsCount = type === 'daisy' ? 12 : 6;
+-      const petalWidth = type === 'forget' ? 10 : 14;
+-      const petalHeight = type === 'forget' ? 20 : 26;
+-      const petalsMarkup = Array.from({ length: petalsCount })
+-        .map((_, index) => {
+-          const rotation = (360 / petalsCount) * index;
+-          const offset = type === 'daisy' ? 0.9 : 1;
+-          return `<ellipse cx="0" cy="${fmt(petalHeight * offset)}" rx="${fmt(petalWidth * 0.35)}" ry="${fmt(petalHeight)}" transform="rotate(${fmt(rotation)})" fill="${shiftHue(petal, hueShift)}" opacity="0.96" />`;
+-        })
+-        .join('');
+-      return `<g class="crown-flower" transform="translate(${fmt(x)} ${fmt(y)}) scale(${fmt(flowerScale * scale)})">${petalsMarkup}<circle cx="0" cy="0" r="${fmt(type === 'daisy' ? 9 : 7)}" fill="${shiftHue(centre, hueShift)}" /></g>`;
++function eyeLayersToSvg(eyeState: EyeState, eyes: CowPoseAssets['eyes']): string {
++  const layers: SpriteLayer[] = [eyes.open];
++  if (eyes.half) layers.push(eyes.half);
++  layers.push(eyes.closed);
++  return layers
++    .map(layer => {
++      const classes = ['cow-layer', 'cow-eyes'];
++      if (layer.className) classes.push(layer.className);
++      const width = fmt(layer.width * (layer.scale ?? 1));
++      const height = fmt(layer.height * (layer.scale ?? 1));
++      const anchor = layer.anchor ?? COW_ANCHOR;
++      const offset = layer.offset ?? { x: 0, y: 0 };
++      const x = fmt(-anchor.x * (layer.scale ?? 1) + offset.x);
++      const y = fmt(-anchor.y * (layer.scale ?? 1) + offset.y);
++      return `<image class="${classes.join(' ')}" href="${layer.src}" x="${x}" y="${y}" width="${width}" height="${height}" />`;
+     })
+     .join('');
+-
+-  const leafMarkup = leaves
+-    .map(leaf => `<path d="M-${fmt(leaf.width / 2)} 0 Q0 -${fmt(leaf.height)} ${fmt(leaf.width / 2)} 0 Q0 ${fmt(leaf.height)} -${fmt(leaf.width / 2)} 0 Z" transform="translate(${fmt(leaf.x)} ${fmt(leaf.y)}) rotate(${fmt(leaf.rotate)}) scale(${fmt(scale)})" fill="${shiftHue(leaf.colour, hueShift)}" />`)
+-    .join('');
+-
+-  return `<g class="flower-crown" opacity="0.98">${leafMarkup}${petals}</g>`;
+-}
+-
+-function shiftHue(hex: string, degrees: number): string {
+-  if (!degrees) return hex;
+-  const { h, s, l } = hexToHsl(hex);
+-  return hslToHex({ h: (h + degrees + 360) % 360, s, l });
+-}
+-
+-function hexToHsl(hex: string): { h: number; s: number; l: number } {
+-  const value = hex.replace('#', '');
+-  const bigint = parseInt(value, 16);
+-  const r = ((bigint >> 16) & 255) / 255;
+-  const g = ((bigint >> 8) & 255) / 255;
+-  const b = (bigint & 255) / 255;
+-  const max = Math.max(r, g, b);
+-  const min = Math.min(r, g, b);
+-  let h = 0;
+-  let s = 0;
+-  const l = (max + min) / 2;
+-  const d = max - min;
+-  if (d !== 0) {
+-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+-    switch (max) {
+-      case r:
+-        h = (g - b) / d + (g < b ? 6 : 0);
+-        break;
+-      case g:
+-        h = (b - r) / d + 2;
+-        break;
+-      case b:
+-        h = (r - g) / d + 4;
+-        break;
+-    }
+-    h /= 6;
+-  }
+-  return { h: h * 360, s: s * 100, l: l * 100 };
+-}
+-
+-function hslToHex({ h, s, l }: { h: number; s: number; l: number }): string {
+-  const hue = h / 360;
+-  const sat = s / 100;
+-  const light = l / 100;
+-  const hueToRgb = (p: number, q: number, t: number): number => {
+-    if (t < 0) t += 1;
+-    if (t > 1) t -= 1;
+-    if (t < 1 / 6) return p + (q - p) * 6 * t;
+-    if (t < 1 / 2) return q;
+-    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+-    return p;
+-  };
+-  let r: number;
+-  let g: number;
+-  let b: number;
+-  if (sat === 0) {
+-    r = g = b = light;
+-  } else {
+-    const q = light < 0.5 ? light * (1 + sat) : light + sat - light * sat;
+-    const p = 2 * light - q;
+-    r = hueToRgb(p, q, hue + 1 / 3);
+-    g = hueToRgb(p, q, hue);
+-    b = hueToRgb(p, q, hue - 1 / 3);
+-  }
+-  const toHex = (x: number) => Math.round(x * 255).toString(16).padStart(2, '0');
+-  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+ }
+ 
+-function buildEyeState(pose: CowPose, mood: MoodState): 'open' | 'half' | 'closed' {
+-  if (pose === 'blink') return 'closed';
+-  if (mood === 'sleepy') return 'half';
+-  return 'open';
++interface ResolvedAccessory {
++  key: string;
++  def: AccessorySpriteDefinition;
+ }
+ 
+-type MoodState = 'happy' | 'calm' | 'sleepy' | 'worried';
+-
+-export function moodFromStats(happiness: number, hunger: number, cleanliness: number): MoodState {
+-  if (happiness >= 72 && hunger <= 45 && cleanliness >= 60) return 'happy';
+-  if (hunger >= 75 || cleanliness <= 34) return 'worried';
+-  if (happiness <= 45 || hunger >= 60) return 'sleepy';
+-  return 'calm';
+-}
+-
+-export function renderAccessory(name: string, cow: Cow, scale = 1): string {
+-  const geo = computeGeometry(cow, 'idle');
+-  return renderAccessorySvg(name, cow, geo, scale);
+-}
+-
+-function renderAccessoriesLayer(cow: Cow, geo: CowGeometry): string {
+-  if (!cow.accessories?.length) return '';
++function resolveAccessories(cow: Cow): ResolvedAccessory[] {
++  if (!cow.accessories?.length) return [];
+   return cow.accessories
+-    .map(name => renderAccessorySvg(name, cow, geo))
+-    .filter(Boolean)
++    .map(name => {
++      const key = resolvedAccessoryKey(name);
++      const def = ACCESSORY_SPRITES[key];
++      if (!def) return null;
++      return { key, def };
++    })
++    .filter((value): value is ResolvedAccessory => Boolean(value));
++}
++
++function accessoryToSvg(entry: ResolvedAccessory): string {
++  const target = ACCESSORY_ANCHORS[entry.def.placement];
++  if (!target) return '';
++  const scale = entry.def.scale ?? 1;
++  const anchor = entry.def.anchor;
++  const offset = entry.def.offset ?? { x: 0, y: 0 };
++  const width = fmt(entry.def.width * scale);
++  const height = fmt(entry.def.height * scale);
++  const x = fmt(target.x + offset.x - anchor.x * scale);
++  const y = fmt(target.y + offset.y - anchor.y * scale);
++  const classes = ['cow-layer', 'cow-accessory'];
++  if (entry.def.className) classes.push(entry.def.className);
++  classes.push(`accessory-${entry.key}`);
++  return `<image class="${classes.join(' ')}" href="${entry.def.src}" x="${x}" y="${y}" width="${width}" height="${height}" />`;
++}
++
++function accessoriesToSvg(cow: Cow): string {
++  const entries = resolveAccessories(cow);
++  if (!entries.length) return '';
++  return sortLayers(entries.map(entry => ({ ...entry, zIndex: entry.def.zIndex ?? 0 })))
++    .map(({ key, def }) => accessoryToSvg({ key, def }))
+     .join('');
+ }
+ 
+-function drawAccessoriesLayer(ctx: CanvasRenderingContext2D, cow: Cow, geo: CowGeometry): void {
+-  cow.accessories?.forEach(name => {
+-    drawAccessoryCanvas(ctx, name, cow, geo);
+-  });
+-}
+-
+ export function svg(cow: Cow, opts: CowSvgOptions = {}): string {
++  const sprite = spriteForCow(cow);
+   const pose: CowPose = opts.pose || 'idle';
+-  const size = opts.size ?? DEFAULT_SIZE;
+-  const highContrast = !!opts.highContrast;
+-  const geometry = computeGeometry(cow, pose);
+-  const coat = COAT_COLOURS[cow.colour] || COAT_COLOURS.brown;
+-  const defs = createDefs(geometry, coat, highContrast);
++  const assets = poseAssets(sprite, pose);
+   const mood = moodFromStats(cow.happiness ?? 50, cow.hunger ?? 50, cow.cleanliness ?? 50);
+-  const chonkClass = `chonk-${chonkBucket(cow.chonk)}`;
+-  const classes = ['cow-svg', 'cow-figure', `pose-${pose}`, `mood-${mood}`, `coat-${cow.colour}`, chonkClass];
++  const eyeState = buildEyeState(pose, mood);
++  const classes = ['cow-svg', 'cow-figure', `pose-${pose}`, `coat-${cow.colour}`, `chonk-${chonkBucket(cow.chonk)}`];
+   if (opts.className) classes.push(opts.className);
+-  if (highContrast) classes.push('high-contrast');
+-  const viewBoxDef = parseViewBox(opts.viewBox) ?? DEFAULT_VIEWBOX;
+-  const scale = opts.scale ?? 1;
++  if (opts.highContrast) classes.push('high-contrast');
++  const widthAttr = opts.size ? ` width="${fmt(opts.size)}" height="${fmt(opts.size)}"` : ` width="${fmt(DEFAULT_SIZE)}" height="${fmt(DEFAULT_SIZE)}"`;
++  const viewBoxAttr = opts.viewBox || defaultViewBox(sprite);
+   const offsetX = opts.offsetX ?? 0;
+   const offsetY = opts.offsetY ?? 0;
+-  const rootOffsetX = viewBoxDef.x + viewBoxDef.width / 2 + offsetX;
+-  const rootOffsetY = viewBoxDef.y + viewBoxDef.height / 2 + offsetY;
+-  const transformParts: string[] = [];
+-  if (rootOffsetX || rootOffsetY) {
+-    transformParts.push(`translate(${fmt(rootOffsetX)} ${fmt(rootOffsetY)})`);
++  const scale = opts.scale ?? 1;
++  const transforms: string[] = [];
++  if (offsetX || offsetY) transforms.push(`translate(${fmt(offsetX)} ${fmt(offsetY)})`);
++  if (scale !== 1) transforms.push(`scale(${fmt(scale)})`);
++  const transformAttr = transforms.length ? ` transform="${transforms.join(' ')}"` : '';
++  const baseLayers = sortLayers(assets.layers).map(layerToSvg).join('');
++  const eyesSvg = eyeLayersToSvg(eyeState, assets.eyes);
++  const accessories = accessoriesToSvg(cow);
++  const label = `${cow.name} the cow`;
++  const chonk = clamp((cow.chonk ?? 0) / 100, 0, 1);
++  return `<svg class="${classes.join(' ')}" role="img" aria-label="${label}" data-eye-state="${eyeState}" viewBox="${viewBoxAttr}" preserveAspectRatio="xMidYMid meet"${widthAttr} style="--cow-chonk:${chonk.toFixed(3)};">
++    <title>${label}</title>
++    <g class="cow-root-group"${transformAttr}>
++      ${baseLayers}
++      ${eyesSvg}
++      ${accessories}
++    </g>
++  </svg>`;
++}
++
++const imageCache = new Map<string, HTMLImageElement>();
++const loadingImages = new Map<string, HTMLImageElement>();
++
++function ensureImage(src: string): HTMLImageElement | null {
++  const cached = imageCache.get(src);
++  if (cached && cached.complete && cached.naturalWidth > 0) {
++    return cached;
+   }
+-  if (scale !== 1) {
+-    transformParts.push(`scale(${fmt(scale)})`);
++  if (!loadingImages.has(src) && typeof Image !== 'undefined') {
++    const img = new Image();
++    img.decoding = 'async';
++    img.onload = () => {
++      imageCache.set(src, img);
++      loadingImages.delete(src);
++    };
++    img.onerror = () => {
++      loadingImages.delete(src);
++    };
++    img.src = src;
++    loadingImages.set(src, img);
+   }
+-  const rootTransformAttr = transformParts.length ? ` transform="${transformParts.join(' ')}"` : '';
+-  const viewBoxAttr = `${fmt(viewBoxDef.x)} ${fmt(viewBoxDef.y)} ${fmt(viewBoxDef.width)} ${fmt(viewBoxDef.height)}`;
+-  const fringe = buildFringePaths(geometry);
+-  const styleVars = `--coat-base:${coat.base};--coat-shade:${coat.shade};--coat-light:${coat.light};--chonk:${geometry.chonk.toFixed(3)};--bob-strength:${geometry.bobStrength.toFixed(3)};`;
+-  const eyeState = buildEyeState(pose, mood);
+-  const eyelidColour = shiftHue(coat.base, -4);
+-  const blushOpacity = lerp(BLUSH_MIN_OPACITY, BLUSH_MAX_OPACITY, 0.6 + geometry.chonk * 0.4);
+-  const glow = buildPastureGlow(geometry, defs.glowGradient);
+-  const accessories = renderAccessoriesLayer(cow, geometry);
+-
+-  const svgStyle = `<style>
+-      .cow-figure { overflow: visible; }
+-      .cow-figure .cow-root-group { transform-box: fill-box; transform-origin: 50% 70%; }
+-      .cow-figure .cow-body-group { transform-origin: 0 ${fmt(geometry.body.cy)}; }
+-      .cow-figure.pose-walk .cow-body-group { animation: cow-bob 2.8s ease-in-out infinite; }
+-      .cow-figure.pose-idle .cow-body-group { animation: cow-sway 5.4s ease-in-out infinite; }
+-      .cow-figure .cow-leg.front { transform-origin: center ${fmt(geometry.body.cy + geometry.body.ry)}; }
+-      .cow-figure.pose-walk .cow-leg.front-left { animation: leg-swing 1.4s ease-in-out infinite; }
+-      .cow-figure.pose-walk .cow-leg.front-right { animation: leg-swing 1.4s ease-in-out infinite reverse; }
+-      .cow-figure.pose-walk .cow-leg.back-left { animation: leg-swing 1.4s ease-in-out infinite reverse; }
+-      .cow-figure.pose-walk .cow-leg.back-right { animation: leg-swing 1.4s ease-in-out infinite; }
+-      .cow-figure .cow-fringe, .cow-figure .cow-fringe-back { transform-origin: 0 ${fmt(geometry.fringe.top + 4)}; }
+-      .cow-figure.pose-walk .cow-fringe, .cow-figure.pose-walk .cow-fringe-back { animation: fringe-bob 2.8s ease-in-out infinite; }
+-      .cow-figure .eye-half, .cow-figure .eye-closed, .cow-figure .eye-lid { opacity: 0; }
+-      .cow-figure.mood-sleepy .eye-half { opacity: 1; }
+-      .cow-figure.pose-blink .eye-open, .cow-figure.auto-blink .eye-open { opacity: 0; }
+-      .cow-figure.pose-blink .eye-closed, .cow-figure.auto-blink .eye-closed { opacity: 1; }
+-      .cow-figure.pose-blink .eye-lid, .cow-figure.auto-blink .eye-lid { opacity: 1; }
+-      .cow-figure .eyebrow { transition: transform 0.4s ease; transform-origin: center; }
+-      .cow-figure.mood-worried .eyebrow-left { transform: rotate(-10deg) translateY(-1px); }
+-      .cow-figure.mood-worried .eyebrow-right { transform: rotate(10deg) translateY(-1px); }
+-      @keyframes cow-bob { 0% { transform: translateY(0); } 50% { transform: translateY(${fmt(-4.8 * geometry.bobStrength)}); } 100% { transform: translateY(0); } }
+-      @keyframes cow-sway { 0% { transform: translateY(0); } 50% { transform: translateY(${fmt(-1.8 * geometry.bobStrength)}); } 100% { transform: translateY(0); } }
+-      @keyframes fringe-bob { 0% { transform: rotate(0); } 50% { transform: rotate(${fmt(2.6 * geometry.bobStrength)}deg); } 100% { transform: rotate(0); } }
+-      @keyframes leg-swing { 0% { transform: rotate(${fmt(3 * geometry.bobStrength)}deg); } 50% { transform: rotate(${fmt(-3 * geometry.bobStrength)}deg); } 100% { transform: rotate(${fmt(3 * geometry.bobStrength)}deg); } }
+-    </style>`;
++  return null;
++}
++
++function warmCowAssets(sprite: CowSpriteDefinition): void {
++  const layers = sprite.poses.idle.layers;
++  layers.forEach(layer => ensureImage(layer.src));
++  const eyes = sprite.poses.idle.eyes;
++  ensureImage(eyes.open.src);
++  eyes.half && ensureImage(eyes.half.src);
++  ensureImage(eyes.closed.src);
++}
++
++function drawLayer(ctx: CanvasRenderingContext2D, layer: SpriteLayer): void {
++  const img = ensureImage(layer.src);
++  if (!img) return;
++  const scale = layer.scale ?? 1;
++  const anchor = layer.anchor ?? COW_ANCHOR;
++  const offset = layer.offset ?? { x: 0, y: 0 };
++  const x = offset.x - anchor.x * scale;
++  const y = offset.y - anchor.y * scale;
++  const width = layer.width * scale;
++  const height = layer.height * scale;
++  const opacity = typeof layer.opacity === 'number' ? layer.opacity : 1;
++  ctx.save();
++  ctx.globalAlpha *= opacity;
++  ctx.drawImage(img, x, y, width, height);
++  ctx.restore();
++}
+ 
+-  return `<svg class="${classes.join(' ')}" data-name="${cow.name}" role="img" aria-label="${cow.name} Highland calf" viewBox="${viewBoxAttr}" width="${fmt(size)}" height="${fmt(size)}" style="${styleVars}">
+-      ${svgStyle}
+-      <defs>${defs.defs}</defs>
+-      <g class="cow-root-group"${rootTransformAttr}>
+-        ${glow}
+-        <g class="cow-body-group">
+-        <ellipse class="cow-body" cx="${fmt(geometry.body.cx)}" cy="${fmt(geometry.body.cy)}" rx="${fmt(geometry.body.rx)}" ry="${fmt(geometry.body.ry)}" fill="url(#${defs.bodyGradient})" stroke="${highContrast ? '#4A2C3A' : 'none'}" stroke-width="${highContrast ? '2.4' : '0'}" />
+-        <ellipse class="cow-belly" cx="${fmt(geometry.body.cx)}" cy="${fmt(geometry.body.bellyCy)}" rx="${fmt(geometry.body.bellyRx)}" ry="${fmt(geometry.body.bellyRy)}" fill="rgba(255,255,255,0.24)" />
+-        <ellipse class="cow-shadow" cx="${fmt(geometry.body.cx)}" cy="${fmt(geometry.body.cy + geometry.body.ry * 0.55)}" rx="${fmt(geometry.body.rx * 0.64)}" ry="${fmt(geometry.body.ry * 0.45)}" fill="rgba(74,44,58,0.08)" />
+-        </g>
+-        <g class="cow-legs">
+-        ${geometry.legs.map(leg => `<path class="cow-leg ${leg.position}-${leg.side}" d="${buildLegPath(leg)}" fill="${coat.shade}" />`).join('')}
+-        ${geometry.legs.map(leg => `<path class="cow-hoof" d="${buildHoofPath(leg)}" fill="#534448" />`).join('')}
+-        </g>
+-        <g class="cow-head">
+-        <path class="cow-horn left" d="${buildHornPath(geometry, 'left')}" fill="url(#${defs.hornGradient})" stroke="${highContrast ? '#806F57' : 'none'}" stroke-width="${highContrast ? '1.6' : '0'}" />
+-        <path class="cow-horn right" d="${buildHornPath(geometry, 'right')}" fill="url(#${defs.hornGradient})" stroke="${highContrast ? '#806F57' : 'none'}" stroke-width="${highContrast ? '1.6' : '0'}" />
+-        <path class="cow-ear left" d="${buildEarPath(geometry.ears.left, 'left')}" fill="${shiftHue(coat.base, -6)}" />
+-        <path class="cow-ear right" d="${buildEarPath(geometry.ears.right, 'right')}" fill="${shiftHue(coat.base, -6)}" />
+-        <path class="cow-ear-inner left" d="${buildEarInnerPath(geometry.ears.left, 'left')}" fill="rgba(255,221,235,0.85)" />
+-        <path class="cow-ear-inner right" d="${buildEarInnerPath(geometry.ears.right, 'right')}" fill="rgba(255,221,235,0.85)" />
+-        <ellipse class="cow-head" cx="${fmt(geometry.head.cx)}" cy="${fmt(geometry.head.cy)}" rx="${fmt(geometry.head.rx)}" ry="${fmt(geometry.head.ry)}" fill="url(#${defs.headGradient})" stroke="${highContrast ? '#4A2C3A' : 'none'}" stroke-width="${highContrast ? '2.2' : '0'}" />
+-        <path class="cow-fringe-back" d="${fringe.back}" fill="${shiftHue(coat.base, -10)}" />
+-        <g class="cow-eyes" fill="${EYE_COLOUR}">
+-          <ellipse class="eye-open" cx="${fmt(geometry.eyes.left.cx)}" cy="${fmt(geometry.eyes.left.cy)}" rx="${fmt(geometry.eyes.left.rx)}" ry="${fmt(geometry.eyes.left.ry)}" opacity="${eyeState === 'open' ? '1' : '0'}" />
+-          <ellipse class="eye-open" cx="${fmt(geometry.eyes.right.cx)}" cy="${fmt(geometry.eyes.right.cy)}" rx="${fmt(geometry.eyes.right.rx)}" ry="${fmt(geometry.eyes.right.ry)}" opacity="${eyeState === 'open' ? '1' : '0'}" />
+-          <path class="eye-half" d="${buildEyeHalfPath(geometry.eyes.left.cx, geometry.eyes.left.cy, geometry.eyes.left.rx, geometry.eyes.left.ry)}" fill="${eyelidColour}" opacity="${eyeState === 'half' ? '1' : '0'}" />
+-          <path class="eye-half" d="${buildEyeHalfPath(geometry.eyes.right.cx, geometry.eyes.right.cy, geometry.eyes.right.rx, geometry.eyes.right.ry)}" fill="${eyelidColour}" opacity="${eyeState === 'half' ? '1' : '0'}" />
+-          <path class="eye-closed" d="${buildEyeClosedPath(geometry.eyes.left.cx, geometry.eyes.left.cy, geometry.eyes.left.rx)}" stroke="${eyelidColour}" stroke-width="3" stroke-linecap="round" />
+-          <path class="eye-closed" d="${buildEyeClosedPath(geometry.eyes.right.cx, geometry.eyes.right.cy, geometry.eyes.right.rx)}" stroke="${eyelidColour}" stroke-width="3" stroke-linecap="round" />
+-          <path class="eye-lid" d="${buildEyeHalfPath(geometry.eyes.left.cx, geometry.eyes.left.cy, geometry.eyes.left.rx, geometry.eyes.left.ry)}" fill="${eyelidColour}" opacity="0" />
+-          <path class="eye-lid" d="${buildEyeHalfPath(geometry.eyes.right.cx, geometry.eyes.right.cy, geometry.eyes.right.rx, geometry.eyes.right.ry)}" fill="${eyelidColour}" opacity="0" />
+-          <path class="eye-highlight" d="${buildEyeHighlight(geometry.eyes.left.cx, geometry.eyes.left.cy)}" fill="rgba(255,255,255,0.7)" />
+-          <path class="eye-highlight" d="${buildEyeHighlight(geometry.eyes.right.cx, geometry.eyes.right.cy)}" fill="rgba(255,255,255,0.7)" />
+-          <path class="eyebrow eyebrow-left" d="${buildBrowPath(geometry.eyes.left.cx, geometry.eyes.left.cy - geometry.eyes.left.ry - 6, geometry.eyes.left.rx * 0.95, 3)}" stroke="${shiftHue(coat.shade, -10)}" stroke-width="3" stroke-linecap="round" fill="none" />
+-          <path class="eyebrow eyebrow-right" d="${buildBrowPath(geometry.eyes.right.cx, geometry.eyes.right.cy - geometry.eyes.right.ry - 6, geometry.eyes.right.rx * 0.95, -3)}" stroke="${shiftHue(coat.shade, -10)}" stroke-width="3" stroke-linecap="round" fill="none" />
+-        </g>
+-        <path class="cow-fringe" d="${fringe.front}" fill="${shiftHue(coat.light, -8)}" />
+-        <path class="cow-snout" d="${buildSnoutPath(geometry)}" fill="url(#${defs.snoutGradient})" />
+-        <path class="cow-snout-highlight" d="${buildSnoutHighlightPath(geometry)}" fill="rgba(255,255,255,0.35)" />
+-        <ellipse class="nostril" cx="${fmt(-geometry.snout.nostrilGap / 2)}" cy="${fmt(geometry.snout.cy + 6)}" rx="${fmt(geometry.snout.nostrilRadius)}" ry="${fmt(geometry.snout.nostrilRadius * 0.65)}" fill="${shiftHue(coat.shade, -16)}" />
+-        <ellipse class="nostril" cx="${fmt(geometry.snout.nostrilGap / 2)}" cy="${fmt(geometry.snout.cy + 6)}" rx="${fmt(geometry.snout.nostrilRadius)}" ry="${fmt(geometry.snout.nostrilRadius * 0.65)}" fill="${shiftHue(coat.shade, -16)}" />
+-        <ellipse class="cow-blush" cx="${fmt(geometry.blush.left.cx)}" cy="${fmt(geometry.blush.left.cy)}" rx="${fmt(geometry.blush.left.rx)}" ry="${fmt(geometry.blush.left.ry)}" fill="${BLUSH_COLOUR}" opacity="${fmt(blushOpacity)}" />
+-        <ellipse class="cow-blush" cx="${fmt(geometry.blush.right.cx)}" cy="${fmt(geometry.blush.right.cy)}" rx="${fmt(geometry.blush.right.rx)}" ry="${fmt(geometry.blush.right.ry)}" fill="${BLUSH_COLOUR}" opacity="${fmt(blushOpacity)}" />
+-        </g>
+-        ${accessories}
+-      </g>
+-    </svg>`;
++function drawAccessories(ctx: CanvasRenderingContext2D, cow: Cow): void {
++  const entries = resolveAccessories(cow);
++  if (!entries.length) return;
++  entries.forEach(entry => ensureImage(entry.def.src));
++  sortLayers(entries.map(entry => ({ ...entry, zIndex: entry.def.zIndex ?? 0 }))).forEach(({ def }) => {
++    const img = ensureImage(def.src);
++    if (!img) return;
++    const target = ACCESSORY_ANCHORS[def.placement];
++    if (!target) return;
++    const scale = def.scale ?? 1;
++    const anchor = def.anchor;
++    const offset = def.offset ?? { x: 0, y: 0 };
++    const x = target.x + offset.x - anchor.x * scale;
++    const y = target.y + offset.y - anchor.y * scale;
++    ctx.drawImage(img, x, y, def.width * scale, def.height * scale);
++  });
+ }
+ 
+ export function drawCanvas(ctx: CanvasRenderingContext2D, cow: Cow, opts: CowCanvasOptions = {}): void {
++  const sprite = spriteForCow(cow);
++  warmCowAssets(sprite);
+   const width = opts.w ?? ctx.canvas.width;
+   const height = opts.h ?? ctx.canvas.height;
+   const pose: CowPose = opts.pose || 'idle';
++  const assets = poseAssets(sprite, pose);
++  const scale = opts.scale ?? Math.min(width / COW_TEXTURE_SIZE, height / COW_TEXTURE_SIZE);
++  const x = opts.x ?? width / 2;
++  const y = opts.y ?? height / 2;
++  const wobble = (opts.wobble ?? 0) * (Math.PI / 180);
++  const clear = opts.clear ?? (opts.x === undefined && opts.y === undefined);
++  if (clear) {
++    ctx.clearRect(0, 0, width, height);
++  }
+   ctx.save();
+-  ctx.clearRect(0, 0, width, height);
+-  const scale = Math.min(width / 240, height / 240);
+-  ctx.translate(width / 2, height / 2 + 10);
++  ctx.translate(x, y);
++  if (wobble) ctx.rotate(wobble);
+   ctx.scale(scale, scale);
+-
+-  const geometry = computeGeometry(cow, pose, now());
+-  const coat = COAT_COLOURS[cow.colour] || COAT_COLOURS.brown;
+-  const fringe = buildFringePaths(geometry);
+-  const eyeState = buildEyeState(pose, moodFromStats(cow.happiness ?? 50, cow.hunger ?? 50, cow.cleanliness ?? 50));
+-
+-  const glow = ctx.createRadialGradient(0, geometry.body.cy + geometry.body.ry * 0.55, 20, 0, geometry.body.cy + geometry.body.ry * 0.55, geometry.body.rx * 1.6);
+-  glow.addColorStop(0, 'rgba(255,246,252,0.78)');
+-  glow.addColorStop(1, 'rgba(255,246,252,0)');
+-  ctx.fillStyle = glow;
+-  ctx.beginPath();
+-  ctx.ellipse(0, geometry.body.cy + geometry.body.ry * 0.55, geometry.body.rx * 1.6, geometry.body.ry * 1.2, 0, 0, Math.PI * 2);
+-  ctx.fill();
+-
+-  const bodyGrad = ctx.createLinearGradient(0, geometry.body.cy - geometry.body.ry, 0, geometry.body.cy + geometry.body.ry);
+-  bodyGrad.addColorStop(0, coat.light);
+-  bodyGrad.addColorStop(0.65, coat.base);
+-  bodyGrad.addColorStop(1, coat.shade);
+-  ctx.fillStyle = bodyGrad;
+-  ctx.beginPath();
+-  ctx.ellipse(geometry.body.cx, geometry.body.cy, geometry.body.rx, geometry.body.ry, 0, 0, Math.PI * 2);
+-  ctx.fill();
+-
+-  ctx.fillStyle = 'rgba(255,255,255,0.24)';
+-  ctx.beginPath();
+-  ctx.ellipse(geometry.body.cx, geometry.body.bellyCy, geometry.body.bellyRx, geometry.body.bellyRy, 0, 0, Math.PI * 2);
+-  ctx.fill();
+-
+-  ctx.fillStyle = 'rgba(74,44,58,0.08)';
+-  ctx.beginPath();
+-  ctx.ellipse(geometry.body.cx, geometry.body.cy + geometry.body.ry * 0.55, geometry.body.rx * 0.64, geometry.body.ry * 0.45, 0, 0, Math.PI * 2);
+-  ctx.fill();
+-
+-  geometry.legs.forEach(leg => {
+-    const legPath = new Path2D(buildLegPath(leg));
+-    ctx.fillStyle = coat.shade;
+-    ctx.fill(legPath);
+-    const hoofPath = new Path2D(buildHoofPath(leg));
+-    ctx.fillStyle = '#534448';
+-    ctx.fill(hoofPath);
+-  });
+-
+-  const hornGrad = ctx.createLinearGradient(-geometry.head.rx, geometry.horns.baseLeft.y, geometry.head.rx, geometry.horns.baseLeft.y - 20);
+-  hornGrad.addColorStop(0, '#F1EBE3');
+-  hornGrad.addColorStop(0.55, HORN_BASE);
+-  hornGrad.addColorStop(1, '#BDAF9D');
+-  ctx.fillStyle = hornGrad;
+-  ctx.strokeStyle = 'rgba(128,111,87,0.8)';
+-  ctx.lineWidth = 1.6;
+-  ['left', 'right'].forEach(side => {
+-    const hornPath = new Path2D(buildHornPath(geometry, side as 'left' | 'right'));
+-    ctx.fill(hornPath);
+-  });
+-
+-  ctx.lineWidth = 0;
+-  const earOuter = shiftHue(coat.base, -6);
+-  const earInner = 'rgba(255,221,235,0.85)';
+-  ctx.fillStyle = earOuter;
+-  ctx.fill(new Path2D(buildEarPath(geometry.ears.left, 'left')));
+-  ctx.fill(new Path2D(buildEarPath(geometry.ears.right, 'right')));
+-  ctx.fillStyle = earInner;
+-  ctx.fill(new Path2D(buildEarInnerPath(geometry.ears.left, 'left')));
+-  ctx.fill(new Path2D(buildEarInnerPath(geometry.ears.right, 'right')));
+-
+-  const headGrad = ctx.createLinearGradient(0, geometry.head.top, 0, geometry.head.bottom);
+-  headGrad.addColorStop(0, coat.light);
+-  headGrad.addColorStop(1, coat.base);
+-  ctx.fillStyle = headGrad;
+-  ctx.beginPath();
+-  ctx.ellipse(geometry.head.cx, geometry.head.cy, geometry.head.rx, geometry.head.ry, 0, 0, Math.PI * 2);
+-  ctx.fill();
+-
+-  ctx.fillStyle = shiftHue(coat.base, -10);
+-  ctx.fill(new Path2D(fringe.back));
+-
+-  ctx.fillStyle = eyeState === 'closed' ? shiftHue(coat.base, -4) : EYE_COLOUR;
+-  if (eyeState === 'closed') {
+-    ctx.strokeStyle = shiftHue(coat.base, -4);
+-    ctx.lineWidth = 3;
+-    ctx.lineCap = 'round';
+-    ctx.beginPath();
+-    ctx.moveTo(geometry.eyes.left.cx - geometry.eyes.left.rx, geometry.eyes.left.cy);
+-    ctx.quadraticCurveTo(geometry.eyes.left.cx, geometry.eyes.left.cy + 1, geometry.eyes.left.cx + geometry.eyes.left.rx, geometry.eyes.left.cy);
+-    ctx.stroke();
+-    ctx.beginPath();
+-    ctx.moveTo(geometry.eyes.right.cx - geometry.eyes.right.rx, geometry.eyes.right.cy);
+-    ctx.quadraticCurveTo(geometry.eyes.right.cx, geometry.eyes.right.cy + 1, geometry.eyes.right.cx + geometry.eyes.right.rx, geometry.eyes.right.cy);
+-    ctx.stroke();
++  const baseLayers = sortLayers(assets.layers);
++  baseLayers.forEach(layer => drawLayer(ctx, layer));
++  const mood = moodFromStats(cow.happiness ?? 50, cow.hunger ?? 50, cow.cleanliness ?? 50);
++  const eyeState = buildEyeState(pose, mood);
++  if (eyeState === 'open') {
++    drawLayer(ctx, assets.eyes.open);
++  } else if (eyeState === 'half' && assets.eyes.half) {
++    drawLayer(ctx, assets.eyes.half);
+   } else {
+-    ctx.beginPath();
+-    ctx.ellipse(geometry.eyes.left.cx, geometry.eyes.left.cy, geometry.eyes.left.rx, geometry.eyes.left.ry, 0, 0, Math.PI * 2);
+-    ctx.fill();
+-    ctx.beginPath();
+-    ctx.ellipse(geometry.eyes.right.cx, geometry.eyes.right.cy, geometry.eyes.right.rx, geometry.eyes.right.ry, 0, 0, Math.PI * 2);
+-    ctx.fill();
+-    if (eyeState === 'half') {
+-      ctx.fillStyle = shiftHue(coat.base, -4);
+-      ctx.fill(new Path2D(buildEyeHalfPath(geometry.eyes.left.cx, geometry.eyes.left.cy, geometry.eyes.left.rx, geometry.eyes.left.ry)));
+-      ctx.fill(new Path2D(buildEyeHalfPath(geometry.eyes.right.cx, geometry.eyes.right.cy, geometry.eyes.right.rx, geometry.eyes.right.ry)));
+-    } else {
+-      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+-      ctx.beginPath();
+-      ctx.arc(geometry.eyes.left.cx - 3, geometry.eyes.left.cy - 4, 3.2, 0, Math.PI * 2);
+-      ctx.fill();
+-      ctx.beginPath();
+-      ctx.arc(geometry.eyes.right.cx - 3, geometry.eyes.right.cy - 4, 3.2, 0, Math.PI * 2);
+-      ctx.fill();
+-    }
++    drawLayer(ctx, assets.eyes.closed);
+   }
+-
+-  ctx.strokeStyle = shiftHue(coat.shade, -10);
+-  ctx.lineWidth = 3;
+-  ctx.lineCap = 'round';
+-  ctx.beginPath();
+-  const leftBrow = new Path2D(buildBrowPath(geometry.eyes.left.cx, geometry.eyes.left.cy - geometry.eyes.left.ry - 6, geometry.eyes.left.rx * 0.95, 3));
+-  const rightBrow = new Path2D(buildBrowPath(geometry.eyes.right.cx, geometry.eyes.right.cy - geometry.eyes.right.ry - 6, geometry.eyes.right.rx * 0.95, -3));
+-  ctx.stroke(leftBrow);
+-  ctx.stroke(rightBrow);
+-
+-  ctx.fillStyle = shiftHue(coat.light, -8);
+-  ctx.fill(new Path2D(fringe.front));
+-
+-  const snoutGrad = ctx.createLinearGradient(0, geometry.snout.cy - geometry.snout.height * 0.5, 0, geometry.snout.cy + geometry.snout.height * 0.7);
+-  snoutGrad.addColorStop(0, coat.light);
+-  snoutGrad.addColorStop(1, coat.base);
+-  ctx.fillStyle = snoutGrad;
+-  ctx.fill(new Path2D(buildSnoutPath(geometry)));
+-  ctx.fillStyle = 'rgba(255,255,255,0.35)';
+-  ctx.fill(new Path2D(buildSnoutHighlightPath(geometry)));
+-
+-  const nostrilColour = shiftHue(coat.shade, -16);
+-  ctx.fillStyle = nostrilColour;
+-  ctx.beginPath();
+-  ctx.ellipse(-geometry.snout.nostrilGap / 2, geometry.snout.cy + 6, geometry.snout.nostrilRadius, geometry.snout.nostrilRadius * 0.65, 0, 0, Math.PI * 2);
+-  ctx.fill();
+-  ctx.beginPath();
+-  ctx.ellipse(geometry.snout.nostrilGap / 2, geometry.snout.cy + 6, geometry.snout.nostrilRadius, geometry.snout.nostrilRadius * 0.65, 0, 0, Math.PI * 2);
+-  ctx.fill();
+-
+-  const blushOpacity = lerp(BLUSH_MIN_OPACITY, BLUSH_MAX_OPACITY, 0.6 + geometry.chonk * 0.4);
+-  ctx.fillStyle = `rgba(243,177,180,${blushOpacity})`;
+-  ctx.beginPath();
+-  ctx.ellipse(geometry.blush.left.cx, geometry.blush.left.cy, geometry.blush.left.rx, geometry.blush.left.ry, 0, 0, Math.PI * 2);
+-  ctx.fill();
+-  ctx.beginPath();
+-  ctx.ellipse(geometry.blush.right.cx, geometry.blush.right.cy, geometry.blush.right.rx, geometry.blush.right.ry, 0, 0, Math.PI * 2);
+-  ctx.fill();
+-
+-  drawAccessoriesLayer(ctx, cow, geometry);
++  drawAccessories(ctx, cow);
+   ctx.restore();
+ }
+ 
+ function clearBlink(container: HTMLElement): void {
+   const timers = blinkControllers.get(container);
+   if (!timers) return;
+   if (typeof window !== 'undefined') {
+     if (timers.open) window.clearTimeout(timers.open);
+     if (timers.close) window.clearTimeout(timers.close);
+   }
+   blinkControllers.delete(container);
+ }
+ 
+ function scheduleBlink(container: HTMLElement, svgEl: SVGElement): void {
+   if (typeof window === 'undefined') return;
+   const state = { open: 0, close: 0 };
+   const queue = () => {
+     state.open = window.setTimeout(() => {
+       if (!svgEl.isConnected) return;
+       svgEl.classList.add('auto-blink');
+       state.close = window.setTimeout(() => {
+         svgEl.classList.remove('auto-blink');
+         queue();
+       }, BLINK_DURATION);
+       blinkControllers.set(container, { open: state.open, close: state.close });
+diff --git a/highland-cow-farm/src/styles/theme.css b/highland-cow-farm/src/styles/theme.css
+index 8dd645a27082499614758f2267b934e7bd37003a..c4b50f115b64dd79917ddbbdd89332709f6b52fa 100644
+--- a/highland-cow-farm/src/styles/theme.css
++++ b/highland-cow-farm/src/styles/theme.css
+@@ -808,57 +808,104 @@
+       background: rgba(242, 169, 183, 0.16);
+       border: 1px solid rgba(242, 169, 183, 0.38);
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       font-size: 1.6rem;
+       color: var(--text);
+       padding: 8px;
+       text-align: center;
+       transition: transform var(--transition);
+     }
+ 
+     .pantry-item span {
+       font-size: 0.78rem;
+       color: var(--text-muted);
+       margin-top: 6px;
+     }
+ 
+     .pantry-item:hover {
+       transform: translateY(-2px);
+     }
+ 
+     .cow-art {
+       width: 100%;
+-      max-width: 180px;
++      max-width: 220px;
+       justify-self: center;
+       --cow-art-base-transform: translateY(0);
+       transform: var(--cow-art-base-transform);
+       transition: transform 0.4s ease;
+     }
+ 
++    .cow-art svg {
++      display: block;
++      width: 100%;
++      height: auto;
++    }
++
++    .cow-figure {
++      overflow: visible;
++    }
++
++    .cow-figure .cow-layer {
++      pointer-events: none;
++      transform-box: fill-box;
++      transform-origin: 50% 50%;
++    }
++
++    .cow-figure .cow-accessory {
++      mix-blend-mode: normal;
++    }
++
++    .cow-figure .cow-eyes {
++      opacity: 0;
++      transition: opacity 120ms ease;
++    }
++
++    .cow-figure[data-eye-state='open'] .eyes-open {
++      opacity: 1;
++    }
++
++    .cow-figure[data-eye-state='half'] .eyes-half {
++      opacity: 1;
++    }
++
++    .cow-figure[data-eye-state='closed'] .eyes-closed {
++      opacity: 1;
++    }
++
++    .cow-figure.auto-blink .eyes-open,
++    .cow-figure.pose-blink .eyes-open {
++      opacity: 0;
++    }
++
++    .cow-figure.auto-blink .eyes-closed,
++    .cow-figure.pose-blink .eyes-closed {
++      opacity: 1;
++    }
++
+     .cow-art .cow-root-group {
+       transform-box: fill-box;
+       transform-origin: 50% 72%;
+     }
+ 
+     @keyframes cowHoverBob {
+       0%,
+       100% {
+         transform: var(--cow-art-base-transform) translateY(0) rotate(0deg);
+       }
+       40% {
+         transform: var(--cow-art-base-transform) translateY(-4px) rotate(-0.6deg);
+       }
+       60% {
+         transform: var(--cow-art-base-transform) translateY(-2px) rotate(0.4deg);
+       }
+     }
+ 
+     .cow-card:hover .cow-art,
+     .cow-card:focus-within .cow-art {
+       animation: cowHoverBob 4.8s ease-in-out infinite;
+     }
+ 
+     body.high-contrast .cow-card:hover .cow-art,
+     body.high-contrast .cow-card:focus-within .cow-art {
+@@ -879,51 +926,51 @@
+       .cow-art .cow-root-group.is-idle-wobble {
+         animation: none;
+       }
+     }
+ 
+     .cow-art--idle-wobble .cow-root-group,
+     .cow-art .cow-root-group.is-idle-wobble {
+       animation: cowIdleWobble 4.2s ease-in-out infinite;
+     }
+ 
+     @keyframes cowIdleWobble {
+       0%,
+       100% {
+         transform: translateY(0);
+       }
+       50% {
+         transform: translateY(2.2px);
+       }
+     }
+ 
+     .cow-card.is-chonk .cow-art {
+       --cow-art-base-transform: scale(1.1) translateY(6px);
+     }
+ 
+     .cow-art-mini {
+-      max-width: 120px;
++      max-width: 150px;
+     }
+     .status-row {
+       display: flex;
+       justify-content: space-between;
+       font-size: 0.85rem;
+       color: var(--text-muted);
+     }
+ 
+     .chonk-hearts {
+       font-size: 1rem;
+       letter-spacing: 2px;
+     }
+ 
+     .task-panel {
+       display: grid;
+       gap: 16px;
+     }
+ 
+     .task-header {
+       display: flex;
+       flex-wrap: wrap;
+       gap: 12px;
+       justify-content: space-between;
+       align-items: center;
+       background: rgba(255, 255, 255, 0.55);
+ 
+EOF
+)
