@@ -1,4 +1,14 @@
-import type { AchievementMap, Cow, DecorLayout, Options, SaveData } from '../types';
+import type {
+  AchievementMap,
+  Cow,
+  DecorLayout,
+  Options,
+  SaveData,
+  SeasonState,
+  SeasonFestival,
+  SeasonProgressSnapshot,
+  SeasonFestivalReward
+} from '../types';
 import { DEFAULT_FOODS, FoodLibrary } from '../data/foods';
 import { AccessoryLibrary } from '../data/accessories';
 import { DecorLibrary } from '../data/decor';
@@ -8,9 +18,245 @@ import { clamp, range, sample } from './util';
 import { DEFAULT_COW_NAMES, ensureCowDefaults, newCow } from '../game/cows';
 
 export const SAVE_KEY = 'hcfarm_save_v1';
-const VERSION = 3;
+const VERSION = 4;
 
 let data: SaveData;
+
+const DEFAULT_SEASON_TEMPLATE: SeasonState = {
+  id: 'spring-bloom',
+  name: 'Spring Bloom',
+  startDay: 1,
+  festivalTasks: [
+    'Keep two decor spots filled to impress visiting neighbours.',
+    'Serve every cow a seasonal treat at least once this week.',
+    'Earn a perfect day to kick off the closing ceilidh.'
+  ],
+  calendar: [
+    {
+      id: 'spring-bunting-week',
+      name: 'Ribbon Rehearsal',
+      startOffset: 0,
+      festivalOffset: 6,
+      tasks: [
+        'Earn a perfect day to delight the décor committee.',
+        'Display at least two decor pieces before the weekend.'
+      ],
+      note: 'Ribbon practise adds extra grooming patches and a brisker herding pace.',
+      modifiers: {
+        brush: { patchBonus: 1 },
+        catch: { timeModifier: 1 }
+      },
+      reward: {
+        type: 'decor',
+        item: 'Festival Bunting',
+        reason: 'Ribbon Rehearsal décor milestone'
+      }
+    },
+    {
+      id: 'spring-pantry-week',
+      name: 'Pasture Pantry Prep',
+      startOffset: 7,
+      festivalOffset: 13,
+      tasks: [
+        'Win the food frenzy with no chonky mishaps.',
+        'Keep herd happiness above 60 heading into the feast.'
+      ],
+      note: 'Seasonal snacks grant extra feeding time but cows grow hungrier if you slip.',
+      modifiers: {
+        food: { timeModifier: 2 },
+        ceilidh: { beatWindow: 0.12 }
+      }
+    },
+    {
+      id: 'spring-ceilidh-week',
+      name: 'Bloomlight Ceilidh',
+      startOffset: 14,
+      festivalOffset: 20,
+      tasks: [
+        'Finish the ceilidh with a perfect chain of steps.',
+        'Brush at least two cows to parade sheen.'
+      ],
+      note: 'Lantern rehearsals slow the ceilidh beat but expect gleaming coats.',
+      modifiers: {
+        ceilidh: { beatWindow: 0.18, tempoModifier: -0.05 },
+        brush: { patchBonus: 1 }
+      }
+    }
+  ],
+  completedFestivals: []
+};
+
+function cloneFestival(entry: SeasonFestival): SeasonFestival {
+  const modifiers = entry.modifiers
+    ? Object.keys(entry.modifiers).reduce((acc, key) => {
+        const value = entry.modifiers![key];
+        if (value && typeof value === 'object') {
+          acc[key] = Object.assign({}, value);
+        }
+        return acc;
+      }, {} as Record<string, Record<string, any>>)
+    : undefined;
+  return {
+    id: entry.id,
+    name: entry.name,
+    startOffset: entry.startOffset,
+    festivalOffset: entry.festivalOffset,
+    tasks: entry.tasks ? entry.tasks.slice() : [],
+    note: entry.note,
+    modifiers,
+    reward: entry.reward
+      ? { type: entry.reward.type, item: entry.reward.item, reason: entry.reward.reason }
+      : undefined
+  };
+}
+
+function cloneSeason(template: SeasonState): SeasonState {
+  return {
+    id: template.id,
+    name: template.name,
+    startDay: template.startDay,
+    festivalTasks: template.festivalTasks.slice(),
+    calendar: template.calendar.map(cloneFestival),
+    completedFestivals: template.completedFestivals.slice()
+  };
+}
+
+function defaultSeason(): SeasonState {
+  return cloneSeason(DEFAULT_SEASON_TEMPLATE);
+}
+
+function sanitizeFestivalReward(reward: any, fallback?: SeasonFestivalReward): SeasonFestivalReward | undefined {
+  if (!reward || typeof reward !== 'object') {
+    return fallback ? { ...fallback } : undefined;
+  }
+  const type = reward.type;
+  if (type !== 'foods' && type !== 'accessories' && type !== 'decor') {
+    return fallback ? { ...fallback } : undefined;
+  }
+  const item = typeof reward.item === 'string' && reward.item.trim() ? reward.item.trim() : null;
+  if (!item) {
+    return fallback ? { ...fallback } : undefined;
+  }
+  return {
+    type,
+    item,
+    reason: typeof reward.reason === 'string' ? reward.reason : fallback?.reason
+  };
+}
+
+function sanitizeFestival(entry: any, fallback: SeasonFestival): SeasonFestival {
+  const base = cloneFestival(fallback);
+  if (!entry || typeof entry !== 'object') {
+    return base;
+  }
+  const sanitized: SeasonFestival = {
+    id: typeof entry.id === 'string' && entry.id.trim() ? entry.id.trim() : base.id,
+    name: typeof entry.name === 'string' && entry.name.trim() ? entry.name.trim() : base.name,
+    startOffset:
+      typeof entry.startOffset === 'number' && Number.isFinite(entry.startOffset)
+        ? Math.max(0, Math.floor(entry.startOffset))
+        : base.startOffset,
+    festivalOffset:
+      typeof entry.festivalOffset === 'number' && Number.isFinite(entry.festivalOffset)
+        ? Math.max(0, Math.floor(entry.festivalOffset))
+        : base.festivalOffset,
+    tasks: Array.isArray(entry.tasks) && entry.tasks.length
+      ? entry.tasks
+          .filter((task: unknown) => typeof task === 'string' && task.trim())
+          .map((task: string) => task.trim())
+      : base.tasks.slice(),
+    note: typeof entry.note === 'string' && entry.note.trim() ? entry.note : base.note,
+    modifiers:
+      entry.modifiers && typeof entry.modifiers === 'object'
+        ? Object.keys(entry.modifiers).reduce((acc, key) => {
+            const value = entry.modifiers[key];
+            if (value && typeof value === 'object') {
+              acc[key] = Object.assign({}, value);
+            }
+            return acc;
+          }, {} as Record<string, Record<string, any>>)
+        : base.modifiers
+        ? Object.keys(base.modifiers).reduce((acc, key) => {
+            acc[key] = Object.assign({}, base.modifiers![key]);
+            return acc;
+          }, {} as Record<string, Record<string, any>>)
+        : undefined,
+    reward: sanitizeFestivalReward(entry.reward, base.reward)
+  };
+  if (sanitized.festivalOffset < sanitized.startOffset) {
+    sanitized.festivalOffset = sanitized.startOffset;
+  }
+  return sanitized;
+}
+
+function sanitizeSeason(season: Partial<SeasonState> | undefined): SeasonState {
+  const base = defaultSeason();
+  if (!season || typeof season !== 'object') {
+    return base;
+  }
+  const sanitized: SeasonState = {
+    id: typeof season.id === 'string' && season.id.trim() ? season.id.trim() : base.id,
+    name: typeof season.name === 'string' && season.name.trim() ? season.name.trim() : base.name,
+    startDay:
+      typeof season.startDay === 'number' && Number.isFinite(season.startDay)
+        ? Math.max(1, Math.floor(season.startDay))
+        : base.startDay,
+    festivalTasks: Array.isArray(season.festivalTasks) && season.festivalTasks.length
+      ? season.festivalTasks
+          .filter((task: unknown) => typeof task === 'string' && task.trim())
+          .map((task: string) => task.trim())
+      : base.festivalTasks.slice(),
+    calendar:
+      Array.isArray(season.calendar) && season.calendar.length
+        ? season.calendar.map(entry => {
+            const fallback = base.calendar.find(template => template.id === entry.id) || base.calendar[0];
+            return sanitizeFestival(entry, fallback);
+          })
+        : base.calendar.map(cloneFestival),
+    completedFestivals: Array.isArray(season.completedFestivals)
+      ? season.completedFestivals
+          .filter((id: unknown) => typeof id === 'string' && id.trim())
+          .map((id: string) => id.trim())
+      : []
+  };
+
+  const seenIds = new Set<string>();
+  sanitized.calendar = sanitized.calendar.map((entry, index) => {
+    let identifier = entry.id;
+    if (seenIds.has(identifier)) {
+      identifier = `${identifier}-${index + 1}`;
+    }
+    seenIds.add(identifier);
+    return Object.assign({}, entry, { id: identifier });
+  });
+
+  const validIds = new Set(sanitized.calendar.map(entry => entry.id));
+  sanitized.completedFestivals = sanitized.completedFestivals.filter(id => validIds.has(id));
+  return sanitized;
+}
+
+function findFestivalById(season: SeasonState, id: string): SeasonFestival | undefined {
+  return season.calendar.find(entry => entry.id === id);
+}
+
+function toProgressEntry(
+  season: SeasonState,
+  entry: SeasonFestival,
+  day: number,
+  completed: Set<string>
+) {
+  const cloned = cloneFestival(entry);
+  const weekStartDay = season.startDay + cloned.startOffset;
+  const festivalDay = season.startDay + cloned.festivalOffset;
+  return {
+    ...cloned,
+    weekStartDay,
+    festivalDay,
+    daysUntilFestival: festivalDay - day,
+    isFestivalWeek: day >= weekStartDay && day <= festivalDay,
+    completed: completed.has(cloned.id)
+  };
+}
 
 function blankAchievements(): AchievementMap {
   const result: AchievementMap = {};
@@ -180,6 +426,7 @@ export function migrateSave(oldData: any): SaveData {
       }
     });
   }
+  migrated.season = sanitizeSeason(oldData.season);
   return migrated;
 }
 
@@ -206,7 +453,8 @@ export function newSave(): SaveData {
     },
     stats: { totalPerfects: 0, totalChonks: 0, perfectDayStreak: 0, bestPerfectDayStreak: 0, lastRewardType: null },
     achievements: blankAchievements(),
-    lastPlayedISO: new Date().toISOString()
+    lastPlayedISO: new Date().toISOString(),
+    season: defaultSeason()
   };
 }
 
@@ -244,6 +492,7 @@ export function loadSave(): SaveData {
     cow.accessories = sanitizeAccessories(cow.accessories);
   });
   if (!data.achievements) data.achievements = blankAchievements();
+  data.season = sanitizeSeason(data.season);
   return data;
 }
 
@@ -470,6 +719,72 @@ export function refreshAutomaticAchievements(): void {
   if (getActiveDecor().length >= 3) {
     unlockAchievement('cozyDecorator', { silent: true });
   }
+}
+
+export function getSeason(): SeasonState {
+  data.season = sanitizeSeason(data.season);
+  return cloneSeason(data.season);
+}
+
+export function setSeason(partial: Partial<SeasonState>): SeasonState {
+  if (!partial) return getSeason();
+  const merged = Object.assign({}, data.season, partial);
+  data.season = sanitizeSeason(merged);
+  saveNow();
+  return data.season;
+}
+
+export function isFestivalComplete(id: string): boolean {
+  if (!id) return false;
+  return !!data.season.completedFestivals.find(entry => entry === id);
+}
+
+export function markFestivalComplete(id: string): void {
+  if (!id) return;
+  if (!isFestivalComplete(id)) {
+    data.season.completedFestivals.push(id);
+  }
+}
+
+export function getFestivalName(id: string): string | null {
+  if (!id) return null;
+  const season = sanitizeSeason(data.season);
+  const found = findFestivalById(season, id);
+  return found ? found.name : null;
+}
+
+export function getSeasonContext(day: number = data.day): SeasonProgressSnapshot {
+  data.season = sanitizeSeason(data.season);
+  const season = data.season;
+  const seasonClone = cloneSeason(season);
+  const currentDay = typeof day === 'number' && Number.isFinite(day) ? Math.max(1, Math.floor(day)) : season.startDay;
+  const dayOfSeason = Math.max(0, currentDay - seasonClone.startDay);
+  const completed = new Set(season.completedFestivals);
+  const calendar = seasonClone.calendar
+    .slice()
+    .sort((a, b) => (a.startOffset === b.startOffset ? a.festivalOffset - b.festivalOffset : a.startOffset - b.startOffset));
+  let activeFestival: SeasonProgressSnapshot['activeFestival'];
+  let nextFestival: SeasonProgressSnapshot['nextFestival'];
+  calendar.forEach(entry => {
+    const progress = toProgressEntry(seasonClone, entry, currentDay, completed);
+    if (!nextFestival && progress.daysUntilFestival >= 0) {
+      nextFestival = progress;
+    }
+    if (!activeFestival && progress.isFestivalWeek) {
+      activeFestival = progress;
+    }
+  });
+  if (!activeFestival && nextFestival && nextFestival.weekStartDay <= currentDay) {
+    activeFestival = nextFestival;
+  }
+  return {
+    season: seasonClone,
+    day: currentDay,
+    dayOfSeason,
+    weekNumber: Math.max(1, Math.floor(dayOfSeason / 7) + 1),
+    activeFestival,
+    nextFestival
+  };
 }
 
 // initialise on module load

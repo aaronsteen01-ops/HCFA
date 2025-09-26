@@ -1,4 +1,4 @@
-import type { AchievementMap, Cow, DecorLayout } from '../types';
+import type { AchievementMap, Cow, DecorLayout, SeasonProgressSnapshot } from '../types';
 import { showScreen } from '../core/screens';
 import { AccessoryLibrary } from '../data/accessories';
 import { ACHIEVEMENTS } from '../data/achievements';
@@ -170,7 +170,7 @@ export function renderHerd(cows: Cow[]): void {
   herdGrid.appendChild(fragment);
 }
 
-export function renderEvents(events: Array<{ title?: string; detail?: string } | string>): void {
+export function renderEvents(events: Array<{ title?: string; detail?: string } | string>, season?: SeasonProgressSnapshot | null): void {
   if (!eventsList) return;
   eventsList.innerHTML = '';
   const fallback = { title: 'No special events', detail: 'A peaceful breeze across the paddock.' };
@@ -198,6 +198,50 @@ export function renderEvents(events: Array<{ title?: string; detail?: string } |
     }
     eventsList.appendChild(li);
   });
+
+  if (season) {
+    const highlight = season.activeFestival || season.nextFestival;
+    const li = document.createElement('li');
+    li.className = 'season-event';
+    const title = document.createElement('strong');
+    title.textContent = highlight ? `${season.season.name} • ${highlight.name}` : season.season.name;
+    li.appendChild(title);
+    const detailLines: string[] = [];
+    if (highlight) {
+      if (highlight.completed) {
+        detailLines.push('Festival goals complete!');
+      } else if (typeof highlight.daysUntilFestival === 'number') {
+        if (highlight.daysUntilFestival === 0) {
+          detailLines.push('Festival day today!');
+        } else if (highlight.daysUntilFestival > 0) {
+          const label = highlight.daysUntilFestival === 1 ? 'day' : 'days';
+          detailLines.push(`Festival in ${highlight.daysUntilFestival} ${label}.`);
+        }
+      }
+      if (highlight.note) {
+        detailLines.push(highlight.note);
+      }
+    } else {
+      detailLines.push('Season calendar is forming.');
+    }
+    if (detailLines.length) {
+      const span = document.createElement('span');
+      span.textContent = detailLines.join(' ');
+      li.appendChild(span);
+    }
+    const tasks = highlight?.tasks?.length ? highlight.tasks : season.season.festivalTasks;
+    if (tasks && tasks.length) {
+      const listEl = document.createElement('ul');
+      listEl.className = 'season-task-list';
+      tasks.forEach(task => {
+        const taskItem = document.createElement('li');
+        taskItem.textContent = task;
+        listEl.appendChild(taskItem);
+      });
+      li.appendChild(listEl);
+    }
+    eventsList.appendChild(li);
+  }
 }
 
 export function renderPantry(foods: string[]): void {

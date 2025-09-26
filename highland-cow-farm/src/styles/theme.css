@@ -99,6 +99,34 @@
       overflow-x: hidden;
     }
 
+    body[data-season='spring-bloom'] {
+      --sky-glow: rgba(254, 214, 241, 0.82);
+      --accent: #f3a7d1;
+      --accent-strong: #eb7ab3;
+    }
+
+    body[data-season='harvest-tide'] {
+      --accent: #f3b15c;
+      --accent-strong: #d8892d;
+      --sky-glow: rgba(255, 210, 160, 0.7);
+    }
+
+    .season-event {
+      margin-top: 8px;
+    }
+
+    .season-event strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .season-task-list {
+      margin: 6px 0 0;
+      padding-left: 18px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
     body::before,
     body::after {
       content: "";

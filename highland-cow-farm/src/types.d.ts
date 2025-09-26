@@ -44,6 +44,49 @@ export interface FarmStats {
 
 export type AchievementMap = Record<string, boolean>;
 
+export interface SeasonFestivalReward {
+  type: 'foods' | 'accessories' | 'decor';
+  item: string;
+  reason?: string;
+}
+
+export interface SeasonFestival {
+  id: string;
+  name: string;
+  startOffset: number;
+  festivalOffset: number;
+  tasks: string[];
+  note?: string;
+  modifiers?: Record<string, Record<string, any>>;
+  reward?: SeasonFestivalReward;
+}
+
+export interface SeasonState {
+  id: string;
+  name: string;
+  startDay: number;
+  festivalTasks: string[];
+  calendar: SeasonFestival[];
+  completedFestivals: string[];
+}
+
+export interface SeasonFestivalProgress extends SeasonFestival {
+  weekStartDay: number;
+  festivalDay: number;
+  daysUntilFestival: number;
+  isFestivalWeek: boolean;
+  completed: boolean;
+}
+
+export interface SeasonProgressSnapshot {
+  season: SeasonState;
+  day: number;
+  dayOfSeason: number;
+  weekNumber: number;
+  activeFestival?: SeasonFestivalProgress;
+  nextFestival?: SeasonFestivalProgress;
+}
+
 export interface SaveData {
   version: number;
   day: number;
@@ -55,6 +98,7 @@ export interface SaveData {
   stats: FarmStats;
   achievements: AchievementMap;
   lastPlayedISO: string;
+  season: SeasonState;
 }
 
 export interface MiniGameOutcome {
