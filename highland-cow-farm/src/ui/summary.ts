@@ -4,13 +4,14 @@ import { FoodLibrary } from '../data/foods';
 import { AccessoryLibrary } from '../data/accessories';
 import { DecorLibrary } from '../data/decor';
 import { ACHIEVEMENTS } from '../data/achievements';
+import type { MiniGameKey } from '../minigames/types';
 
 interface SummaryHandlers {
   onContinue?: () => void;
 }
 
 export interface SummaryData {
-  results: Array<{ name: string; success: boolean; summary: string }>;
+  results: Array<{ name: string; success: boolean; summary: string; icon?: string; key?: MiniGameKey }>;
   adjustments: Record<string, Partial<Record<'happiness' | 'hunger' | 'cleanliness' | 'chonk', number>>>;
   herd: Cow[];
   reward?: { type: 'foods' | 'accessories' | 'decor'; item: string; typeLabel?: string; theme?: string; guaranteedBy?: string | null } | null;
@@ -29,6 +30,23 @@ let resultsEl: HTMLElement | null = null;
 let cowDeltasEl: HTMLElement | null = null;
 let unlockEl: HTMLElement | null = null;
 let continueButton: HTMLButtonElement | null = null;
+
+function buildMiniIcon(icon?: string): HTMLElement | null {
+  if (!icon) return null;
+  const holder = document.createElement('span');
+  holder.className = 'mini-title-icon summary-icon';
+  holder.setAttribute('aria-hidden', 'true');
+  if (icon.startsWith('data:image')) {
+    const img = document.createElement('img');
+    img.src = icon;
+    img.alt = '';
+    img.className = 'mini-title-icon-img';
+    holder.appendChild(img);
+  } else {
+    holder.textContent = icon;
+  }
+  return holder;
+}
 
 export function configureSummaryHandlers(partial: SummaryHandlers): void {
   handlers = Object.assign({}, handlers, partial);
@@ -67,6 +85,7 @@ export function renderSummary(data: SummaryData): void {
 
   resultsEl.innerHTML = '';
   const fragment = document.createDocumentFragment();
+  const totalGames = results.length;
 
   if (typeof perfectDay === 'boolean') {
     const perfectItem = document.createElement('div');
@@ -74,7 +93,10 @@ export function renderSummary(data: SummaryData): void {
     if (perfectDay) {
       const streakCount = Math.max(0, Number(perfectStreak) || 0);
       const label = streakCount === 1 ? 'day' : 'days';
-      perfectItem.innerHTML = `<strong>Perfect Pastures!</strong><br>All three mini-games cleared with smiles.<br>Perfect-day streak: ${streakCount} ${label}.`;
+      const miniLabel = totalGames
+        ? `All ${totalGames} mini-${totalGames === 1 ? 'game' : 'games'} cleared with smiles.`
+        : 'All mini-games cleared with smiles.';
+      perfectItem.innerHTML = `<strong>Perfect Pastures!</strong><br>${miniLabel}<br>Perfect-day streak: ${streakCount} ${label}.`;
     } else {
       const streakLost = Math.max(0, Number(previousPerfectStreak) || 0);
       const label = streakLost === 1 ? 'day' : 'days';
@@ -88,7 +110,20 @@ export function renderSummary(data: SummaryData): void {
     const item = document.createElement('div');
     item.className = 'summary-item';
     const statusEmoji = result.success ? '🌟' : '⚠️';
-    item.innerHTML = `<strong>${statusEmoji} ${result.name}</strong><br>${result.summary || (result.success ? 'Great job!' : 'We will get it tomorrow.')}`;
+    const title = document.createElement('strong');
+    title.appendChild(document.createTextNode(`${statusEmoji} `));
+    const iconEl = buildMiniIcon(result.icon);
+    if (iconEl) {
+      title.appendChild(iconEl);
+      title.appendChild(document.createTextNode(' '));
+    }
+    title.appendChild(document.createTextNode(result.name));
+    const summaryLine = document.createElement('div');
+    summaryLine.className = 'summary-item-text';
+    const summaryText = result.summary || (result.success ? 'Great job!' : 'We will get it tomorrow.');
+    summaryLine.textContent = summaryText;
+    item.appendChild(title);
+    item.appendChild(summaryLine);
     fragment.appendChild(item);
   });
 

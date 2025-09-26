@@ -1,5 +1,7 @@
 import type { Cow, Options } from '../types';
 
+export type MiniGameKey = 'catch' | 'food' | 'brush' | 'ceilidh';
+
 export interface MiniGameContext {
   participants: Cow[];
   difficulty: number;

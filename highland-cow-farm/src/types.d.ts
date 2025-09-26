@@ -63,3 +63,8 @@ export interface MiniGameOutcome {
   summary?: string;
   stats?: { totalPerfects?: number; totalChonks?: number };
 }
+
+declare module '*.b64?raw' {
+  const content: string;
+  export default content;
+}

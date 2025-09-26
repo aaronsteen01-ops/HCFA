@@ -6,7 +6,7 @@ export interface AchievementEntry {
 export const ACHIEVEMENTS: Record<string, AchievementEntry> = {
   perfectDay: {
     title: 'Perfect Pastures',
-    description: 'Complete all three mini-games in a single day without a miss.'
+    description: 'Complete all four mini-games in a single day without a miss.'
   },
   fashionista: {
     title: 'Highland Fashionista',
