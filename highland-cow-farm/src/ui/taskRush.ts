@@ -8,6 +8,8 @@ interface TaskHandlers {
 let handlers: TaskHandlers = {};
 let initialised = false;
 let subtitleEl: HTMLElement | null = null;
+let subtitleIconEl: HTMLElement | null = null;
+let subtitleLabelEl: HTMLElement | null = null;
 let badgeEl: HTMLElement | null = null;
 let instructionEl: HTMLElement | null = null;
 let timerEl: HTMLElement | null = null;
@@ -24,6 +26,19 @@ export function init(section: HTMLElement): void {
   initialised = true;
   subtitleEl = section.querySelector<HTMLElement>('#mini-subtitle');
   badgeEl = section.querySelector<HTMLElement>('#mini-badge');
+  if (subtitleEl && !subtitleLabelEl) {
+    subtitleEl.innerHTML = '';
+    subtitleIconEl = document.createElement('span');
+    subtitleIconEl.className = 'mini-title-icon';
+    subtitleIconEl.setAttribute('aria-hidden', 'true');
+    subtitleIconEl.hidden = true;
+    subtitleEl.appendChild(subtitleIconEl);
+
+    subtitleLabelEl = document.createElement('span');
+    subtitleLabelEl.className = 'mini-title-label';
+    subtitleEl.appendChild(subtitleLabelEl);
+  }
+
   instructionEl = section.querySelector<HTMLElement>('#mini-instruction');
   timerEl = section.querySelector<HTMLElement>('#task-timer');
   areaEl = section.querySelector<HTMLElement>('#minigame-area');
@@ -39,8 +54,32 @@ export function show(): void {
   showScreen('task');
 }
 
-export function setMiniTitle(label: string, index: number, total: number): void {
-  if (subtitleEl) subtitleEl.textContent = label;
+function applyIcon(target: HTMLElement | null, icon?: string): void {
+  if (!target) return;
+  target.innerHTML = '';
+  if (!icon) {
+    target.hidden = true;
+    return;
+  }
+  target.hidden = false;
+  if (icon.startsWith('data:image')) {
+    const img = document.createElement('img');
+    img.src = icon;
+    img.alt = '';
+    img.className = 'mini-title-icon-img';
+    target.appendChild(img);
+  } else {
+    target.textContent = icon;
+  }
+}
+
+export function setMiniTitle(label: string, index: number, total: number, icon?: string): void {
+  if (subtitleLabelEl) {
+    subtitleLabelEl.textContent = label;
+  } else if (subtitleEl) {
+    subtitleEl.textContent = label;
+  }
+  applyIcon(subtitleIconEl, icon);
   if (badgeEl) badgeEl.textContent = `Mini ${index} of ${total}`;
 }
 

@@ -6,18 +6,21 @@ import * as SummaryUI from '../ui/summary';
 import * as CatchGame from '../minigames/catch';
 import * as FoodGame from '../minigames/food';
 import * as BrushGame from '../minigames/brush';
-import type { MiniGameContext, MiniGameResult } from '../minigames/types';
+import * as CeilidhGame from '../minigames/ceilidh';
+import type { MiniGameContext, MiniGameResult, MiniGameKey } from '../minigames/types';
+import ceilidhIconRaw from '../assets/minigames/ceilidh-icon.b64?raw';
+
+const CEILIDH_ICON = `data:image/png;base64,${ceilidhIconRaw}`;
 
 interface MiniGameDefinition {
   key: MiniGameKey;
   label: string;
   description: string;
+  icon?: string;
   start: typeof CatchGame.start;
   stop: typeof CatchGame.stop;
   mount: typeof CatchGame.mount;
 }
-
-type MiniGameKey = 'catch' | 'food' | 'brush';
 
 type MiniGameMap = Record<MiniGameKey, MiniGameDefinition>;
 
@@ -28,6 +31,7 @@ const miniGames: MiniGameMap = {
     key: 'catch',
     label: 'Catch the Cow',
     description: 'Tap or click runaway cows to nudge them back toward the centre paddock.',
+    icon: '🐄',
     start: CatchGame.start,
     stop: CatchGame.stop,
     mount: CatchGame.mount
@@ -36,6 +40,7 @@ const miniGames: MiniGameMap = {
     key: 'food',
     label: 'Food Frenzy',
     description: 'Drag the matching feed to each cow. One serving each keeps them spry!',
+    icon: '🥕',
     start: FoodGame.start,
     stop: FoodGame.stop,
     mount: FoodGame.mount
@@ -44,9 +49,19 @@ const miniGames: MiniGameMap = {
     key: 'brush',
     label: 'Brush Rush',
     description: 'Brush the messy patches away by dragging across them quickly.',
+    icon: '🧼',
     start: BrushGame.start,
     stop: BrushGame.stop,
     mount: BrushGame.mount
+  },
+  ceilidh: {
+    key: 'ceilidh',
+    label: 'Highland Ceilidh',
+    description: 'Tap the step button as the glow appears to keep the dance in perfect time.',
+    icon: CEILIDH_ICON,
+    start: CeilidhGame.start,
+    stop: CeilidhGame.stop,
+    mount: CeilidhGame.mount
   }
 };
 
@@ -215,6 +230,32 @@ const PersonalityEngine = (function() {
             : `${outcome.summary} The grooming circle fizzled out early.`;
         }
       }
+    },
+    ceilidh: {
+      Social: {
+        personality: 'Social',
+        label: 'Community Ceilidh',
+        instruction: 'Social cows invite the whole herd. The rhythm window widens – keep chaining steps!',
+        dailyNote: 'Social cows plan an evening ceilidh. Stay on tempo to send spirits soaring.',
+        modifiers: { beatWindow: 0.15, happinessBonus: 3 },
+        applyOutcome(outcome, participants) {
+          const socials = participants.filter(cow => cow.personality === 'Social');
+          socials.forEach(cow => {
+            const adj = ensureAdjustment(outcome, cow.id);
+            if (outcome.success) {
+              adj.happiness = (adj.happiness || 0) + 4;
+            } else {
+              adj.happiness = (adj.happiness || 0) - 3;
+              adj.hunger = (adj.hunger || 0) + 4;
+            }
+          });
+          if (socials.length) {
+            outcome.summary = outcome.success
+              ? `${outcome.summary} The social herd cheered the ceilidh on!`
+              : `${outcome.summary} Without the rhythm, the social herd lost steam.`;
+          }
+        }
+      }
     }
   };
 
@@ -259,6 +300,12 @@ const PersonalityEngine = (function() {
     if (brushEvent) {
       const event = cloneEvent('brush', brushEvent);
       plan.events.brush = event;
+      plan.notes.push(event.dailyNote);
+    }
+    const ceilidhEvent = counts.Social ? configs.ceilidh.Social : null;
+    if (ceilidhEvent) {
+      const event = cloneEvent('ceilidh', ceilidhEvent);
+      plan.events.ceilidh = event;
       plan.notes.push(event.dailyNote);
     }
     return plan;
@@ -560,7 +607,7 @@ export async function startDay(): Promise<void> {
     if (event) {
       instructionParts.push(`${event.label}: ${event.instruction}`);
     }
-    TaskRush.setMiniTitle(info.label, i + 1, queue.length);
+    TaskRush.setMiniTitle(info.label, i + 1, queue.length, info.icon);
     TaskRush.setInstruction(instructionParts.join(' '));
 
     const outcome = await playMiniGame(key, {
@@ -577,7 +624,9 @@ export async function startDay(): Promise<void> {
     results.results.push({
       name: info.label,
       success: !!outcome.success,
-      summary: outcome.summary || (outcome.success ? 'Great job!' : 'We will get it tomorrow.')
+      summary: outcome.summary || (outcome.success ? 'Great job!' : 'We will get it tomorrow.'),
+      icon: info.icon,
+      key
     });
     mergeAdjustments(results.adjustments, outcome.adjustments);
     if (outcome.stats) {

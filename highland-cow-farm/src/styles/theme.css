@@ -997,6 +997,54 @@
       font-weight: 600;
     }
 
+    .mini-subtitle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .mini-title-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.9rem;
+      height: 1.9rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 4px 10px rgba(53, 38, 77, 0.15);
+      color: var(--accent-strong);
+      font-size: 1.2rem;
+    }
+
+    body.high-contrast .mini-title-icon,
+    body.hc-high-contrast .mini-title-icon {
+      background: var(--bg);
+      box-shadow: none;
+      border: 2px solid var(--outline);
+    }
+
+    .mini-title-icon-img {
+      display: block;
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+
+    .mini-title-label {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .summary-icon {
+      margin-right: 0.1rem;
+    }
+
+    .summary-item-text {
+      margin-top: 0.35rem;
+      line-height: 1.35;
+    }
+
     .task-timer {
       font-size: 1.4rem;
       font-weight: 700;
@@ -1212,6 +1260,96 @@
     @keyframes sparkle {
       from { opacity: 1; transform: scale(0.6); }
       to { opacity: 0; transform: scale(1.8); }
+    }
+
+    .ceilidh-stage {
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .ceilidh-prompt {
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.7rem 1.2rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 2px solid rgba(53, 38, 77, 0.14);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      color: var(--text);
+    }
+
+    .ceilidh-prompt.active {
+      transform: scale(1.05);
+      background: rgba(138, 198, 164, 0.18);
+      border-color: rgba(138, 198, 164, 0.5);
+      box-shadow: 0 0 0 6px rgba(138, 198, 164, 0.25);
+    }
+
+    .ceilidh-prompt.miss {
+      background: rgba(244, 135, 109, 0.18);
+      border-color: rgba(244, 135, 109, 0.5);
+      box-shadow: 0 0 0 6px rgba(244, 135, 109, 0.25);
+    }
+
+    .ceilidh-score {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .ceilidh-tap {
+      padding: 0.75rem 2.6rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 14px 24px rgba(53, 38, 77, 0.22);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .ceilidh-tap:active {
+      transform: translateY(1px);
+      box-shadow: 0 10px 18px rgba(53, 38, 77, 0.2);
+    }
+
+    .ceilidh-tap:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    body.high-contrast .ceilidh-prompt,
+    body.hc-high-contrast .ceilidh-prompt {
+      background: var(--bg);
+      border: 2px solid var(--outline);
+      box-shadow: none;
+    }
+
+    body.high-contrast .ceilidh-prompt.active,
+    body.hc-high-contrast .ceilidh-prompt.active {
+      border-color: var(--success);
+    }
+
+    body.high-contrast .ceilidh-prompt.miss,
+    body.hc-high-contrast .ceilidh-prompt.miss {
+      border-color: var(--danger);
+    }
+
+    body.high-contrast .ceilidh-tap,
+    body.hc-high-contrast .ceilidh-tap {
+      background: var(--accent-contrast);
+      color: var(--accent-strong);
+      border: 2px solid var(--accent-strong);
+      box-shadow: none;
     }
 
     .style-layout {
