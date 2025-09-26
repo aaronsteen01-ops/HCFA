@@ -24,6 +24,10 @@ export const DecorLibrary: Record<string, DecorEntry> = {
     icon: '🥛',
     description: 'An old churn overflowing with blooms.'
   },
+  'Festival Bunting': {
+    icon: '🎀',
+    description: 'Colourful ribbons stretch across the paddock for festival week.'
+  },
   'Heather Hedge': {
     icon: '🌸',
     description: 'Neat hedges of blooming heather create a fragrant border.'

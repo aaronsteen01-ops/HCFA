@@ -11,7 +11,7 @@ import * as DecorRoom from './ui/decorRoom';
 import * as TaskRush from './ui/taskRush';
 import * as SummaryUI from './ui/summary';
 import * as Progression from './game/progression';
-import type { Options } from './types';
+import type { Options, SeasonProgressSnapshot } from './types';
 
 const app = document.getElementById('app');
 if (!app) {
@@ -56,6 +56,23 @@ if (taskArea) {
 }
 
 let optionsReturnScreen: string = 'title';
+let currentSeasonClass: string | null = null;
+
+function updateSeasonStyles(season?: SeasonProgressSnapshot | null): void {
+  const body = document.body;
+  if (!body) return;
+  if (currentSeasonClass) {
+    body.classList.remove(currentSeasonClass);
+    currentSeasonClass = null;
+  }
+  if (season?.season?.id) {
+    currentSeasonClass = `season-${season.season.id}`;
+    body.classList.add(currentSeasonClass);
+    body.setAttribute('data-season', season.season.id);
+  } else {
+    body.removeAttribute('data-season');
+  }
+}
 
 function applyOptionEffects(options: Options): void {
   OptionsUI.applyOptions(options);
@@ -79,7 +96,9 @@ function refreshFarm(): void {
   FarmUI.renderDecor(State.getDecorLayout());
   FarmUI.renderAchievements(State.getAchievements());
   const preview = Progression.getPreviewPlan(data);
-  FarmUI.renderEvents(preview?.previewNotes || []);
+  const seasonContext = preview?.season || State.getSeasonContext(data.day);
+  updateSeasonStyles(seasonContext);
+  FarmUI.renderEvents(preview?.previewNotes || [], seasonContext);
   if (data.options.audioOn) {
     ensureAmbience();
   } else {

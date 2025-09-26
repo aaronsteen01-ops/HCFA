@@ -1,4 +1,4 @@
-import type { Cow } from '../types';
+import type { Cow, SeasonProgressSnapshot } from '../types';
 import { showScreen } from '../core/screens';
 import { FoodLibrary } from '../data/foods';
 import { AccessoryLibrary } from '../data/accessories';
@@ -14,7 +14,14 @@ export interface SummaryData {
   results: Array<{ name: string; success: boolean; summary: string; icon?: string; key?: MiniGameKey }>;
   adjustments: Record<string, Partial<Record<'happiness' | 'hunger' | 'cleanliness' | 'chonk', number>>>;
   herd: Cow[];
-  reward?: { type: 'foods' | 'accessories' | 'decor'; item: string; typeLabel?: string; theme?: string; guaranteedBy?: string | null } | null;
+  reward?: {
+    type: 'foods' | 'accessories' | 'decor';
+    item: string;
+    typeLabel?: string;
+    theme?: string;
+    guaranteedBy?: string | null;
+    festivalId?: string;
+  } | null;
   stats?: { totalPerfects?: number; totalChonks?: number };
   day?: number;
   achievementsUnlocked?: string[];
@@ -22,6 +29,15 @@ export interface SummaryData {
   perfectStreak?: number;
   previousPerfectStreak?: number;
   bestPerfectStreak?: number;
+  season?: SeasonProgressSnapshot;
+  festivalResult?: {
+    id: string;
+    name: string;
+    rewardUnlocked: boolean;
+    rewardItem?: string;
+    rewardType?: 'foods' | 'accessories' | 'decor';
+    guaranteedBy?: string | null;
+  };
 }
 
 let handlers: SummaryHandlers = {};
@@ -80,7 +96,9 @@ export function renderSummary(data: SummaryData): void {
     perfectDay,
     perfectStreak,
     previousPerfectStreak,
-    achievementsUnlocked = []
+    achievementsUnlocked = [],
+    season,
+    festivalResult
   } = data;
 
   resultsEl.innerHTML = '';
@@ -104,6 +122,57 @@ export function renderSummary(data: SummaryData): void {
       perfectItem.innerHTML = `<strong>Almost There</strong><br>Not every task was flawless today.<br>${streakMessage}`;
     }
     fragment.appendChild(perfectItem);
+  }
+
+  if (season) {
+    const highlight = season.activeFestival || season.nextFestival;
+    const seasonItem = document.createElement('div');
+    seasonItem.className = 'summary-item summary-season';
+    const title = document.createElement('strong');
+    title.textContent = highlight ? `${season.season.name} • ${highlight.name}` : season.season.name;
+    seasonItem.appendChild(title);
+    const detailLines: string[] = [];
+    if (highlight) {
+      if (festivalResult && festivalResult.id === highlight.id) {
+        if (festivalResult.rewardUnlocked) {
+          const rewardText = festivalResult.rewardItem
+            ? `${festivalResult.rewardItem} unlocked!`
+            : 'Seasonal reward unlocked!';
+          detailLines.push(`Festival milestone complete. ${rewardText}`);
+        } else {
+          detailLines.push('Festival goals met – reward already owned.');
+        }
+        if (festivalResult.guaranteedBy) {
+          detailLines.push(`Guaranteed by ${festivalResult.guaranteedBy}.`);
+        }
+      } else if (typeof highlight.daysUntilFestival === 'number') {
+        if (highlight.daysUntilFestival === 0) {
+          detailLines.push('Festival day is underway!');
+        } else if (highlight.daysUntilFestival > 0) {
+          const label = highlight.daysUntilFestival === 1 ? 'day' : 'days';
+          detailLines.push(`Festival in ${highlight.daysUntilFestival} ${label}.`);
+        }
+      }
+      if (highlight.note) {
+        detailLines.push(highlight.note);
+      }
+    }
+    const summary = document.createElement('div');
+    summary.className = 'summary-item-text';
+    summary.textContent = detailLines.join(' ');
+    seasonItem.appendChild(summary);
+    const tasks = highlight?.tasks?.length ? highlight.tasks : season.season.festivalTasks;
+    if (tasks && tasks.length) {
+      const list = document.createElement('ul');
+      list.className = 'season-task-list';
+      tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.textContent = task;
+        list.appendChild(li);
+      });
+      seasonItem.appendChild(list);
+    }
+    fragment.appendChild(seasonItem);
   }
 
   results.forEach(result => {

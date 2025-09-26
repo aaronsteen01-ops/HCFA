@@ -1,4 +1,4 @@
-import type { Cow, SaveData } from '../types';
+import type { Cow, SaveData, SeasonProgressSnapshot } from '../types';
 import { shuffle, sample, pick } from '../core/util';
 import * as State from '../core/state';
 import * as TaskRush from '../ui/taskRush';
@@ -78,6 +78,15 @@ interface PlannedEvent {
 interface EventPlan {
   events: Partial<Record<MiniGameKey, PlannedEvent>>;
   notes: string[];
+  seasonNotes?: { title: string; detail: string; tasks?: string[]; daysUntil?: number };
+}
+
+interface PreparedPlan {
+  queue: MiniGameKey[];
+  eventPlan: EventPlan;
+  previewNotes: Array<{ title?: string; detail?: string; key?: MiniGameKey }>;
+  season: SeasonProgressSnapshot;
+  signature: string;
 }
 
 const PersonalityEngine = (function() {
@@ -281,7 +290,8 @@ const PersonalityEngine = (function() {
     return counts;
   }
 
-  function planDay(cows: Cow[]): EventPlan {
+  function planDay(save: SaveData, seasonContext?: SeasonProgressSnapshot): EventPlan {
+    const cows = save.cows || [];
     const counts = countPersonalities(cows);
     const plan: EventPlan = { events: {}, notes: [] };
     const catchEvent = counts.Sleepy ? configs.catch.Sleepy : (counts.Social ? configs.catch.Social : null);
@@ -308,6 +318,42 @@ const PersonalityEngine = (function() {
       plan.events.ceilidh = event;
       plan.notes.push(event.dailyNote);
     }
+
+    const seasonal = seasonContext || State.getSeasonContext(save.day);
+    const highlight = seasonal?.activeFestival || seasonal?.nextFestival;
+    if (highlight) {
+      if (highlight.note) {
+        plan.notes.push(highlight.note);
+      }
+      if (highlight.modifiers) {
+        Object.keys(highlight.modifiers).forEach(key => {
+          const miniKey = key as MiniGameKey;
+          const event = plan.events[miniKey];
+          if (event) {
+            event.modifiers = Object.assign({}, event.modifiers || {}, highlight.modifiers![key]);
+          }
+        });
+      }
+      const daysUntil = highlight.daysUntilFestival;
+      const detailParts: string[] = [];
+      if (typeof daysUntil === 'number') {
+        if (daysUntil === 0) {
+          detailParts.push('Festival day is here!');
+        } else if (daysUntil > 0) {
+          const label = daysUntil === 1 ? 'day' : 'days';
+          detailParts.push(`Festival in ${daysUntil} ${label}.`);
+        }
+      }
+      if (highlight.note) {
+        detailParts.push(highlight.note);
+      }
+      plan.seasonNotes = {
+        title: `${seasonal?.season?.name || 'Season'} • ${highlight.name}`,
+        detail: detailParts.join(' '),
+        tasks: highlight.tasks?.slice() || seasonal?.season?.festivalTasks?.slice() || [],
+        daysUntil
+      };
+    }
     return plan;
   }
 
@@ -328,7 +374,7 @@ const PersonalityEngine = (function() {
   return { planDay, eventForMini, applyOutcome };
 })();
 
-let preparedPlan: { queue: MiniGameKey[]; eventPlan: EventPlan; signature: string } | null = null;
+let preparedPlan: PreparedPlan | null = null;
 let running = false;
 let lastResults: SummaryUI.SummaryData | null = null;
 let miniGameArea: HTMLElement | null = null;
@@ -359,8 +405,8 @@ function planSignature(save: SaveData): string {
   return `${save.day}|${herdSignature}`;
 }
 
-function buildPreviewNotes(queue: MiniGameKey[], eventPlan: EventPlan) {
-  return queue.map((key, index) => {
+function buildPreviewNotes(queue: MiniGameKey[], eventPlan: EventPlan, season?: SeasonProgressSnapshot) {
+  const base = queue.map((key, index) => {
     const info = miniGames[key];
     const event = eventPlan.events?.[key];
     if (event) {
@@ -377,15 +423,49 @@ function buildPreviewNotes(queue: MiniGameKey[], eventPlan: EventPlan) {
       detail: 'Standard conditions today.'
     };
   });
+  if (eventPlan.seasonNotes) {
+    const tasks = eventPlan.seasonNotes.tasks && eventPlan.seasonNotes.tasks.length
+      ? ` Tasks: ${eventPlan.seasonNotes.tasks.join(' • ')}`
+      : '';
+    base.push({
+      title: eventPlan.seasonNotes.title,
+      detail: `${eventPlan.seasonNotes.detail}${tasks}`.trim()
+    });
+  } else if (season) {
+    const highlight = season.activeFestival || season.nextFestival;
+    if (highlight) {
+      const days = highlight.daysUntilFestival;
+      let detail = '';
+      if (typeof days === 'number') {
+        if (days === 0) {
+          detail = 'Festival day is here!';
+        } else if (days > 0) {
+          const label = days === 1 ? 'day' : 'days';
+          detail = `Festival in ${days} ${label}.`;
+        }
+      }
+      if (highlight.note) {
+        detail = detail ? `${detail} ${highlight.note}` : highlight.note;
+      }
+      const tasks = highlight.tasks && highlight.tasks.length ? ` Tasks: ${highlight.tasks.join(' • ')}` : '';
+      base.push({
+        title: `${season.season.name} • ${highlight.name}`,
+        detail: `${detail}${tasks}`.trim()
+      });
+    }
+  }
+  return base;
 }
 
 function buildPlan(save: SaveData) {
   const queue = shuffle(Object.keys(miniGames)) as MiniGameKey[];
-  const eventPlan = PersonalityEngine.planDay(save.cows);
+  const season = State.getSeasonContext(save.day);
+  const eventPlan = PersonalityEngine.planDay(save, season);
   return {
     queue,
     eventPlan,
-    previewNotes: buildPreviewNotes(queue, eventPlan),
+    season,
+    previewNotes: buildPreviewNotes(queue, eventPlan, season),
     signature: planSignature(save)
   };
 }
@@ -430,8 +510,32 @@ function mergeAdjustments(target: SummaryUI.SummaryData['adjustments'], addition
   });
 }
 
-function chooseReward(save: SaveData, context: { perfectDay: boolean; streakBefore: number; nextPerfectStreak: number; lastRewardType?: string | null }) {
+function chooseReward(
+  save: SaveData,
+  context: { perfectDay: boolean; streakBefore: number; nextPerfectStreak: number; lastRewardType?: string | null },
+  seasonContext?: SeasonProgressSnapshot
+) {
   const unlocks = save.unlocks || {};
+  const seasonal = seasonContext || State.getSeasonContext(save.day);
+  const activeFestival = seasonal?.activeFestival;
+  if (
+    activeFestival &&
+    activeFestival.reward &&
+    context.perfectDay &&
+    !State.isFestivalComplete(activeFestival.id)
+  ) {
+    const rewardData = activeFestival.reward;
+    const typeLabel = rewardData.type.charAt(0).toUpperCase() + rewardData.type.slice(1);
+    const guaranteedBy = rewardData.reason || `${activeFestival.name} milestone`;
+    return {
+      type: rewardData.type,
+      item: rewardData.item,
+      typeLabel,
+      theme: activeFestival.name,
+      festivalId: activeFestival.id,
+      guaranteedBy
+    };
+  }
   const rewardThemes = [
     {
       name: 'Highland Picnic',
@@ -574,8 +678,9 @@ export async function startDay(): Promise<void> {
   running = true;
   const save = State.getData();
   const plan = ensurePlan(save);
-  const queue = plan ? plan.queue.slice() : shuffle(Object.keys(miniGames)) as MiniGameKey[];
-  const eventPlan = plan ? plan.eventPlan : PersonalityEngine.planDay(save.cows);
+  const queue = plan ? plan.queue.slice() : (shuffle(Object.keys(miniGames)) as MiniGameKey[]);
+  const seasonContext = plan ? plan.season : State.getSeasonContext(save.day);
+  const eventPlan = plan ? plan.eventPlan : PersonalityEngine.planDay(save, seasonContext);
   const results: SummaryUI.SummaryData = {
     results: [],
     adjustments: {},
@@ -586,7 +691,9 @@ export async function startDay(): Promise<void> {
     achievementsUnlocked: [],
     perfectDay: false,
     perfectStreak: 0,
-    previousPerfectStreak: save.stats?.perfectDayStreak || 0
+    previousPerfectStreak: save.stats?.perfectDayStreak || 0,
+    season: seasonContext,
+    festivalResult: undefined
   };
   const options = Object.assign({}, save.options);
   const availableFoods = State.getUnlocks('foods');
@@ -656,9 +763,32 @@ export async function startDay(): Promise<void> {
     streakBefore: previousStreak,
     nextPerfectStreak: nextStreak,
     lastRewardType: save.stats?.lastRewardType
-  });
+  }, seasonContext);
   if (reward) {
     const added = State.addUnlock(reward.type, reward.item);
+    if (reward.festivalId) {
+      State.markFestivalComplete(reward.festivalId);
+      if (seasonContext?.activeFestival && seasonContext.activeFestival.id === reward.festivalId) {
+        seasonContext.activeFestival.completed = true;
+      }
+      if (seasonContext?.nextFestival && seasonContext.nextFestival.id === reward.festivalId) {
+        seasonContext.nextFestival.completed = true;
+      }
+      const festivalName =
+        seasonContext?.activeFestival?.id === reward.festivalId
+          ? seasonContext.activeFestival.name
+          : seasonContext?.nextFestival?.id === reward.festivalId
+            ? seasonContext.nextFestival.name
+            : reward.theme || State.getFestivalName(reward.festivalId) || reward.item;
+      results.festivalResult = {
+        id: reward.festivalId,
+        name: festivalName,
+        rewardUnlocked: added,
+        rewardItem: reward.item,
+        rewardType: reward.type,
+        guaranteedBy: reward.guaranteedBy || null
+      };
+    }
     if (added) {
       results.reward = reward;
     } else {
