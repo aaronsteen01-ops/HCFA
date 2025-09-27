@@ -1,0 +1,126 @@
+{
+  "version": "0.1.0",
+  "canvas": {
+    "width": 512,
+    "height": 512
+  },
+  "poses": ["idle"],
+  "coats": ["default"],
+  "categories": [
+    {
+      "id": "body",
+      "label": "Body",
+      "required": true,
+      "z": 0,
+      "parts": [
+        {
+          "id": "body_default_idle",
+          "label": "Default Idle Body",
+          "file": "placeholders/placeholder_body_default_idle.b64",
+          "poses": ["idle"],
+          "coats": ["default"],
+          "tags": ["body:default", "pose:idle"]
+        }
+      ]
+    },
+    {
+      "id": "face",
+      "label": "Face",
+      "required": true,
+      "z": 10,
+      "parts": [
+        {
+          "id": "face_joyful",
+          "label": "Joyful Face",
+          "file": "placeholders/placeholder_face_joyful.b64",
+          "poses": ["idle"],
+          "tags": ["face:joyful"]
+        }
+      ]
+    },
+    {
+      "id": "horns",
+      "label": "Horns",
+      "required": true,
+      "z": 20,
+      "parts": [
+        {
+          "id": "horns_default",
+          "label": "Default Horns",
+          "file": "placeholders/placeholder_horns_default.b64",
+          "tags": ["horns:default"]
+        }
+      ]
+    },
+    {
+      "id": "hair",
+      "label": "Fringe",
+      "z": 30,
+      "parts": [
+        {
+          "id": "hair_fringed",
+          "label": "Fringed Hair",
+          "file": "placeholders/placeholder_hair_fringed.b64",
+          "tags": ["hair:fringed"]
+        }
+      ]
+    },
+    {
+      "id": "head",
+      "label": "Head Accessory",
+      "z": 40,
+      "max": 1,
+      "parts": [
+        {
+          "id": "acc_pastel_bow",
+          "label": "Pastel Bow",
+          "file": "placeholders/placeholder_head_pastel_bow.b64",
+          "tags": ["head:acc_pastel_bow"],
+          "rules": {
+            "exclude": ["head:acc_flower_crown"]
+          }
+        },
+        {
+          "id": "acc_flower_crown",
+          "label": "Flower Crown",
+          "file": "placeholders/placeholder_head_flower_crown.b64",
+          "tags": ["head:acc_flower_crown"],
+          "rules": {
+            "exclude": ["head:acc_pastel_bow"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "neck",
+      "label": "Neckwear",
+      "z": 50,
+      "parts": [
+        {
+          "id": "neck_bell",
+          "label": "Cowbell",
+          "file": "placeholders/placeholder_neck_bell.b64",
+          "tags": ["neck:bell"]
+        }
+      ]
+    },
+    {
+      "id": "body_acc",
+      "label": "Body Accessory",
+      "z": 60,
+      "parts": [
+        {
+          "id": "blanket_patchwork",
+          "label": "Patchwork Blanket",
+          "file": "placeholders/placeholder_body_acc_blanket.b64",
+          "tags": ["body_acc:blanket"]
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "exclude": ["head:acc_pastel_bow", "head:acc_flower_crown"]
+    }
+  ]
+}
