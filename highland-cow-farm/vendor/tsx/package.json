@@ -1,0 +1,7 @@
+{
+  "name": "tsx",
+  "version": "0.0.0-local",
+  "bin": {
+    "tsx": "bin/cli.js"
+  }
+}
