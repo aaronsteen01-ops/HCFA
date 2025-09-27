@@ -6,6 +6,10 @@ import type {
   CowNoteEntry,
   CowSnapshotEntry,
   DecorLayout,
+  FamilyChallengeAssignment,
+  FamilyChallengeDaySummary,
+  FamilyChallengeOverview,
+  FamilyChallengeState,
   JournalData,
   Options,
   SaveData,
@@ -23,7 +27,7 @@ import { clamp, range, sample } from './util';
 import { DEFAULT_COW_NAMES, ensureCowDefaults, newCow } from '../game/cows';
 
 export const SAVE_KEY = 'hcfarm_save_v1';
-const VERSION = 5;
+const VERSION = 6;
 
 const MAX_NAME_HISTORY = 12;
 const MAX_OUTFIT_HISTORY = 18;
@@ -31,6 +35,341 @@ const MAX_NOTES = 60;
 const MAX_SNAPSHOTS = 24;
 
 let data: SaveData;
+
+const FAMILY_DEFAULT_NAMES = ['Caretaker A', 'Caretaker B', 'Caretaker C', 'Caretaker D'];
+const MAX_FAMILY_PARTICIPANTS = 8;
+
+function fallbackFamilyName(index: number): string {
+  if (index < FAMILY_DEFAULT_NAMES.length) {
+    return FAMILY_DEFAULT_NAMES[index];
+  }
+  return `Caretaker ${index + 1}`;
+}
+
+function buildDefaultFamilyParticipants(): FamilyChallengeState['participants'] {
+  return FAMILY_DEFAULT_NAMES.map((name, index) => ({ id: `family-${index + 1}`, name }));
+}
+
+function sanitizeCount(value: unknown): number {
+  const num = typeof value === 'number' ? value : Number(value);
+  if (!Number.isFinite(num)) return 0;
+  return Math.max(0, Math.floor(num));
+}
+
+function sanitizeFamilyParticipants(list: any): FamilyChallengeState['participants'] {
+  if (!Array.isArray(list)) return buildDefaultFamilyParticipants();
+  const participants: FamilyChallengeState['participants'] = [];
+  const seenIds = new Set<string>();
+  list.slice(0, MAX_FAMILY_PARTICIPANTS).forEach((entry, index) => {
+    if (!entry || typeof entry !== 'object') return;
+    let id = typeof entry.id === 'string' && entry.id.trim() ? entry.id.trim() : `family-${index + 1}`;
+    while (seenIds.has(id)) {
+      id = `${id}-${index + 1}`;
+    }
+    let name = typeof entry.name === 'string' && entry.name.trim() ? entry.name.trim() : fallbackFamilyName(index);
+    participants.push({ id, name });
+    seenIds.add(id);
+  });
+  if (!participants.length) {
+    return buildDefaultFamilyParticipants();
+  }
+  return participants;
+}
+
+function sanitizeFamilyStats(
+  stats: Record<string, any> | undefined,
+  participants: FamilyChallengeState['participants']
+): FamilyChallengeState['stats'] {
+  const result: FamilyChallengeState['stats'] = {};
+  const source = stats && typeof stats === 'object' ? stats : {};
+  participants.forEach(participant => {
+    const entry = source[participant.id] || {};
+    result[participant.id] = {
+      id: participant.id,
+      name: participant.name,
+      plays: sanitizeCount(entry.plays),
+      wins: sanitizeCount(entry.wins),
+      perfects: sanitizeCount(entry.perfects),
+      score: sanitizeCount(entry.score),
+      mvpCount: sanitizeCount(entry.mvpCount),
+      lastPlayedDay:
+        typeof entry.lastPlayedDay === 'number' && Number.isFinite(entry.lastPlayedDay)
+          ? Math.max(0, Math.floor(entry.lastPlayedDay))
+          : undefined,
+      lastMvpDay:
+        typeof entry.lastMvpDay === 'number' && Number.isFinite(entry.lastMvpDay)
+          ? Math.max(0, Math.floor(entry.lastMvpDay))
+          : undefined
+    };
+  });
+  return result;
+}
+
+function defaultFamilyChallenge(): FamilyChallengeState {
+  const participants = buildDefaultFamilyParticipants();
+  return {
+    enabled: false,
+    participants,
+    rotationIndex: 0,
+    streak: 0,
+    bestStreak: 0,
+    stats: sanitizeFamilyStats({}, participants),
+    lastMvpId: null,
+    mvpRotationIndex: 0
+  };
+}
+
+function sanitizeFamilyChallenge(state: Partial<FamilyChallengeState> | undefined): FamilyChallengeState {
+  if (!state || typeof state !== 'object') {
+    return defaultFamilyChallenge();
+  }
+  const participants = sanitizeFamilyParticipants((state as FamilyChallengeState).participants);
+  if (!participants.length) {
+    return defaultFamilyChallenge();
+  }
+  const rotationIndex = sanitizeCount((state as FamilyChallengeState).rotationIndex);
+  const streak = sanitizeCount((state as FamilyChallengeState).streak);
+  const bestStreak = sanitizeCount((state as FamilyChallengeState).bestStreak);
+  const stats = sanitizeFamilyStats((state as FamilyChallengeState).stats, participants);
+  const lastMvpId =
+    typeof state.lastMvpId === 'string' && stats[state.lastMvpId] ? state.lastMvpId : null;
+  const mvpRotationIndex = sanitizeCount(state.mvpRotationIndex);
+  return {
+    enabled: !!(state as FamilyChallengeState).enabled,
+    participants,
+    rotationIndex: participants.length ? rotationIndex % participants.length : 0,
+    streak,
+    bestStreak: Math.max(bestStreak, streak),
+    stats,
+    lastMvpId,
+    mvpRotationIndex: participants.length ? mvpRotationIndex % participants.length : 0
+  };
+}
+
+function ensureFamilyChallengeBase(): FamilyChallengeState {
+  if (!data || !data.familyChallenge) {
+    data.familyChallenge = defaultFamilyChallenge();
+  } else {
+    data.familyChallenge = sanitizeFamilyChallenge(data.familyChallenge);
+  }
+  return data.familyChallenge;
+}
+
+interface FamilyChallengeDayPayload {
+  assignments: FamilyChallengeAssignment[];
+  perfectDay: boolean;
+  day: number;
+  nextRotationIndex?: number;
+}
+
+function cloneFamilyState(source: FamilyChallengeState): FamilyChallengeState {
+  return {
+    enabled: source.enabled,
+    participants: source.participants.map(entry => ({ ...entry })),
+    rotationIndex: source.rotationIndex,
+    streak: source.streak,
+    bestStreak: source.bestStreak,
+    stats: Object.keys(source.stats).reduce((acc, key) => {
+      acc[key] = { ...source.stats[key] };
+      return acc;
+    }, {} as FamilyChallengeState['stats']),
+    lastMvpId: source.lastMvpId ?? null,
+    mvpRotationIndex: source.mvpRotationIndex
+  };
+}
+
+export function getFamilyChallenge(): FamilyChallengeState {
+  return cloneFamilyState(ensureFamilyChallengeBase());
+}
+
+export function getFamilyChallengeOverview(): FamilyChallengeOverview {
+  const challenge = ensureFamilyChallengeBase();
+  const nextPlayer =
+    challenge.participants.length > 0
+      ? challenge.participants[challenge.rotationIndex % challenge.participants.length]
+      : null;
+  const lastMvpName = challenge.lastMvpId
+    ? challenge.stats[challenge.lastMvpId]?.name ||
+      challenge.participants.find(participant => participant.id === challenge.lastMvpId)?.name ||
+      null
+    : null;
+  return {
+    enabled: challenge.enabled,
+    nextPlayer: nextPlayer ? { id: nextPlayer.id, name: nextPlayer.name } : null,
+    streak: challenge.streak,
+    bestStreak: challenge.bestStreak,
+    lastMvpName
+  };
+}
+
+export function completeFamilyChallengeDay(payload: FamilyChallengeDayPayload): FamilyChallengeDaySummary | null {
+  const challenge = ensureFamilyChallengeBase();
+  if (!challenge.enabled || !challenge.participants.length) {
+    return null;
+  }
+  challenge.stats = sanitizeFamilyStats(challenge.stats, challenge.participants);
+  const assignments = Array.isArray(payload.assignments) ? payload.assignments.slice() : [];
+  const dayStats = new Map<string, { plays: number; wins: number; perfects: number; score: number }>();
+  assignments.forEach(entry => {
+    if (!entry || !challenge.stats[entry.participantId]) return;
+    const record = dayStats.get(entry.participantId) || { plays: 0, wins: 0, perfects: 0, score: 0 };
+    record.plays += 1;
+    if (entry.success) {
+      record.wins += 1;
+    }
+    if (entry.perfect) {
+      record.perfects += 1;
+      record.score += 2;
+    } else if (entry.success) {
+      record.score += 1;
+    }
+    dayStats.set(entry.participantId, record);
+  });
+
+  challenge.participants.forEach(participant => {
+    const stats = challenge.stats[participant.id];
+    if (stats) {
+      stats.name = participant.name;
+    } else {
+      challenge.stats[participant.id] = {
+        id: participant.id,
+        name: participant.name,
+        plays: 0,
+        wins: 0,
+        perfects: 0,
+        score: 0,
+        mvpCount: 0
+      };
+    }
+  });
+
+  dayStats.forEach((stat, id) => {
+    const record = challenge.stats[id];
+    if (!record) return;
+    record.plays += stat.plays;
+    record.wins += stat.wins;
+    record.perfects += stat.perfects;
+    record.score += stat.score;
+    record.lastPlayedDay = payload.day;
+  });
+
+  const candidates: string[] = [];
+  let bestScore = -Infinity;
+  dayStats.forEach((stat, id) => {
+    if (stat.score > bestScore) {
+      bestScore = stat.score;
+      candidates.length = 0;
+      candidates.push(id);
+    } else if (stat.score === bestScore) {
+      candidates.push(id);
+    }
+  });
+
+  let mvpId: string | null = null;
+  if (candidates.length === 1) {
+    mvpId = candidates[0];
+  } else if (candidates.length > 1) {
+    const lastIndex = challenge.lastMvpId ? candidates.indexOf(challenge.lastMvpId) : -1;
+    if (lastIndex >= 0) {
+      mvpId = candidates[(lastIndex + 1) % candidates.length];
+    } else {
+      const pivot = challenge.mvpRotationIndex % candidates.length;
+      mvpId = candidates[pivot];
+    }
+  }
+
+  if (mvpId) {
+    const record = challenge.stats[mvpId];
+    if (record) {
+      record.mvpCount += 1;
+      record.lastMvpDay = payload.day;
+    }
+    challenge.lastMvpId = mvpId;
+    if (challenge.participants.length) {
+      challenge.mvpRotationIndex = (challenge.mvpRotationIndex + 1) % challenge.participants.length;
+    }
+  }
+
+  if (typeof payload.nextRotationIndex === 'number' && challenge.participants.length) {
+    const nextIndex = sanitizeCount(payload.nextRotationIndex);
+    challenge.rotationIndex = nextIndex % challenge.participants.length;
+  } else if (challenge.participants.length) {
+    const advance = assignments.length % challenge.participants.length;
+    challenge.rotationIndex = (challenge.rotationIndex + advance) % challenge.participants.length;
+  }
+
+  if (payload.perfectDay) {
+    challenge.streak += 1;
+    if (challenge.bestStreak < challenge.streak) {
+      challenge.bestStreak = challenge.streak;
+    }
+  } else {
+    challenge.streak = 0;
+  }
+
+  challenge.stats = sanitizeFamilyStats(challenge.stats, challenge.participants);
+
+  const assignmentsSummary = assignments
+    .filter(entry => !!challenge.stats[entry.participantId])
+    .map(entry => {
+      const participant = challenge.participants.find(part => part.id === entry.participantId);
+      return {
+        miniGame: entry.miniGame,
+        name: participant ? participant.name : 'Caretaker',
+        success: !!entry.success,
+        perfect: !!entry.perfect
+      };
+    });
+
+  const leaderboard = challenge.participants
+    .map(participant => {
+      const record = challenge.stats[participant.id];
+      return {
+        id: participant.id,
+        name: participant.name,
+        plays: record?.plays || 0,
+        wins: record?.wins || 0,
+        perfects: record?.perfects || 0,
+        score: record?.score || 0,
+        mvpCount: record?.mvpCount || 0,
+        isMvp: participant.id === mvpId
+      };
+    })
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      if (b.perfects !== a.perfects) return b.perfects - a.perfects;
+      if (b.wins !== a.wins) return b.wins - a.wins;
+      return a.name.localeCompare(b.name);
+    });
+
+  const nextPlayer =
+    challenge.participants.length > 0
+      ? challenge.participants[challenge.rotationIndex % challenge.participants.length]
+      : null;
+
+  const summary: FamilyChallengeDaySummary = {
+    enabled: challenge.enabled,
+    assignments: assignmentsSummary,
+    leaderboard,
+    streak: challenge.streak,
+    bestStreak: challenge.bestStreak,
+    mvpName: mvpId ? challenge.stats[mvpId]?.name || null : null,
+    nextPlayer: nextPlayer ? { id: nextPlayer.id, name: nextPlayer.name } : null
+  };
+
+  const unlocked: string[] = [];
+  if (challenge.enabled && payload.perfectDay) {
+    if (unlockAchievement('familyHarmony')) {
+      unlocked.push('familyHarmony');
+    }
+  }
+  if (unlocked.length) {
+    summary.unlockedAchievements = unlocked;
+  }
+
+  saveNow();
+  return summary;
+}
 
 function nowISO(): string {
   return new Date().toISOString();
@@ -540,7 +879,8 @@ function sanitizeOptions(options: Partial<Options> | undefined): Options {
     ambienceVolume: 0.5,
     masterVolume: 1,
     highContrastUI: false,
-    reducedFlash: false
+    reducedFlash: false,
+    familyChallengeMode: false
   };
   if (!options) return base;
   return {
@@ -549,7 +889,8 @@ function sanitizeOptions(options: Partial<Options> | undefined): Options {
     ambienceVolume: typeof options.ambienceVolume === 'number' ? clamp(options.ambienceVolume, 0, 1) : base.ambienceVolume,
     masterVolume: typeof options.masterVolume === 'number' ? clamp(options.masterVolume, 0, 1) : base.masterVolume,
     highContrastUI: !!options.highContrastUI,
-    reducedFlash: !!options.reducedFlash
+    reducedFlash: !!options.reducedFlash,
+    familyChallengeMode: !!options.familyChallengeMode
   };
 }
 
@@ -645,6 +986,7 @@ export function migrateSave(oldData: any): SaveData {
     });
   }
   migrated.season = sanitizeSeason(oldData.season);
+  migrated.familyChallenge = sanitizeFamilyChallenge(oldData.familyChallenge);
   return migrated;
 }
 
@@ -672,12 +1014,14 @@ export function newSave(): SaveData {
       ambienceVolume: 0.5,
       masterVolume: 1,
       highContrastUI: false,
-      reducedFlash: false
+      reducedFlash: false,
+      familyChallengeMode: false
     },
     stats: { totalPerfects: 0, totalChonks: 0, perfectDayStreak: 0, bestPerfectDayStreak: 0, lastRewardType: null },
     achievements: blankAchievements(),
     lastPlayedISO: new Date().toISOString(),
-    season: defaultSeason()
+    season: defaultSeason(),
+    familyChallenge: defaultFamilyChallenge()
   };
 }
 
@@ -708,6 +1052,7 @@ export function loadSave(): SaveData {
   data.unlocks.decor = sanitizeUnlockList(data.unlocks.decor, DecorLibrary);
   data.decorLayout = sanitizeDecorLayout(data.decorLayout, data);
   data.activeDecor = sanitizeDecor(Object.values(data.decorLayout), data);
+  data.options = sanitizeOptions(data.options);
   data.cows = Array.isArray(data.cows)
     ? data.cows.map((cow: Cow, index: number) => ensureCowDefaults(cow, cow.id || `cow-${index + 1}`, cow.name || DEFAULT_COW_NAMES[index % DEFAULT_COW_NAMES.length]))
     : [];
@@ -721,6 +1066,11 @@ export function loadSave(): SaveData {
   pruneJournal();
   if (!data.achievements) data.achievements = blankAchievements();
   data.season = sanitizeSeason(data.season);
+  data.familyChallenge = sanitizeFamilyChallenge(data.familyChallenge);
+  if (data.familyChallenge.enabled !== data.options.familyChallengeMode) {
+    data.familyChallenge.enabled = !!data.familyChallenge.enabled;
+    data.options.familyChallengeMode = data.familyChallenge.enabled;
+  }
   return data;
 }
 
@@ -745,6 +1095,11 @@ export function setOption(partial: Partial<Options>): void {
   if (typeof partial.audioOn === 'boolean') data.options.audioOn = partial.audioOn;
   if (typeof partial.highContrastUI === 'boolean') data.options.highContrastUI = partial.highContrastUI;
   if (typeof partial.reducedFlash === 'boolean') data.options.reducedFlash = partial.reducedFlash;
+  if (typeof partial.familyChallengeMode === 'boolean') {
+    data.options.familyChallengeMode = partial.familyChallengeMode;
+    const challenge = ensureFamilyChallengeBase();
+    challenge.enabled = partial.familyChallengeMode;
+  }
   if (typeof partial.effectsVolume === 'number') data.options.effectsVolume = clamp(partial.effectsVolume, 0, 1);
   if (typeof partial.ambienceVolume === 'number') data.options.ambienceVolume = clamp(partial.ambienceVolume, 0, 1);
   if (typeof partial.masterVolume === 'number') data.options.masterVolume = clamp(partial.masterVolume, 0, 1);

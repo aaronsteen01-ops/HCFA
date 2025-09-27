@@ -11,6 +11,7 @@ let initialised = false;
 let audioToggle: HTMLInputElement | null = null;
 let contrastToggle: HTMLInputElement | null = null;
 let reducedToggle: HTMLInputElement | null = null;
+let familyToggle: HTMLInputElement | null = null;
 let masterRange: HTMLInputElement | null = null;
 let effectsRange: HTMLInputElement | null = null;
 let ambienceRange: HTMLInputElement | null = null;
@@ -28,6 +29,7 @@ export function init(section: HTMLElement): void {
   audioToggle = section.querySelector<HTMLInputElement>('#toggle-audio');
   contrastToggle = section.querySelector<HTMLInputElement>('#toggle-contrast');
   reducedToggle = section.querySelector<HTMLInputElement>('#toggle-reduced');
+  familyToggle = section.querySelector<HTMLInputElement>('#toggle-family-challenge');
   masterRange = section.querySelector<HTMLInputElement>('#range-master');
   effectsRange = section.querySelector<HTMLInputElement>('#range-effects');
   ambienceRange = section.querySelector<HTMLInputElement>('#range-ambience');
@@ -46,6 +48,10 @@ export function init(section: HTMLElement): void {
 
   reducedToggle?.addEventListener('change', () => {
     handlers.onChange?.({ reducedFlash: !!reducedToggle?.checked });
+  });
+
+  familyToggle?.addEventListener('change', () => {
+    handlers.onChange?.({ familyChallengeMode: !!familyToggle?.checked });
   });
 
   effectsRange?.addEventListener('input', () => {
@@ -83,6 +89,7 @@ export function update(options: Options): void {
   audioToggle && (audioToggle.checked = !!options.audioOn);
   contrastToggle && (contrastToggle.checked = !!options.highContrastUI);
   reducedToggle && (reducedToggle.checked = !!options.reducedFlash);
+  familyToggle && (familyToggle.checked = !!options.familyChallengeMode);
   if (masterRange) {
     masterRange.value = String(options.masterVolume ?? 1);
     if (masterValue) masterValue.textContent = `${Math.round((options.masterVolume ?? 1) * 100)}%`;

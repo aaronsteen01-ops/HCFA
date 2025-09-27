@@ -101,8 +101,9 @@ function refreshFarm(): void {
   FarmUI.renderAchievements(State.getAchievements());
   const preview = Progression.getPreviewPlan(data);
   const seasonContext = preview?.season || State.getSeasonContext(data.day);
+  const challengeOverview = State.getFamilyChallengeOverview();
   updateSeasonStyles(seasonContext);
-  FarmUI.renderEvents(preview?.previewNotes || [], seasonContext);
+  FarmUI.renderEvents(preview?.previewNotes || [], seasonContext, challengeOverview);
   if (data.options.audioOn) {
     ensureAmbience();
   } else {

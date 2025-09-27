@@ -23,5 +23,9 @@ export const ACHIEVEMENTS: Record<string, AchievementEntry> = {
   chonkSentinel: {
     title: 'Chonk Sentinel',
     description: 'End a day with every cow below 70 chonk.'
+  },
+  familyHarmony: {
+    title: 'Family Harmony',
+    description: 'Share a perfect day together in Family Challenge mode.'
   }
 };
