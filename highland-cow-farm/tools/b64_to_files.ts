@@ -18,6 +18,8 @@ const MIME_EXTENSION_OVERRIDES: Record<string, string> = {
 
 async function resolveSourceDir(): Promise<string> {
   const candidates = [
+    path.resolve('highland-cow-farm/src/assets/cowparts'),
+    path.resolve('../highland-cow-farm/src/assets/cowparts'),
     path.resolve('src/assets/cowparts'),
     path.resolve('../src/assets/cowparts'),
   ];

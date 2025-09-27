@@ -1,7 +1,32 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
-const SOURCE_DIR = path.resolve('src/assets/cowparts');
+async function resolveSourceDir(): Promise<string> {
+  const candidates = [
+    path.resolve('highland-cow-farm/src/assets/cowparts'),
+    path.resolve('src/assets/cowparts'),
+    path.resolve('../highland-cow-farm/src/assets/cowparts'),
+    path.resolve('../src/assets/cowparts'),
+  ];
+
+  for (const candidate of candidates) {
+    try {
+      const stats = await fs.stat(candidate);
+      if (stats.isDirectory()) {
+        return candidate;
+      }
+    } catch (error) {
+      const code = typeof error === 'object' && error && 'code' in error ? (error as { code?: string }).code : undefined;
+      if (code !== 'ENOENT') {
+        throw error;
+      }
+    }
+  }
+
+  throw new Error(
+    `Unable to find a cowparts directory. Looked in:\n${candidates.map((dir) => ` - ${dir}`).join('\n')}`,
+  );
+}
 
 const MIME_EXTENSION_OVERRIDES: Record<string, string> = {
   'image/svg+xml': '.svg',
@@ -84,7 +109,8 @@ async function convertFile(filePath: string): Promise<string> {
 }
 
 async function main(): Promise<void> {
-  const b64Files = await walk(SOURCE_DIR);
+  const sourceDir = await resolveSourceDir();
+  const b64Files = await walk(sourceDir);
 
   if (b64Files.length === 0) {
     console.log('No .b64 files found.');

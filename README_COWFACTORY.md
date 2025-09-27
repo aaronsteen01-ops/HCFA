@@ -4,7 +4,7 @@ This module powers procedurally generated Highland cows with interchangeable par
 
 🔧 How it works
 
-Assets are stored in src/assets/cowparts/ by category.
+Assets are stored in highland-cow-farm/src/assets/cowparts/ by category.
 
 Each asset has a transparent background and is centred on a 512×512 canvas (nose tip at centre (256,256)).
 
@@ -17,7 +17,7 @@ Cows are rendered onto <canvas> at runtime.
 You can save a cow’s recipe (the chosen parts) to reconstruct them later.
 
 📂 Folder layout
-src/assets/cowparts/
+highland-cow-farm/src/assets/cowparts/
   bodies/       # Base coat + pose (required)
   faces/        # Expressions (required)
   horns/        # Horn shapes (default, short, etc.)
@@ -32,7 +32,7 @@ src/assets/cowparts/
 
 Each folder contains a README.txt for guidance.
 
-Example src/assets/cowparts/bodies/README.txt
+Example highland-cow-farm/src/assets/cowparts/bodies/README.txt
 Body sprites (required for every cow).
 - Export size: 512x512 transparent PNG or WebP
 - Anchor: nose at (256,256)
@@ -49,7 +49,7 @@ Optional:
   body_<coat>_walk.webp
   body_<coat>_blink.webp
 
-Example src/assets/cowparts/head/README.txt
+Example highland-cow-farm/src/assets/cowparts/head/README.txt
 Head accessories (crowns, bows, hats).
 - Positioned relative to top of head (anchor 256,190).
 - Transparent background.
@@ -104,7 +104,7 @@ await factory.renderToCanvas(recipe, document.querySelector("#cowCanvas")!);
 
 Create src/game/cowFactory.ts using the provided TypeScript template.
 
-Create src/assets/cowparts/ with subfolders and README.txt notes inside each.
+Create highland-cow-farm/src/assets/cowparts/ with subfolders and README.txt notes inside each.
 
 Generate sprites.json manifest stub with sample entries (one per category).
 

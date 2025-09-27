@@ -5,7 +5,7 @@ game client (a Vite workspace) and the shared asset pipeline for generating cow 
 
 ## Repository Layout
 - `highland-cow-farm/` – Main Vite project with development tooling and sample factory harness.
-- `src/assets/cowparts/` – Source manifest, placeholder assets, and decoded outputs that power the cow factory.
+- `highland-cow-farm/src/assets/cowparts/` – Source manifest, placeholder assets, and decoded outputs that power the cow factory.
 - `tools/` – Shared build/decode utilities.
 - `README_COWFACTORY.md` – Deep-dive into the procedural sprite system.
 
@@ -18,15 +18,15 @@ game client (a Vite workspace) and the shared asset pipeline for generating cow 
 > Tip: The decode step is fast and can be rerun whenever new parts are added. Existing decoded files are overwritten in place.
 
 ## Asset Pipeline
-Cow parts are stored as compact base64 (`.b64`) files under `src/assets/cowparts`. This keeps placeholder art small and easily
+Cow parts are stored as compact base64 (`.b64`) files under `highland-cow-farm/src/assets/cowparts`. This keeps placeholder art small and easily
 editable (most are inline SVG). The `tools/b64_to_files.ts` script converts those placeholders into regular image files so the
 runtime can load them via URL references. The script now auto-detects whether it should read assets from the shared root
-(`../src/assets/cowparts`) or a local project copy, making it usable from multiple packages.
+(`../highland-cow-farm/src/assets/cowparts`) or a local project copy, making it usable from multiple packages.
 
 ### Adding a New Cow Part
 Use this checklist whenever you introduce fresh art:
-- [ ] Drop the new asset into `src/assets/cowparts/<category>/placeholders/` as a `.b64` file (or update the decoded version).
-- [ ] Register the part in `src/assets/cowparts/sprites.json`, including tags, poses, coats, and any rules.
+- [ ] Drop the new asset into `highland-cow-farm/src/assets/cowparts/<category>/placeholders/` as a `.b64` file (or update the decoded version).
+- [ ] Register the part in `highland-cow-farm/src/assets/cowparts/sprites.json`, including tags, poses, coats, and any rules.
 - [ ] Run `npm run assets:decode` to regenerate the decoded files so the factory sees the latest art.
 
 ## Appendix: Game Design Snapshot
