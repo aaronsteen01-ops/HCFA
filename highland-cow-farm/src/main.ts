@@ -10,6 +10,7 @@ import * as StyleRoom from './ui/styleRoom';
 import * as DecorRoom from './ui/decorRoom';
 import * as TaskRush from './ui/taskRush';
 import * as SummaryUI from './ui/summary';
+import * as Journal from './ui/journal';
 import * as Progression from './game/progression';
 import type { Options, SeasonProgressSnapshot } from './types';
 
@@ -44,6 +45,9 @@ sections.forEach(section => {
       break;
     case 'summary':
       SummaryUI.init(section);
+      break;
+    case 'journal':
+      Journal.init(section);
       break;
     default:
       break;
@@ -141,6 +145,10 @@ FarmUI.configureFarmHandlers({
   },
   onManageDecor() {
     DecorRoom.show(State.getUnlocks('decor'), State.getDecorLayout());
+  },
+  onOpenJournal() {
+    Journal.refresh();
+    Journal.show();
   }
 });
 
@@ -207,6 +215,16 @@ SummaryUI.configureSummaryHandlers({
 TaskRush.configureTaskHandlers({
   onContinue() {
     // Placeholder for future manual progression controls.
+  }
+});
+
+Journal.configureJournalHandlers({
+  onBack() {
+    FarmUI.show();
+    refreshFarm();
+  },
+  onDataChanged() {
+    refreshFarm();
   }
 });
 

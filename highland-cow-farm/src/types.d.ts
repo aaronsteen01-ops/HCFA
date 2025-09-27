@@ -13,6 +13,44 @@ export interface Cow {
   colour: CowColour;
 }
 
+export interface CowNameRecord {
+  day: number;
+  name: string;
+  recordedISO: string;
+}
+
+export interface CowNoteEntry {
+  id: string;
+  day: number;
+  text: string;
+  recordedISO: string;
+}
+
+export interface CowOutfitEntry {
+  day: number;
+  accessories: string[];
+  recordedISO: string;
+}
+
+export interface CowSnapshotEntry {
+  day: number;
+  dataUri: string;
+  recordedISO: string;
+}
+
+export interface CowJournalEntry {
+  cowId: string;
+  names: CowNameRecord[];
+  notes: CowNoteEntry[];
+  outfits: CowOutfitEntry[];
+  favouriteTreats: Record<string, number>;
+  snapshots: CowSnapshotEntry[];
+}
+
+export interface JournalData {
+  cows: Record<string, CowJournalEntry>;
+}
+
 export interface Unlocks {
   foods: string[];
   accessories: string[];
@@ -91,6 +129,7 @@ export interface SaveData {
   version: number;
   day: number;
   cows: Cow[];
+  journal: JournalData;
   unlocks: Unlocks;
   activeDecor: string[];
   decorLayout: DecorLayout;
@@ -103,10 +142,21 @@ export interface SaveData {
 
 export interface MiniGameOutcome {
   success: boolean;
-  adjustments: Record<string, Partial<Record<'happiness' | 'hunger' | 'cleanliness' | 'chonk', number>>>;
+  adjustments: CowAdjustments;
   summary?: string;
   stats?: { totalPerfects?: number; totalChonks?: number };
 }
+
+export interface CowAdjustment {
+  happiness?: number;
+  hunger?: number;
+  cleanliness?: number;
+  chonk?: number;
+  addAccessory?: string;
+  servedTreats?: string[];
+}
+
+export type CowAdjustments = Record<string, CowAdjustment>;
 
 declare module '*.b64?raw' {
   const content: string;

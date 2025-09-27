@@ -1,7 +1,12 @@
 import type {
   AchievementMap,
   Cow,
+  CowAdjustments,
+  CowJournalEntry,
+  CowNoteEntry,
+  CowSnapshotEntry,
   DecorLayout,
+  JournalData,
   Options,
   SaveData,
   SeasonState,
@@ -18,9 +23,212 @@ import { clamp, range, sample } from './util';
 import { DEFAULT_COW_NAMES, ensureCowDefaults, newCow } from '../game/cows';
 
 export const SAVE_KEY = 'hcfarm_save_v1';
-const VERSION = 4;
+const VERSION = 5;
+
+const MAX_NAME_HISTORY = 12;
+const MAX_OUTFIT_HISTORY = 18;
+const MAX_NOTES = 60;
+const MAX_SNAPSHOTS = 24;
 
 let data: SaveData;
+
+function nowISO(): string {
+  return new Date().toISOString();
+}
+
+function clipList<T>(list: T[], limit: number): T[] {
+  if (!Array.isArray(list)) return [];
+  if (list.length <= limit) return list.slice();
+  return list.slice(list.length - limit);
+}
+
+function sanitizeNameHistory(entry: Partial<CowJournalEntry> | undefined, cow: Cow, day: number, timestamp: string) {
+  const source = Array.isArray(entry?.names) ? entry!.names : [];
+  const cleaned = source
+    .filter(record => record && typeof record.name === 'string')
+    .map(record => ({
+      day: typeof record.day === 'number' && Number.isFinite(record.day) ? Math.max(1, Math.floor(record.day)) : day,
+      name: record.name.trim(),
+      recordedISO: typeof record.recordedISO === 'string' && record.recordedISO ? record.recordedISO : timestamp
+    }))
+    .filter(record => record.name);
+  if (!cleaned.length) {
+    cleaned.push({ day, name: cow.name, recordedISO: timestamp });
+  }
+  return clipList(cleaned, MAX_NAME_HISTORY);
+}
+
+function sanitizeNotes(entry: Partial<CowJournalEntry> | undefined, day: number, timestamp: string): CowNoteEntry[] {
+  const source = Array.isArray(entry?.notes) ? entry!.notes : [];
+  const cleaned = source
+    .filter(note => note && typeof note.text === 'string' && typeof note.id === 'string')
+    .map(note => ({
+      id: note.id,
+      day: typeof note.day === 'number' && Number.isFinite(note.day) ? Math.max(1, Math.floor(note.day)) : day,
+      text: note.text.trim(),
+      recordedISO: typeof note.recordedISO === 'string' && note.recordedISO ? note.recordedISO : timestamp
+    }))
+    .filter(note => note.text.length > 0);
+  return clipList(cleaned, MAX_NOTES);
+}
+
+function sanitizeOutfits(entry: Partial<CowJournalEntry> | undefined, cow: Cow, day: number, timestamp: string) {
+  const source = Array.isArray(entry?.outfits) ? entry!.outfits : [];
+  const cleaned = source
+    .filter(outfit => outfit && Array.isArray(outfit.accessories))
+    .map(outfit => ({
+      day: typeof outfit.day === 'number' && Number.isFinite(outfit.day) ? Math.max(1, Math.floor(outfit.day)) : day,
+      accessories: outfit.accessories.filter((item: unknown): item is string => typeof item === 'string'),
+      recordedISO: typeof outfit.recordedISO === 'string' && outfit.recordedISO ? outfit.recordedISO : timestamp
+    }));
+  if (!cleaned.length && cow.accessories?.length) {
+    cleaned.push({ day, accessories: cow.accessories.slice(), recordedISO: timestamp });
+  }
+  return clipList(cleaned, MAX_OUTFIT_HISTORY);
+}
+
+function sanitizeTreats(entry: Partial<CowJournalEntry> | undefined): Record<string, number> {
+  const source = entry?.favouriteTreats;
+  if (!source || typeof source !== 'object') return {};
+  const result: Record<string, number> = {};
+  Object.keys(source).forEach(key => {
+    const count = (source as Record<string, unknown>)[key];
+    if (typeof count === 'number' && Number.isFinite(count) && count > 0) {
+      result[key] = Math.floor(count);
+    }
+  });
+  return result;
+}
+
+function sanitizeSnapshots(entry: Partial<CowJournalEntry> | undefined, day: number, timestamp: string): CowSnapshotEntry[] {
+  const source = Array.isArray(entry?.snapshots) ? entry!.snapshots : [];
+  const cleaned = source
+    .filter(snapshot => snapshot && typeof snapshot.dataUri === 'string' && snapshot.dataUri.trim())
+    .map(snapshot => ({
+      day: typeof snapshot.day === 'number' && Number.isFinite(snapshot.day) ? Math.max(1, Math.floor(snapshot.day)) : day,
+      dataUri: snapshot.dataUri,
+      recordedISO: typeof snapshot.recordedISO === 'string' && snapshot.recordedISO ? snapshot.recordedISO : timestamp
+    }));
+  return clipList(cleaned, MAX_SNAPSHOTS);
+}
+
+function sanitizeJournalEntry(entry: Partial<CowJournalEntry> | undefined, cow: Cow, day: number): CowJournalEntry {
+  const timestamp = nowISO();
+  return {
+    cowId: cow.id,
+    names: sanitizeNameHistory(entry, cow, day, timestamp),
+    notes: sanitizeNotes(entry, day, timestamp),
+    outfits: sanitizeOutfits(entry, cow, day, timestamp),
+    favouriteTreats: sanitizeTreats(entry),
+    snapshots: sanitizeSnapshots(entry, day, timestamp)
+  };
+}
+
+function defaultJournalEntry(cow: Cow, day: number): CowJournalEntry {
+  const timestamp = nowISO();
+  const outfits = cow.accessories?.length
+    ? [{ day, accessories: cow.accessories.slice(), recordedISO: timestamp }]
+    : [];
+  return {
+    cowId: cow.id,
+    names: [{ day, name: cow.name, recordedISO: timestamp }],
+    notes: [],
+    outfits,
+    favouriteTreats: {},
+    snapshots: []
+  };
+}
+
+function ensureJournalBase(): JournalData {
+  if (!data.journal || typeof data.journal !== 'object') {
+    data.journal = { cows: {} } as JournalData;
+  } else if (!data.journal.cows || typeof data.journal.cows !== 'object') {
+    data.journal.cows = {};
+  }
+  return data.journal;
+}
+
+function ensureJournalForCow(cow: Cow): CowJournalEntry {
+  const journal = ensureJournalBase();
+  const existing = journal.cows[cow.id];
+  const sanitized = sanitizeJournalEntry(existing, cow, data?.day || 1);
+  journal.cows[cow.id] = sanitized;
+  return sanitized;
+}
+
+function pruneJournal(): void {
+  if (!data?.journal?.cows) return;
+  const valid = new Set(data.cows.map(cow => cow.id));
+  Object.keys(data.journal.cows).forEach(id => {
+    if (!valid.has(id)) {
+      delete data.journal.cows[id];
+    }
+  });
+}
+
+function recordOutfitHistory(cow: Cow): void {
+  if (!cow) return;
+  const entry = ensureJournalForCow(cow);
+  const current = Array.isArray(cow.accessories) ? cow.accessories.slice() : [];
+  const last = entry.outfits[entry.outfits.length - 1];
+  if (last && JSON.stringify(last.accessories) === JSON.stringify(current)) {
+    return;
+  }
+  const record: CowJournalEntry['outfits'][number] = {
+    day: data?.day || 1,
+    accessories: current,
+    recordedISO: nowISO()
+  };
+  entry.outfits = clipList(entry.outfits.concat(record), MAX_OUTFIT_HISTORY);
+}
+
+function recordTreatHistory(cow: Cow, treats: string[] | undefined | null): void {
+  if (!cow || !Array.isArray(treats) || !treats.length) return;
+  const entry = ensureJournalForCow(cow);
+  treats.forEach(name => {
+    if (typeof name !== 'string') return;
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    entry.favouriteTreats[trimmed] = (entry.favouriteTreats[trimmed] || 0) + 1;
+  });
+}
+
+function recordNameHistory(cow: Cow, nextName: string): void {
+  if (!cow) return;
+  const entry = ensureJournalForCow(cow);
+  const trimmed = nextName.trim();
+  if (!trimmed) return;
+  const last = entry.names[entry.names.length - 1];
+  if (last && last.name === trimmed) return;
+  const record = {
+    day: data?.day || 1,
+    name: trimmed,
+    recordedISO: nowISO()
+  };
+  entry.names = clipList(entry.names.concat(record), MAX_NAME_HISTORY);
+}
+
+function recordSnapshot(cow: Cow, dataUri: string): CowSnapshotEntry {
+  const entry = ensureJournalForCow(cow);
+  const snapshot: CowSnapshotEntry = {
+    day: data?.day || 1,
+    dataUri,
+    recordedISO: nowISO()
+  };
+  entry.snapshots = clipList(entry.snapshots.concat(snapshot), MAX_SNAPSHOTS);
+  return snapshot;
+}
+
+function cloneJournalEntry(entry: CowJournalEntry): CowJournalEntry {
+  return {
+    cowId: entry.cowId,
+    names: entry.names.map(item => ({ ...item })),
+    notes: entry.notes.map(item => ({ ...item })),
+    outfits: entry.outfits.map(item => ({ ...item, accessories: item.accessories.slice() })),
+    favouriteTreats: Object.assign({}, entry.favouriteTreats),
+    snapshots: entry.snapshots.map(item => ({ ...item }))
+  };
+}
 
 const DEFAULT_SEASON_TEMPLATE: SeasonState = {
   id: 'spring-bloom',
@@ -414,6 +622,16 @@ export function migrateSave(oldData: any): SaveData {
   migrated.cows.forEach(cow => {
     cow.accessories = sanitizeAccessories(cow.accessories, migrated);
   });
+  const previousJournal =
+    oldData.journal && typeof oldData.journal === 'object' && oldData.journal.cows && typeof oldData.journal.cows === 'object'
+      ? oldData.journal.cows
+      : {};
+  const journal: JournalData = { cows: {} };
+  migrated.cows.forEach(cow => {
+    const entry = previousJournal ? previousJournal[cow.id] : undefined;
+    journal.cows[cow.id] = sanitizeJournalEntry(entry, cow, migrated.day);
+  });
+  migrated.journal = journal;
   migrated.activeDecor = sanitizeDecor(migrated.activeDecor, migrated);
   if (legacyLayout) {
     migrated.decorLayout = sanitizeDecorLayout(legacyLayout, migrated);
@@ -436,10 +654,15 @@ export function newSave(): SaveData {
     const name = DEFAULT_COW_NAMES[i % DEFAULT_COW_NAMES.length];
     cows.push(newCow(`cow-${i + 1}`, name));
   }
+  const journal: JournalData = { cows: {} };
+  cows.forEach(cow => {
+    journal.cows[cow.id] = defaultJournalEntry(cow, 1);
+  });
   return {
     version: VERSION,
     day: 1,
     cows,
+    journal,
     unlocks: { foods: DEFAULT_FOODS.slice(), accessories: [], decor: [] },
     activeDecor: [],
     decorLayout: { left: null, centre: null, right: null },
@@ -491,6 +714,11 @@ export function loadSave(): SaveData {
   data.cows.forEach(cow => {
     cow.accessories = sanitizeAccessories(cow.accessories);
   });
+  ensureJournalBase();
+  data.cows.forEach(cow => {
+    ensureJournalForCow(cow);
+  });
+  pruneJournal();
   if (!data.achievements) data.achievements = blankAchievements();
   data.season = sanitizeSeason(data.season);
   return data;
@@ -527,7 +755,7 @@ export function getOption<K extends keyof Options>(key: K): Options[K] {
   return data.options[key];
 }
 
-export function applyCowAdjustments(adjustments: Record<string, Partial<Record<'happiness' | 'hunger' | 'cleanliness' | 'chonk', number>>>): void {
+export function applyCowAdjustments(adjustments: CowAdjustments): void {
   data.cows.forEach(cow => {
     const diff = adjustments[cow.id];
     if (!diff) return;
@@ -543,14 +771,19 @@ export function applyCowAdjustments(adjustments: Record<string, Partial<Record<'
     if (typeof diff.hunger === 'number') {
       cow.hunger = clamp(cow.hunger + diff.hunger, 0, 100);
     }
-    if ((diff as any).addAccessory) {
+    if (typeof diff.addAccessory === 'string' && diff.addAccessory) {
       const next = cow.accessories.slice();
-      const accessory = (diff as any).addAccessory as string;
+      const accessory = diff.addAccessory;
       if (!next.includes(accessory)) {
         next.push(accessory);
         cow.accessories = sanitizeAccessories(next);
       }
+      recordOutfitHistory(cow);
     }
+    if (Array.isArray(diff.servedTreats) && diff.servedTreats.length) {
+      recordTreatHistory(cow, diff.servedTreats);
+    }
+    ensureJournalForCow(cow);
   });
 }
 
@@ -619,6 +852,8 @@ export function setCowAccessories(cowId: string, accessories: string[]): boolean
   const changed = JSON.stringify(cow.accessories) !== JSON.stringify(sanitized);
   cow.accessories = sanitized;
   if (changed) {
+    recordOutfitHistory(cow);
+    ensureJournalForCow(cow);
     saveNow();
   }
   return changed;
@@ -655,6 +890,106 @@ export function randomiseAccessories(cowId: string): Cow | null {
 
 export function getCow(cowId: string): Cow | undefined {
   return data.cows.find(cow => cow.id === cowId);
+}
+
+export function getCowJournal(cowId: string): CowJournalEntry | null {
+  const cow = data.cows.find(entry => entry.id === cowId);
+  if (!cow) return null;
+  const entry = ensureJournalForCow(cow);
+  return cloneJournalEntry(entry);
+}
+
+export function getJournal(): JournalData {
+  ensureJournalBase();
+  pruneJournal();
+  const result: JournalData = { cows: {} };
+  data.cows.forEach(cow => {
+    const entry = ensureJournalForCow(cow);
+    result.cows[cow.id] = cloneJournalEntry(entry);
+  });
+  return result;
+}
+
+export function renameCow(
+  cowId: string,
+  nextName: string
+): { success: boolean; message?: string; cow?: CowJournalEntry['names'][number]; cowData?: Cow } {
+  const cow = data.cows.find(entry => entry.id === cowId);
+  if (!cow) {
+    return { success: false, message: 'Cow not found.' };
+  }
+  const trimmed = typeof nextName === 'string' ? nextName.trim() : '';
+  if (!trimmed) {
+    return { success: false, message: 'Name cannot be empty.' };
+  }
+  if (trimmed.length > 24) {
+    return { success: false, message: 'Name must be 24 characters or fewer.' };
+  }
+  if (cow.name === trimmed) {
+    return { success: false, message: 'That is already this cow\'s name.' };
+  }
+  cow.name = trimmed;
+  recordNameHistory(cow, trimmed);
+  ensureJournalForCow(cow);
+  saveNow();
+  const entry = data.journal.cows[cow.id];
+  return {
+    success: true,
+    cow: entry?.names[entry.names.length - 1],
+    cowData: cow
+  };
+}
+
+export function addCowNote(cowId: string, text: string): { success: boolean; message?: string; note?: CowNoteEntry } {
+  const cow = data.cows.find(entry => entry.id === cowId);
+  if (!cow) {
+    return { success: false, message: 'Cow not found.' };
+  }
+  const trimmed = typeof text === 'string' ? text.trim() : '';
+  if (!trimmed) {
+    return { success: false, message: 'Note cannot be empty.' };
+  }
+  if (trimmed.length > 280) {
+    return { success: false, message: 'Keep notes under 280 characters.' };
+  }
+  const entry = ensureJournalForCow(cow);
+  const note: CowNoteEntry = {
+    id: `note-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`,
+    day: data?.day || 1,
+    text: trimmed,
+    recordedISO: nowISO()
+  };
+  entry.notes = clipList(entry.notes.concat(note), MAX_NOTES);
+  saveNow();
+  return { success: true, note: { ...note } };
+}
+
+export function removeCowNote(cowId: string, noteId: string): { success: boolean; message?: string } {
+  const cow = data.cows.find(entry => entry.id === cowId);
+  if (!cow) {
+    return { success: false, message: 'Cow not found.' };
+  }
+  const entry = ensureJournalForCow(cow);
+  const index = entry.notes.findIndex(note => note.id === noteId);
+  if (index === -1) {
+    return { success: false, message: 'Note not found.' };
+  }
+  entry.notes.splice(index, 1);
+  saveNow();
+  return { success: true };
+}
+
+export function recordCowSnapshotEntry(cowId: string, dataUri: string): { success: boolean; message?: string; snapshot?: CowSnapshotEntry } {
+  const cow = data.cows.find(entry => entry.id === cowId);
+  if (!cow) {
+    return { success: false, message: 'Cow not found.' };
+  }
+  if (typeof dataUri !== 'string' || !dataUri.startsWith('data:image')) {
+    return { success: false, message: 'Snapshot must be an image data URI.' };
+  }
+  const snapshot = recordSnapshot(cow, dataUri);
+  saveNow();
+  return { success: true, snapshot: { ...snapshot } };
 }
 
 export function getUnlocks(type: 'foods' | 'accessories' | 'decor'): string[] {

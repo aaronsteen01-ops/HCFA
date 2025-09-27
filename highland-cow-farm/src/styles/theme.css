@@ -1584,6 +1584,223 @@
       box-shadow: none;
     }
 
+    .journal-controls {
+      display: flex;
+      gap: 12px;
+      margin: 18px 0 22px;
+      flex-wrap: wrap;
+    }
+
+    .journal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .journal-card {
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: var(--card-radius);
+      padding: 20px 22px;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    body.high-contrast .journal-card,
+    body.hc-high-contrast .journal-card {
+      background: var(--bg);
+      box-shadow: none;
+      border: 2px solid var(--outline);
+      backdrop-filter: none;
+    }
+
+    .journal-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .journal-cow-art {
+      width: min(160px, 30vw);
+      height: auto;
+      display: block;
+    }
+
+    .journal-subtitle {
+      margin: 4px 0 0;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .journal-message {
+      min-height: 1.2em;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .journal-message[data-state='success'] {
+      color: var(--success);
+    }
+
+    .journal-message[data-state='error'] {
+      color: var(--danger);
+    }
+
+    .journal-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.65);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .journal-stats strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .journal-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .journal-section h4 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .journal-list,
+    .journal-notes-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .journal-list li,
+    .journal-notes-list li {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 14px;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .journal-list li span {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .journal-empty {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .journal-treats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .journal-treat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.75);
+      font-size: 0.9rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    .journal-treat small {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .journal-note-meta {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .journal-notes-list p {
+      margin: 0;
+      font-size: 0.92rem;
+    }
+
+    .journal-note-delete {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .journal-note-form textarea,
+    .journal-rename-form input {
+      width: 100%;
+      margin-top: 4px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 8px 10px;
+    }
+
+    body.high-contrast .journal-note-form textarea,
+    body.high-contrast .journal-rename-form input,
+    body.hc-high-contrast .journal-note-form textarea,
+    body.hc-high-contrast .journal-rename-form input {
+      border: 2px solid var(--outline);
+    }
+
+    .journal-note-form button,
+    .journal-rename-form button,
+    .journal-snapshot-btn {
+      align-self: flex-start;
+    }
+
+    .journal-snapshot {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .journal-snapshot img {
+      width: 100%;
+      max-width: 220px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: var(--bg);
+      box-shadow: 0 8px 24px rgba(61, 43, 79, 0.16);
+    }
+
+    .journal-snapshot figcaption {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
     @media (max-width: 640px) {
       body {
         padding: 12px;

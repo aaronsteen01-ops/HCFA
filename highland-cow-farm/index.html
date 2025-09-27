@@ -135,6 +135,7 @@
       <div class="button-row">
         <button id="btn-start-day">Start Day Cycle</button>
         <button class="secondary" id="btn-farm-options">Options</button>
+        <button class="ghost" id="btn-open-journal">Open Herd Journal</button>
       </div>
     </section>
 
@@ -170,6 +171,18 @@
         <button id="btn-decor-save">Save Décor</button>
         <button class="secondary" id="btn-decor-back">Cancel</button>
       </div>
+    </section>
+
+    <section class="screen" data-screen="journal" aria-labelledby="journal-heading">
+      <header>
+        <h2 id="journal-heading">Herd Journal</h2>
+        <p>Collect little stories about each cow: outfit highlights, favourite snacks, and thoughtful notes.</p>
+      </header>
+      <div class="journal-controls">
+        <button class="secondary" id="btn-journal-back">Back to Farm</button>
+        <button class="ghost" id="btn-journal-refresh">Refresh Journal</button>
+      </div>
+      <div class="journal-grid" id="journal-cow-list" aria-live="polite"></div>
     </section>
 
     <section class="screen" data-screen="task" aria-labelledby="task-heading">

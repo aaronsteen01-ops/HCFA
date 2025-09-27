@@ -12,6 +12,7 @@ interface FarmHandlers {
   onOptions?: () => void;
   onEditCow?: (cowId: string) => void;
   onManageDecor?: () => void;
+  onOpenJournal?: () => void;
 }
 
 let handlers: FarmHandlers = {};
@@ -119,6 +120,7 @@ export function init(section: HTMLElement): void {
   const startDayButton = section.querySelector<HTMLButtonElement>('#btn-start-day');
   const optionsButton = section.querySelector<HTMLButtonElement>('#btn-farm-options');
   const decorButton = section.querySelector<HTMLButtonElement>('#btn-manage-decor');
+  const journalButton = section.querySelector<HTMLButtonElement>('#btn-open-journal');
 
   startDayButton?.addEventListener('click', () => {
     handlers.onStartDay?.();
@@ -130,6 +132,10 @@ export function init(section: HTMLElement): void {
 
   decorButton?.addEventListener('click', () => {
     handlers.onManageDecor?.();
+  });
+
+  journalButton?.addEventListener('click', () => {
+    handlers.onOpenJournal?.();
   });
 
   herdGrid?.addEventListener('click', event => {
