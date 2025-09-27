@@ -1,4 +1,4 @@
-import type { Cow, Options } from '../types';
+import type { Cow, CowAdjustments, Options } from '../types';
 
 export type MiniGameKey = 'catch' | 'food' | 'brush' | 'ceilidh';
 
@@ -15,7 +15,7 @@ export interface MiniGameContext {
 
 export interface MiniGameResult {
   success: boolean;
-  adjustments: Record<string, Partial<Record<'happiness' | 'hunger' | 'cleanliness' | 'chonk', number>>>;
+  adjustments: CowAdjustments;
   summary?: string;
   stats?: { totalPerfects?: number; totalChonks?: number };
 }

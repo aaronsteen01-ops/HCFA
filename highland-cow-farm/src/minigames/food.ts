@@ -189,6 +189,7 @@ function finish(success: boolean, message: string) {
   state.running = false;
   stopLoop();
   const adjustments: MiniGameResult['adjustments'] = {};
+  const treatLog: Record<string, string[]> = {};
   state.targets.forEach(target => {
     if (!adjustments[target.cow.id]) adjustments[target.cow.id] = {};
     const adj = adjustments[target.cow.id];
@@ -199,6 +200,10 @@ function finish(success: boolean, message: string) {
       const chonkChange = typeof foodMeta.chonk === 'number' ? foodMeta.chonk : 0;
       adj.hunger = (adj.hunger || 0) + hungerChange;
       adj.happiness = (adj.happiness || 0) + happinessChange;
+      if (target.food?.name) {
+        if (!treatLog[target.cow.id]) treatLog[target.cow.id] = [];
+        treatLog[target.cow.id].push(target.food.name);
+      }
       if (chonkChange) {
         adj.chonk = (adj.chonk || 0) + chonkChange;
       }
@@ -212,6 +217,12 @@ function finish(success: boolean, message: string) {
       adj.chonk = (adj.chonk || 0) + overfeedChonk;
       adj.happiness = (adj.happiness || 0) - overfeedMood;
     }
+  });
+  Object.keys(treatLog).forEach(id => {
+    const entry = adjustments[id];
+    if (!entry) return;
+    const list = entry.servedTreats || [];
+    entry.servedTreats = list.concat(treatLog[id]);
   });
   const treatNames = Array.from(new Set(state.targets.filter(t => t.satisfied && t.food).map(t => t.food!.name)));
   let summary = message || '';

@@ -1,4 +1,4 @@
-import type { Cow, SeasonProgressSnapshot } from '../types';
+import type { Cow, CowAdjustments, SeasonProgressSnapshot } from '../types';
 import { showScreen } from '../core/screens';
 import { FoodLibrary } from '../data/foods';
 import { AccessoryLibrary } from '../data/accessories';
@@ -12,7 +12,7 @@ interface SummaryHandlers {
 
 export interface SummaryData {
   results: Array<{ name: string; success: boolean; summary: string; icon?: string; key?: MiniGameKey }>;
-  adjustments: Record<string, Partial<Record<'happiness' | 'hunger' | 'cleanliness' | 'chonk', number>>>;
+  adjustments: CowAdjustments;
   herd: Cow[];
   reward?: {
     type: 'foods' | 'accessories' | 'decor';

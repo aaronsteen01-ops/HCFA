@@ -1,4 +1,4 @@
-import type { Cow, SaveData, SeasonProgressSnapshot } from '../types';
+import type { Cow, CowAdjustments, SaveData, SeasonProgressSnapshot } from '../types';
 import { shuffle, sample, pick } from '../core/util';
 import * as State from '../core/state';
 import * as TaskRush from '../ui/taskRush';
@@ -496,7 +496,7 @@ function pickParticipants(cows: Cow[], count: number, plannedEvent: PlannedEvent
   return selection.concat(extras);
 }
 
-function mergeAdjustments(target: SummaryUI.SummaryData['adjustments'], addition: Record<string, any>) {
+function mergeAdjustments(target: CowAdjustments, addition: CowAdjustments) {
   if (!addition) return;
   Object.keys(addition).forEach(id => {
     const source = addition[id];
@@ -507,6 +507,13 @@ function mergeAdjustments(target: SummaryUI.SummaryData['adjustments'], addition
         dest[key] = (dest[key] || 0) + source[key];
       }
     });
+    if (Array.isArray(source.servedTreats) && source.servedTreats.length) {
+      const merged = dest.servedTreats ? dest.servedTreats.slice() : [];
+      dest.servedTreats = merged.concat(source.servedTreats);
+    }
+    if (typeof source.addAccessory === 'string' && source.addAccessory.trim()) {
+      dest.addAccessory = source.addAccessory;
+    }
   });
 }
 
