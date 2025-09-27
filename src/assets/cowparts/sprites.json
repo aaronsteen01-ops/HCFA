@@ -97,10 +97,10 @@
       "z": 50,
       "parts": [
         {
-          "id": "neck_bell",
-          "label": "Cowbell",
-          "file": "placeholders/placeholder_neck_bell.b64",
-          "tags": ["neck:bell"]
+          "id": "neck_scarf",
+          "label": "Cozy Scarf",
+          "file": "placeholders/placeholder_neck_scarf.b64",
+          "tags": ["neck:scarf"]
         }
       ]
     },
@@ -110,10 +110,10 @@
       "z": 60,
       "parts": [
         {
-          "id": "blanket_patchwork",
-          "label": "Patchwork Blanket",
-          "file": "placeholders/placeholder_body_acc_blanket.b64",
-          "tags": ["body_acc:blanket"]
+          "id": "body_acc_saddle",
+          "label": "Trail Saddle",
+          "file": "placeholders/placeholder_body_acc_saddle.b64",
+          "tags": ["body_acc:saddle"]
         }
       ]
     }
