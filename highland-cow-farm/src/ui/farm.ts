@@ -1,4 +1,4 @@
-import type { AchievementMap, Cow, DecorLayout, SeasonProgressSnapshot } from '../types';
+import type { AchievementMap, Cow, DecorLayout, FamilyChallengeOverview, SeasonProgressSnapshot } from '../types';
 import { showScreen } from '../core/screens';
 import { AccessoryLibrary } from '../data/accessories';
 import { ACHIEVEMENTS } from '../data/achievements';
@@ -22,6 +22,7 @@ let eventsList: HTMLElement | null = null;
 let pantryList: HTMLElement | null = null;
 let decorDisplay: HTMLElement | null = null;
 let achievementList: HTMLElement | null = null;
+let challengeBadge: HTMLElement | null = null;
 
 export function configureFarmHandlers(partial: FarmHandlers): void {
   handlers = Object.assign({}, handlers, partial);
@@ -114,6 +115,7 @@ export function init(section: HTMLElement): void {
   initialised = true;
   herdGrid = section.querySelector<HTMLElement>('#herd-grid');
   eventsList = section.querySelector<HTMLElement>('#farm-events');
+  challengeBadge = section.querySelector<HTMLElement>('#family-challenge-status');
   pantryList = section.querySelector<HTMLElement>('#pantry-list');
   decorDisplay = section.querySelector<HTMLElement>('#decor-display');
   achievementList = section.querySelector<HTMLElement>('#achievement-list');
@@ -176,7 +178,11 @@ export function renderHerd(cows: Cow[]): void {
   herdGrid.appendChild(fragment);
 }
 
-export function renderEvents(events: Array<{ title?: string; detail?: string } | string>, season?: SeasonProgressSnapshot | null): void {
+export function renderEvents(
+  events: Array<{ title?: string; detail?: string } | string>,
+  season?: SeasonProgressSnapshot | null,
+  challenge?: FamilyChallengeOverview | null
+): void {
   if (!eventsList) return;
   eventsList.innerHTML = '';
   const fallback = { title: 'No special events', detail: 'A peaceful breeze across the paddock.' };
@@ -247,6 +253,25 @@ export function renderEvents(events: Array<{ title?: string; detail?: string } |
       li.appendChild(listEl);
     }
     eventsList.appendChild(li);
+  }
+
+  if (challengeBadge) {
+    if (challenge?.enabled) {
+      challengeBadge.hidden = false;
+      const streakLabel = challenge.streak === 1 ? 'day' : 'days';
+      const parts = [`Family Challenge active`];
+      if (challenge.nextPlayer) {
+        parts.push(`Next: ${challenge.nextPlayer.name}`);
+      }
+      parts.push(`Streak ${challenge.streak} ${streakLabel}`);
+      if (challenge.lastMvpName) {
+        parts.push(`MVP: ${challenge.lastMvpName}`);
+      }
+      challengeBadge.textContent = parts.join(' • ');
+    } else {
+      challengeBadge.hidden = true;
+      challengeBadge.textContent = '';
+    }
   }
 }
 

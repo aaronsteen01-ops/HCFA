@@ -1,3 +1,5 @@
+import type { MiniGameKey } from './minigames/types';
+
 export type Personality = 'Greedy' | 'Vain' | 'Sleepy' | 'Social';
 export type CowColour = 'brown' | 'cream' | 'rose' | 'chocolate' | 'white';
 
@@ -70,6 +72,72 @@ export interface Options {
   masterVolume: number;
   highContrastUI: boolean;
   reducedFlash: boolean;
+  familyChallengeMode: boolean;
+}
+
+export interface FamilyChallengeParticipant {
+  id: string;
+  name: string;
+}
+
+export interface FamilyChallengeRecord {
+  id: string;
+  name: string;
+  plays: number;
+  wins: number;
+  perfects: number;
+  score: number;
+  mvpCount: number;
+  lastPlayedDay?: number;
+  lastMvpDay?: number;
+}
+
+export interface FamilyChallengeState {
+  enabled: boolean;
+  participants: FamilyChallengeParticipant[];
+  rotationIndex: number;
+  streak: number;
+  bestStreak: number;
+  stats: Record<string, FamilyChallengeRecord>;
+  lastMvpId?: string | null;
+  mvpRotationIndex: number;
+}
+
+export interface FamilyChallengeAssignment {
+  participantId: string;
+  miniGame: MiniGameKey;
+  success: boolean;
+  perfect: boolean;
+}
+
+export interface FamilyChallengeLeaderboardEntry {
+  id: string;
+  name: string;
+  plays: number;
+  wins: number;
+  perfects: number;
+  score: number;
+  mvpCount: number;
+  isMvp?: boolean;
+}
+
+export interface FamilyChallengeDaySummary {
+  enabled: boolean;
+  assignments: Array<{ miniGame: MiniGameKey; name: string; success: boolean; perfect: boolean }>;
+  leaderboard: FamilyChallengeLeaderboardEntry[];
+  streak: number;
+  bestStreak: number;
+  mvpName?: string | null;
+  nextPlayer?: { id: string; name: string } | null;
+  unlockedAchievements?: string[];
+}
+
+export interface FamilyChallengeOverview {
+  enabled: boolean;
+  nextPlayer?: { id: string; name: string } | null;
+  streak: number;
+  bestStreak: number;
+  lastMvpName?: string | null;
 }
 
 export interface FarmStats {
@@ -138,6 +206,7 @@ export interface SaveData {
   achievements: AchievementMap;
   lastPlayedISO: string;
   season: SeasonState;
+  familyChallenge: FamilyChallengeState;
 }
 
 export interface MiniGameOutcome {

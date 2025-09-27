@@ -1,10 +1,17 @@
-import type { Cow, CowAdjustments, SeasonProgressSnapshot } from '../types';
+import type { Cow, CowAdjustments, FamilyChallengeDaySummary, SeasonProgressSnapshot } from '../types';
 import { showScreen } from '../core/screens';
 import { FoodLibrary } from '../data/foods';
 import { AccessoryLibrary } from '../data/accessories';
 import { DecorLibrary } from '../data/decor';
 import { ACHIEVEMENTS } from '../data/achievements';
 import type { MiniGameKey } from '../minigames/types';
+
+const MINI_LABELS: Record<MiniGameKey, string> = {
+  catch: 'Catch the Cow',
+  food: 'Food Frenzy',
+  brush: 'Brush Rush',
+  ceilidh: 'Highland Ceilidh'
+};
 
 interface SummaryHandlers {
   onContinue?: () => void;
@@ -38,6 +45,7 @@ export interface SummaryData {
     rewardType?: 'foods' | 'accessories' | 'decor';
     guaranteedBy?: string | null;
   };
+  familyChallenge?: FamilyChallengeDaySummary;
 }
 
 let handlers: SummaryHandlers = {};
@@ -98,7 +106,8 @@ export function renderSummary(data: SummaryData): void {
     previousPerfectStreak,
     achievementsUnlocked = [],
     season,
-    festivalResult
+    festivalResult,
+    familyChallenge
   } = data;
 
   resultsEl.innerHTML = '';
@@ -122,6 +131,74 @@ export function renderSummary(data: SummaryData): void {
       perfectItem.innerHTML = `<strong>Almost There</strong><br>Not every task was flawless today.<br>${streakMessage}`;
     }
     fragment.appendChild(perfectItem);
+  }
+
+  if (familyChallenge?.enabled && familyChallenge.leaderboard?.length) {
+    const familyItem = document.createElement('div');
+    familyItem.className = 'summary-item summary-family';
+    const title = document.createElement('strong');
+    title.textContent = 'Family Challenge';
+    familyItem.appendChild(title);
+    const meta = document.createElement('div');
+    meta.className = 'summary-item-text';
+    const streakLabel = familyChallenge.streak === 1 ? 'day' : 'days';
+    const bestLabel = familyChallenge.bestStreak === 1 ? 'day' : 'days';
+    const metaParts = [`Shared streak: ${familyChallenge.streak} ${streakLabel}`];
+    metaParts.push(`Best: ${familyChallenge.bestStreak} ${bestLabel}`);
+    if (familyChallenge.mvpName) {
+      metaParts.push(`MVP: ${familyChallenge.mvpName}`);
+    }
+    if (familyChallenge.nextPlayer) {
+      metaParts.push(`Next up: ${familyChallenge.nextPlayer.name}`);
+    }
+    meta.textContent = metaParts.join(' • ');
+    familyItem.appendChild(meta);
+
+    const leaderboard = document.createElement('div');
+    leaderboard.className = 'family-leaderboard';
+    familyChallenge.leaderboard.forEach(entry => {
+      const row = document.createElement('div');
+      row.className = 'family-leaderboard-row';
+      if (entry.isMvp) {
+        row.classList.add('is-mvp');
+      }
+      const name = document.createElement('span');
+      name.className = 'family-leaderboard-name';
+      name.textContent = entry.name;
+      row.appendChild(name);
+      const statsLine = document.createElement('span');
+      statsLine.className = 'family-leaderboard-stats';
+      statsLine.textContent = `Perfects ${entry.perfects} • Wins ${entry.wins} • Score ${entry.score}`;
+      row.appendChild(statsLine);
+      if (entry.isMvp) {
+        const badge = document.createElement('span');
+        badge.className = 'family-leaderboard-badge';
+        badge.textContent = 'MVP ⭐';
+        row.appendChild(badge);
+      } else if (entry.mvpCount > 0) {
+        const badge = document.createElement('span');
+        badge.className = 'family-leaderboard-badge history';
+        badge.textContent = `MVP ×${entry.mvpCount}`;
+        row.appendChild(badge);
+      }
+      leaderboard.appendChild(row);
+    });
+    familyItem.appendChild(leaderboard);
+
+    if (familyChallenge.assignments?.length) {
+      const assignmentList = document.createElement('ul');
+      assignmentList.className = 'family-assignments';
+      familyChallenge.assignments.forEach(entry => {
+        const li = document.createElement('li');
+        const status = entry.perfect ? '🌟' : entry.success ? '✅' : '⚠️';
+        const label = MINI_LABELS[entry.miniGame] || entry.miniGame;
+        li.textContent = `${status} ${entry.name} — ${label}`;
+        assignmentList.appendChild(li);
+      });
+      familyItem.appendChild(assignmentList);
+    }
+
+    fragment.appendChild(familyItem);
   }
 
   if (season) {

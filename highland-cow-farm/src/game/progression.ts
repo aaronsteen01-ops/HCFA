@@ -1,4 +1,4 @@
-import type { Cow, CowAdjustments, SaveData, SeasonProgressSnapshot } from '../types';
+import type { Cow, CowAdjustments, FamilyChallengeAssignment, SaveData, SeasonProgressSnapshot } from '../types';
 import { shuffle, sample, pick } from '../core/util';
 import * as State from '../core/state';
 import * as TaskRush from '../ui/taskRush';
@@ -684,6 +684,13 @@ export async function startDay(): Promise<void> {
   if (running) return;
   running = true;
   const save = State.getData();
+  const familyChallenge = State.getFamilyChallenge();
+  const familyParticipants = familyChallenge.participants || [];
+  const familyActive = familyChallenge.enabled && familyParticipants.length > 0;
+  let familyRotationIndex = familyActive && familyParticipants.length
+    ? familyChallenge.rotationIndex % familyParticipants.length
+    : 0;
+  const familyAssignments: FamilyChallengeAssignment[] = [];
   const plan = ensurePlan(save);
   const queue = plan ? plan.queue.slice() : (shuffle(Object.keys(miniGames)) as MiniGameKey[]);
   const seasonContext = plan ? plan.season : State.getSeasonContext(save.day);
@@ -721,7 +728,15 @@ export async function startDay(): Promise<void> {
     if (event) {
       instructionParts.push(`${event.label}: ${event.instruction}`);
     }
-    TaskRush.setMiniTitle(info.label, i + 1, queue.length, info.icon);
+    const familyCaretaker = familyActive && familyParticipants.length
+      ? familyParticipants[familyRotationIndex % familyParticipants.length]
+      : null;
+    const displayName = familyCaretaker ? `${info.label} • ${familyCaretaker.name}` : info.label;
+    if (familyCaretaker && familyParticipants.length) {
+      familyRotationIndex = (familyRotationIndex + 1) % familyParticipants.length;
+      instructionParts.push(`Caretaker: ${familyCaretaker.name}`);
+    }
+    TaskRush.setMiniTitle(displayName, i + 1, queue.length, info.icon);
     TaskRush.setInstruction(instructionParts.join(' '));
 
     const outcome = await playMiniGame(key, {
@@ -736,12 +751,24 @@ export async function startDay(): Promise<void> {
 
     PersonalityEngine.applyOutcome(event, outcome, participants);
     results.results.push({
-      name: info.label,
+      name: displayName,
       success: !!outcome.success,
       summary: outcome.summary || (outcome.success ? 'Great job!' : 'We will get it tomorrow.'),
       icon: info.icon,
       key
     });
+    if (familyCaretaker) {
+      const perfect = !!(
+        outcome.success &&
+        (typeof outcome.stats?.totalPerfects !== 'number' || outcome.stats.totalPerfects > 0)
+      );
+      familyAssignments.push({
+        participantId: familyCaretaker.id,
+        miniGame: key,
+        success: !!outcome.success,
+        perfect
+      });
+    }
     mergeAdjustments(results.adjustments, outcome.adjustments);
     if (outcome.stats) {
       results.stats!.totalPerfects = (results.stats!.totalPerfects || 0) + (outcome.stats.totalPerfects || 0);
@@ -757,6 +784,22 @@ export async function startDay(): Promise<void> {
   State.applyCowAdjustments(results.adjustments);
   const perfectDay = results.results.length > 0 && results.results.every(entry => entry.success);
   results.perfectDay = perfectDay;
+  if (familyActive) {
+    const familySummary = State.completeFamilyChallengeDay({
+      assignments: familyAssignments,
+      perfectDay,
+      day: save.day,
+      nextRotationIndex: familyParticipants.length ? familyRotationIndex % familyParticipants.length : 0
+    });
+    if (familySummary) {
+      results.familyChallenge = familySummary;
+      familySummary.unlockedAchievements?.forEach(key => {
+        if (!results.achievementsUnlocked!.includes(key)) {
+          results.achievementsUnlocked!.push(key);
+        }
+      });
+    }
+  }
   if (perfectDay) {
     if (State.unlockAchievement('perfectDay')) {
       results.achievementsUnlocked!.push('perfectDay');
